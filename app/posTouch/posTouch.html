@@ -1,0 +1,300 @@
+<h4></h4>
+
+<br/> 
+
+<section id="posTouch-page" class="container">
+    <div class="row">
+        <div class="container col-sm-8">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
+                    <a (click)="previousTableGroups()" class="btn sharp btn-default" role="button">
+                        <strong>&lt;</strong><br>
+                        <span style="font-size : small;">Previous</span>
+                    </a>
+                    <a (click)="clickTableGroup(0)" class="btn sharp btn-default" role="button">
+                        <strong>{{tableGroup[0]}}</strong><br>
+                        <span>{{tableGroupPicked[0]}}</span>
+                    </a>
+                    <a (click)="clickTableGroup(1)" class="btn sharp btn-default" role="button">
+                        <strong>{{tableGroup[1]}}</strong><br>
+                        <span>{{tableGroupPicked[1]}}</span>
+                    </a>
+                    <a (click)="clickTableGroup(2)" class="btn sharp btn-default" role="button">
+                        <strong>{{tableGroup[2]}}</strong><br>
+                        <span>{{tableGroupPicked[2]}}</span>
+                    </a>
+                    <a (click)="clickTableGroup(3)" class="btn sharp btn-default" role="button">
+                        <strong>{{tableGroup[3]}}</strong><br>
+                        <span>{{tableGroupPicked[3]}}</span>
+                    </a>
+                    <a (click)="clickTableGroup(4)" class="btn sharp btn-default" role="button">
+                        <strong>{{tableGroup[4]}}</strong><br>
+                        <span>{{tableGroupPicked[4]}}</span>
+                    </a>
+                    <a (click)="clickTableGroup(5)" class="btn sharp btn-default" role="button">
+                        <strong>{{tableGroup[5]}}</strong><br>
+                        <span>{{tableGroupPicked[5]}}</span>
+                    </a>
+                    <a (click)="nextTableGroups()" class="btn sharp btn-default" role="button">
+                        <strong>&gt;</strong><br>
+                        <span style="font-size : small;">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
+                    <a (click)="previousTables()" class="btn sharp btn-primary" role="button">
+                        <strong>&lt;</strong><br>
+                        <span style="font-size : small;">Previous</span>
+                    </a>
+                    <a (click)="clickTable(0)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[0]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(1)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[1]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(2)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[2]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(3)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[3]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(4)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[4]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(5)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[5]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(6)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[6]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                </div>
+            </div>
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
+                    <a (click)="clickTable(7)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[7]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(8)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[8]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(9)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[9]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(10)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[10]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(11)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[11]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(12)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[12]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(13)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[13]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(14)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[14]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                </div>
+            </div>
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
+                    <a (click)="clickTable(15)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[15]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(16)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[16]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(17)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[17]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(18)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[18]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(19)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[19]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(20)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[20]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(21)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[21]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(22)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[22]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                </div>
+            </div>
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
+                    <a (click)="clickTable(23)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[23]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(24)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[24]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(25)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[25]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(26)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[26]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(27)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[27]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(28)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[28]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(29)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[29]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(30)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[30]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                </div>
+            </div>
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
+                    <a (click)="clickTable(31)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[31]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(32)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[32]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(33)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[33]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(34)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[34]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(35)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[35]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(36)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[36]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(37)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[37]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(38)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[38]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                </div>
+            </div>
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
+                    <a (click)="clickTable(39)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[39]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(40)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[40]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(41)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[41]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(42)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[42]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(43)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[43]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(44)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[44]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="clickTable(45)" class="btn sharp btn-primary" role="button">
+                        <strong>{{table[45]}}</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a (click)="nextTables()" class="btn sharp btn-primary" role="button">
+                        <strong>&gt;</strong><br>
+                        <span style="font-size : small;">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
+                    <a (click)="clickTableOverTheCounter()" class="btn sharp btn-success" role="button">
+                        <strong>Over The Counter</strong><br>
+                        <span style="font-size : small;">Walk-in / OTC Transactions</span>
+                    </a>
+                    <a (click)="clickTableDelivery" class="btn sharp btn-success" role="button">
+                        <strong>Delivery</strong><br>
+                        <span style="font-size : small;">Delivery Transactions</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container col-sm-4">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
+                    <a class="btn sharp btn-default" role="button">
+                        <strong>Open</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a class="btn sharp btn-default" role="button">
+                        <strong>Billed Out</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                    <a class="btn sharp btn-default" role="button">
+                        <strong>Collected</strong><br>
+                        <span style="font-size : small;">&nbsp;</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <wj-flex-grid #flexSales
+                              class="grid" 
+                              [itemsSource]="sales"> 
+                </wj-flex-grid> 
+            </div>
+        </div>
+    </div>
+</section>
+
+    

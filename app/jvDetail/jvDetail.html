@@ -1,0 +1,87 @@
+<section id="jvDetail-page" class="container">
+    
+    <br>
+    
+    <div class="row">
+        <div class="col-sm-6">
+            <h4>Journal Voucher Detail</h4>
+        </div>
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-danger pull-right sharp" 
+                    (click)="closeJVDetail()">Close</button>
+            <button type="submit" class="btn btn-primary pull-right sharp" 
+                    (click)="printJVDetail()">Print</button>
+            <button type="submit" class="btn btn-primary pull-right sharp" 
+                    (click)="saveJVDetail()">Save</button>
+            <button type="submit" class="btn btn-primary pull-right sharp" 
+                    (click)="lockJVDetail()">Lock</button>
+            <button type="submit" class="btn btn-primary pull-right sharp" 
+                    (click)="journalJVDetail()">Journal</button>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <dl class="dl-horizontal">
+                    <dt>Branch</dt>
+                    <dd>
+                        <input [(ngModel)]="jvHeader.branch" type="text" 
+                               class="form-control" required="required" 
+                               placeholder="Branch" disabled>
+                    </dd>
+                    <dt>JV Number</dt>
+                    <dd>
+                        <input [(ngModel)]="jvHeader.jvNumber" type="text" 
+                               style="width:50%;"
+                               class="form-control" required="required" 
+                               placeholder="JV No." disabled>
+                    </dd>
+                    <dt>JV Date</dt>
+                    <dd>
+                        <wj-input-date 
+                            (value)="jvDate()" 
+                            style="width:50%;"
+                            format="M/d/yyyy">
+                        </wj-input-date>
+                    </dd>
+                    <dt>Manual JV Number</dt>
+                    <dd>
+                        <input [(ngModel)]="jvHeader.manualJVNumber" type="text" 
+                               style="width:50%;"
+                               class="form-control" required="required" 
+                               placeholder="Manual JV No.">
+                    </dd>
+                    <dt>Particulars</dt>
+                    <dd>
+                        <textarea [(ngModel)]="jvHeader.particulars" 
+                               class="form-control" required="required" 
+                               placeholder="Particulars"></textarea>
+                    </dd>
+                </dl>
+            </div>
+        </div>  
+        <div class="col-sm-6">
+            <div class="form-group">
+                <dl class="dl-horizontal">
+                    <dt>Prepared By</dt>
+                    <dd>
+                        <input [(ngModel)]="jvHeader.preparedBy" type="text" 
+                               class="form-control" required="required" placeholder="Prepared By">
+                    </dd>
+                    <dt>Checked By</dt>
+                    <dd>
+                        <input [(ngModel)]="jvHeader.checkedBy" type="text" 
+                               class="form-control" required="required" placeholder="Checked By">
+                    </dd>
+                    <dt>Approved By</dt>
+                    <dd>
+                        <input [(ngModel)]="jvHeader.approvedBy" type="text" 
+                               class="form-control" required="required" placeholder="Approved By">
+                    </dd>
+                </dl>
+            </div>
+        </div>  
+    </div>     
+    
+</section>

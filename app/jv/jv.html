@@ -1,0 +1,101 @@
+<section id="jv-page" class="container">
+    
+    <h4>Journal Voucher List</h4>
+    
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <dl class="dl-horizontal">
+                    <dt>Date Start</dt>
+                    <dd>
+                        <wj-input-date #startDateMem
+                            [(value)]="startDate" 
+                            (valueChanged)="createJV()"
+                            format="M/d/yyyy">
+                        </wj-input-date>
+                    </dd>
+                </dl>
+            </div>
+        </div>  
+        <div class="col-sm-4">
+            <div class="form-group">
+                <dl class="dl-horizontal">
+                    <dt>Date End</dt>
+                    <dd>
+                        <wj-input-date #endDateMem
+                            [(value)]="endDate"
+                            (valueChanged)="createJV()"
+                            format="M/d/yyyy">
+                        </wj-input-date>
+                    </dd>
+                </dl>
+            </div>
+        </div>  
+    </div>    
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <wj-flex-grid #flexJV
+                        class="grid" 
+                        [itemsSource]="collectionJV">  
+                
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                        <button class="btn btn-primary sharp" (click)="openJVDetail(false)">
+                                Edit
+                        </button>
+                    </template>
+                </wj-flex-grid-column>     
+                            
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                        <button class="btn btn-danger sharp" (click)="openDelJVModal()">
+                                Del
+                        </button>
+                    </template>
+                </wj-flex-grid-column>    
+                
+                <wj-flex-grid-column [header]="'JV No'" [binding]="'jvNumber'" [isReadOnly]="true" [width]="100">  
+                </wj-flex-grid-column>     
+                    
+                <wj-flex-grid-column [header]="'JV Date'" [binding]="'jvDateToString'" [isReadOnly]="true" [width]="100">  
+                </wj-flex-grid-column>     
+                
+                <wj-flex-grid-column [header]="'Particulars'" [binding]="'particulars'" [isReadOnly]="true" [width]="'*'">  
+                </wj-flex-grid-column>       
+                
+                <wj-flex-grid-column [header]="'Prepared By'" [binding]="'preparedBy'" [isReadOnly]="true" [width]="200">  
+                </wj-flex-grid-column>  
+                
+                <wj-flex-grid-column [header]="'L'" [binding]="'isLocked'" [isReadOnly]="true" [width]="50">  
+                </wj-flex-grid-column>                                                                  
+            </wj-flex-grid>             
+         </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-6 btn-group">
+            <button type="submit" class="btn btn-primary pull-left sharp" 
+                    (click)="openJVDetail(true)">Add</button>
+        </div>       
+        
+        <div class="col-sm-6 btn-group">
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJV.moveToFirstPage()">
+                <span class="glyphicon glyphicon-fast-backward"></span>
+            </button>
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJV.moveToPreviousPage()">
+                <span class="glyphicon glyphicon-step-backward"></span>
+            </button>
+            <button type="button" class="btn btn-default pull-right sharp" disabled  style="width:100px">
+                {{collectionJV.pageIndex + 1}} / {{collectionJV.pageCount}}
+            </button>
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJV.moveToNextPage()">
+                <span class="glyphicon glyphicon-step-forward"></span>
+            </button>
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJV.moveToLastPage()">
+                <span class="glyphicon glyphicon-fast-forward"></span>
+            </button>
+        </div> 
+    </div>  
+    
+</section>
