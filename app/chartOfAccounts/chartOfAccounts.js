@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', '../chartOfAccounts/chartOfAccountsTabs', '../chartOfAccounts/chartOfAccountsTab', '../chartOfAccounts/ChartOfAccountsService', 'ng2-toastr/ng2-toastr'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', '../chartOfAccounts/chartOfAccountsTabs', '../chartOfAccounts/chartOfAccountsTab', '../chartOfAccounts/chartOfAccountsService', 'ng2-toastr/ng2-toastr'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, router_1, wjNg2FlexGrid, wjNg2Input, chartOfAccountsTabs_1, chartOfAccountsTab_1, ChartOfAccountsService_1, ng2_toastr_1;
+    var core_1, router_1, wjNg2FlexGrid, wjNg2Input, chartOfAccountsTabs_1, chartOfAccountsTab_1, chartOfAccountsService_1, ng2_toastr_1;
     var ChartOfAccountsComponent;
     return {
         setters:[
@@ -35,8 +35,8 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
             function (chartOfAccountsTab_1_1) {
                 chartOfAccountsTab_1 = chartOfAccountsTab_1_1;
             },
-            function (ChartOfAccountsService_1_1) {
-                ChartOfAccountsService_1 = ChartOfAccountsService_1_1;
+            function (chartOfAccountsService_1_1) {
+                chartOfAccountsService_1 = chartOfAccountsService_1_1;
             },
             function (ng2_toastr_1_1) {
                 ng2_toastr_1 = ng2_toastr_1_1;
@@ -335,10 +335,10 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                             wjNg2Input.WjComboBox,
                             chartOfAccountsTabs_1.ChartOfAccountsTabs,
                             chartOfAccountsTab_1.ChartOfAccountsTab],
-                        providers: [ChartOfAccountsService_1.ChartOfAccountsService, ng2_toastr_1.ToastsManager]
+                        providers: [chartOfAccountsService_1.ChartOfAccountsService, ng2_toastr_1.ToastsManager]
                     }),
-                    __param(2, core_1.Inject(ChartOfAccountsService_1.ChartOfAccountsService)), 
-                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager, ChartOfAccountsService_1.ChartOfAccountsService])
+                    __param(2, core_1.Inject(chartOfAccountsService_1.ChartOfAccountsService)), 
+                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager, chartOfAccountsService_1.ChartOfAccountsService])
                 ], ChartOfAccountsComponent);
                 return ChartOfAccountsComponent;
             }());

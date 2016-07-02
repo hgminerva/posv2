@@ -41,7 +41,6 @@ System.register(['angular2/core', 'angular2/router', 'ng2-toastr/ng2-toastr', '.
                 }
                 POSTouchComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
-                        this.router.navigate(['Login']);
                     }
                     else {
                         this.page_tableGroup = 1;
@@ -53,6 +52,15 @@ System.register(['angular2/core', 'angular2/router', 'ng2-toastr/ng2-toastr', '.
                         for (var p = 0; p < this.tableGroup.length; p++) {
                             this.tableGroupPicked[p] = "";
                         }
+                    }
+                    this.page_tableGroup = 1;
+                    this.pages_tableGroup = 1;
+                    this.getTableGroup();
+                    this.fillTableGroup();
+                    this.page_table = 1;
+                    this.pages_table = 1;
+                    for (var p = 0; p < this.tableGroup.length; p++) {
+                        this.tableGroupPicked[p] = "";
                     }
                 };
                 // ============

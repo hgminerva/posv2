@@ -30,6 +30,8 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                 // =======
                 ChartOfAccountsService.prototype.getAccounts = function (component) {
                     var data = new wijmo.collections.ObservableArray();
+                    var api_url = localStorage.getItem('api_url');
+                    // let url = api_url + "/api/MstAccount";
                     var url = "http://api.accountico.io/api/MstAccount";
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
                     var options = new http_1.RequestOptions({ headers: headers });
@@ -68,7 +70,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Save Error', '');
                         }
                     });
-                    ;
                 };
                 ChartOfAccountsService.prototype.updateAccount = function (data, component) {
                     var url = "http://api.accountico.io/api/MstAccount/" + data.Id;
@@ -85,7 +86,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Update Error', '');
                         }
                     });
-                    ;
                 };
                 ChartOfAccountsService.prototype.deleteAccount = function (data, component) {
                     var id = data.id;
@@ -102,7 +102,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Delete Error', '');
                         }
                     });
-                    ;
                 };
                 // ============
                 // ACCOUNT TYPE
@@ -146,7 +145,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Save Error', '');
                         }
                     });
-                    ;
                 };
                 ChartOfAccountsService.prototype.updateAccountType = function (data, component) {
                     var url = "http://api.accountico.io/api/MstAccountType/" + data.Id;
@@ -163,7 +161,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Update Error', '');
                         }
                     });
-                    ;
                 };
                 ChartOfAccountsService.prototype.deleteAccountType = function (data, component) {
                     var id = data.id;
@@ -180,7 +177,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Delete Error', '');
                         }
                     });
-                    ;
                 };
                 // ================
                 // ACCOUNT CATEGORY
@@ -221,7 +217,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Save Error', '');
                         }
                     });
-                    ;
                 };
                 ChartOfAccountsService.prototype.updateAccountCategory = function (data, component) {
                     var url = "http://api.accountico.io/api/MstAccountCategory/" + data.Id;
@@ -238,7 +233,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Update Error', '');
                         }
                     });
-                    ;
                 };
                 ChartOfAccountsService.prototype.deleteAccountCategory = function (data, component) {
                     var id = data.id;
@@ -255,7 +249,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Delete Error', '');
                         }
                     });
-                    ;
                 };
                 // =========
                 // CASH FLOW 
@@ -296,7 +289,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Save Error', '');
                         }
                     });
-                    ;
                 };
                 ChartOfAccountsService.prototype.updateAccountCashFlow = function (data, component) {
                     var url = "http://api.accountico.io/api/MstAccountCashFlow/" + data.Id;
@@ -313,7 +305,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Update Error', '');
                         }
                     });
-                    ;
                 };
                 ChartOfAccountsService.prototype.deleteAccountCashFlow = function (data, component) {
                     var id = data.id;
@@ -330,7 +321,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             component.toastr.error('Delete Error', '');
                         }
                     });
-                    ;
                 };
                 ChartOfAccountsService = __decorate([
                     core_1.Injectable(), 
@@ -342,4 +332,4 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
         }
     }
 });
-//# sourceMappingURL=ChartOfAccountsService.js.map
+//# sourceMappingURL=chartOfAccountsService.js.map

@@ -39,7 +39,7 @@ export class POSTouchComponent implements OnInit {
     
     ngOnInit() {
         if (!localStorage.getItem('access_token')) {
-            this.router.navigate(['Login']);
+            //this.router.navigate(['Login']);
         } else {
             this.page_tableGroup = 1;
             this.pages_tableGroup = 1;
@@ -54,6 +54,18 @@ export class POSTouchComponent implements OnInit {
                 this.tableGroupPicked[p] = "";
             }
         }
+         this.page_tableGroup = 1;
+            this.pages_tableGroup = 1;
+            
+            this.getTableGroup();
+            this.fillTableGroup();
+            
+            this.page_table = 1;
+            this.pages_table = 1;
+            
+            for(var p=0; p<this.tableGroup.length; p++) {
+                this.tableGroupPicked[p] = "";
+            }
     }
    
    // ============

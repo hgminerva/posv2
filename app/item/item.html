@@ -1,0 +1,49 @@
+<section id="item-page" class="container">
+   <div class="row">
+        <div class="col-sm-8">
+            <tab tabTitle="Chart Of Accounts">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4></h4>    
+                        <wj-flex-grid #flexAccount
+                                    class="grid" 
+                                    [itemsSource]="">  
+                            
+                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-primary sharp" >
+                                            Edit
+                                    </button>
+                                </template>
+                            </wj-flex-grid-column>     
+                                        
+                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger sharp" >
+                                            Del
+                                    </button>
+                                </template>
+                            </wj-flex-grid-column>    
+                            
+                            <wj-flex-grid-column [header]="'Item Code'" [binding]="'ItemCode'" [isReadOnly]="true" [width]="100">  
+                            </wj-flex-grid-column>     
+                                
+                            <wj-flex-grid-column [header]="'Bar Code'" [binding]="'Barcpde'" [isReadOnly]="true" [width]="'*'">  
+                            </wj-flex-grid-column>     
+                            
+                            <wj-flex-grid-column [header]="'Item Description'" [binding]="'Item Description'" [isReadOnly]="true" [width]="'*'">  
+                            </wj-flex-grid-column>       
+                            
+                            <wj-flex-grid-column [header]="'Alias'" [binding]="'Alias'" [isReadOnly]="true" [width]="'*'">  
+                            </wj-flex-grid-column>  
+
+                            <wj-flex-grid-column [header]="'Generic Name'" [binding]="'Generic Name'" [isReadOnly]="true" [width]="'*'">
+                            </wj-flex-grid-column>  
+                                                                                           
+                        </wj-flex-grid>                      
+                        </div> 
+                    </div>
+             </tab>
+         </div>
+    </div>
+</section>

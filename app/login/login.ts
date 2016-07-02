@@ -15,13 +15,14 @@ export class LoginComponent {
     private title = 'Login';
 
     constructor(private _router: Router,  private _http: Http, private _toastr: ToastsManager) {
+     
     }   
       
     login(event, username, password) {
         event.preventDefault();
         
         let api_url = localStorage.getItem('api_url');
-        let url = api_url + "/Token";
+        let url = api_url + "/api/MstUser";
         let body = "username=" + username + "&password=" + password + "&grant_type=password";
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });        
@@ -44,8 +45,8 @@ export class LoginComponent {
     
     setSystemDefaults(username) {
         var data = new wijmo.collections.ObservableArray();
-        
-        let url = "http://api.accountico.io/api/MstUser/Defaults?username=" + username
+        let api_url = localStorage.getItem('api_url');
+        let url = api_url + '/api/MstUser/Defaults?username=' + username;
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
         let options = new RequestOptions({ headers: headers }); 
         

@@ -2,6 +2,7 @@
 
 import {Component,Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
+import {ChartOfAccountsComponent} from './chartOfAccounts';
 
 @Injectable()
 export class ChartOfAccountsService {
@@ -15,8 +16,10 @@ export class ChartOfAccountsService {
     // ACCOUNT
     // =======
         
-    getAccounts(component : Object) : wijmo.collections.ObservableArray {
+    getAccounts(component : ChartOfAccountsComponent) : wijmo.collections.ObservableArray {
         let data = new wijmo.collections.ObservableArray();
+        let api_url = localStorage.getItem('api_url');
+       // let url = api_url + "/api/MstAccount";
         let url = "http://api.accountico.io/api/MstAccount";  
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
         let options = new RequestOptions({ headers: headers }); 
@@ -42,11 +45,10 @@ export class ChartOfAccountsService {
                     component.toastr.error('Get Error', '');
                 }                
             );
-            
         return data;
     }
     
-    addAccount(data : Object, component : Object) : void {
+    addAccount(data : Object, component : ChartOfAccountsComponent) : void {
         let url = "http://api.accountico.io/api/MstAccount";        
          
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
@@ -63,11 +65,10 @@ export class ChartOfAccountsService {
                 else {
                     component.toastr.error('Save Error', '');
                 }
-            })
-        );        
+            })   
     }
     
-    updateAccount(data : Object, component : Object) : void {
+    updateAccount(data, component : ChartOfAccountsComponent) : void {
         let url = "http://api.accountico.io/api/MstAccount/" + data.Id;  
         
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
@@ -84,11 +85,10 @@ export class ChartOfAccountsService {
                 else {
                     component.toastr.error('Update Error', '');
                 }
-            })
-        );            
+            })           
     }    
     
-    deleteAccount(data : Object, component : Object) : void {
+    deleteAccount(data, component : ChartOfAccountsComponent) : void {
         let id = data.id;
         
         let url = "http://api.accountico.io/api/MstAccount/" + id;  
@@ -104,15 +104,14 @@ export class ChartOfAccountsService {
                 else {
                     component.toastr.error('Delete Error', '');
                 }
-            })
-        );             
+            })            
     }    
     
     // ============
     // ACCOUNT TYPE
     // ============
         
-    getAccountTypes(component : Object) : wijmo.collections.ObservableArray {
+    getAccountTypes(component : ChartOfAccountsComponent) : wijmo.collections.ObservableArray {
         var data = new wijmo.collections.ObservableArray();
         
         let url = "http://api.accountico.io/api/MstAccountType";  
@@ -143,7 +142,7 @@ export class ChartOfAccountsService {
         return data;
     }
     
-    addAccountType(data : Object, component : Object) : void {
+    addAccountType(data, component : ChartOfAccountsComponent) : void {
         let url = "http://api.accountico.io/api/MstAccountType";        
          
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
@@ -160,11 +159,10 @@ export class ChartOfAccountsService {
                 else {
                     component.toastr.error('Save Error', '');
                 }
-            })
-        );     
+            })  
     }
     
-    updateAccountType(data : Object, component : Object): void {
+    updateAccountType(data, component : ChartOfAccountsComponent): void {
         let url = "http://api.accountico.io/api/MstAccountType/" + data.Id;  
         
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
@@ -182,10 +180,9 @@ export class ChartOfAccountsService {
                     component.toastr.error('Update Error', '');
                 }
             })
-        );    
     }
     
-    deleteAccountType(data : Object, component : Object) : void {
+    deleteAccountType(data, component : ChartOfAccountsComponent) : void {
         let id = data.id;
         
         let url = "http://api.accountico.io/api/MstAccountType/" + id;  
@@ -201,15 +198,14 @@ export class ChartOfAccountsService {
                 else {
                     component.toastr.error('Delete Error', '');
                 }
-            })
-        );    
+            })   
     }
             
     // ================
     // ACCOUNT CATEGORY
     // ================            
             
-    getAccountCategories(component : Object) : wijmo.collections.ObservableArray {
+    getAccountCategories(component : ChartOfAccountsComponent) : wijmo.collections.ObservableArray {
         var data = new wijmo.collections.ObservableArray();
         
         let url = "http://api.accountico.io/api/MstAccountCategory";  
@@ -237,7 +233,7 @@ export class ChartOfAccountsService {
         return data;
     }
     
-    addAccountCategory(data : Object, component : Object) : void {
+    addAccountCategory(data, component : ChartOfAccountsComponent) : void {
         let url = "http://api.accountico.io/api/MstAccountCategory";        
          
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
@@ -255,10 +251,9 @@ export class ChartOfAccountsService {
                     component.toastr.error('Save Error', '');
                 }
             })
-        ); 
     }
     
-    updateAccountCategory(data : Object, component : Object): void {
+    updateAccountCategory(data, component : ChartOfAccountsComponent): void {
         let url = "http://api.accountico.io/api/MstAccountCategory/" + data.Id;  
         
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
@@ -275,11 +270,10 @@ export class ChartOfAccountsService {
                 else {
                     component.toastr.error('Update Error', '');
                 }
-            })
-        );    
+            })   
     }
     
-    deleteAccountCategory(data : Object, component : Object) : void {
+    deleteAccountCategory(data, component : ChartOfAccountsComponent) : void {
         let id = data.id;
         
         let url = "http://api.accountico.io/api/MstAccountCategory/" + id;  
@@ -295,15 +289,14 @@ export class ChartOfAccountsService {
                 else {
                     component.toastr.error('Delete Error', '');
                 }
-            })
-        );   
+            }) 
     }
     
     // =========
     // CASH FLOW 
     // =========
         
-    getAccountCashFlow(component : Object) : wijmo.collections.ObservableArray {
+    getAccountCashFlow(component : ChartOfAccountsComponent) : wijmo.collections.ObservableArray {
         var data = new wijmo.collections.ObservableArray();
         
         let url = "http://api.accountico.io/api/MstAccountCashFlow"; 
@@ -331,7 +324,7 @@ export class ChartOfAccountsService {
         return data;
     }    
     
-    addAccountCashFlow(data : Object, component : Object) : void {
+    addAccountCashFlow(data, component : ChartOfAccountsComponent) : void {
         let url = "http://api.accountico.io/api/MstAccountCashFlow";        
          
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
@@ -349,10 +342,9 @@ export class ChartOfAccountsService {
                     component.toastr.error('Save Error', '');
                 }
             })
-        );   
     }
     
-    updateAccountCashFlow(data : Object, component : Object): void {
+    updateAccountCashFlow(data, component : ChartOfAccountsComponent): void {
         let url = "http://api.accountico.io/api/MstAccountCashFlow/" + data.Id;  
         
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
@@ -369,11 +361,10 @@ export class ChartOfAccountsService {
                 else {
                     component.toastr.error('Update Error', '');
                 }
-            })
-        );  
+            }) 
     }
     
-    deleteAccountCashFlow(data : Object, component : Object) : void {
+    deleteAccountCashFlow(data, component : ChartOfAccountsComponent) : void {
         let id = data.id;
         
         let url = "http://api.accountico.io/api/MstAccountCashFlow/" + id;  
@@ -390,7 +381,6 @@ export class ChartOfAccountsService {
                     component.toastr.error('Delete Error', '');
                 }
             })
-        ); 
     }
     
 }

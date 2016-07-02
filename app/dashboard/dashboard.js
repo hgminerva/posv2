@@ -26,9 +26,9 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                     this._router = _router;
                 }
                 DashboardComponent.prototype.ngOnInit = function () {
-                    if (!localStorage.getItem('access_token')) {
-                        this._router.navigate(['Login']);
-                    }
+                    // if (!localStorage.getItem('access_token')) {
+                    //     this._router.navigate(['Login']);
+                    // }
                 };
                 DashboardComponent.prototype.logout = function () {
                     localStorage.removeItem('access_token');
@@ -41,8 +41,88 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                     localStorage.removeItem('company');
                     window.location.replace('/');
                 };
+                DashboardComponent.prototype.item = function () {
+                    this._router.navigate(['Item']);
+                };
+                DashboardComponent.prototype.pos = function () {
+                    this._router.navigate(['POS']);
+                };
                 DashboardComponent.prototype.posTouch = function () {
                     this._router.navigate(['POSTouch']);
+                };
+                DashboardComponent.prototype.reportSales = function () {
+                    this._router.navigate(['SalesReports']);
+                };
+                DashboardComponent.prototype.discounting = function () {
+                    this._router.navigate(['Discounting']);
+                };
+                DashboardComponent.prototype.collection = function () {
+                    this._router.navigate(['Collection']);
+                };
+                DashboardComponent.prototype.itemGroup = function () {
+                    this._router.navigate(['ItemGroup']);
+                };
+                DashboardComponent.prototype.reportCollection = function () {
+                    this._router.navigate(['CollectionReports']);
+                };
+                DashboardComponent.prototype.customer = function () {
+                    this._router.navigate(['Customer']);
+                };
+                DashboardComponent.prototype.purchase = function () {
+                    this._router.navigate(['Purchases']);
+                };
+                DashboardComponent.prototype.itemComponents = function () {
+                    this._router.navigate(['ItemComponents']);
+                };
+                DashboardComponent.prototype.receivable = function () {
+                    this._router.navigate(['Receivables']);
+                };
+                DashboardComponent.prototype.supplier = function () {
+                    this._router.navigate(['Supplier']);
+                };
+                DashboardComponent.prototype.disbursement = function () {
+                    this._router.navigate(['Disbursement']);
+                };
+                DashboardComponent.prototype.restaurantTables = function () {
+                    this._router.navigate(['RestaurantTables']);
+                };
+                DashboardComponent.prototype.debitCreditMemo = function () {
+                    this._router.navigate(['DebitCreditMemo']);
+                };
+                DashboardComponent.prototype.systemTables = function () {
+                    this._router.navigate(['SystemTables']);
+                };
+                DashboardComponent.prototype.stockIn = function () {
+                    this._router.navigate(['StockIn']);
+                };
+                DashboardComponent.prototype.inventory = function () {
+                    this._router.navigate(['Inventory']);
+                };
+                DashboardComponent.prototype.reportDisbursement = function () {
+                    this._router.navigate(['DisbursementReports']);
+                };
+                DashboardComponent.prototype.users = function () {
+                    this._router.navigate(['Users']);
+                };
+                DashboardComponent.prototype.stockOut = function () {
+                    this._router.navigate(['StockOut']);
+                };
+                DashboardComponent.prototype.stockCount = function () {
+                    this._router.navigate(['StockCount']);
+                };
+                DashboardComponent.prototype.reportAccounting = function () {
+                    this._router.navigate(['AccountingReports']);
+                };
+                DashboardComponent.prototype.settings = function () {
+                    this._router.navigate(['Settings']);
+                };
+                DashboardComponent.prototype.reportPOS = function () {
+                    this._router.navigate(['PosReports']);
+                };
+                DashboardComponent.prototype.report8mmPOS = function () {
+                    this._router.navigate(['EightMmPosReports']);
+                };
+                DashboardComponent.prototype.utilities = function () {
                 };
                 DashboardComponent = __decorate([
                     core_1.Component({

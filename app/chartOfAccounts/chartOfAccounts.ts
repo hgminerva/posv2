@@ -6,7 +6,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
 import {ChartOfAccountsTabs} from '../chartOfAccounts/chartOfAccountsTabs';
 import {ChartOfAccountsTab} from '../chartOfAccounts/chartOfAccountsTab';
-import {ChartOfAccountsService} from '../chartOfAccounts/ChartOfAccountsService';
+import {ChartOfAccountsService} from '../chartOfAccounts/chartOfAccountsService';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 

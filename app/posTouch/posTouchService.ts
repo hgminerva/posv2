@@ -2,6 +2,7 @@
 
 import {Component,Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
+import {POSTouchComponent} from './posTouch';
 
 @Injectable()
 export class POSTouchService {
@@ -15,7 +16,7 @@ export class POSTouchService {
     // TABLE GROUPS
     // ============
         
-    getTableGroups(component : Object) : wijmo.collections.ObservableArray {
+    getTableGroups(component : POSTouchComponent) : wijmo.collections.ObservableArray {
         let data = new wijmo.collections.ObservableArray();
         let api_url = localStorage.getItem('api_url');
         let url = api_url + "/api/MstTableGroup"; 
@@ -52,7 +53,7 @@ export class POSTouchService {
     // TABLES
     // ======
     
-    getTablesPerTableGroup(component: Object, tableGroupId: number) : wijmo.collections.ObservableArray {
+    getTablesPerTableGroup(component: POSTouchComponent, tableGroupId: number) : wijmo.collections.ObservableArray {
         let data = new wijmo.collections.ObservableArray();
         let api_url = localStorage.getItem('api_url');
         let url = api_url + "/api/MstTable/PerTableGroup/" + tableGroupId;

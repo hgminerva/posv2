@@ -38,7 +38,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', 'ng2-toast
                     var _this = this;
                     event.preventDefault();
                     var api_url = localStorage.getItem('api_url');
-                    var url = api_url + "/Token";
+                    var url = api_url + "/api/MstUser";
                     var body = "username=" + username + "&password=" + password + "&grant_type=password";
                     var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
                     var options = new http_1.RequestOptions({ headers: headers });
@@ -56,7 +56,8 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', 'ng2-toast
                 LoginComponent.prototype.setSystemDefaults = function (username) {
                     var _this = this;
                     var data = new wijmo.collections.ObservableArray();
-                    var url = "http://api.accountico.io/api/MstUser/Defaults?username=" + username;
+                    var api_url = localStorage.getItem('api_url');
+                    var url = api_url + '/api/MstUser/Defaults?username=' + username;
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
                     var options = new http_1.RequestOptions({ headers: headers });
                     this._http.get(url, options)
