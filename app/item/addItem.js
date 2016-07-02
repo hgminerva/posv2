@@ -1,0 +1,71 @@
+System.register(['angular2/core', 'angular2/router', 'ng2-toastr/ng2-toastr', './itemService'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var core_1, router_1, ng2_toastr_1, itemService_1;
+    var AddItemComponent;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
+            function (ng2_toastr_1_1) {
+                ng2_toastr_1 = ng2_toastr_1_1;
+            },
+            function (itemService_1_1) {
+                itemService_1 = itemService_1_1;
+            }],
+        execute: function() {
+            AddItemComponent = (function () {
+                function AddItemComponent(_itemService, _toastr, _router) {
+                    this._itemService = _itemService;
+                    this._toastr = _toastr;
+                    this._router = _router;
+                }
+                AddItemComponent.prototype.ngOnInit = function () {
+                    if (!localStorage.getItem('access_token')) {
+                    }
+                    else {
+                    }
+                };
+                AddItemComponent.prototype.addItem = function () {
+                    var newItem = {};
+                };
+                //getters
+                AddItemComponent.prototype.getToastr = function () { return this._toastr; };
+                /*
+                   This function will check if all user's input are valid.
+                   Throws an exception if not.
+                */
+                AddItemComponent.prototype.isAcceptable = function (data) {
+                    var accept = true;
+                    return accept;
+                };
+                AddItemComponent = __decorate([
+                    core_1.Component({
+                        selector: 'addItem',
+                        templateUrl: 'app/item/addItem.html',
+                        providers: [
+                            ng2_toastr_1.ToastsManager, itemService_1.ItemService
+                        ]
+                    }), 
+                    __metadata('design:paramtypes', [itemService_1.ItemService, ng2_toastr_1.ToastsManager, router_1.Router])
+                ], AddItemComponent);
+                return AddItemComponent;
+            }());
+            exports_1("AddItemComponent", AddItemComponent);
+        }
+    }
+});
+//# sourceMappingURL=addItem.js.map

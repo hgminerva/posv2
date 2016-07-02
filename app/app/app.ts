@@ -10,6 +10,7 @@ import { LogoutComponent } from '../logout/logout';
 import { DashboardComponent } from '../dashboard/dashboard';
 import { ProfileComponent } from '../profile/profile';
 import { ItemComponent } from '../item/item';
+import {AddItemComponent} from '../item/addItem';
 import { POSComponent } from '../pos/pos';
 import { POSTouchComponent } from '../posTouch/posTouch';
 import { SalesReportsComponent } from '../salesReports/salesReports';
@@ -55,6 +56,7 @@ import { EightMmPosReportsComponent } from '../8mmPosReports/8mmPosReports';
                { path: '/dashboard', name: 'Dashboard', component: DashboardComponent },
                { path: '/profile', name: 'Profile', component: ProfileComponent },
                { path: '/item', name: 'Item', component: ItemComponent },
+               { path: '/addItem', name: 'AddItem', component: AddItemComponent },
                { path: '/pos', name: 'POS', component: POSComponent},  
                { path: '/posTouch', name: 'POSTouch', component: POSTouchComponent },
                { path: '/salesReports', name: 'SalesReports', component: SalesReportsComponent},

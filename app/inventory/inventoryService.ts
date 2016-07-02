@@ -7,6 +7,7 @@ export class InventoryService {
     private url: string;
     private accessToken : string;
     private option : RequestOptions;
+    private static SUCCESS : number = 200;
 
     constructor(private _http : Http) {
         this.url = localStorage.getItem('api_url') + "/api/MstItemInventory";
@@ -51,7 +52,7 @@ export class InventoryService {
         this._http.post(this.url, JSON.stringify(data), this.option)
             .subscribe(
                 response => {
-                    if(response.status == 200) {
+                    if(response.status == InventoryService.SUCCESS) {
                         component.getToastr().success('Save Successfull', '');
                     }
                     else {
@@ -69,7 +70,7 @@ export class InventoryService {
         this._http.put(this.url, JSON.stringify(data), this.option)
             .subscribe(
                 response => {
-                    if(response.status == 200) {
+                    if(response.status == InventoryService.SUCCESS) {
                         component.getToastr().success('Update Successfull', '');
                     }
                     else {
@@ -88,7 +89,7 @@ export class InventoryService {
         this._http.delete(url, this.option)
             .subscribe(
                 response => {
-                    if(response.status == 200) {
+                    if(response.status == InventoryService.SUCCESS) {
                         component.getToastr().success('Delete Successfull', '');
                     }
                     else {

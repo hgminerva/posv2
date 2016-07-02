@@ -7,6 +7,7 @@ export class UsersService {
     private url : string;
     private accessToken : string;
     private option : RequestOptions;
+    private static SUCCESS : number = 200;
 
     constructor(private _http : Http) {
         this.url = localStorage.getItem('api_url') + "/api/MstUser"; 
@@ -57,7 +58,7 @@ export class UsersService {
         this._http.post(this.url, JSON.stringify(data), this.option)
             .subscribe(
                 response => {
-                    if(response.status == 2) {
+                    if(response.status == UsersService.SUCCESS) {
                         component.getToastr().success('Save Successful', '');
                     }
                     else {
@@ -75,7 +76,7 @@ export class UsersService {
         this._http.put(this.url, JSON.stringify(data), this.option)
             .subscribe(
                 response => {
-                    if(response.status == 2) {
+                    if(response.status == UsersService.SUCCESS) {
                         component.getToastr().success('Update Successful', '');
                     }
                     else {
@@ -94,7 +95,7 @@ export class UsersService {
         this._http.delete(url, this.option)
             .subscribe(
                 response => {
-                    if(response.status == 200) {
+                    if(response.status ==  UsersService.SUCCESS) {
                         component.getToastr().success('Delete Successful', '');
                     }
                     else {

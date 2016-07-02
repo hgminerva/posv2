@@ -55,7 +55,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.option.headers = header;
                     this._http.post(this.url, JSON.stringify(data), this.option)
                         .subscribe(function (response) {
-                        if (response.status == 200) {
+                        if (response.status == InventoryService.SUCCESS) {
                             component.getToastr().success('Save Successfull', '');
                         }
                         else {
@@ -69,7 +69,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.option.headers = header;
                     this._http.put(this.url, JSON.stringify(data), this.option)
                         .subscribe(function (response) {
-                        if (response.status == 200) {
+                        if (response.status == InventoryService.SUCCESS) {
                             component.getToastr().success('Update Successfull', '');
                         }
                         else {
@@ -84,7 +84,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.option.headers = header;
                     this._http.delete(url, this.option)
                         .subscribe(function (response) {
-                        if (response.status == 200) {
+                        if (response.status == InventoryService.SUCCESS) {
                             component.getToastr().success('Delete Successfull', '');
                         }
                         else {
@@ -92,6 +92,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         }
                     });
                 };
+                InventoryService.SUCCESS = 200;
                 InventoryService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

@@ -80,9 +80,28 @@ textarea,
   background-color: #d9534f;
   padding: 20px 20px 20px 20px;
 }
+
 .modal .modal-header-del > h4 {
   font-weight: 300;
   font-size: 14px;
   color: #ffffff;
   margin: 0;
 }
+
+.btn-margin{
+    margin-right: 5px;
+}
+
+#itemHeader {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding : 0px;
+    border-bottom: 1px solid floralwhite;
+    box-shadow: 0px 1px 0px #ffffff;
+}
+
+#itemHeader h2 {
+     margin: 0px;
+}
+
+

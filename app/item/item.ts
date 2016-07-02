@@ -20,6 +20,8 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
             ]
 })
 export class ItemComponent implements OnInit{
+    public collectionItems : wijmo.collections.CollectionView;
+    public items : wijmo.collections.ObservableArray;
 
     constructor(private _itemService : ItemService, private _toastr : ToastsManager, private _router : Router){
     
@@ -30,28 +32,28 @@ export class ItemComponent implements OnInit{
             //this._router.navigate(['Login']);
         }
         else {
-
+         
         }
+        this.items = new wijmo.collections.ObservableArray();
+        this.collectionItems = new wijmo.collections.CollectionView(this.items);
+        this.items.push({itemCode : 'test1'});
+        this.items.push({itemCode : 'test2'});
+        console.log(this.items.length);
     }   
 
-    public displayItems() : void {
+    public getItems() : void {
 
     }
 
-    public saveItem() : void{
-        const newItem = {
-
-        }
+    /*
+        This function when clicked will go to addItem.html
+    */
+    public addItem() : void {
+        this._router.navigate(['AddItem']);
     }
 
-    public editItem() : void {
-        const updatedItem = {
-
-        }
-    }
-
-    public removeItem() : void {
-
+    public returnHome() : void {
+        this._router.navigate(['Dashboard']);
     }
 
     //getters

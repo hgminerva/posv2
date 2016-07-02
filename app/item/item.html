@@ -1,49 +1,60 @@
 <section id="item-page" class="container">
-   <div class="row">
-        <div class="col-sm-8">
-            <tab tabTitle="Chart Of Accounts">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h4></h4>    
-                        <wj-flex-grid #flexAccount
-                                    class="grid" 
-                                    [itemsSource]="">  
-                            
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                    <button class="btn btn-primary sharp" >
-                                            Edit
-                                    </button>
-                                </template>
-                            </wj-flex-grid-column>     
-                                        
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                    <button class="btn btn-danger sharp" >
-                                            Del
-                                    </button>
-                                </template>
-                            </wj-flex-grid-column>    
-                            
-                            <wj-flex-grid-column [header]="'Item Code'" [binding]="'ItemCode'" [isReadOnly]="true" [width]="100">  
-                            </wj-flex-grid-column>     
-                                
-                            <wj-flex-grid-column [header]="'Bar Code'" [binding]="'Barcpde'" [isReadOnly]="true" [width]="'*'">  
-                            </wj-flex-grid-column>     
-                            
-                            <wj-flex-grid-column [header]="'Item Description'" [binding]="'Item Description'" [isReadOnly]="true" [width]="'*'">  
-                            </wj-flex-grid-column>       
-                            
-                            <wj-flex-grid-column [header]="'Alias'" [binding]="'Alias'" [isReadOnly]="true" [width]="'*'">  
-                            </wj-flex-grid-column>  
-
-                            <wj-flex-grid-column [header]="'Generic Name'" [binding]="'Generic Name'" [isReadOnly]="true" [width]="'*'">
-                            </wj-flex-grid-column>  
-                                                                                           
-                        </wj-flex-grid>                      
-                        </div> 
-                    </div>
-             </tab>
-         </div>
+   <div class="container">
+       <div id="itemHeader">
+            <div class="row">
+                <div class="col-sm-10">
+                    <h4>Item List</h4>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-success pull-left sharp btn-margin" (click)="addItem()">Add</button>
+                    <button type="submit" class="btn btn-danger pull-left sharp btn-margin" (click)="returnHome()">Close</button>
+                </div>   
+            </div>
+        </div>
+        <div class="row">
+            <table class="container">
+                <tr>
+                    <td>Filter</td>
+                     <td>Filter</td>
+                      <td>Filter</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <wj-flex-grid #flexItem class="grid" [itemsSource]="collectionItems" > 
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-primary sharp" >
+                                        Edit
+                                </button>
+                        </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-danger sharp">
+                                    <i class="fa fa-trash">Delete</i>
+                                </button>
+                        </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Code'" [binding]="'itemCode'" [isReadOnly]="true" [width]="100">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Description'" [binding]="'itemDescription'" [isReadOnly]="true" [width]="'5*'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Category'" [binding]="'itemCategory'" [isReadOnly]="true" [width]="100">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Bar Code'" [binding]="'itemBarCode'" [isReadOnly]="true" [width]="100">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Price'" [binding]="'itemPrice'" [isReadOnly]="true" [width]="100">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Qty'" [binding]="'itemQty'" [isReadOnly]="true" [width]="'2*'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Lock'" [binding]="'itemLock'" [isReadOnly]="true" [width]="'2*'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Inventory'" [binding]="'itemInventory'" [isReadOnly]="true" [width]="'2*'">
+                    </wj-flex-grid-column>
+               </wj-flex-grid>      
+            </div>
+        </div>
     </div>
 </section>

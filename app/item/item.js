@@ -44,16 +44,22 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     }
                     else {
                     }
+                    this.items = new wijmo.collections.ObservableArray();
+                    this.collectionItems = new wijmo.collections.CollectionView(this.items);
+                    this.items.push({ itemCode: 'test1' });
+                    this.items.push({ itemCode: 'test2' });
+                    console.log(this.items.length);
                 };
-                ItemComponent.prototype.displayItems = function () {
+                ItemComponent.prototype.getItems = function () {
                 };
-                ItemComponent.prototype.saveItem = function () {
-                    var newItem = {};
+                /*
+                    This function when clicked will go to addItem.html
+                */
+                ItemComponent.prototype.addItem = function () {
+                    this._router.navigate(['AddItem']);
                 };
-                ItemComponent.prototype.editItem = function () {
-                    var updatedItem = {};
-                };
-                ItemComponent.prototype.removeItem = function () {
+                ItemComponent.prototype.returnHome = function () {
+                    this._router.navigate(['Dashboard']);
                 };
                 //getters
                 ItemComponent.prototype.getToastr = function () { return this._toastr; };
