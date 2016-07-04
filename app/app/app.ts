@@ -10,7 +10,7 @@ import { LogoutComponent } from '../logout/logout';
 import { DashboardComponent } from '../dashboard/dashboard';
 import { ProfileComponent } from '../profile/profile';
 import { ItemComponent } from '../item/item';
-import {AddItemComponent} from '../item/addItem';
+import {ItemAddComponent} from '../item/ItemAdd';
 import { POSComponent } from '../pos/pos';
 import { POSTouchComponent } from '../posTouch/posTouch';
 import { SalesReportsComponent } from '../salesReports/salesReports';
@@ -53,10 +53,10 @@ import { EightMmPosReportsComponent } from '../8mmPosReports/8mmPosReports';
 @RouteConfig( [{ path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
                { path: '/login', name: 'Login', component: LoginComponent },
                { path: '/logout', name: 'Logout', component: LogoutComponent },
+               { path: '/item', name: 'Item', component: ItemComponent},
                { path: '/dashboard', name: 'Dashboard', component: DashboardComponent },
                { path: '/profile', name: 'Profile', component: ProfileComponent },
-               { path: '/item', name: 'Item', component: ItemComponent },
-               { path: '/addItem', name: 'AddItem', component: AddItemComponent },
+               { path: '/addItem', name: 'AddItem', component: ItemAddComponent },
                { path: '/pos', name: 'POS', component: POSComponent},  
                { path: '/posTouch', name: 'POSTouch', component: POSTouchComponent },
                { path: '/salesReports', name: 'SalesReports', component: SalesReportsComponent},
@@ -82,7 +82,7 @@ import { EightMmPosReportsComponent } from '../8mmPosReports/8mmPosReports';
                { path: '/accountingReports', name: 'AccountingReports', component: AccountingReportsComponent},
                { path: '/settings', name: 'Settings', component: SettingsComponent},
                { path: '/posReports', name: 'PosReports', component: PosReportsComponent},
-               { path: '/8mmPosReports', name: 'EightMmPosReports', component: EightMmPosReportsComponent}
+               { path: '/8mmPosReports', name: 'EightMmPosReports', component: EightMmPosReportsComponent},
 ])
 
 export class App {

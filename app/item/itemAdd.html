@@ -1,0 +1,112 @@
+<section class="container">
+    <div class="row">
+        <div class="contentHeader">
+            <div class="col-sm-6">
+                <div class="pull-left">
+                    <h3>Item Details</h3>
+                </div>
+            </div>
+             <div class="col-sm-6">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary">Lock</button>
+                    <button type="button" class="btn btn-primary">Unlock</button>
+                    <button type="button" class="btn btn-primary">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#GeneralInformation">General Information</a></li>
+                <li><a a data-toggle="tab" href="#OtherInformation">Other Information</a></li>
+                <li><a a data-toggle="tab" href="#Image">Image</a></li>
+            </ul>
+        </div>
+        <div class="tab-content tabContainer">
+            <div id="GeneralInformation" class="tab-pane fade in active">
+                <form role="form">
+                    <div class="form-group">
+                        <label>Item Code:</label>
+                        <input type="text" placeholder="Item Code" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label>Bar Code (SKU):</label>
+                        <input type="text" placeholder="NA" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Item Description:</label>
+                        <input type="text" placeholder="Item Description"  required />
+                    </div>
+                     <div class="form-group">
+                        <label>Alias:</label>
+                        <input type="text" placeholder="Alias"  required />
+                    </div>
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <wj-comboBox class="input-30">
+                            
+                        </wj-comboBox>
+                    </div>
+                     <div class="form-group">
+                        <label>Unit:</label>
+                        <wj-comboBox class="input-30">
+                            
+                        </wj-comboBox>
+                    </div>
+                     <div class="form-group">
+                        <label>Default Supplier:</label>
+                        <wj-comboBox class="input-30">
+                            
+                        </wj-comboBox>
+                    </div>
+                     <div class="form-group">
+                        <label>Cost:</label>
+                        <input type="text" placeholder="0.00" required />
+                    </div>
+                     <div class="form-group">
+                        <label>Mark up (%):</label>
+                        <input type="text" placeholder="0.00" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Price:</label>
+                        <input type="text" placeholder="0.00" required />
+                    </div>
+                      <div class="form-group">
+                        <label>Stock Level Quantity:</label>
+                        <input type="text" placeholder="0.00" required />
+                    </div>
+                    <div class="form-group">
+                        <label>On Hand:</label>
+                        <input type="text" placeholder="0.00" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label>Inventory:</label>
+                        <input type="checkbox" />
+                    </div>
+                    <div class="form-group">
+                        <label>Package:</label>
+                        <input type="checkbox" />
+                    </div>
+                    <div class="form-group">
+                        <label>Expiry Date:</label>
+                        <input type="text" placeholder="" disabled />
+                    </div>
+                     <div class="form-group">
+                        <label>Lot Number:</label>
+                        <input type="text" placeholder="" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label>Remarks:</label>
+                        <textarea rows="10" cols="40">
+                        </textarea>
+                    </div>
+                </form>
+            </div>
+            <div id="OtherInformation" class="tab-pane fade">
+            </div>
+            <div id="Image" class="tab-pane fade">
+            </div>
+        </div>
+    </div>
+</section>

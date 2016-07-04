@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/common', 'rxjs/Rx', '../home/home', '../login/login', '../logout/logout', '../dashboard/dashboard', '../profile/profile', '../item/item', '../item/addItem', '../pos/pos', '../posTouch/posTouch', '../salesReports/salesReports', '../discounting/discounting', '../collection/collection', '../itemGroup/itemGroup', '../collectionReports/collectionReports', '../customer/customer', '../purchases/purchases', '../itemComponents/itemComponents', '../receivable/receivable', '../supplier/supplier', '../disbursement/disbursement', '../restaurantTables/restaurantTables', '../debitCreditMemo/debitCreditMemo', '../systemTables/systemTables', '../stockIn/stockIn', '../inventory/inventory', '../disbursementReports/disbursementReports', '../users/users', '../stockOut/stockOut', '../stockCount/stockCount', '../accountingReports/accountingReports', '../settings/settings', '../posReports/posReports', '../8mmPosReports/8mmPosReports'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/common', 'rxjs/Rx', '../home/home', '../login/login', '../logout/logout', '../dashboard/dashboard', '../profile/profile', '../item/item', '../item/ItemAdd', '../pos/pos', '../posTouch/posTouch', '../salesReports/salesReports', '../discounting/discounting', '../collection/collection', '../itemGroup/itemGroup', '../collectionReports/collectionReports', '../customer/customer', '../purchases/purchases', '../itemComponents/itemComponents', '../receivable/receivable', '../supplier/supplier', '../disbursement/disbursement', '../restaurantTables/restaurantTables', '../debitCreditMemo/debitCreditMemo', '../systemTables/systemTables', '../stockIn/stockIn', '../inventory/inventory', '../disbursementReports/disbursementReports', '../users/users', '../stockOut/stockOut', '../stockCount/stockCount', '../accountingReports/accountingReports', '../settings/settings', '../posReports/posReports', '../8mmPosReports/8mmPosReports'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_1, common_1, Rx_1, home_1, login_1, logout_1, dashboard_1, profile_1, item_1, addItem_1, pos_1, posTouch_1, salesReports_1, discounting_1, collection_1, itemGroup_1, collectionReports_1, customer_1, purchases_1, itemComponents_1, receivable_1, supplier_1, disbursement_1, restaurantTables_1, debitCreditMemo_1, systemTables_1, stockIn_1, inventory_1, disbursementReports_1, users_1, stockOut_1, stockCount_1, accountingReports_1, settings_1, posReports_1, _8mmPosReports_1;
+    var core_1, router_1, http_1, common_1, Rx_1, home_1, login_1, logout_1, dashboard_1, profile_1, item_1, ItemAdd_1, pos_1, posTouch_1, salesReports_1, discounting_1, collection_1, itemGroup_1, collectionReports_1, customer_1, purchases_1, itemComponents_1, receivable_1, supplier_1, disbursement_1, restaurantTables_1, debitCreditMemo_1, systemTables_1, stockIn_1, inventory_1, disbursementReports_1, users_1, stockOut_1, stockCount_1, accountingReports_1, settings_1, posReports_1, _8mmPosReports_1;
     var App;
     return {
         setters:[
@@ -47,8 +47,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
             function (item_1_1) {
                 item_1 = item_1_1;
             },
-            function (addItem_1_1) {
-                addItem_1 = addItem_1_1;
+            function (ItemAdd_1_1) {
+                ItemAdd_1 = ItemAdd_1_1;
             },
             function (pos_1_1) {
                 pos_1 = pos_1_1;
@@ -168,10 +168,10 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                     router_1.RouteConfig([{ path: '/home', name: 'Home', component: home_1.HomeComponent, useAsDefault: true },
                         { path: '/login', name: 'Login', component: login_1.LoginComponent },
                         { path: '/logout', name: 'Logout', component: logout_1.LogoutComponent },
+                        { path: '/item', name: 'Item', component: item_1.ItemComponent },
                         { path: '/dashboard', name: 'Dashboard', component: dashboard_1.DashboardComponent },
                         { path: '/profile', name: 'Profile', component: profile_1.ProfileComponent },
-                        { path: '/item', name: 'Item', component: item_1.ItemComponent },
-                        { path: '/addItem', name: 'AddItem', component: addItem_1.AddItemComponent },
+                        { path: '/addItem', name: 'AddItem', component: ItemAdd_1.ItemAddComponent },
                         { path: '/pos', name: 'POS', component: pos_1.POSComponent },
                         { path: '/posTouch', name: 'POSTouch', component: posTouch_1.POSTouchComponent },
                         { path: '/salesReports', name: 'SalesReports', component: salesReports_1.SalesReportsComponent },
@@ -197,7 +197,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                         { path: '/accountingReports', name: 'AccountingReports', component: accountingReports_1.AccountingReportsComponent },
                         { path: '/settings', name: 'Settings', component: settings_1.SettingsComponent },
                         { path: '/posReports', name: 'PosReports', component: posReports_1.PosReportsComponent },
-                        { path: '/8mmPosReports', name: 'EightMmPosReports', component: _8mmPosReports_1.EightMmPosReportsComponent }
+                        { path: '/8mmPosReports', name: 'EightMmPosReports', component: _8mmPosReports_1.EightMmPosReportsComponent },
                     ]), 
                     __metadata('design:paramtypes', [http_1.Http])
                 ], App);
