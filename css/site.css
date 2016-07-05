@@ -18,6 +18,9 @@ body {
     #push,
     #footer {
         height: 60px;
+        width: 100%;
+        padding-top: 10px;
+        bottom: 0px;
     }
 
     /* Lastly, apply responsive CSS fixes as necessary */
@@ -68,12 +71,44 @@ textarea,
   color: #ffffff;
 }
 
+.input-10 {
+    width: 10%;
+}
+
+.input-20 {
+    width: 20%;
+}
+
 .input-30 {
     width: 30%;
 }
 
+.input-40 {
+    width: 40%;
+}
+
+.input-50 {
+    width: 50%;
+}
+
+.input-60 {
+    width: 60%;
+}
+
 .input-70 {
     width: 70%;
+}
+
+.input-80 {
+    width: 80%;
+}
+
+.input-90 {
+    width: 90%;
+}
+
+.input-100 {
+    width: 100%;
 }
 
 .modal-header-del {
@@ -120,9 +155,24 @@ div.contentFilter {
 }
 
 div.tabContainer {
-    margin: 0px;
+    margin: auto;
+    margin-bottom: 10px;
     padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     color: #181000;
+    background-color: #F0F0E0;
+    width: 98%;
 }
 
+div.input-right {
+    float: right;
+}
 
+div.col-sm-2 {
+    padding-left: 10px;
+}
+
+.dark-blue{
+   
+}

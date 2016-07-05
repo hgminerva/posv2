@@ -32,6 +32,10 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                     this.router = router;
                 }
                 ItemAddComponent.prototype.ngOnInit = function () {
+                    this.testArray = new wijmo.collections.ObservableArray();
+                    this.testArray.push('test');
+                    this.testArray.push('test');
+                    console.log('test1' + this.testArray.length);
                 };
                 ItemAddComponent = __decorate([
                     core_1.Component({
