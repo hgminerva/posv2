@@ -31,11 +31,36 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                 function ItemAddComponent(router) {
                     this.router = router;
                 }
+                /*
+                    This function is just like a constructor will initialize all the component elements
+                    when the user will add a new entry in item.
+                    Will go back to the login screen if you try to access this component without logging in.
+                */
                 ItemAddComponent.prototype.ngOnInit = function () {
                     this.testArray = new wijmo.collections.ObservableArray();
                     this.testArray.push('test');
                     this.testArray.push('test');
                     console.log('test1' + this.testArray.length);
+                };
+                /*
+                    This function will go back dashboard.html when clicked
+                */
+                ItemAddComponent.prototype.onClose = function () {
+                    this.router.navigate(['Item']);
+                };
+                /*
+                    This function will disable all of the content of the itemAddTabContent Tab
+                */
+                ItemAddComponent.prototype.onLock = function () {
+                    document.getElementById('itemAddTabContent').setAttribute('class', 'disable');
+                    console.log('disabled');
+                };
+                /*
+                    This function will enable all of the content of the itemAddTabContent Tab
+                */
+                ItemAddComponent.prototype.onUnLock = function () {
+                    document.getElementById('itemAddTabContent').setAttribute('class', 'enable');
+                    console.log('disabled');
                 };
                 ItemAddComponent = __decorate([
                     core_1.Component({

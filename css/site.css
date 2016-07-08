@@ -154,7 +154,7 @@ div.contentFilter {
     color: #181009;
 }
 
-div.tabContainer {
+div.margin {
     margin: auto;
     margin-bottom: 10px;
     padding-left: 20px;
@@ -162,7 +162,7 @@ div.tabContainer {
     padding-bottom: 20px;
     color: #181000;
     background-color: #F0F0E0;
-    width: 98%;
+    width: 90%;
 }
 
 div.input-right {
@@ -173,6 +173,10 @@ div.col-sm-2 {
     padding-left: 10px;
 }
 
-.dark-blue{
-   
+.grid {
+    width: 98%;
+}
+
+.contentTable {
+    margin: auto;
 }

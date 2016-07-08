@@ -23,10 +23,39 @@ export class ItemAddComponent implements OnInit{
 
     }
 
-    ngOnInit(){
+    /*
+        This function is just like a constructor will initialize all the component elements
+        when the user will add a new entry in item. 
+        Will go back to the login screen if you try to access this component without logging in.
+    */
+    ngOnInit() : void {
         this.testArray = new wijmo.collections.ObservableArray();
         this.testArray.push('test');
         this.testArray.push('test');
         console.log('test1' + this.testArray.length);
     }
+
+    /*
+        This function will go back dashboard.html when clicked
+    */
+    onClose() : void {
+        this.router.navigate(['Item']);
+    }
+
+    /*
+        This function will disable all of the content of the itemAddTabContent Tab 
+    */
+    onLock() : void {
+        document.getElementById('itemAddTabContent').setAttribute('class','disable');
+        console.log('disabled');
+    }
+
+    /*
+        This function will enable all of the content of the itemAddTabContent Tab 
+    */
+    onUnLock() : void {
+        document.getElementById('itemAddTabContent').setAttribute('class','enable');
+        console.log('disabled');
+    }
+
 }

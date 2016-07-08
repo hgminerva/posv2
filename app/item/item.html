@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12 margin">
                 <wj-flex-grid #flexItem class="grid" [itemsSource]="collectionItems" > 
                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
@@ -40,21 +40,21 @@
                                 </button>
                         </template>
                     </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Code'" [binding]="'itemCode'" [isReadOnly]="true" [width]="100">
+                    <wj-flex-grid-column [header]="'Code'" [binding]="'itemCodeId'" [isReadOnly]="true" [width]="100">
                     </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Description'" [binding]="'itemDescription'" [isReadOnly]="true" [width]="'5*'">
+                    <wj-flex-grid-column [header]="'Description'" [binding]="'itemDescriptionId'" [isReadOnly]="true" [width]="'5*'">
                     </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Category'" [binding]="'itemCategory'" [isReadOnly]="true" [width]="100">
+                    <wj-flex-grid-column [header]="'Category'" [binding]="'itemCategoryId'" [isReadOnly]="true" [width]="100">
                     </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Bar Code'" [binding]="'itemBarCode'" [isReadOnly]="true" [width]="100">
+                    <wj-flex-grid-column [header]="'Bar Code'" [binding]="'itemBarCodeId'" [isReadOnly]="true" [width]="100">
                     </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Price'" [binding]="'itemPrice'" [isReadOnly]="true" [width]="100">
+                    <wj-flex-grid-column [header]="'Price'" [binding]="'itemPriceId'" [isReadOnly]="true" [width]="100">
                     </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Qty'" [binding]="'itemQty'" [isReadOnly]="true" [width]="'2*'">
+                    <wj-flex-grid-column [header]="'Qty'" [binding]="'itemQtyId'" [isReadOnly]="true" [width]="'2*'">
                     </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Lock'" [binding]="'itemLock'" [isReadOnly]="true" [width]="'2*'">
+                    <wj-flex-grid-column [header]="'Lock'" [binding]="'itemLockId'" [isReadOnly]="true" [width]="'2*'">
                     </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Inventory'" [binding]="'itemInventory'" [isReadOnly]="true" [width]="'2*'">
+                    <wj-flex-grid-column [header]="'Inventory'" [binding]="'itemInventoryId'" [isReadOnly]="true" [width]="'2*'">
                     </wj-flex-grid-column>
                </wj-flex-grid>      
             </div>

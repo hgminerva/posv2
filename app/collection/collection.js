@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', './collectionService'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', './collectionService', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, collectionService_1;
+    var core_1, ng2_toastr_1, router_1, collectionService_1, wjNg2FlexGrid, wjNg2Input;
     var CollectionComponent;
     return {
         setters:[
@@ -25,6 +25,12 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
             },
             function (collectionService_1_1) {
                 collectionService_1 = collectionService_1_1;
+            },
+            function (wjNg2FlexGrid_1) {
+                wjNg2FlexGrid = wjNg2FlexGrid_1;
+            },
+            function (wjNg2Input_1) {
+                wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
             CollectionComponent = (function () {
@@ -33,19 +39,46 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     this._toastr = _toastr;
                     this._router = _router;
                 }
+                /*
+                    This function is just like a constructor will initialize all the component elements
+                    when collection in dashboard is clicked.
+                    Will go back to the login screen if you try to access this component without logging in.
+                */
                 CollectionComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
-                        this._router.navigate(['Login']);
                     }
                     else {
+                        this.collection = new wijmo.collections.ObservableArray();
+                        this.collectionView = new wijmo.collections.CollectionView();
                     }
+                };
+                /*
+                    This function will go to discountingAdd.html when clicked
+                */
+                CollectionComponent.prototype.onAdd = function () {
+                    this._router.navigate(['AddCollection']);
+                };
+                /*
+                    This function will go back dashboard.html when clicked
+                */
+                CollectionComponent.prototype.onClose = function () {
+                    this._router.navigate(['Dashboard']);
                 };
                 //getters
                 CollectionComponent.prototype.getToastr = function () { return this._toastr; };
                 CollectionComponent = __decorate([
                     core_1.Component({
                         selector: 'collection',
-                        templateUrl: 'app/collection/collection.html'
+                        templateUrl: 'app/collection/collection.html',
+                        directives: [
+                            wjNg2FlexGrid.WjFlexGrid,
+                            wjNg2FlexGrid.WjFlexGridColumn,
+                            wjNg2FlexGrid.WjFlexGridCellTemplate,
+                            wjNg2Input.WjComboBox,
+                        ],
+                        providers: [
+                            collectionService_1.CollectionService, ng2_toastr_1.ToastsManager
+                        ]
                     }), 
                     __metadata('design:paramtypes', [collectionService_1.CollectionService, ng2_toastr_1.ToastsManager, router_1.Router])
                 ], CollectionComponent);
