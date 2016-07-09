@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], f
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
     var CollectionAddComponent;
     return {
         setters:[
@@ -22,6 +22,12 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], f
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (wjNg2FlexGrid_1) {
+                wjNg2FlexGrid = wjNg2FlexGrid_1;
+            },
+            function (wjNg2Input_1) {
+                wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
             CollectionAddComponent = (function () {
@@ -30,10 +36,19 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], f
                     this.toastr = toastr;
                 }
                 CollectionAddComponent.prototype.ngOnInit = function () {
+                    this.cmbCustomerSource = new wijmo.collections.ObservableArray();
+                    this.cmbSalesNumberSource = new wijmo.collections.ObservableArray();
+                    this.cmbAuthoritySource = new wijmo.collections.ObservableArray();
+                    this.collectionDetailSource = new wijmo.collections.ObservableArray();
+                    this.collectionDetailView = new wijmo.collections.CollectionView(this.collectionDetailSource);
+                    this.cmbCustomerSource.push('Test');
+                    this.cmbSalesNumberSource.push('Test');
+                    this.cmbAuthoritySource.push('Test');
+                    this.collectionDetailSource.push({ Amount: '200' });
                 };
                 CollectionAddComponent.prototype.onLock = function () {
                 };
-                CollectionAddComponent.prototype.onUnLock = function () {
+                CollectionAddComponent.prototype.onUnlock = function () {
                 };
                 CollectionAddComponent.prototype.onPreview = function () {
                 };
@@ -42,12 +57,24 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], f
                 CollectionAddComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                CollectionAddComponent.prototype.onSelectChange = function (combobox) {
+                    var arr = this.collectionDetailSource;
+                    combobox.selectedIndexChanged.addHandler(function () {
+                        arr.push({});
+                    });
+                };
                 //getters
                 CollectionAddComponent.prototype.getToastr = function () { return this.toastr; };
                 CollectionAddComponent = __decorate([
                     core_1.Component({
                         selector: 'collection-add',
                         templateUrl: 'app/collection/collectionAdd.html',
+                        directives: [
+                            wjNg2FlexGrid.WjFlexGrid,
+                            wjNg2FlexGrid.WjFlexGridColumn,
+                            wjNg2FlexGrid.WjFlexGridCellTemplate,
+                            wjNg2Input.WjComboBox,
+                        ],
                         providers: [
                             ng2_toastr_1.ToastsManager
                         ]

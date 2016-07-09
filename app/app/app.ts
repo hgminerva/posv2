@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 import { Http, Headers, RequestOptions, HTTP_PROVIDERS } from 'angular2/http';
 import { NgIf } from 'angular2/common';
