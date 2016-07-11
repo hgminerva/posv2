@@ -13,7 +13,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
                  wjNg2FlexGrid.WjFlexGrid, 
                  wjNg2FlexGrid.WjFlexGridColumn, 
                  wjNg2FlexGrid.WjFlexGridCellTemplate,
-                 wjNg2Input.WjComboBox,
+                 wjNg2Input.WjComboBox
                ],
     providers: [
                 ItemService, ToastsManager
@@ -27,6 +27,11 @@ export class ItemComponent implements OnInit{
     
     }
 
+    /** 
+    *This function is just like a constructor will initialize all the component elements
+    *when discounting in dashboard is clicked. 
+    *Will go back to the login screen if you try to access this component without logging in.
+    **/
     ngOnInit() : void {
         if(!localStorage.getItem('access_token')) {
             //this._router.navigate(['Login']);
@@ -34,11 +39,10 @@ export class ItemComponent implements OnInit{
         else {
          
         }
+        /*Else*/
         this.items = new wijmo.collections.ObservableArray();
         this.collectionItems = new wijmo.collections.CollectionView(this.items);
-        this.items.push({itemCode : 'test1'});
-        this.items.push({itemCode : 'test2'});
-        console.log(this.items.length);
+        this.items.push({Lock : true});
     }   
 
     public getItems() : void {

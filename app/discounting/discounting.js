@@ -42,16 +42,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     this.router = router;
                     this.toastr = toastr;
                 }
-                /*
-                    This function is just like a constructor will initialize all the component elements
-                    when discounting in dashboard is clicked.
-                    Will go back to the login screen if you try to access this component without logging in.
-                */
+                /**
+                *This function is just like a constructor will initialize all the component elements
+                *when discounting in dashboard is clicked.
+                *Will go back to the login screen if you try to access this component without logging in.
+                **/
                 DiscountingComponent.prototype.ngOnInit = function () {
                     this.discounts = new wijmo.collections.ObservableArray();
                     this.discountsView = new wijmo.collections.CollectionView(this.discounts);
                     this.discounts.push({
-                        DiscountId: 'Test'
+                        Lock: true
                     });
                     console.log('' + this.discounts.length);
                 };

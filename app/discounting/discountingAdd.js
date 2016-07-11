@@ -37,15 +37,11 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], f
                     This function will disable all of the content of the itemAddTabContent Tab
                 */
                 DiscountingAddComponent.prototype.onLock = function () {
-                    document.getElementById('ftableDiscountSchedule').setAttribute('class', 'disable');
-                    console.log('disabled');
                 };
                 /*
                     This function will enable all of the content of the itemAddTabContent Tab
                 */
-                DiscountingAddComponent.prototype.onUnLock = function () {
-                    document.getElementById('itemAddTabContent').setAttribute('class', 'enable');
-                    console.log('disabled');
+                DiscountingAddComponent.prototype.onUnlock = function () {
                 };
                 DiscountingAddComponent = __decorate([
                     core_1.Component({

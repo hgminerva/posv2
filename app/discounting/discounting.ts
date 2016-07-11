@@ -33,17 +33,17 @@ export class DiscountingComponent implements OnInit{
                ) {
     }
 
-    /*
-        This function is just like a constructor will initialize all the component elements
-        when discounting in dashboard is clicked. 
-        Will go back to the login screen if you try to access this component without logging in.
-    */
+    /** 
+    *This function is just like a constructor will initialize all the component elements
+    *when discounting in dashboard is clicked. 
+    *Will go back to the login screen if you try to access this component without logging in.
+    **/
     public ngOnInit() : void {
         this.discounts = new wijmo.collections.ObservableArray();
         this.discountsView = new wijmo.collections.CollectionView(this.discounts);
 
         this.discounts.push({
-            DiscountId : 'Test'
+            Lock : true
         });
 
         console.log('' + this.discounts.length);

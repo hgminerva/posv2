@@ -39,16 +39,20 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     this._toastr = _toastr;
                     this._router = _router;
                 }
+                /**
+                *This function is just like a constructor will initialize all the component elements
+                *when discounting in dashboard is clicked.
+                *Will go back to the login screen if you try to access this component without logging in.
+                **/
                 ItemComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
                     else {
                     }
+                    /*Else*/
                     this.items = new wijmo.collections.ObservableArray();
                     this.collectionItems = new wijmo.collections.CollectionView(this.items);
-                    this.items.push({ itemCode: 'test1' });
-                    this.items.push({ itemCode: 'test2' });
-                    console.log(this.items.length);
+                    this.items.push({ Lock: true });
                 };
                 ItemComponent.prototype.getItems = function () {
                 };
@@ -71,7 +75,7 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                             wjNg2FlexGrid.WjFlexGrid,
                             wjNg2FlexGrid.WjFlexGridColumn,
                             wjNg2FlexGrid.WjFlexGridCellTemplate,
-                            wjNg2Input.WjComboBox,
+                            wjNg2Input.WjComboBox
                         ],
                         providers: [
                             itemService_1.ItemService, ng2_toastr_1.ToastsManager

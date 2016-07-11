@@ -57,10 +57,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 CollectionAddComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
-                CollectionAddComponent.prototype.onSelectChange = function (combobox) {
-                    var arr = this.collectionDetailSource;
+                CollectionAddComponent.prototype.onSelectChange = function (combobox, source) {
+                    var s = source;
                     combobox.selectedIndexChanged.addHandler(function () {
-                        arr.push({});
+                        s.push({});
                     });
                 };
                 //getters
@@ -73,7 +73,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2FlexGrid.WjFlexGrid,
                             wjNg2FlexGrid.WjFlexGridColumn,
                             wjNg2FlexGrid.WjFlexGridCellTemplate,
-                            wjNg2Input.WjComboBox,
+                            wjNg2Input.WjComboBox
                         ],
                         providers: [
                             ng2_toastr_1.ToastsManager

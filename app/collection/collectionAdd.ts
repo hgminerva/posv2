@@ -13,7 +13,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
                  wjNg2FlexGrid.WjFlexGrid, 
                  wjNg2FlexGrid.WjFlexGridColumn, 
                  wjNg2FlexGrid.WjFlexGridCellTemplate,
-                 wjNg2Input.WjComboBox,
+                 wjNg2Input.WjComboBox
     ],
     providers: [
         ToastsManager
@@ -21,7 +21,6 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 
 export class CollectionAddComponent implements OnInit{
-
     private cmbCustomerSource : wijmo.collections.ObservableArray;
     private cmbSalesNumberSource : wijmo.collections.ObservableArray;
     private cmbAuthoritySource : wijmo.collections.ObservableArray;
@@ -67,11 +66,11 @@ export class CollectionAddComponent implements OnInit{
         this.router.navigate(['Dashboard']);
     }
 
-    public onSelectChange(combobox : wijmo.input.ComboBox) : void {
-    var arr = this.collectionDetailSource;
-       combobox.selectedIndexChanged.addHandler(function(){
-           arr.push({});
-       });
+    public onSelectChange(combobox : wijmo.input.ComboBox, source : wijmo.collections.ObservableArray) : void {
+        const s = source;
+        combobox.selectedIndexChanged.addHandler(function(){
+           s.push({});
+        });
     }
 
     //getters

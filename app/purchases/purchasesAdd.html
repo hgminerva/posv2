@@ -1,0 +1,135 @@
+<section id="purchase-add-page" class="container">
+<!--Holds the header-->
+    <div class="row">
+        <div class="contentHeader">
+            <div class="col-sm-6">
+                <div class="pull-left">
+                    <h3>Purchase Order Detail</h3>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="pull-right">
+                    <button class="btn btn-primary sharp" type="button" (click)="onLock()">Lock</button>
+                    <button class="btn btn-primary sharp" type="button" (click)="onUnlock()">Unlock</button>
+                    <button class="btn btn-primary sharp" type="button" (click)="onPreview()">Preview</button>
+                    <button class="btn btn-primary sharp" type="button" (click)="onPrint()">Print</button>
+                    <button class="btn btn-primary sharp" type="button" (click)="onClose()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--End of Header-->
+<!--Holds the body-->
+    <div class="row">
+        <div class="col-sm-12 margin">
+            <div class="row">
+                <form id="formAddPurchaseOrder" class="form-horizontal" role="form">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label pull-left">P.O. No.</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input id="txtPO_Number" 
+                                       class="form-control input-40 pull-left"
+                                       type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label pull-left">Period</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input id="txtPeriod" 
+                                       class="form-control input-40 pull-left"
+                                       type="text" disabled>
+                            </div>
+                         </div>
+                         <div class="form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label pull-left">Date</label>
+                            </div>
+                            <div class="col-sm-10">
+                               <wj-input-date id="date" ([ngModel])="theDate" format="M/d/yyyy">
+                               </wj-input-date>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label pull-left">Supplier</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <wj-combo-box id="cmbSupplier" [cmbSupplier]
+                                              class="input-70"
+                                              [itemsSource]="cmbSupplierSource"
+                                              [isReadOnly]="true">
+                                </wj-combo-box>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label pull-left">Remarks</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <textarea id="txtRemarks" ([ngModel])="txtRemark" class="input-70" rows="5">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label class="control-label pull-left">Prepared By</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <wj-combo-box id="cmbPreparedBy" 
+                                                class="input-70"
+                                                [itemsSource]="cmbAuthority"
+                                                [isReadOnly]="true" disabled>
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label class="control-label pull-left">Checked By</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <wj-combo-box id="cmbCheckedBy"
+                                                class="input-70"
+                                                [itemsSource]="cmbAuthority"
+                                                [isReadOnly]="true">
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label class="control-label pull-left">Approved By</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <wj-combo-box id="cmbApprovedBy"
+                                                class="input-70"
+                                                [itemsSource]="cmbAuthority"
+                                                [isReadOnly]="true">
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label class="control-label pull-left">Total Amount</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input id="txtTotalAmount"
+                                           class="form-control input-70"
+                                           placeholder="0.00"
+                                           disabled>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<!--End of body-->
+</section>

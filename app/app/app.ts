@@ -19,9 +19,12 @@ import {DiscountingAddComponent} from '../discounting/discountingAdd';
 import {CollectionComponent} from '../collection/collection';
 import {CollectionAddComponent} from '../collection/collectionAdd';
 import {ItemGroupComponent} from '../itemGroup/itemGroup';
+import {ItemGroupAddComponent} from '../itemGroup/itemGroupAdd';
 import {CollectionReportsComponent} from '../collectionReports/collectionReports';
 import {CustomerComponent} from '../customer/customer';
+import {CustomerAddComponent} from '../customer/customerAdd';
 import {PurchasesComponent} from '../purchases/purchases';
+import {PurchaseAddComponent} from '../purchases/purchasesAdd';
 import {ItemComponentsComponent} from '../itemComponents/itemComponents';
 import {ReceivableComponent} from '../receivable/receivable';
 import {SupplierComponent} from '../supplier/supplier';
@@ -67,9 +70,12 @@ import {EightMmPosReportsComponent} from '../8mmPosReports/8mmPosReports';
                { path: '/collection', name: 'Collection', component: CollectionComponent},
                { path: '/addCollection', name: 'AddCollection', component: CollectionAddComponent},
                { path: '/itemGroup', name: 'ItemGroup', component: ItemGroupComponent},
+               { path: '/addItemGroup', name: 'ItemGroupAdd', component: ItemGroupAddComponent},
                { path: '/collectionReports', name: 'CollectionReports', component: CollectionReportsComponent},
                { path: '/customer', name: 'Customer', component: CustomerComponent},
-               { path: '/purchases', name: 'Purchases', component: PurchasesComponent},
+               { path: '/addCustomer', name: 'CustomerAdd', component: CustomerAddComponent},
+               { path: '/purchaseOrder', name: 'Purchases', component: PurchasesComponent},
+               { path: '/addPurchaseOrder', name: 'PurchasesAdd', component: PurchaseAddComponent},
                { path: '/itemComponents', name: 'ItemComponents', component: ItemComponentsComponent},
                { path: '/receivable', name: 'Receivables', component: ReceivableComponent},
                { path: '/supplier', name: 'Supplier', component: SupplierComponent},

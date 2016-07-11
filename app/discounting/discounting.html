@@ -39,12 +39,23 @@
                         </button>
                     </template>
                 </wj-flex-grid-column> 
-                <wj-flex-grid-column [header]="'Discount'" [binding]="'DiscountId'" [isReadOnly]="true" [width]="'3*'">
+                <wj-flex-grid-column [header]="'Discount'" 
+                                     [binding]="'DiscountId'"
+                                     [isReadOnly]="true" 
+                                     [width]="'3*'"
+                                     [align]="'center'">
                 </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Discount Rate(%)'" [binding]="'DiscountRateId'"
-                                     [isReadOnly]="true" [width]="'2*'">
+                <wj-flex-grid-column [header]="'Discount Rate(%)'"
+                                     [binding]="'DiscountRateId'"
+                                     [isReadOnly]="true" 
+                                     [width]="'2*'"
+                                     [align]="'center'">
                 </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Lock'" [binding]="'LockId'" type="Boolean">
+                <wj-flex-grid-column [header]="'Lock'" 
+                                     [binding]="'Lock'"
+                                     [data-type]="'Boolean'"
+                                     [isReadOnly]="true" 
+                                     [align]="'center'">
                 </wj-flex-grid-column>
             </wj-flex-grid>
         </div>

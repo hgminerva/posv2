@@ -11,7 +11,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
-    var PurchasesComponent;
+    var PurchaseAddComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -30,60 +30,73 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
-            PurchasesComponent = (function () {
-                function PurchasesComponent(toastr, router) {
+            PurchaseAddComponent = (function () {
+                function PurchaseAddComponent(toastr, router) {
                     this.toastr = toastr;
                     this.router = router;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
-                *when purchases in dashboard is clicked.
+                *when there will be new purchase order.
                 *Will go back to the login screen if you try to access this component without logging in.
                 **/
-                PurchasesComponent.prototype.ngOnInit = function () {
+                PurchaseAddComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
                     else {
                     }
                     /*Else*/
-                    this.purchaseSource = new wijmo.collections.ObservableArray();
-                    this.purchaseView = new wijmo.collections.CollectionView(this.purchaseSource);
-                    this.purchaseSource.push({ Lock: true });
+                    this.purchaseAddSource = new wijmo.collections.ObservableArray();
+                    this.purchaseAddView = new wijmo.collections.CollectionView(this.purchaseAddSource);
+                    this.cmbSupplierSource = new wijmo.collections.ObservableArray();
+                    this.cmbAuthority = new wijmo.collections.ObservableArray();
+                    this.theDate = new Date();
+                    this.initCmbSupplier();
+                    this.initCmbAuthority();
                 };
-                /*
-                    This function will go to purchaseAdd.html when clicked
-                */
-                PurchasesComponent.prototype.onAdd = function () {
-                    this.router.navigate(['PurchasesAdd']);
+                PurchaseAddComponent.prototype.onLock = function () {
+                    document.getElementById('date').setAttribute('disabled', 'disabled');
                 };
-                /*
-                    This function will go back dashboard.html when clicked
-                */
-                PurchasesComponent.prototype.onClose = function () {
-                    this.router.navigate(['Dashboard']);
+                PurchaseAddComponent.prototype.onUnlock = function () {
+                };
+                PurchaseAddComponent.prototype.onPreview = function () {
+                };
+                PurchaseAddComponent.prototype.onPrint = function () {
+                };
+                PurchaseAddComponent.prototype.onClose = function () {
+                    this.router.navigate(['Purchases']);
                 };
                 //getters
-                PurchasesComponent.prototype.getToastr = function () { return this.toastr; };
-                PurchasesComponent = __decorate([
+                PurchaseAddComponent.prototype.getToastr = function () { return this.toastr; };
+                PurchaseAddComponent.prototype.initCmbSupplier = function () {
+                    this.cmbSupplierSource.push('Return from Customer');
+                };
+                PurchaseAddComponent.prototype.initCmbAuthority = function () {
+                    this.cmbAuthority.push('Administrator');
+                    this.cmbAuthority.push('Cashier');
+                    this.cmbAuthority.push('Teller');
+                };
+                PurchaseAddComponent = __decorate([
                     core_1.Component({
-                        selector: 'purchases',
-                        templateUrl: 'app/purchases/purchases.html',
+                        selector: 'purchase-add',
+                        templateUrl: 'app/purchases/purchasesAdd.html',
                         directives: [
                             wjNg2FlexGrid.WjFlexGrid,
                             wjNg2FlexGrid.WjFlexGridColumn,
                             wjNg2FlexGrid.WjFlexGridCellTemplate,
-                            wjNg2Input.WjComboBox
+                            wjNg2Input.WjComboBox,
+                            wjNg2Input.WjInputDate
                         ],
                         providers: [
                             ng2_toastr_1.ToastsManager
                         ]
                     }), 
                     __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
-                ], PurchasesComponent);
-                return PurchasesComponent;
+                ], PurchaseAddComponent);
+                return PurchaseAddComponent;
             }());
-            exports_1("PurchasesComponent", PurchasesComponent);
+            exports_1("PurchaseAddComponent", PurchaseAddComponent);
         }
     }
 });
-//# sourceMappingURL=purchases.js.map
+//# sourceMappingURL=purchasesAdd.js.map

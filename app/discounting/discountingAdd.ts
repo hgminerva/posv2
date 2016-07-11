@@ -28,16 +28,14 @@ export class DiscountingAddComponent implements OnInit{
         This function will disable all of the content of the itemAddTabContent Tab 
     */
     public onLock() : void {
-        document.getElementById('ftableDiscountSchedule').setAttribute('class','disable');
-        console.log('disabled');
+        
     }
 
     /*
         This function will enable all of the content of the itemAddTabContent Tab 
     */
-    public onUnLock() : void {
-        document.getElementById('itemAddTabContent').setAttribute('class','enable');
-        console.log('disabled');
+    public onUnlock() : void {
+       
     }
 
 }

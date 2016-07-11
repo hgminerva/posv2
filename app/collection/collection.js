@@ -39,18 +39,20 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     this._toastr = _toastr;
                     this._router = _router;
                 }
-                /*
-                    This function is just like a constructor will initialize all the component elements
-                    when collection in dashboard is clicked.
-                    Will go back to the login screen if you try to access this component without logging in.
-                */
+                /**
+                *This function is just like a constructor will initialize all the component elements
+                *when discounting in dashboard is clicked.
+                *Will go back to the login screen if you try to access this component without logging in.
+                **/
                 CollectionComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
                     else {
-                        this.collection = new wijmo.collections.ObservableArray();
-                        this.collectionView = new wijmo.collections.CollectionView();
                     }
+                    /*Else*/
+                    this.collection = new wijmo.collections.ObservableArray();
+                    this.collectionView = new wijmo.collections.CollectionView(this.collection);
+                    this.collection.push({ Lock: true, C: false });
                 };
                 /*
                     This function will go to discountingAdd.html when clicked

@@ -11,7 +11,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
-    var CustomerComponent;
+    var CustomerAddComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -30,42 +30,72 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
-            CustomerComponent = (function () {
-                function CustomerComponent(toastr, router) {
+            CustomerAddComponent = (function () {
+                function CustomerAddComponent(toastr, router) {
                     this.toastr = toastr;
                     this.router = router;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
-                *when Customer in dashboard is clicked.
+                *when you add a customer.
                 *Will go back to the login screen if you try to access this component without logging in.
                 **/
-                CustomerComponent.prototype.ngOnInit = function () {
+                CustomerAddComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
                     else {
                     }
                     /*Else*/
-                    this.customerSource = new wijmo.collections.ObservableArray();
-                    this.customerView = new wijmo.collections.CollectionView(this.customerSource);
-                    this.customerSource.push({ Lock: true });
+                    this.cmbTermSource = new wijmo.collections.ObservableArray();
+                    this.cmbAR_AccountSource = new wijmo.collections.ObservableArray();
+                    this.cmbDefaultPrice = new wijmo.collections.ObservableArray();
+                    this.initTermCombobox();
+                    this.initARCombobox();
+                    this.cmbDefaultPrice.push('');
                 };
                 /**
-                *This function will go to customerAdd.html when clicked
+                * This function will go back customer.html when clicked
                 **/
-                CustomerComponent.prototype.onAdd = function () {
-                    this.router.navigate(['CustomerAdd']);
+                CustomerAddComponent.prototype.onClose = function () {
+                    this.router.navigate(['Customer']);
                 };
                 /**
-                *This function will go back dashboard.html when clicked
+                *This function will disable all of the content of the  CustomerAdd
                 **/
-                CustomerComponent.prototype.onClose = function () {
-                    this.router.navigate(['Dashboard']);
+                CustomerAddComponent.prototype.onLock = function () {
                 };
-                CustomerComponent = __decorate([
+                /**
+                *This function will enable all of the content of the CustomerAdd
+                **/
+                CustomerAddComponent.prototype.onUnlock = function () {
+                };
+                //getters
+                CustomerAddComponent.prototype.getToastr = function () { return this.toastr; };
+                /**
+                *This function initializes the  term combobox of customer add page
+                **/
+                CustomerAddComponent.prototype.initTermCombobox = function () {
+                    var i, day = 15;
+                    for (i = 1; i < CustomerAddComponent.CMB_TERM_SOURCE_LENGTH; i++) {
+                        this.cmbTermSource.push(day + " days");
+                        day *= 2;
+                    }
+                    this.cmbTermSource.push('COD');
+                };
+                /**
+                *This function initializes the  AR Account combobox of customer add page
+                **/
+                CustomerAddComponent.prototype.initARCombobox = function () {
+                    this.cmbAR_AccountSource.push('Account Receviable - Others');
+                    this.cmbAR_AccountSource.push('Account Receviable - Sales');
+                    this.cmbAR_AccountSource.push('Cash on Hand');
+                    this.cmbAR_AccountSource.push('Inventory');
+                };
+                CustomerAddComponent.CMB_TERM_SOURCE_LENGTH = 5;
+                CustomerAddComponent = __decorate([
                     core_1.Component({
-                        selector: 'customer',
-                        templateUrl: 'app/customer/customer.html',
+                        selector: 'customer-add',
+                        templateUrl: 'app/customer/customerAdd.html',
                         directives: [
                             wjNg2FlexGrid.WjFlexGrid,
                             wjNg2FlexGrid.WjFlexGridColumn,
@@ -77,11 +107,11 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                         ]
                     }), 
                     __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
-                ], CustomerComponent);
-                return CustomerComponent;
+                ], CustomerAddComponent);
+                return CustomerAddComponent;
             }());
-            exports_1("CustomerComponent", CustomerComponent);
+            exports_1("CustomerAddComponent", CustomerAddComponent);
         }
     }
 });
-//# sourceMappingURL=customer.js.map
+//# sourceMappingURL=customerAdd.js.map

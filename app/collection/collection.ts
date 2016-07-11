@@ -31,19 +31,22 @@ export class CollectionComponent implements OnInit{
 
     }
 
-    /*
-        This function is just like a constructor will initialize all the component elements
-        when collection in dashboard is clicked. 
-        Will go back to the login screen if you try to access this component without logging in.
-    */
+    /** 
+    *This function is just like a constructor will initialize all the component elements
+    *when discounting in dashboard is clicked. 
+    *Will go back to the login screen if you try to access this component without logging in.
+    **/
     public ngOnInit() : void {
         if(!localStorage.getItem('access_token')) {
            // this._router.navigate(['Login']);
         }
         else {
-            this.collection = new wijmo.collections.ObservableArray();
-            this.collectionView = new wijmo.collections.CollectionView();
         }
+        /*Else*/
+        this.collection = new wijmo.collections.ObservableArray();
+        this.collectionView = new wijmo.collections.CollectionView(this.collection);
+
+        this.collection.push({Lock:true, C:false});
     }
 
     /*
