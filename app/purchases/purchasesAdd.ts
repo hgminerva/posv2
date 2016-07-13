@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject} from 'angular2/core';
+import {Component, OnInit, Inject, Input} from 'angular2/core';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 import {Router} from 'angular2/router';
 
@@ -24,13 +24,16 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 * 
 */
 export class PurchaseAddComponent implements OnInit{
+    //grid
     private purchaseAddView : wijmo.collections.CollectionView;
     private purchaseAddSource : wijmo.collections.ObservableArray;
+    private cmbItemSource : wijmo.collections.ObservableArray;
+    private cmbUnit : wijmo.collections.ObservableArray;
+    //html elements sources
     private cmbSupplierSource : wijmo.collections.ObservableArray;
     private cmbAuthority : wijmo.collections.ObservableArray;
-
-    //user input fields
-    private txtPO_NO : String;
+    //html elements input
+    private txtPO_Number : String;
     private txtPeriod : Number;
     private theDate : Date;
     private cmbSupplier : String;
@@ -39,6 +42,7 @@ export class PurchaseAddComponent implements OnInit{
     private cmbCheckedBy : String;
     private cmbApprovedBy : String;
     private txtTotalAmount : Number;
+    private inputDate : wijmo.input.InputDate;
 
     constructor(private toastr : ToastsManager, private router : Router) {
 
@@ -59,21 +63,48 @@ export class PurchaseAddComponent implements OnInit{
         /*Else*/
         this.purchaseAddSource = new wijmo.collections.ObservableArray();
         this.purchaseAddView = new wijmo.collections.CollectionView(this.purchaseAddSource);
+        this.cmbItemSource = new wijmo.collections.ObservableArray();
+        this.cmbUnit = new wijmo.collections.ObservableArray();
+
         this.cmbSupplierSource = new wijmo.collections.ObservableArray();
         this.cmbAuthority = new wijmo.collections.ObservableArray();
 
-        this.theDate = new Date();
+        this.inputDate = new  wijmo.input.InputDate('#inputDate', {
+            format : 'MM/dd/yyyy',
+            value : new Date()
+        });
 
         this.initCmbSupplier();
         this.initCmbAuthority();
+        this.initCmbUnit();
+
+        this.purchaseAddSource.push({Quantity : 1});
+        this.cmbItemSource.push('Test');
+        this.cmbItemSource.push('Test1');
     }  
 
     public onLock() : void {
-        document.getElementById('date').setAttribute('disabled', 'disabled');
+        document.getElementById('inputDate').setAttribute('disabled', 'disabled');
+        document.getElementById('cmbSupplier').setAttribute('disabled', 'disabled');
+        document.getElementById('txtRemarks').setAttribute('disabled', 'disabled');
+        document.getElementById('cmbCheckedBy').setAttribute('disabled', 'disabled');
+        document.getElementById('cmbApprovedBy').setAttribute('disabled', 'disabled');
+        document.getElementById('flexPurchaseAdd').setAttribute('disabled','disabled');
+        document.getElementById('btnDownload').setAttribute('disabled','disabled');
+        document.getElementById('btnImportXLS').setAttribute('disabled','disabled');
+        document.getElementById('btnExportXLS').setAttribute('disabled','disabled');
     }
 
     public onUnlock() : void {
-
+        document.getElementById('inputDate').removeAttribute('disabled');
+        document.getElementById('cmbSupplier').removeAttribute('disabled');
+        document.getElementById('txtRemarks').removeAttribute('disabled');
+        document.getElementById('cmbCheckedBy').removeAttribute('disabled');
+        document.getElementById('cmbApprovedBy').removeAttribute('disabled');
+        document.getElementById('flexPurchaseAdd').removeAttribute('disabled');
+        document.getElementById('btnDownload').removeAttribute('disabled');
+        document.getElementById('btnImportXLS').removeAttribute('disabled');
+        document.getElementById('btnExportXLS').removeAttribute('disabled');
     }
 
     public onPreview() : void {
@@ -87,7 +118,11 @@ export class PurchaseAddComponent implements OnInit{
         this.router.navigate(['Purchases']);
     }
 
-    //getters
+    public onSelectChange() : void {
+        
+    }
+
+   //getters
     public getToastr() : ToastsManager { return this.toastr; }
 
     private initCmbSupplier() : void {
@@ -98,6 +133,20 @@ export class PurchaseAddComponent implements OnInit{
         this.cmbAuthority.push('Administrator');
         this.cmbAuthority.push('Cashier');
         this.cmbAuthority.push('Teller');
+    }
+
+    private initCmbUnit() : void {
+        this.cmbUnit.push('Pc(s)');
+    }
+
+    private addPurchaseOrder() : void {
+        var data = {
+
+        }
+    }
+    
+    private validateUserInput() : boolean {
+        return true;
     }
 
 }

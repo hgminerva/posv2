@@ -1,0 +1,79 @@
+<section id="supplier-page" class="container">
+    <div class="row">
+        <div class="contentHeader">
+            <div class="col-sm-6">
+                <div class="pull-left">
+                    <h3>Disbursement List</h3>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="pull-right">
+                    <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button>
+                    <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-sm-12">
+            <div class="contentFilter">
+                <label>Search:</label>
+                <input class="input-20" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+         <div class="col-sm-12 margin">
+            <wj-flex-grid #flexDiscount class="grid" [itemsSource]="disbursementView">
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="55">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                        <button class="btn btn-primary sharp" >
+                                Edit
+                        </button>
+                    </template>
+                </wj-flex-grid-column> 
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                        <button class="btn btn-danger sharp" >
+                                Delete
+                        </button>
+                    </template>
+                </wj-flex-grid-column> 
+                <wj-flex-grid-column [header]="'Disbursement Date'" 
+                                     [binding]="'Disbursement Date'"
+                                     [isReadOnly]="true" 
+                                     [width]="'2*'"
+                                     [align]="'center'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Disbursement No'"
+                                     [binding]="'Disbursement No'"
+                                     [isReadOnly]="true" 
+                                     [width]="'2*'"
+                                     [align]="'center'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Amount'" 
+                                     [binding]="'Amount'"
+                                     [width]="'2*'"
+                                     [align]="'center'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Account'" 
+                                     [binding]="'Account'"
+                                     [width]="'3*'"
+                                     [align]="'center'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Remarks'" 
+                                     [binding]="'Remarks'"
+                                     [width]="'3*'"
+                                     [align]="'center'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Lock'" 
+                                     [binding]="'Lock'"
+                                     [data-type]="'Boolean'"
+                                     [isReadOnly]="true" 
+                                     [align]="'center'"
+                                     [width]="'1*'">
+                </wj-flex-grid-column>
+            </wj-flex-grid>
+        </div>
+    </div>
+</section>

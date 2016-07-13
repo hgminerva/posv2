@@ -48,16 +48,42 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     /*Else*/
                     this.purchaseAddSource = new wijmo.collections.ObservableArray();
                     this.purchaseAddView = new wijmo.collections.CollectionView(this.purchaseAddSource);
+                    this.cmbItemSource = new wijmo.collections.ObservableArray();
+                    this.cmbUnit = new wijmo.collections.ObservableArray();
                     this.cmbSupplierSource = new wijmo.collections.ObservableArray();
                     this.cmbAuthority = new wijmo.collections.ObservableArray();
-                    this.theDate = new Date();
+                    this.inputDate = new wijmo.input.InputDate('#inputDate', {
+                        format: 'MM/dd/yyyy',
+                        value: new Date()
+                    });
                     this.initCmbSupplier();
                     this.initCmbAuthority();
+                    this.initCmbUnit();
+                    this.purchaseAddSource.push({ Quantity: 1 });
+                    this.cmbItemSource.push('Test');
+                    this.cmbItemSource.push('Test1');
                 };
                 PurchaseAddComponent.prototype.onLock = function () {
-                    document.getElementById('date').setAttribute('disabled', 'disabled');
+                    document.getElementById('inputDate').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbSupplier').setAttribute('disabled', 'disabled');
+                    document.getElementById('txtRemarks').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbCheckedBy').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbApprovedBy').setAttribute('disabled', 'disabled');
+                    document.getElementById('flexPurchaseAdd').setAttribute('disabled', 'disabled');
+                    document.getElementById('btnDownload').setAttribute('disabled', 'disabled');
+                    document.getElementById('btnImportXLS').setAttribute('disabled', 'disabled');
+                    document.getElementById('btnExportXLS').setAttribute('disabled', 'disabled');
                 };
                 PurchaseAddComponent.prototype.onUnlock = function () {
+                    document.getElementById('inputDate').removeAttribute('disabled');
+                    document.getElementById('cmbSupplier').removeAttribute('disabled');
+                    document.getElementById('txtRemarks').removeAttribute('disabled');
+                    document.getElementById('cmbCheckedBy').removeAttribute('disabled');
+                    document.getElementById('cmbApprovedBy').removeAttribute('disabled');
+                    document.getElementById('flexPurchaseAdd').removeAttribute('disabled');
+                    document.getElementById('btnDownload').removeAttribute('disabled');
+                    document.getElementById('btnImportXLS').removeAttribute('disabled');
+                    document.getElementById('btnExportXLS').removeAttribute('disabled');
                 };
                 PurchaseAddComponent.prototype.onPreview = function () {
                 };
@@ -65,6 +91,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 PurchaseAddComponent.prototype.onClose = function () {
                     this.router.navigate(['Purchases']);
+                };
+                PurchaseAddComponent.prototype.onSelectChange = function () {
                 };
                 //getters
                 PurchaseAddComponent.prototype.getToastr = function () { return this.toastr; };
@@ -75,6 +103,15 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.cmbAuthority.push('Administrator');
                     this.cmbAuthority.push('Cashier');
                     this.cmbAuthority.push('Teller');
+                };
+                PurchaseAddComponent.prototype.initCmbUnit = function () {
+                    this.cmbUnit.push('Pc(s)');
+                };
+                PurchaseAddComponent.prototype.addPurchaseOrder = function () {
+                    var data = {};
+                };
+                PurchaseAddComponent.prototype.validateUserInput = function () {
+                    return true;
                 };
                 PurchaseAddComponent = __decorate([
                     core_1.Component({
