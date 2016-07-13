@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/common', 'rxjs/Rx', '../home/home', '../login/login', '../logout/logout', '../dashboard/dashboard', '../profile/profile', '../item/item', '../item/ItemAdd', '../pos/pos', '../posTouch/posTouch', '../salesReports/salesReports', '../discounting/discounting', '../discounting/discountingAdd', '../collection/collection', '../collection/collectionAdd', '../itemGroup/itemGroup', '../itemGroup/itemGroupAdd', '../collectionReports/collectionReports', '../customer/customer', '../customer/customerAdd', '../purchases/purchases', '../purchases/purchasesAdd', '../itemComponents/itemComponents', '../receivable/receivable', '../supplier/supplier', '../supplier/supplierAdd', '../disbursement/disbursement', '../restaurantTables/restaurantTables', '../debitCreditMemo/debitCreditMemo', '../systemTables/systemTables', '../stockIn/stockIn', '../inventory/inventory', '../disbursementReports/disbursementReports', '../users/users', '../stockOut/stockOut', '../stockCount/stockCount', '../accountingReports/accountingReports', '../settings/settings', '../posReports/posReports', '../8mmPosReports/8mmPosReports'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/common', 'rxjs/Rx', '../home/home', '../login/login', '../logout/logout', '../dashboard/dashboard', '../profile/profile', '../item/item', '../item/ItemAdd', '../pos/pos', '../posTouch/posTouch', '../salesReports/salesReports', '../discounting/discounting', '../discounting/discountingAdd', '../collection/collection', '../collection/collectionAdd', '../itemGroup/itemGroup', '../itemGroup/itemGroupAdd', '../collectionReports/collectionReports', '../customer/customer', '../customer/customerAdd', '../purchases/purchases', '../purchases/purchasesAdd', '../itemComponents/itemComponents', '../receivable/receivable', '../supplier/supplier', '../supplier/supplierAdd', '../disbursement/disbursement', '../disbursement/disbursementAdd', '../restaurantTables/restaurantTables', '../debitCreditMemo/debitCreditMemo', '../systemTables/systemTables', '../stockIn/stockIn', '../inventory/inventory', '../disbursementReports/disbursementReports', '../users/users', '../stockOut/stockOut', '../stockCount/stockCount', '../accountingReports/accountingReports', '../settings/settings', '../posReports/posReports', '../8mmPosReports/8mmPosReports'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_1, common_1, Rx_1, home_1, login_1, logout_1, dashboard_1, profile_1, item_1, ItemAdd_1, pos_1, posTouch_1, salesReports_1, discounting_1, discountingAdd_1, collection_1, collectionAdd_1, itemGroup_1, itemGroupAdd_1, collectionReports_1, customer_1, customerAdd_1, purchases_1, purchasesAdd_1, itemComponents_1, receivable_1, supplier_1, supplierAdd_1, disbursement_1, restaurantTables_1, debitCreditMemo_1, systemTables_1, stockIn_1, inventory_1, disbursementReports_1, users_1, stockOut_1, stockCount_1, accountingReports_1, settings_1, posReports_1, _8mmPosReports_1;
+    var core_1, router_1, http_1, common_1, Rx_1, home_1, login_1, logout_1, dashboard_1, profile_1, item_1, ItemAdd_1, pos_1, posTouch_1, salesReports_1, discounting_1, discountingAdd_1, collection_1, collectionAdd_1, itemGroup_1, itemGroupAdd_1, collectionReports_1, customer_1, customerAdd_1, purchases_1, purchasesAdd_1, itemComponents_1, receivable_1, supplier_1, supplierAdd_1, disbursement_1, disbursementAdd_1, restaurantTables_1, debitCreditMemo_1, systemTables_1, stockIn_1, inventory_1, disbursementReports_1, users_1, stockOut_1, stockCount_1, accountingReports_1, settings_1, posReports_1, _8mmPosReports_1;
     var App;
     return {
         setters:[
@@ -106,6 +106,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
             },
             function (disbursement_1_1) {
                 disbursement_1 = disbursement_1_1;
+            },
+            function (disbursementAdd_1_1) {
+                disbursementAdd_1 = disbursementAdd_1_1;
             },
             function (restaurantTables_1_1) {
                 restaurantTables_1 = restaurantTables_1_1;
@@ -209,6 +212,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                         { path: '/supplier', name: 'Supplier', component: supplier_1.SupplierComponent },
                         { path: '/addSupplier', name: 'SupplierAdd', component: supplierAdd_1.SupplierAddComponent },
                         { path: '/disbursement', name: 'Disbursement', component: disbursement_1.DisbursementComponent },
+                        { path: '/addDisbursement', name: 'DisbursementAdd', component: disbursementAdd_1.DisbursementAddComponent },
                         { path: '/restaurantTables', name: 'RestaurantTables', component: restaurantTables_1.RestaurantTablesComponent },
                         { path: '/debitCreditMemo', name: 'DebitCreditMemo', component: debitCreditMemo_1.DebitCreditMemoComponent },
                         { path: '/systemTables', name: 'SystemTables', component: systemTables_1.SystemTablesComponent },

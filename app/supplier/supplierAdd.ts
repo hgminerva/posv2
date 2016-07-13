@@ -2,7 +2,6 @@ import {Component, OnInit} from 'angular2/core';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 import {Router} from 'angular2/router';
 
-import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
 @Component({

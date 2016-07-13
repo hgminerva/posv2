@@ -30,6 +30,7 @@ import {ReceivableComponent} from '../receivable/receivable';
 import {SupplierComponent} from '../supplier/supplier';
 import {SupplierAddComponent} from '../supplier/supplierAdd';
 import {DisbursementComponent} from '../disbursement/disbursement';
+import {DisbursementAddComponent} from '../disbursement/disbursementAdd';
 import {RestaurantTablesComponent} from '../restaurantTables/restaurantTables';
 import {DebitCreditMemoComponent} from '../debitCreditMemo/debitCreditMemo';
 import {SystemTablesComponent} from '../systemTables/systemTables';
@@ -82,6 +83,7 @@ import {EightMmPosReportsComponent} from '../8mmPosReports/8mmPosReports';
                { path: '/supplier', name: 'Supplier', component: SupplierComponent},
                { path: '/addSupplier', name: 'SupplierAdd', component: SupplierAddComponent},
                { path: '/disbursement', name: 'Disbursement', component: DisbursementComponent},
+               { path: '/addDisbursement', name: 'DisbursementAdd', component: DisbursementAddComponent},
                { path: '/restaurantTables', name: 'RestaurantTables', component: RestaurantTablesComponent},
                { path: '/debitCreditMemo', name: 'DebitCreditMemo', component: DebitCreditMemoComponent},
                { path: '/systemTables', name: 'SystemTables', component: SystemTablesComponent},
