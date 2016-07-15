@@ -76,66 +76,64 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <div class="col-sm-3">
-                                    <label class="control-label pull-left">Prepared By</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <wj-combo-box id="cmbPreparedBy" 
-                                                class="input-70"
-                                                [itemsSource]="cmbAuthority"
-                                                [isReadOnly]="true" disabled>
-                                    </wj-combo-box>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label pull-left">Prepared By</label>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-3">
-                                    <label class="control-label pull-left">Checked By</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <wj-combo-box id="cmbCheckedBy"
-                                                class="input-70"
-                                                [itemsSource]="cmbAuthority"
-                                                [isReadOnly]="true">
-                                    </wj-combo-box>
-                                </div>
+                            <div class="col-sm-9">
+                                <wj-combo-box id="cmbPreparedBy" 
+                                            class="input-70"
+                                            [itemsSource]="cmbAuthority"
+                                            [isReadOnly]="true" disabled>
+                                </wj-combo-box>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-3">
-                                    <label class="control-label pull-left">Approved By</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <wj-combo-box id="cmbApprovedBy"
-                                                class="input-70"
-                                                [itemsSource]="cmbAuthority"
-                                                [isReadOnly]="true">
-                                    </wj-combo-box>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label pull-left">Checked By</label>
                             </div>
+                            <div class="col-sm-9">
+                                <wj-combo-box id="cmbCheckedBy"
+                                            class="input-70"
+                                            [itemsSource]="cmbAuthority"
+                                            [isReadOnly]="true">
+                                </wj-combo-box>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label pull-left">Approved By</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <wj-combo-box id="cmbApprovedBy"
+                                            class="input-70"
+                                            [itemsSource]="cmbAuthority"
+                                            [isReadOnly]="true">
+                                </wj-combo-box>
+                            </div>
+                        </div>
                             <div class="form-group">
                                 <div class="col-sm-3">
                                     <label class="control-label pull-left">Total Amount</label>
                                 </div>
                                 <div class="col-sm-9">
                                     <input id="txtTotalAmount"
-                                           class="form-control input-70"
-                                           placeholder="0.00"
-                                           disabled>
+                                        class="form-control input-70"
+                                        placeholder="0.00"
+                                        disabled>
                                 </div>
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <div class="col-sm-6">
                                     <input id="txtTotalAmount"
-                                           class="form-control input-100"
-                                           placeholder="Download items from stock alert."
-                                           disabled>
+                                        class="form-control input-100"
+                                        placeholder="Download items from stock alert."
+                                        disabled>
                                 </div>
                                 <div class="col-sm-6">
                                     <button id="btnDownload" class="btn btn-primary sharp ">Download</button>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </form>
             </div>

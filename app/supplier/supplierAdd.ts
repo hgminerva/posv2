@@ -7,7 +7,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 @Component({
     selector: 'supplier',
     templateUrl: 'app/supplier/supplierAdd.html',
-       directives: [
+    directives: [
         wjNg2Input.WjComboBox
     ],
     providers: [

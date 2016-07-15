@@ -32,7 +32,9 @@ import {SupplierAddComponent} from '../supplier/supplierAdd';
 import {DisbursementComponent} from '../disbursement/disbursement';
 import {DisbursementAddComponent} from '../disbursement/disbursementAdd';
 import {RestaurantTablesComponent} from '../restaurantTables/restaurantTables';
+import {RestaurantTablesAddComponent} from '../restaurantTables/restaurantTablesAdd';
 import {DebitCreditMemoComponent} from '../debitCreditMemo/debitCreditMemo';
+import {DebitCreditMemoAddComponent} from '../debitCreditMemo/debitCreditMemoAdd';
 import {SystemTablesComponent} from '../systemTables/systemTables';
 import {StockInComponent} from '../stockIn/stockIn';
 import {InventoryComponent} from '../inventory/inventory';
@@ -85,7 +87,9 @@ import {EightMmPosReportsComponent} from '../8mmPosReports/8mmPosReports';
                { path: '/disbursement', name: 'Disbursement', component: DisbursementComponent},
                { path: '/addDisbursement', name: 'DisbursementAdd', component: DisbursementAddComponent},
                { path: '/restaurantTables', name: 'RestaurantTables', component: RestaurantTablesComponent},
+               { path: '/addRestaurantTables', name: 'RestaurantTablesAdd', component: RestaurantTablesAddComponent},
                { path: '/debitCreditMemo', name: 'DebitCreditMemo', component: DebitCreditMemoComponent},
+               { path: '/addDebitCreditMemo', name: 'DebitCreditMemoAdd', component: DebitCreditMemoAddComponent},
                { path: '/systemTables', name: 'SystemTables', component: SystemTablesComponent},
                { path: '/stockIn', name: 'StockIn', component: StockInComponent},
                { path: '/inventory', name: 'Inventory', component: InventoryComponent},
@@ -96,7 +100,7 @@ import {EightMmPosReportsComponent} from '../8mmPosReports/8mmPosReports';
                { path: '/accountingReports', name: 'AccountingReports', component: AccountingReportsComponent},
                { path: '/settings', name: 'Settings', component: SettingsComponent},
                { path: '/posReports', name: 'PosReports', component: PosReportsComponent},
-               { path: '/8mmPosReports', name: 'EightMmPosReports', component: EightMmPosReportsComponent},
+               { path: '/8mmPosReports', name: 'EightMmPosReports', component: EightMmPosReportsComponent}
 ])
 
 export class App {

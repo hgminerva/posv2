@@ -19,6 +19,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 export class DisbursementAddComponent implements OnInit{
     private cmbTermSource : wijmo.collections.ObservableArray;
     private cmbAR_AccountSource : wijmo.collections.ObservableArray;
+    private cmbReturnSource : wijmo.collections.ObservableArray;
     private cmbDefaultPrice : wijmo.collections.ObservableArray;
 
     private cmbAuthoritySource : wijmo.collections.ObservableArray;
@@ -46,6 +47,7 @@ export class DisbursementAddComponent implements OnInit{
         /*Else*/
         this.cmbTermSource = new wijmo.collections.ObservableArray();
         this.cmbAR_AccountSource = new wijmo.collections.ObservableArray();
+        this.cmbReturnSource = new wijmo.collections.ObservableArray();
         this.cmbDefaultPrice = new wijmo.collections.ObservableArray();
         
         this.disbursementDate = new wijmo.input.InputDate('#disbursementDate', {
@@ -55,6 +57,8 @@ export class DisbursementAddComponent implements OnInit{
         
         this.initTypeCombobox();
         this.initPayTypeCombobox();
+        this.initReturnComboBox();
+        
         this.cmbDefaultPrice.push('');
     }
 
@@ -95,7 +99,16 @@ export class DisbursementAddComponent implements OnInit{
     public onClose() : void {
         this.router.navigate(['Disbursement']);
     }
-
+    
+    public onReturn() : void {
+        var cmbReturn = document.getElementById('cmbReturn');
+        if((<HTMLInputElement>document.getElementById('chkReturn')).checked) {
+            cmbReturn.removeAttribute('disabled');
+        }
+        else{
+             cmbReturn.setAttribute('disabled','disabled');
+        }
+    }
     //getters
     public getToastr() : ToastsManager { return this.toastr; } 
 
@@ -111,5 +124,9 @@ export class DisbursementAddComponent implements OnInit{
     **/
     private initPayTypeCombobox() : void {
       
+    }
+
+    private initReturnComboBox() : void{
+        this.cmbReturnSource.push('Test');
     }
 }

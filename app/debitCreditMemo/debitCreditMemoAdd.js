@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2Input;
-    var DisbursementAddComponent;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var DebitCreditMemoAddComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -23,40 +23,47 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             function (router_1_1) {
                 router_1 = router_1_1;
             },
+            function (wjNg2FlexGrid_1) {
+                wjNg2FlexGrid = wjNg2FlexGrid_1;
+            },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
-            DisbursementAddComponent = (function () {
-                function DisbursementAddComponent(toastr, router) {
+            DebitCreditMemoAddComponent = (function () {
+                function DebitCreditMemoAddComponent(toastr, router) {
                     this.toastr = toastr;
                     this.router = router;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
-                *when you add a customer.
+                *when there will be new purchase order.
                 *Will go back to the login screen if you try to access this component without logging in.
                 **/
-                DisbursementAddComponent.prototype.ngOnInit = function () {
+                DebitCreditMemoAddComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
                     else {
                     }
                     /*Else*/
-                    this.cmbTermSource = new wijmo.collections.ObservableArray();
-                    this.cmbAR_AccountSource = new wijmo.collections.ObservableArray();
-                    this.cmbReturnSource = new wijmo.collections.ObservableArray();
-                    this.cmbDefaultPrice = new wijmo.collections.ObservableArray();
-                    this.disbursementDate = new wijmo.input.InputDate('#disbursementDate', {
+                    this.purchaseAddSource = new wijmo.collections.ObservableArray();
+                    this.purchaseAddView = new wijmo.collections.CollectionView(this.purchaseAddSource);
+                    this.cmbItemSource = new wijmo.collections.ObservableArray();
+                    this.cmbAccount = new wijmo.collections.ObservableArray();
+                    this.cmbSupplierSource = new wijmo.collections.ObservableArray();
+                    this.cmbAuthority = new wijmo.collections.ObservableArray();
+                    this.inputDate = new wijmo.input.InputDate('#inputDate', {
                         format: 'MM/dd/yyyy',
                         value: new Date()
                     });
-                    this.initTypeCombobox();
-                    this.initPayTypeCombobox();
-                    this.initReturnComboBox();
-                    this.cmbDefaultPrice.push('');
+                    this.initCmbSupplier();
+                    this.initCmbAuthority();
+                    this.initCmbAccount();
+                    this.purchaseAddSource.push({ Quantity: 1 });
+                    this.cmbItemSource.push('Test');
+                    this.cmbItemSource.push('Test1');
                 };
-                DisbursementAddComponent.prototype.onLock = function () {
+                DebitCreditMemoAddComponent.prototype.onLock = function () {
                     document.getElementById('inputDate').setAttribute('disabled', 'disabled');
                     document.getElementById('cmbSupplier').setAttribute('disabled', 'disabled');
                     document.getElementById('txtRemarks').setAttribute('disabled', 'disabled');
@@ -67,7 +74,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     document.getElementById('btnImportXLS').setAttribute('disabled', 'disabled');
                     document.getElementById('btnExportXLS').setAttribute('disabled', 'disabled');
                 };
-                DisbursementAddComponent.prototype.onUnlock = function () {
+                DebitCreditMemoAddComponent.prototype.onUnlock = function () {
                     document.getElementById('inputDate').removeAttribute('disabled');
                     document.getElementById('cmbSupplier').removeAttribute('disabled');
                     document.getElementById('txtRemarks').removeAttribute('disabled');
@@ -78,46 +85,42 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     document.getElementById('btnImportXLS').removeAttribute('disabled');
                     document.getElementById('btnExportXLS').removeAttribute('disabled');
                 };
-                DisbursementAddComponent.prototype.onPreview = function () {
+                DebitCreditMemoAddComponent.prototype.onPreview = function () {
                 };
-                DisbursementAddComponent.prototype.onPrint = function () {
+                DebitCreditMemoAddComponent.prototype.onPrint = function () {
                 };
-                /**
-                * This function will go back disburement.html when clicked
-                **/
-                DisbursementAddComponent.prototype.onClose = function () {
-                    this.router.navigate(['Disbursement']);
+                DebitCreditMemoAddComponent.prototype.onClose = function () {
+                    this.router.navigate(['Purchases']);
                 };
-                DisbursementAddComponent.prototype.onReturn = function () {
-                    var cmbReturn = document.getElementById('cmbReturn');
-                    if (document.getElementById('chkReturn').checked) {
-                        cmbReturn.removeAttribute('disabled');
-                    }
-                    else {
-                        cmbReturn.setAttribute('disabled', 'disabled');
-                    }
+                DebitCreditMemoAddComponent.prototype.onSelectChange = function () {
                 };
                 //getters
-                DisbursementAddComponent.prototype.getToastr = function () { return this.toastr; };
-                /**
-                *This function initializes the  term combobox of customer add page
-                **/
-                DisbursementAddComponent.prototype.initTypeCombobox = function () {
+                DebitCreditMemoAddComponent.prototype.getToastr = function () { return this.toastr; };
+                DebitCreditMemoAddComponent.prototype.initCmbSupplier = function () {
+                    this.cmbSupplierSource.push('Return from Customer');
                 };
-                /**
-                *This function initializes the  AR Account combobox of customer add page
-                **/
-                DisbursementAddComponent.prototype.initPayTypeCombobox = function () {
+                DebitCreditMemoAddComponent.prototype.initCmbAuthority = function () {
+                    this.cmbAuthority.push('Administrator');
+                    this.cmbAuthority.push('Cashier');
+                    this.cmbAuthority.push('Teller');
                 };
-                DisbursementAddComponent.prototype.initReturnComboBox = function () {
-                    this.cmbReturnSource.push('Test');
+                DebitCreditMemoAddComponent.prototype.initCmbAccount = function () {
+                    this.cmbAccount.push('Test');
                 };
-                DisbursementAddComponent.CMB_TERM_SOURCE_LENGTH = 5;
-                DisbursementAddComponent = __decorate([
+                DebitCreditMemoAddComponent.prototype.addPurchaseOrder = function () {
+                    var data = {};
+                };
+                DebitCreditMemoAddComponent.prototype.validateUserInput = function () {
+                    return true;
+                };
+                DebitCreditMemoAddComponent = __decorate([
                     core_1.Component({
-                        selector: 'customer-add',
-                        templateUrl: 'app/disbursement/disbursementAdd.html',
+                        selector: 'purchase-add',
+                        templateUrl: 'app/debitCreditMemo/debitCreditMemoAdd.html',
                         directives: [
+                            wjNg2FlexGrid.WjFlexGrid,
+                            wjNg2FlexGrid.WjFlexGridColumn,
+                            wjNg2FlexGrid.WjFlexGridCellTemplate,
                             wjNg2Input.WjComboBox,
                             wjNg2Input.WjInputDate
                         ],
@@ -126,11 +129,11 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                         ]
                     }), 
                     __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
-                ], DisbursementAddComponent);
-                return DisbursementAddComponent;
+                ], DebitCreditMemoAddComponent);
+                return DebitCreditMemoAddComponent;
             }());
-            exports_1("DisbursementAddComponent", DisbursementAddComponent);
+            exports_1("DebitCreditMemoAddComponent", DebitCreditMemoAddComponent);
         }
     }
 });
-//# sourceMappingURL=disbursementAdd.js.map
+//# sourceMappingURL=debitCreditMemoAdd.js.map

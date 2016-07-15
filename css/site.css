@@ -176,3 +176,7 @@ div.col-sm-2 {
 .contentTable {
     margin: auto;
 }
+
+#debit-credit-memo-add-page #formDebitCreditMemoAdd .col-sm-4{
+    padding-left: 10px;
+}
