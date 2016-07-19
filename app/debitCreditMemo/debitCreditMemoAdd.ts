@@ -84,27 +84,19 @@ export class DebitCreditMemoAddComponent implements OnInit{
     }  
 
     public onLock() : void {
-        document.getElementById('inputDate').setAttribute('disabled', 'disabled');
-        document.getElementById('cmbSupplier').setAttribute('disabled', 'disabled');
-        document.getElementById('txtRemarks').setAttribute('disabled', 'disabled');
+        document.getElementById('flexDebitCreditAdd').setAttribute('disabled', 'disabled');
         document.getElementById('cmbCheckedBy').setAttribute('disabled', 'disabled');
         document.getElementById('cmbApprovedBy').setAttribute('disabled', 'disabled');
-        document.getElementById('flexPurchaseAdd').setAttribute('disabled','disabled');
-        document.getElementById('btnDownload').setAttribute('disabled','disabled');
-        document.getElementById('btnImportXLS').setAttribute('disabled','disabled');
-        document.getElementById('btnExportXLS').setAttribute('disabled','disabled');
+        document.getElementById('txtParticulars').setAttribute('disabled','disabled');
+        document.getElementById('inputDate').setAttribute('disabled','disabled');
     }
 
     public onUnlock() : void {
-        document.getElementById('inputDate').removeAttribute('disabled');
-        document.getElementById('cmbSupplier').removeAttribute('disabled');
-        document.getElementById('txtRemarks').removeAttribute('disabled');
+        document.getElementById('flexDebitCreditAdd').removeAttribute('disabled');
         document.getElementById('cmbCheckedBy').removeAttribute('disabled');
         document.getElementById('cmbApprovedBy').removeAttribute('disabled');
-        document.getElementById('flexPurchaseAdd').removeAttribute('disabled');
-        document.getElementById('btnDownload').removeAttribute('disabled');
-        document.getElementById('btnImportXLS').removeAttribute('disabled');
-        document.getElementById('btnExportXLS').removeAttribute('disabled');
+        document.getElementById('txtParticulars').removeAttribute('disabled');
+        document.getElementById('inputDate').removeAttribute('disabled');
     }
 
     public onPreview() : void {
