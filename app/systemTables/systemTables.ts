@@ -46,7 +46,7 @@ export class SystemTablesComponent implements OnInit{
     }
 
     public onLock() : void {
-
+            
     }
 
     public onUnLock() : void {

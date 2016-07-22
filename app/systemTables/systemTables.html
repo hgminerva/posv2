@@ -28,10 +28,15 @@
         </div>
     </div>
     <div id="systemTableTabContent" class="tab-content container margin">
-        <div id="chartOfAccounts" class="tab-pane in active">
-           <div class="row">
-               <div class="col-sm-12">
-                   <wj-flex-grid id="chartOfAccountsGrid" #chartOfAccountsGrid class="grid" [itemsSource]="chartOfAccountsView">
+        <div id="chartOfAccounts" class="tab-pane fade in active">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="pull-right">
+                        <button id="btnAddChartOfAccounts" class="btn btn-primary sharp">Add</button>
+                    </div>
+                </div>
+                <div class="row">
+                <wj-flex-grid id="chartOfAccountsGrid" #chartOfAccountsGrid class="grid" [itemsSource]="chartOfAccountsView">
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                     <button class="btn btn-primary sharp" >
@@ -47,28 +52,33 @@
                             </template>
                         </wj-flex-grid-column>
                         <wj-flex-grid-column [header]="'Account Code'"
-                                             [binding]="'Account Code'"
-                                             [width]="'2*'"
-                                             [align]="'center'">
+                                            [binding]="'Account Code'"
+                                            [width]="'2*'"
+                                            [align]="'center'">
                         </wj-flex-grid-column>
                         <wj-flex-grid-column [header]="'Account'"
-                                             [binding]="'Account'"
-                                             [width]="'5*'"
-                                             [align]="'center'">
+                                            [binding]="'Account'"
+                                            [width]="'5*'"
+                                            [align]="'center'">
                         </wj-flex-grid-column>
                         <wj-flex-grid-column [header]="'Type'"
-                                             [binding]="'Type'"
-                                             [width]="'2*'"
-                                             [align]="'center'">
+                                            [binding]="'ChartOfAccountType'"
+                                            [width]="'2*'"
+                                            [align]="'center'">
                         </wj-flex-grid-column>
-                   </wj-flex-grid>
-               </div>
-           </div>
+                </wj-flex-grid>
+                </div>
+            </div>
         </div>
-        <div id="payType" class="tab-pane">
-            <div class="row">
-               <div class="col-sm-12">
-                    <wj-flex-grid id="payTypeGrid"  #payTypeGrid class="grid" [itemsSource]="payTypeSource">
+        <div id="payType" class="tab-pane fade">
+             <div class="col-sm-12">
+                <div class="row">
+                    <div class="pull-right">
+                        <button id="btnAddPayType" class="btn btn-primary sharp">Add</button>
+                    </div>
+                </div>
+                 <div class="row">
+                    <wj-flex-grid id="payTypeGrid"  #payTypeGrid class="grid" [itemsSource]="">
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                     <button class="btn btn-primary sharp" >
@@ -83,18 +93,13 @@
                                     </button>
                             </template>
                         </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Account Code'"
-                                             [binding]="'Account Code'"
+                        <wj-flex-grid-column [header]="'Pay Type'"
+                                             [binding]="'PayType'"
                                              [width]="'2*'"
                                              [align]="'center'">
                         </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Account'"
-                                             [binding]="'Account'"
-                                             [width]="'5*'"
-                                             [align]="'center'">
-                        </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Type'"
-                                             [binding]="'Type'"
+                         <wj-flex-grid-column [header]="'Account'"
+                                             [binding]="'PayTypeAccount'"
                                              [width]="'2*'"
                                              [align]="'center'">
                         </wj-flex-grid-column>
@@ -102,27 +107,146 @@
                </div>
            </div>
         </div>
-        <div id="tax" class="tab-pane">
-            <div class="row">
-               <div class="col-sm-12">
+        <div id="tax" class="tab-pane fade">
+            <div class="col-sm-12">
+                <div class="row">
+                     <div class="pull-right">
+                        <button id="btnAddTax" class="btn btn-primary sharp">Add</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <wj-flex-grid id="taxGrid" #taxGrid class="grid" [itemsSource]="">
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-primary sharp" >
+                                            Edit
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger sharp">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Tax'"
+                                                [binding]="'Tax'"
+                                                [width]="'2*'"
+                                                [align]="'center'">
+                        </wj-flex-grid-column>
+                         <wj-flex-grid-column [header]="'Type'"
+                                                [binding]="'TaxType'"
+                                                [width]="'2*'"
+                                                [align]="'center'">
+                        </wj-flex-grid-column>
+                         <wj-flex-grid-column [header]="'Rate(%)'"
+                                                [binding]="Rate"
+                                                [width]="'2*'"
+                                                [align]="'center'">
+                        </wj-flex-grid-column>
+                         <wj-flex-grid-column [header]="'Account'"
+                                                [binding]="'TaxAccount'"
+                                                [width]="'2*'"
+                                                [align]="'center'">
+                        </wj-flex-grid-column>
+                    </wj-flex-grid>
+                </div>
+            </div>
+        </div>
+        <div id="unit" class="tab-pane fade">
+            <div class="col-sm-12">
+                 <div class="row">
+                     <div class="pull-right">
+                        <button id="btnAddUnit" class="btn btn-primary sharp">Add</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <wj-flex-grid id="unitGrid"  #unitGrid class="grid" [itemsSource]="">
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-primary sharp" >
+                                            Edit
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger sharp">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Unit'"
+                                             [binding]="'Unit'"
+                                             [width]="'*'"
+                                             [align]="'center'">
+                        </wj-flex-grid-column>
+                   </wj-flex-grid>
                </div>
             </div>
         </div>
-        <div id="unit" class="tab-pane">
-            <div class="row">
-               <div class="col-sm-12">
+        <div id="period" class="tab-pane fade">
+             <div class="col-sm-12">
+                 <div class="row">
+                     <div class="pull-right">
+                        <button id="btnAddPeriod" class="btn btn-primary sharp">Add</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <wj-flex-grid id="unitGrid"  #periodtGrid class="grid" [itemsSource]="">
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-primary sharp" >
+                                            Edit
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger sharp">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Period'"
+                                             [binding]="'Period'"
+                                             [width]="'*'"
+                                             [align]="'center'">
+                        </wj-flex-grid-column>
+                   </wj-flex-grid>
                </div>
             </div>
-        </div>
-        <div id="period" class="tab-pane">
-             <div class="row">
-               <div class="col-sm-12">
-               </div>
-             </div>
         </div>
         <div id="terminal" class="tab-pane">
-             <div class="row">
-               <div class="col-sm-12">
+             <div class="col-sm-12">
+                 <div class="row">
+                     <div class="pull-right">
+                        <button id="btnAddTerminal" class="btn btn-primary sharp">Add</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <wj-flex-grid id="terminalGrid"  #terminalGrid class="grid" [itemsSource]="">
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-primary sharp" >
+                                            Edit
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger sharp">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Terminal'"
+                                             [binding]="'Terminal'"
+                                             [width]="'*'"
+                                             [align]="'center'">
+                        </wj-flex-grid-column>
+                   </wj-flex-grid>
                </div>
             </div>
         </div>

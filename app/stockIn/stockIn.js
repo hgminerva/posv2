@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,23 +10,37 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, ng2_toastr_1, router_1;
     var StockInComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (ng2_toastr_1_1) {
+                ng2_toastr_1 = ng2_toastr_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             StockInComponent = (function () {
-                function StockInComponent() {
+                function StockInComponent(router, toastr) {
+                    this.router = router;
+                    this.toastr = toastr;
                 }
+                StockInComponent.prototype.ngOnInit = function () {
+                };
                 StockInComponent = __decorate([
                     core_1.Component({
                         selector: 'stockIn',
-                        templateUrl: 'app/stockIn/stockIn.html'
+                        templateUrl: 'app/stockIn/stockIn.html',
+                        directives: [],
+                        providers: [
+                            ng2_toastr_1.ToastsManager
+                        ]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager])
                 ], StockInComponent);
                 return StockInComponent;
             }());
