@@ -21,174 +21,176 @@
 <!--End of Header-->
 <!--Holds the body-->
     <div class="row">
-        <div class="col-sm-12 margin">
-            <div class="row">
-                <form id="formAddPurchaseOrder" class="form-horizontal" role="form">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <div class="col-sm-2">
-                                <label class="control-label pull-left">P.O. No.</label>
+        <div class="col-sm-12">
+            <div class="margin">
+                <div class="row">
+                    <form id="formAddPurchaseOrder" class="form-horizontal" role="form">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">P.O. No.</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id = "txtPO_Number"
+                                        class="form-control input-40 pull-left"
+                                        type="text" disabled>
+                                </div>
                             </div>
-                            <div class="col-sm-10">
-                                <input id = "txtPO_Number"
-                                       class="form-control input-40 pull-left"
-                                       type="text" disabled>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Period</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="txtPeriod" 
+                                        class="form-control input-40 pull-left"
+                                        type="text" disabled>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-2">
-                                <label class="control-label pull-left">Period</label>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Date</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div id="inputDate"></div>
+                                </div>
                             </div>
-                            <div class="col-sm-10">
-                                <input id="txtPeriod" 
-                                       class="form-control input-40 pull-left"
-                                       type="text" disabled>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Supplier</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <wj-combo-box id="cmbSupplier" [cmbSupplier]
+                                                class="input-70"
+                                                [itemsSource]="cmbSupplierSource"
+                                                [isReadOnly]="true">
+                                    </wj-combo-box>
+                                </div>
                             </div>
-                         </div>
-                         <div class="form-group">
-                            <div class="col-sm-2">
-                                <label class="control-label pull-left">Date</label>
-                            </div>
-                            <div class="col-sm-10">
-                                <div id="inputDate"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-2">
-                                <label class="control-label pull-left">Supplier</label>
-                            </div>
-                            <div class="col-sm-10">
-                                <wj-combo-box id="cmbSupplier" [cmbSupplier]
-                                              class="input-70"
-                                              [itemsSource]="cmbSupplierSource"
-                                              [isReadOnly]="true">
-                                </wj-combo-box>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-2">
-                                <label class="control-label pull-left">Remarks</label>
-                            </div>
-                            <div class="col-sm-10">
-                                <textarea id="txtRemarks"  class="input-70" rows="5">
-                                </textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <div class="col-sm-3">
-                                <label class="control-label pull-left">Prepared By</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <wj-combo-box id="cmbPreparedBy" 
-                                            class="input-70"
-                                            [itemsSource]="cmbAuthority"
-                                            [isReadOnly]="true" disabled>
-                                </wj-combo-box>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Remarks</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <textarea id="txtRemarks"  class="input-70" rows="5">
+                                    </textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-3">
-                                <label class="control-label pull-left">Checked By</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <wj-combo-box id="cmbCheckedBy"
-                                            class="input-70"
-                                            [itemsSource]="cmbAuthority"
-                                            [isReadOnly]="true">
-                                </wj-combo-box>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-3">
-                                <label class="control-label pull-left">Approved By</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <wj-combo-box id="cmbApprovedBy"
-                                            class="input-70"
-                                            [itemsSource]="cmbAuthority"
-                                            [isReadOnly]="true">
-                                </wj-combo-box>
-                            </div>
-                        </div>
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="col-sm-3">
-                                    <label class="control-label pull-left">Total Amount</label>
+                                    <label class="control-label pull-left">Prepared By</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input id="txtTotalAmount"
-                                        class="form-control input-70"
-                                        placeholder="0.00"
-                                        disabled>
+                                    <wj-combo-box id="cmbPreparedBy" 
+                                                class="input-70"
+                                                [itemsSource]="cmbAuthority"
+                                                [isReadOnly]="true" disabled>
+                                    </wj-combo-box>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-6">
-                                    <input id="txtTotalAmount"
-                                        class="form-control input-100"
-                                        placeholder="Download items from stock alert."
-                                        disabled>
+                                <div class="col-sm-3">
+                                    <label class="control-label pull-left">Checked By</label>
                                 </div>
-                                <div class="col-sm-6">
-                                    <button id="btnDownload" class="btn btn-primary sharp ">Download</button>
+                                <div class="col-sm-9">
+                                    <wj-combo-box id="cmbCheckedBy"
+                                                class="input-70"
+                                                [itemsSource]="cmbAuthority"
+                                                [isReadOnly]="true">
+                                    </wj-combo-box>
                                 </div>
                             </div>
-                    </div>
-                </form>
-            </div>
-            <div class="row">
-                <div class="col-sm-9">
-                    <wj-flex-grid id="flexPurchaseAdd" #flexPurchaseAdd class="grid" [itemsSource]="purchaseAddView" [isReadOnly]="true">
-                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-danger sharp" >
-                                        Delete
-                                </button>
-                            </template>
-                        </wj-flex-grid-column> 
-                        <wj-flex-grid-column [header]="'Item'" 
-                                             [binding]="'Item'"
-                                             [align]="'center'"
-                                             [width]="'8*'">
-                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                               <wj-combo-box [itemsSource]="cmbItemSource" class="input-100">
-                               </wj-combo-box>
-                            </template>
-                        </wj-flex-grid-column> 
-                        <wj-flex-grid-column [header]="'Unit'"
-                                             [binding]="'Unit'"
-                                             [align]="'center'"
-                                             [width]="'3*'">
-                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                               <wj-combo-box [itemsSource]="cmbUnit" class="input-100" disabled>
-                               </wj-combo-box>
-                            </template>
-                        </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Quantity'"
-                                             [binding]="'Quantity'"
-                                             [align]="'center'"
-                                             [width]="'2*'"
-                                             [data-type]="'Number'">
-                        </wj-flex-grid-column>
-                         <wj-flex-grid-column [header]="'Unit Cost'"
-                                             [binding]="'UnitCost'"
-                                             [align]="'center'"
-                                             [width]="'2*'"
-                                             [data-type]="'Number'">
-                        </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Total Cost'"
-                                             [binding]="'TotalCost'"
-                                             [align]="'center'"
-                                             [width]="'2*'"
-                                             [data-type]="'Number'">
-                        </wj-flex-grid-column>
-                    </wj-flex-grid>
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label class="control-label pull-left">Approved By</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <wj-combo-box id="cmbApprovedBy"
+                                                class="input-70"
+                                                [itemsSource]="cmbAuthority"
+                                                [isReadOnly]="true">
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <label class="control-label pull-left">Total Amount</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input id="txtTotalAmount"
+                                            class="form-control input-70"
+                                            placeholder="0.00"
+                                            disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <input id="txtTotalAmount"
+                                            class="form-control input-100"
+                                            placeholder="Download items from stock alert."
+                                            disabled>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button id="btnDownload" class="btn btn-primary sharp ">Download</button>
+                                    </div>
+                                </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-sm-3">
-                    <div class="pull-right">
-                        <button id="btnImportXLS" class="btn btn-primary sharp">Import XLS</button>
-                        <button id="btnExportXLS" class="btn btn-primary sharp">Export XLS</button>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <wj-flex-grid id="flexPurchaseAdd" #flexPurchaseAdd class="grid" [itemsSource]="purchaseAddView" [isReadOnly]="true">
+                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger sharp" >
+                                            Delete
+                                    </button>
+                                </template>
+                            </wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Item'" 
+                                                [binding]="'Item'"
+                                                [align]="'center'"
+                                                [width]="'8*'">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <wj-combo-box [itemsSource]="cmbItemSource" class="input-100">
+                                </wj-combo-box>
+                                </template>
+                            </wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Unit'"
+                                                [binding]="'Unit'"
+                                                [align]="'center'"
+                                                [width]="'3*'">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <wj-combo-box [itemsSource]="cmbUnit" class="input-100" disabled>
+                                </wj-combo-box>
+                                </template>
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Quantity'"
+                                                [binding]="'Quantity'"
+                                                [align]="'center'"
+                                                [width]="'2*'"
+                                                [data-type]="'Number'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Unit Cost'"
+                                                [binding]="'UnitCost'"
+                                                [align]="'center'"
+                                                [width]="'2*'"
+                                                [data-type]="'Number'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Total Cost'"
+                                                [binding]="'TotalCost'"
+                                                [align]="'center'"
+                                                [width]="'2*'"
+                                                [data-type]="'Number'">
+                            </wj-flex-grid-column>
+                        </wj-flex-grid>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="pull-right">
+                            <button id="btnImportXLS" class="btn btn-primary sharp">Import XLS</button>
+                            <button id="btnExportXLS" class="btn btn-primary sharp">Export XLS</button>
+                        </div>
                     </div>
                 </div>
             </div>

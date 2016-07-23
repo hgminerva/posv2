@@ -155,14 +155,12 @@ div.contentFilter {
 }
 
 div.margin {
-    margin: auto;
+    margin-top: 10px;
     margin-bottom: 10px;
-    padding-left: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px;
     color: #181000;
     background-color: #F0F0E0;
-    width: 90%;
+    width: 100%;
 }
 
 div.input-right {
@@ -179,4 +177,8 @@ div.col-sm-2 {
 
 #debit-credit-memo-add-page #formDebitCreditMemoAdd .col-sm-4{
     padding-left: 10px;
+}
+
+.btn.sharp {
+    border-radius: 3px;
 }

@@ -16,55 +16,58 @@
      <div class="row">
         <div class="col-sm-12">
             <div class="contentFilter">
-                <label>Search:</label>
+                <label>Filter: </label>
                 <input class="input-20" type="text">
+                <button id="btnSearch" class="btn btn-primary sharp">Search</button>
             </div>
         </div>
     </div>
     <div class="row">
-         <div class="col-sm-12 margin">
-            <wj-flex-grid #flexDiscount class="grid" [itemsSource]="itemComponentView">
-                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <button class="btn btn-danger sharp" >
-                                Delete
-                        </button>
-                    </template>
-                </wj-flex-grid-column> 
-                <wj-flex-grid-column [header]="'Item'" 
-                                     [binding]="'Item'"
-                                     [isReadOnly]="true" 
-                                     [width]="'5*'"
-                                     [align]="'center'">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Components'"
-                                     [binding]="'Components'"
-                                     [isReadOnly]="true" 
-                                     [width]="'2*'"
-                                     [align]="'center'">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'P'" 
-                                     [binding]="'P'"
-                                     [data-type]="'Boolean'"
-                                     [isReadOnly]="true" 
-                                     [width]="'1*'"
-                                     [align]="'center'">
-                </wj-flex-grid-column>
-                 <wj-flex-grid-column [header]="'Packages'" 
-                                     [binding]="'Packages'"
-                                     [isReadOnly]="true" 
-                                     [align]="'center'"
-                                     [width]="'2*'">
-                                     
-                </wj-flex-grid-column>
-                 <wj-flex-grid-column [header]="'Lock'" 
-                                     [binding]="'Lock'"
-                                     [data-type]="'Boolean'"
-                                     [isReadOnly]="true" 
-                                     [align]="'center'"
-                                     [width]="'1*'">
-                </wj-flex-grid-column>
-            </wj-flex-grid>
+         <div class="col-sm-12">
+             <div class="margin">
+                <wj-flex-grid #flexDiscount class="grid" [itemsSource]="itemComponentView">
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                            <button class="btn btn-danger sharp" >
+                                    Delete
+                            </button>
+                        </template>
+                    </wj-flex-grid-column> 
+                    <wj-flex-grid-column [header]="'Item'" 
+                                        [binding]="'Item'"
+                                        [isReadOnly]="true" 
+                                        [width]="'5*'"
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Components'"
+                                        [binding]="'Components'"
+                                        [isReadOnly]="true" 
+                                        [width]="'2*'"
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'P'" 
+                                        [binding]="'P'"
+                                        [data-type]="'Boolean'"
+                                        [isReadOnly]="true" 
+                                        [width]="'1*'"
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Packages'" 
+                                        [binding]="'Packages'"
+                                        [isReadOnly]="true" 
+                                        [align]="'center'"
+                                        [width]="'2*'">
+                                        
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Lock'" 
+                                        [binding]="'Lock'"
+                                        [data-type]="'Boolean'"
+                                        [isReadOnly]="true" 
+                                        [align]="'center'"
+                                        [width]="'1*'">
+                    </wj-flex-grid-column>
+                </wj-flex-grid>
+             </div>
         </div>
     </div>
 </section>

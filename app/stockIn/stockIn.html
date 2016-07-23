@@ -6,10 +6,78 @@
             </div>
             <div class="col-sm-6">
                 <div class="pull-right">
-                    <button id="btnAdd" class="btn btn-primary sharp">Add</button>
-                    <button id="btnClose" class="btn btn-primary sharp">Close</button>
+                    <button id="btnAdd" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
+                    <button id="btnClose" class="btn btn-primary sharp" (click)="onClose()">Close</button>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row contentFilter">
+                    <label>Filter</label>
+                    <input id="txtFilter" class="input-20">
+                    <button id="btnSearch" class="btn btn-primary sharp">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="margin">
+                <wj-flex-grid id="stockInGrid"  #stockInGrid class="grid" [itemsSource]="">
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-danger sharp">
+                                    <i class="fa fa-trash">Delete</i>
+                                </button>
+                        </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Stock-In Date'"
+                                            [binding]="'StockInDate'"
+                                            [width]="150"
+                                            [align]="'center'"
+                                            [isReadOnly]="true">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Stock-In Number'"
+                                            [binding]="'StockInNumber'"
+                                            [width]="180"
+                                            [align]="'center'"
+                                            [isReadOnly]="true">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Supplier'"
+                                            [binding]="'Supplier'"
+                                            [width]="300"
+                                            [align]="'center'"
+                                            [isReadOnly]="true">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Amount'"
+                                            [binding]="'Amount'"
+                                            [width]="100"
+                                            [align]="'center'"
+                                            [isReadOnly]="true">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'L'"
+                                            [binding]="'L'"
+                                            [width]="50"
+                                            [align]="'center'"
+                                            [isReadOnly]="true"
+                                            [data-type]="Boolean">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'R'"
+                                            [binding]="'R'"
+                                            [width]="50"
+                                            [align]="'center'"
+                                            [isReadOnly]="true"
+                                            [data-type]="Boolean">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Remarks'"
+                                            [binding]="'Remarks'"
+                                            [width]="500"
+                                            [align]="'center'"
+                                            [isReadOnly]="true">
+                    </wj-flex-grid-column>
+                </wj-flex-grid>
+            </div>
+        </div>    
     </div>
 </section>

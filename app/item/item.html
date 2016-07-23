@@ -24,72 +24,74 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 margin">
-                <wj-flex-grid #flexItem class="grid" [itemsSource]="collectionItems" > 
-                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-primary sharp" >
-                                        Edit
-                                </button>
-                        </template>
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-danger sharp">
-                                    <i class="fa fa-trash">Delete</i>
-                                </button>
-                        </template>
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Code'" 
-                                         [binding]="'itemCodeId'" 
-                                         [isReadOnly]="true" 
-                                         [width]="100"
-                                         [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Description'" 
-                                         [binding]="'itemDescriptionId'" 
-                                         [isReadOnly]="true" 
-                                         [width]="'5*'"
-                                         [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Category'" 
-                                         [binding]="'itemCategoryId'" 
-                                         [isReadOnly]="true" 
-                                         [width]="100"
-                                         [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Bar Code'" 
-                                         [binding]="'itemBarCodeId'" 
-                                         [isReadOnly]="true" 
-                                         [width]="100"
-                                         [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Price'"
-                                         [binding]="'itemPriceId'" 
-                                         [isReadOnly]="true" 
-                                         [width]="100"
-                                         [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Qty'"
-                                         [binding]="'itemQtyId'" 
-                                         [isReadOnly]="true" 
-                                         [width]="'2*'"
-                                         [data-type]="'Boolean'"
-                                         [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Lock'"
-                                         [binding]="'Lock'" 
-                                         [isReadOnly]="true" 
-                                         [width]="'2*'"
-                                         [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Inventory'" 
-                                         [binding]="'itemInventoryId'"
-                                         [isReadOnly]="true" 
-                                         [width]="'2*'"
-                                         [align]="'center'">
-                    </wj-flex-grid-column>
-               </wj-flex-grid>      
+            <div class="col-sm-12">
+                <div class="margin">
+                        <wj-flex-grid #flexItem class="grid" [itemsSource]="collectionItems" > 
+                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                        <button class="btn btn-primary sharp" >
+                                                Edit
+                                        </button>
+                                </template>
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                        <button class="btn btn-danger sharp">
+                                            <i class="fa fa-trash">Delete</i>
+                                        </button>
+                                </template>
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Code'" 
+                                                [binding]="'itemCodeId'" 
+                                                [isReadOnly]="true" 
+                                                [width]="100"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Description'" 
+                                                [binding]="'itemDescriptionId'" 
+                                                [isReadOnly]="true" 
+                                                [width]="'5*'"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Category'" 
+                                                [binding]="'itemCategoryId'" 
+                                                [isReadOnly]="true" 
+                                                [width]="100"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Bar Code'" 
+                                                [binding]="'itemBarCodeId'" 
+                                                [isReadOnly]="true" 
+                                                [width]="100"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Price'"
+                                                [binding]="'itemPriceId'" 
+                                                [isReadOnly]="true" 
+                                                [width]="100"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Qty'"
+                                                [binding]="'itemQtyId'" 
+                                                [isReadOnly]="true" 
+                                                [width]="'2*'"
+                                                [data-type]="'Boolean'"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Lock'"
+                                                [binding]="'Lock'" 
+                                                [isReadOnly]="true" 
+                                                [width]="'2*'"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Inventory'" 
+                                                [binding]="'itemInventoryId'"
+                                                [isReadOnly]="true" 
+                                                [width]="'2*'"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                    </wj-flex-grid>     
+                </div> 
             </div>
         </div>
     </div>

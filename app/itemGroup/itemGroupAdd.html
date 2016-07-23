@@ -21,7 +21,8 @@
 <!--End of Header-->
 <!--Holds the body-->
     <div class="row">
-        <div class="col-sm-12 margin">
+        <div class="col-sm-12">
+            <div class="margin">
             <div class="row">
                 <div class="col-sm-10">
                     <form id="formItemGroupAdd" class="form-horizontal" role="form">
@@ -66,7 +67,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <wj-flex-grid #flexItemGroupAdd class="grid" [itemsSource]="itemGroupAddView" [isReadOnly]="true">
-                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70" [align]="'center'">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                     <button class="btn btn-primary sharp" >
                                             Delete
@@ -89,6 +90,7 @@
                 </div>
             </div>
         <!--End of wijmo flex grid-->
+            </div>
         </div>
     </div>
 <!--End of Body-->

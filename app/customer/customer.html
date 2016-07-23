@@ -21,56 +21,59 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="contentFilter">
-                <label>Search</label>
+                <label>Filter</label>
                 <input class="input-20" type="text">
+                <button id="btnSearch" class="btn btn-primary sharp">Search</button>
             </div>
         </div>
     </div>
 <!--End of customer page filter-->
 <!--Holds the customer page flex grid-->
     <div class="row">
-        <div class="col-sm-12 margin">
-            <wj-flex-grid #flexCustomerList [itemsSource]="customerView" [isReadOnly]="true">
-               <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <button class="btn btn-primary sharp" >
-                                Edit
-                        </button>
-                    </template>
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <button class="btn btn-danger sharp">
-                            <i class="fa fa-trash">Delete</i>
-                        </button>
-                    </template>
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Customer'"
-                                     [binding]="'Customer'" 
-                                     [isReadOnly]="true" 
-                                     [width]="'3*'"
-                                     [align]="'center'">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Address'" 
-                                     [binding]="'Address'" 
-                                     [isReadOnly]="true" 
-                                     [width]="'4*'"
-                                     [align]="'center'">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Contact No'" 
-                                     [binding]="'ContactNo'" 
-                                     [isReadOnly]="true"
-                                     [width]="'2*'"
-                                     [align]="'center'">
-                </wj-flex-grid-column>
-                 <wj-flex-grid-column [header]="'Lock'"
-                                     [binding]="'Lock'" 
-                                     [isReadOnly]="true" 
-                                     [width]="'1*'"
-                                     [align]="'center'"
-                                     [data-type]="'Boolean'">
-                </wj-flex-grid-column>
-            </wj-flex-grid>
+        <div class="col-sm-12">
+            <div class="margin">
+                <wj-flex-grid #flexCustomerList [itemsSource]="customerView" [isReadOnly]="true">
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                            <button class="btn btn-primary sharp" >
+                                    Edit
+                            </button>
+                        </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                            <button class="btn btn-danger sharp">
+                                <i class="fa fa-trash">Delete</i>
+                            </button>
+                        </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Customer'"
+                                        [binding]="'Customer'" 
+                                        [isReadOnly]="true" 
+                                        [width]="'3*'"
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Address'" 
+                                        [binding]="'Address'" 
+                                        [isReadOnly]="true" 
+                                        [width]="'4*'"
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Contact No'" 
+                                        [binding]="'ContactNo'" 
+                                        [isReadOnly]="true"
+                                        [width]="'2*'"
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Lock'"
+                                        [binding]="'Lock'" 
+                                        [isReadOnly]="true" 
+                                        [width]="'1*'"
+                                        [align]="'center'"
+                                        [data-type]="'Boolean'">
+                    </wj-flex-grid-column>
+                </wj-flex-grid>
+            </div>
         </div>
     </div>
 <!--End of customer page flex grid-->

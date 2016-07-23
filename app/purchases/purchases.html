@@ -21,62 +21,65 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="contentFilter">
-               <label>Search</label>
-                <input class="input-20" type="text">
+               <label>Filter: </label>
+               <input class="input-20" type="text">
+               <button id="btnSearch" class="btn btn-primary sharp">Search</button>
             </div>
         </div>
     </div>
 <!--End of purchase page filter-->
 <!--Holds the purchase page flex grid-->
     <div class="row">
-        <div class="col-sm-12 margin">
-            <wj-flex-grid #flexPurchaseList [itemsSource]="purchaseView" [isReadOnly]="true">
-                  <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="55">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-primary sharp" >
-                                        Edit
-                                </button>
-                        </template>
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-danger sharp">
-                                    <i class="fa fa-trash">Delete</i>
-                                </button>
-                        </template>
-                    </wj-flex-grid-column>    
-                    <wj-flex-grid-column [header]="'P.O. Date'" 
-                                         [binding]="'PO_Date'"
-                                         [isReadOnly]="true"
-                                         [align]="'center'"
-                                         [width]="'2*'">
-                    </wj-flex-grid-column>  
-                    <wj-flex-grid-column [header]="'P.O. No.'" 
-                                         [binding]="'PO_No'"
-                                         [isReadOnly]="true"
-                                          [align]="'center'"
-                                          [width]="'2*'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Amount'" 
-                                         [binding]="'Amount'"
-                                         [isReadOnly]="true"
-                                         [align]="'center'"
-                                         [width]="'2*'">
-                    </wj-flex-grid-column>    
-                    <wj-flex-grid-column [header]="'Supplier'" 
-                                         [binding]="'Supplier'"
-                                         [isReadOnly]="true"
-                                         [align]="'center'"
-                                         [width]="'4*'">
-                    </wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Lock'" 
-                                         [binding]="'Lock'"
-                                         [isReadOnly]="true"
-                                         [align]="'center'"
-                                         [width]="'1*'"
-                                         [data-type]="Boolean">
-                    </wj-flex-grid-column>       
-            </wj-flex-grid>
+        <div class="col-sm-12">
+            <div class="margin">
+                <wj-flex-grid #flexPurchaseList [itemsSource]="purchaseView" [isReadOnly]="true">
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="55">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-primary sharp" >
+                                            Edit
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger sharp">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>    
+                        <wj-flex-grid-column [header]="'P.O. Date'" 
+                                            [binding]="'PO_Date'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="'2*'">
+                        </wj-flex-grid-column>  
+                        <wj-flex-grid-column [header]="'P.O. No.'" 
+                                            [binding]="'PO_No'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="'2*'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Amount'" 
+                                            [binding]="'Amount'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="'2*'">
+                        </wj-flex-grid-column>    
+                        <wj-flex-grid-column [header]="'Supplier'" 
+                                            [binding]="'Supplier'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="'4*'">
+                        </wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'Lock'" 
+                                            [binding]="'Lock'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="'1*'"
+                                            [data-type]="Boolean">
+                        </wj-flex-grid-column>       
+                </wj-flex-grid>
+            </div>
         </div>
     </div>
 <!--End of purchase page -->

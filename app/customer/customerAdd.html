@@ -19,155 +19,161 @@
 <!--End of customer page header -->
 <!--Holds the customer page body-->
     <div class="row">
-        <div class="col-sm-12 margin">
-            <form class="form-horizontal" role="form">
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label pull-left">Customer</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input id="txtCustomer" type="text" class="form-control input-40 pull-left" placeholder="NA" required>
+        <div class="col-sm-12">
+            <div class="margin">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Customer</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="txtCustomer" type="text" class="form-control input-40 pull-left" placeholder="NA" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Address</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="txtAddress" type="text" class="form-control input-60 pull-left" placeholder="NA" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Contact Person</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="txtContactPerson"
+                                        type="text" 
+                                        class="form-control input-30 pull-left"
+                                        placeholder="NA" 
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Contact No</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="txtContactNo" type="text" class="form-control input-20 pull-left" placeholder="NA" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Credit Limit</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="txtContactPerson" 
+                                        type="text"
+                                        class="form-control pull-left text-right input-20" 
+                                        placeholder="0.00" 
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Term</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <wj-combo-box id="cmbTerm"  
+                                                class="input-20 pull-left" 
+                                                [itemsSource]="cmbTermSource"
+                                                [isEditable]="false">
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label  pull-left">TIN</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="txtTin" 
+                                        type="text"
+                                        class="form-control input-30 pull-left" 
+                                        placeholder="NA" 
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">AR Account</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <wj-combo-box id="cmbARAccount" 
+                                                class="input-50 pull-left" 
+                                                [itemsSource]="cmbAR_AccountSource"
+                                                [isEditable]="false">
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="pull-left">With Reward</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="chkReward" type="checkbox" class="checkbox">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Reward Card No</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="txtRewardCardNo" 
+                                        type="text"
+                                        class="form-control input-20  pull-left" 
+                                        required>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Reward Conversion</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="txtRewardConversion" 
+                                        type="text"
+                                        class="form-control input-20 text-right pull-left" 
+                                        placeholder="0.00"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-left">Default Price</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <wj-combo-box id="cmbDefaultPrice" 
+                                                class="input-50"
+                                                [itemsSource]="cmbDefaultPrice"
+                                                [isEditable]="false">
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label pull-left">Address</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input id="txtAddress" type="text" class="form-control input-60 pull-left" placeholder="NA" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label pull-left">Contact Person</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input id="txtContactPerson"
-                               type="text" 
-                               class="form-control input-30 pull-left"
-                               placeholder="NA" 
-                               required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label pull-left">Contact No</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input id="txtContactNo" type="text" class="form-control input-20 pull-left" placeholder="NA" required>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="tblCustomerDetail" class="table table-bordered">
+                            <tr>
+                                <th class="text-center" colspan="2">Sale History</th>
+                                <th class="text-center"  colspan="5">Amount</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Date</th>
+                                <th class="text-center" >Sales Number</th>
+                                <th class="text-center" >Sales</th>
+                                <th class="text-center" >Payment</th>
+                                <th class="text-center" >Debit</th>
+                                <th class="text-center" >Credit</th>
+                                <th class="text-center" >Balance</th>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label pull-left">Credit Limit</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input id="txtContactPerson" 
-                               type="text"
-                               class="form-control pull-left text-right input-20" 
-                               placeholder="0.00" 
-                               required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label pull-left">Term</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <wj-combo-box id="cmbTerm"  
-                                      class="input-20 pull-left" 
-                                      [itemsSource]="cmbTermSource"
-                                      [isEditable]="false">
-                        </wj-combo-box>
-                    </div>
-                </div>
-                 <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label  pull-left">TIN</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input id="txtTin" 
-                               type="text"
-                               class="form-control input-30 pull-left" 
-                               placeholder="NA" 
-                               required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label pull-left">AR Account</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <wj-combo-box id="cmbARAccount" 
-                                      class="input-50 pull-left" 
-                                      [itemsSource]="cmbAR_AccountSource"
-                                      [isEditable]="false">
-                        </wj-combo-box>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="pull-left">With Reward</label>
-                    </div>
-                     <div class="col-sm-10">
-                        <input id="chkReward" type="checkbox" class="checkbox">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label pull-left">Reward Card No</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input id="txtRewardCardNo" 
-                            type="text"
-                            class="form-control input-20  pull-left" 
-                            required>
-                        </div>
-                 </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label pull-left">Reward Conversion</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input id="txtRewardConversion" 
-                            type="text"
-                            class="form-control input-20 text-right pull-left" 
-                            placeholder="0.00"
-                            required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label pull-left">Default Price</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <wj-combo-box id="cmbDefaultPrice" 
-                                      class="input-50"
-                                      [itemsSource]="cmbDefaultPrice"
-                                      [isEditable]="false">
-                        </wj-combo-box>
-                    </div>
-                </div>
-            </form>
-            <div class="row">
-            <div class="col-sm-12">
-                <table id="tblCustomerDetail" class="table table-bordered">
-                    <tr>
-                        <th class="text-center" colspan="2">Sale History</th>
-                        <th class="text-center"  colspan="5">Amount</th>
-                    </tr>
-                    <tr>
-                        <th class="text-center">Date</th>
-                        <th class="text-center" >Sales Number</th>
-                        <th class="text-center" >Sales</th>
-                        <th class="text-center" >Payment</th>
-                        <th class="text-center" >Debit</th>
-                        <th class="text-center" >Credit</th>
-                        <th class="text-center" >Balance</th>
-                    </tr>
-                </table>
             </div>
-        </div>
         </div>
     </div>
 <!--End of customer page body-->

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
-    var StockInComponent;
+    var core_1, ng2_toastr_1, router_1;
+    var StockInAddComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -22,51 +22,43 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (router_1_1) {
                 router_1 = router_1_1;
-            },
-            function (wjNg2FlexGrid_1) {
-                wjNg2FlexGrid = wjNg2FlexGrid_1;
-            },
-            function (wjNg2Input_1) {
-                wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
-            StockInComponent = (function () {
-                function StockInComponent(router, toastr) {
+            StockInAddComponent = (function () {
+                function StockInAddComponent(router, toastr) {
                     this.router = router;
                     this.toastr = toastr;
                 }
-                StockInComponent.prototype.ngOnInit = function () {
-                    if (!localStorage.getItem('access_token')) {
-                    }
-                    else {
-                    }
+                StockInAddComponent.prototype.ngOnInit = function () {
                 };
-                StockInComponent.prototype.onAdd = function () {
-                    this.router.navigate(['StockInAdd']);
-                };
-                StockInComponent.prototype.onClose = function () {
+                StockInAddComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
-                StockInComponent = __decorate([
+                StockInAddComponent.prototype.onLock = function () {
+                };
+                StockInAddComponent.prototype.onUnlock = function () {
+                };
+                StockInAddComponent.prototype.onPreview = function () {
+                };
+                StockInAddComponent.prototype.onPrint = function () {
+                };
+                //getters
+                StockInAddComponent.prototype.getToastr = function () { return this.toastr; };
+                StockInAddComponent = __decorate([
                     core_1.Component({
-                        selector: 'stockIn',
-                        templateUrl: 'app/stockIn/stockIn.html',
-                        directives: [
-                            wjNg2FlexGrid.WjFlexGrid,
-                            wjNg2FlexGrid.WjFlexGridColumn,
-                            wjNg2FlexGrid.WjFlexGridCellTemplate,
-                            wjNg2Input.WjComboBox
-                        ],
+                        selector: 'stock-in-add',
+                        templateUrl: 'app/stockIn/stockInAdd.html',
+                        directives: [],
                         providers: [
                             ng2_toastr_1.ToastsManager
                         ]
                     }), 
                     __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager])
-                ], StockInComponent);
-                return StockInComponent;
+                ], StockInAddComponent);
+                return StockInAddComponent;
             }());
-            exports_1("StockInComponent", StockInComponent);
+            exports_1("StockInAddComponent", StockInAddComponent);
         }
     }
 });
-//# sourceMappingURL=stockIn.js.map
+//# sourceMappingURL=stockInAdd.js.map

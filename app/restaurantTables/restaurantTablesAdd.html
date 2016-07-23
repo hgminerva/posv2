@@ -18,41 +18,43 @@
         </div>
     </div>
      <div class="row">
-        <div class="col-sm-12 margin">
-            <div class="row">
-                <div class="col-sm-12">
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <div class="col-sm-2">
-                                <label class="control-label">Table Group</label>
+        <div class="col-sm-12">
+            <div class="margin">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Table Group</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input id="txtTableGroup" class="form-control input-50" placeholder="NA">
+                                </div>
                             </div>
-                            <div class="col-sm-10">
-                                <input id="txtTableGroup" class="form-control input-50" placeholder="NA">
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <wj-flex-grid id="restaurantTablesAdd" 
-                                  #restaurantTablesAdd 
-                                  class="grid" 
-                                  [itemsSource]="restaurantTableAddView">
-                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-danger sharp" >
-                                        Delete
-                                </button>
-                            </template>
-                        </wj-flex-grid-column>  
-                          <wj-flex-grid-column [header]="'Table'" 
-                                               [binding]="'Table'" 
-                                               [width]="'*'" 
-                                               [align]="'center'"
-                                               [isContentHtml]="true">
-                        </wj-flex-grid-column>         
-                    </wj-flex-grid>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <wj-flex-grid id="restaurantTablesAdd" 
+                                    #restaurantTablesAdd 
+                                    class="grid" 
+                                    [itemsSource]="restaurantTableAddView">
+                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger sharp" >
+                                            Delete
+                                    </button>
+                                </template>
+                            </wj-flex-grid-column>  
+                            <wj-flex-grid-column [header]="'Table'" 
+                                                [binding]="'Table'" 
+                                                [width]="'*'" 
+                                                [align]="'center'"
+                                                [isContentHtml]="true">
+                            </wj-flex-grid-column>         
+                        </wj-flex-grid>
+                    </div>
                 </div>
             </div>
         </div>

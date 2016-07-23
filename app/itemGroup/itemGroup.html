@@ -23,42 +23,44 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 margin">
-            <wj-flex-grid #flexItemGroupList [itemsSource]="itemGroupListView" [isReadOnly]="true">
-                 <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-primary sharp" >
-                                        Edit
-                                </button>
-                        </template>
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-danger sharp">
-                                    <i class="fa fa-trash">Delete</i>
-                                </button>
-                        </template>
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Item Group'" 
-                                         [binding]="'ItemGroup'" 
-                                         [isReadOnly]="true" 
-                                         [width]="'8*'" 
-                                         [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Items'" 
-                                         [binding]="'Items'" 
-                                         [isReadOnly]="true" 
-                                         [width]="'1*'"
-                                         [align]="'center'">
-                    </wj-flex-grid-column>
-                     <wj-flex-grid-column [header]="'Lock'" 
-                                          [binding]="'Lock'" 
-                                          [dataType]="'Boolean'"
-                                          [isReadOnly]="true" 
-                                          [width]="'1*'"
-                                          [align]="'center'">
-                    </wj-flex-grid-column>
-            </wj-flex-grid>
+        <div class="col-sm-12">
+            <div class="margin">
+                <wj-flex-grid #flexItemGroupList [itemsSource]="itemGroupListView" [isReadOnly]="true">
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-primary sharp" >
+                                            Edit
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger sharp">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Item Group'" 
+                                            [binding]="'ItemGroup'" 
+                                            [isReadOnly]="true" 
+                                            [width]="'8*'" 
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Items'" 
+                                            [binding]="'Items'" 
+                                            [isReadOnly]="true" 
+                                            [width]="'1*'"
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Lock'" 
+                                            [binding]="'Lock'" 
+                                            [dataType]="'Boolean'"
+                                            [isReadOnly]="true" 
+                                            [width]="'1*'"
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                </wj-flex-grid>
+            </div>
         </div>
     </div>
 </section>

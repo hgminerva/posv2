@@ -37,6 +37,7 @@ import {DebitCreditMemoComponent} from '../debitCreditMemo/debitCreditMemo';
 import {DebitCreditMemoAddComponent} from '../debitCreditMemo/debitCreditMemoAdd';
 import {SystemTablesComponent} from '../systemTables/systemTables';
 import {StockInComponent} from '../stockIn/stockIn';
+import {StockInAddComponent} from '../stockIn/stockInAdd';
 import {InventoryComponent} from '../inventory/inventory';
 import {DisbursementReportsComponent} from '../disbursementReports/disbursementReports';
 import {UsersComponent} from '../users/users';
@@ -92,6 +93,7 @@ import {EightMmPosReportsComponent} from '../8mmPosReports/8mmPosReports';
                { path: '/addDebitCreditMemo', name: 'DebitCreditMemoAdd', component: DebitCreditMemoAddComponent},
                { path: '/systemTables', name: 'SystemTables', component: SystemTablesComponent},
                { path: '/stockIn', name: 'StockIn', component: StockInComponent},
+               { path: '/addStockIn', name: 'StockInAdd', component: StockInAddComponent},
                { path: '/inventory', name: 'Inventory', component: InventoryComponent},
                { path: '/disbursementReports', name: 'DisbursementReports', component: DisbursementReportsComponent},
                { path: '/users', name: 'Users', component: UsersComponent},
