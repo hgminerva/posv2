@@ -1,30 +1,19 @@
-<section id="stockin-page" class="container">
-    <div class="row">
-        <div class="contentHeader">
-            <div class="col-sm-6">
-                <h3>Stock-In List</h3>
-            </div>
-            <div class="col-sm-6">
-                <div class="pull-right">
-                    <button id="btnAdd" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
-                    <button id="btnClose" class="btn btn-primary sharp" (click)="onClose()">Close</button>
-                </div>
+<section id="stockin-page">
+    <div class="content-header clearfix">
+        <div class="col-sm-6">
+            <h3>Stock-In List</h3>
+        </div>
+        <div class="col-sm-6">
+            <div class="pull-right">
+                <button id="btnAdd" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
+                <button id="btnClose" class="btn btn-primary sharp" (click)="onClose()">Close</button>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="row contentFilter">
-                    <label>Filter</label>
-                    <input id="txtFilter" class="input-20">
-                    <button id="btnSearch" class="btn btn-primary sharp">Search</button>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="margin">
-                <wj-flex-grid id="stockInGrid"  #stockInGrid class="grid" [itemsSource]="">
+    <div class="container">
+        <div class="content-body">
+            <div class="col-sm-12">
+                 <wj-flex-grid id="stockInGrid"  #stockInGrid class="grid" [itemsSource]="">
                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                 <button class="btn btn-danger sharp">
@@ -78,6 +67,6 @@
                     </wj-flex-grid-column>
                 </wj-flex-grid>
             </div>
-        </div>    
+        </div>
     </div>
 </section>

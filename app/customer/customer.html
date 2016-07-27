@@ -1,7 +1,6 @@
-<section id="customer-page" class="container">
-<!--Holds the customer page header-->
-    <div class="row">
-        <div class="contentHeader">
+<section id="customer-page">
+<!--Header here-->
+        <div class="content-header clearfix">
             <div class="col-sm-6">
                 <div class="pull-left">
                     <h3>Customer List</h3>
@@ -14,25 +13,12 @@
                  </div>
             </div>
         </div>
-    </div>
-<!--End of customer page header -->
-<!--Holds the customer page body-->
-<!--Customer page filter-->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="contentFilter">
-                <label>Filter</label>
-                <input class="input-20" type="text">
-                <button id="btnSearch" class="btn btn-primary sharp">Search</button>
-            </div>
-        </div>
-    </div>
-<!--End of customer page filter-->
-<!--Holds the customer page flex grid-->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="margin">
-                <wj-flex-grid #flexCustomerList [itemsSource]="customerView" [isReadOnly]="true">
+<!--End of header -->
+<!--Body here-->
+    <div class="container">
+        <div class="content-body clearfix">
+            <div class="col-sm-12">
+                 <wj-flex-grid #flexCustomerList class="grid" [itemsSource]="customerView" [isReadOnly]="true">
                 <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                             <button class="btn btn-primary sharp" >
@@ -76,6 +62,5 @@
             </div>
         </div>
     </div>
-<!--End of customer page flex grid-->
-<!--End of customer page body-->
+<!--End of body-->
 </section>

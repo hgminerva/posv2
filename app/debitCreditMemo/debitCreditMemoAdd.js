@@ -82,7 +82,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 DebitCreditMemoAddComponent.prototype.onPrint = function () {
                 };
                 DebitCreditMemoAddComponent.prototype.onClose = function () {
-                    this.router.navigate(['Purchases']);
+                    this.router.navigate(['DebitCreditMemo']);
                 };
                 DebitCreditMemoAddComponent.prototype.onSelectChange = function () {
                 };

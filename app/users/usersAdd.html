@@ -1,0 +1,148 @@
+<section id="user-add">
+    <div class="content-header clearfix">
+        <div class="col-sm-6">
+            <h3>User Detail</h3>
+        </div>
+        <div class="col-sm-6">
+            <div class="pull-right">
+                  <button type="button" class="btn btn-primary sharp btn-margin" (click)="onLock()">Lock</button>
+                  <button type="button" class="btn btn-primary sharp btn-margin" (click)="onUnlock()">Unlock</button>
+                  <button type="button" class="btn btn-primary sharp btn-margin" (click)="onClose()">Close</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content-body">
+            <div class="col-sm-12">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Username</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input id="txtUsername" class="form-control input-30"  placeholder="NA" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Password</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input id="txtPassword" class="form-control input-30" placeholder="NA" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Full Name</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input id="txtPassword" class="form-control input-50" placeholder="NA"  required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">User card Number</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input id="txtPassword" class="form-control input-50" placeholder="NA"  required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Copy of Rights</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <wj-combo-box id="cmbRights" class="input-70" [itemsSource]="">
+                            </wj-combo-box>
+                        </div>
+                        <div class="col-sm-6">
+                            <button id="btnCopy" class="btn btn-primary sharp">Copy</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="content-body"> 
+            <div class="col-sm-12">
+                <wj-flex-grid id="userGrid" #userGrid class="grid" [itemsSource]="userView">
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70" [align]="'center'">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                            <button class="btn btn-danger sharp">
+                                <i class="fa fa-trash">Delete</i>
+                            </button>
+                        </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Form / Reports'"
+                                        [binding]="'FormReports'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="'*'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Add'"
+                                        [binding]="'Add'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="70"
+                                        [data-type]="'Boolean'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Edit'"
+                                        [binding]="'Edit'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="70"
+                                        [data-type]="'Boolean'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Delte'"
+                                        [binding]="'Delete'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="70"
+                                        [data-type]="'Boolean'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Lock'"
+                                        [binding]="'Lock'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="70"
+                                        [data-type]="'Boolean'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Unlock'"
+                                        [binding]="'Unlock'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="70"
+                                        [data-type]="'Boolean'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Print'"
+                                        [binding]="'Print'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="70"
+                                        [data-type]="'Boolean'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Preview'"
+                                        [binding]="'Preview'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="70"
+                                        [data-type]="'Boolean'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'View'"
+                                        [binding]="'View'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="70"
+                                        [data-type]="'Boolean'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70" [align]="'center'">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                            <button class="btn btn-danger sharp">
+                                <i class="fa fa-trash">Advance</i>
+                            </button>
+                        </template>
+                    </wj-flex-grid-column>
+                </wj-flex-grid>
+            </div>
+        </div>
+    </div>
+</section>

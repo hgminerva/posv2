@@ -1,42 +1,232 @@
-<section id="stock-in-add-page" class="container">
-    <div class="row">
-        <div class="contentHeader">
-            <div class="col-sm-6">
-                <h3>Stock-In Details</h3>
+<section id="stock-in-add-page">
+    <div class="content-header clearfix">
+        <div class="col-sm-6">
+            <h3>Stock-In Details</h3>
+        </div>
+        <div class="col-sm-6">
+                <div class="pull-right">
+                <button type="button" class="btn btn-primary sharp" (click)="onLock()">Lock</button>
+                <button type="button" class="btn btn-primary sharp" (click)="onUnLock">Unlock</button>
+                <button type="button" class="btn btn-primary sharp" (click)="onPreview">Preview</button>
+                <button type="button" class="btn btn-primary sharp" (click)="onPrint">Print</button>
+                <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
             </div>
-            <div class="col-sm-6">
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-primary sharp" (click)="onLock()">Lock</button>
-                    <button type="button" class="btn btn-primary sharp" (click)="onUnLock">Unlock</button>
-                    <button type="button" class="btn btn-primary sharp" (click)="onPreview">Preview</button>
-                    <button type="button" class="btn btn-primary sharp" (click)="onPrint">Print</button>
-                    <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content-body clearfix">
+            <div class="col-sm-12">
+                <form class="form-horizontal" role="form">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Stock In No.</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input id="txtStockInNo" class="form-control input-40" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Period</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input id="txtPeriod" class="form-control input-40" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Stock In Date</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <div id="inputDate"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Supplier</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <wj-combo-box id="cmbSupplier" [itemsSource]="cmbSupplierSource">
+                                </wj-combo-box>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">PO No.</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <wj-combo-box id="cmbPO_No" [itemsSource]="cmbPO_NoSource">
+                                </wj-combo-box>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Remarks</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <textarea id="txtRemarks" rows="5" class="input-70">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label>Return</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input id="chkReturn" class="checkbox" type="checkbox">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="col-sm-4">
+                                <label class="control-label">Return OR No.</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input id="txtReturnNo" class="form-control" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Return Sales Invoice</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input id="txtReturnSales" class="form-control" type="text" disabled>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Prepared By</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <wj-combo-box id="cmbPreparedBy" 
+                                            class="input-70"
+                                            [itemsSource]="cmbAuthority"
+                                            [isReadOnly]="true" disabled>
+                                </wj-combo-box>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Checked By</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <wj-combo-box id="cmbCheckedBy"
+                                            class="input-70"
+                                            [itemsSource]="cmbAuthority"
+                                            [isReadOnly]="true">
+                                </wj-combo-box>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Approved By</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <wj-combo-box id="cmbApprovedBy"
+                                            class="input-70"
+                                            [itemsSource]="cmbAuthority"
+                                            [isReadOnly]="true">
+                                </wj-combo-box>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Download the items</label>
+                                <label class="control-label">from the category</label>
+                            </div>
+                            <div class="col-sm-5">
+                                    <wj-combo-box id="cmbDownload"
+                                            class="input-100"
+                                            [itemsSource]="cmbDownloadSource"
+                                            [isReadOnly]="true">
+                                </wj-combo-box>
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="btnDownload" class="btn btn-primary sharp pull-left">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="content-body">
+             <div class="col-sm-12">
+                <table>
+                    <tr>
+                        <td><button type="button" class="btn btn-primary sharp" (click)="onAdd()">BARCODE</button></td>
+                        <td class="input-100"><input id="txtBarcode" class="input-100 form-control"></td>
+                    </tr>
+                </table>
+             </div>
+        </div>
+        <div class="content-body clearfix">
+            <div class="col-sm-9">
+                <wj-flex-grid id="addStockInGrid" #addStockInGrid class="grid" [itemsSource]="" [isReadOnly]="true" >
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-danger sharp">
+                                    <i class="fa fa-trash">Delete</i>
+                                </button>
+                        </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Item'"
+                                            [binding]="'Item'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="250">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Unit'"
+                                            [binding]="'Unit'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="80">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Cost'"
+                                            [binding]="'Cost'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="90">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Quanity'"
+                                            [binding]="'Quanity'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="80">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Amount'"
+                                            [binding]="'Amount'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="100">
+                    </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Expiry Date'"
+                                            [binding]="'Expiry Date'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="120">
+                    </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Lot Number'"
+                                            [binding]="'Lot Number'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="140">
+                    </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Asset Account'"
+                                            [binding]="'Asset Account'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="140">
+                    </wj-flex-grid-column>                
+                </wj-flex-grid>
+            </div>
+            <div class="col-sm-3">
+                <div class="pull-right">
+                    <button id="btnImportXLS" class="btn btn-primary sharp">Import XLS</button>
+                    <button id="btnExportXLS" class="btn btn-primary sharp">Export XLS</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="margin">
-                <div class="row">
-                    <form class="form-horizontal" role="form">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                        </div>
-                    </form>
-                </div>
-                <div class="row">
-                <div class="col-sm-12">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                    </div>
-                </div>
-            </div>
-        </div>
-       </div>
 </section>

@@ -2,11 +2,18 @@ import {Component, OnInit} from 'angular2/core';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 import {Router} from 'angular2/router';
 
+import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
+import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
+
 @Component({
     selector: 'stock-in-add',
     templateUrl: 'app/stockIn/stockInAdd.html',
     directives:[
-
+        wjNg2Input.WjInputDate,
+        wjNg2Input.WjComboBox,
+         wjNg2FlexGrid.WjFlexGrid, 
+        wjNg2FlexGrid.WjFlexGridColumn, 
+        wjNg2FlexGrid.WjFlexGridCellTemplate
     ],    
     providers: [
         ToastsManager
@@ -15,16 +22,41 @@ import {Router} from 'angular2/router';
 
 export class StockInAddComponent implements OnInit{
 
+    private stockInDate : wijmo.input.InputDate;
+    private cmbSupplierSource : wijmo.collections.ObservableArray;
+    private cmbPO_NoSource : wijmo.collections.ObservableArray;
+    private cmbAuthority : wijmo.collections.ObservableArray;
+    private cmbDownloadSource : wijmo.collections.ObservableArray;
+
     public constructor(private router : Router, private toastr : ToastsManager) {
 
     }
 
     public ngOnInit() : void {
+        if(!localStorage.getItem('access_token')) {
 
+        }
+        else {
+
+        }
+
+        this.stockInDate = new wijmo.input.InputDate('#inputDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date()
+        });
+        this.cmbSupplierSource = new wijmo.collections.ObservableArray();
+        this.cmbPO_NoSource = new wijmo.collections.ObservableArray();
+        this.cmbAuthority = new wijmo.collections.ObservableArray();
+        this.cmbDownloadSource = new wijmo.collections.ObservableArray();
+
+        this.initCmbSupplier();
+        this.initCmbPO_No();
+        this.initCmbAuthority();
+        this.initCmbDownload();
     }
 
     public onClose() : void {
-        this.router.navigate(['Dashboard']);
+        this.router.navigate(['StockIn']);
     }
 
     
@@ -50,4 +82,28 @@ export class StockInAddComponent implements OnInit{
     //getters
     public getToastr() : ToastsManager { return this.toastr; }
 
+    //fill comboboxes
+    private initCmbSupplier() : void {
+        var ctr;
+        const NA_LENGHT = 6;
+
+        for(ctr = 0; ctr < NA_LENGHT; ctr++) {
+            this.cmbSupplierSource.push('NA');
+        }
+        this.cmbSupplierSource.push('Return from customer');
+    }
+
+    private initCmbPO_No() : void {
+        this.cmbPO_NoSource.push('test');
+    }
+
+    private initCmbAuthority() : void {
+        this.cmbAuthority.push('Administrator');
+        this.cmbAuthority.push('Cashier');
+        this.cmbAuthority.push('Teller');
+    }
+
+    private initCmbDownload() : void {
+        this.cmbDownloadSource.push('test');
+    }
 }

@@ -1,0 +1,55 @@
+<section id="user-page" class="container">
+    <div class="contentHeader clearfix">
+        <div class="col-sm-6">
+            <h3>User List</h3>
+        </div>
+        <div class="col-sm-6">
+            <div class="pull-right">
+                  <button type="button" class="btn btn-primary sharp btn-margin" (click)="onAdd()">Add</button>
+                  <button type="button" class="btn btn-primary sharp btn-margin" (click)="onClose()">Close</button>
+            </div>
+        </div>
+    </div>
+    <div class="contentFilter clearfix">
+       
+    </div>
+    <div class="content-body">
+        <div class="col-sm-12">
+            <wj-flex-grid id="userGrid" #userGrid class="grid" [itemsSource]="userView">
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                        <button class="btn btn-primary sharp" >
+                                Edit
+                        </button>
+                    </template>
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70" [align]="'center'">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                        <button class="btn btn-danger sharp">
+                            <i class="fa fa-trash">Delete</i>
+                        </button>
+                    </template>
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Username'"
+                                    [binding]="'Username'"
+                                    [isReadOnly]="true"
+                                    [align]="'center'"
+                                    [width]="250">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Fullname'"
+                                    [binding]="'Fullname'"
+                                    [isReadOnly]="true"
+                                    [align]="'center'"
+                                    [width]="'2*'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'L'"
+                                [binding]="'L'"
+                                [isReadOnly]="true"
+                                [align]="'center'"
+                                [width]="50"
+                                [data-type]="'Boolean'">
+                </wj-flex-grid-column>
+            </wj-flex-grid>
+        </div>
+    </div>
+</section>

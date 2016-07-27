@@ -11,7 +11,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
-    var StockOutComponent;
+    var UsersAddComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -30,23 +30,28 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
-            StockOutComponent = (function () {
-                function StockOutComponent(router, toastr) {
-                    this.router = router;
+            UsersAddComponent = (function () {
+                function UsersAddComponent(toastr, router) {
                     this.toastr = toastr;
+                    this.router = router;
                 }
-                StockOutComponent.prototype.ngOnInit = function () {
+                UsersAddComponent.prototype.ngOnInit = function () {
+                    if (!localStorage.getItem('access_token')) {
+                    }
+                    else {
+                    }
                 };
-                StockOutComponent.prototype.onAdd = function () {
-                    this.router.navigate(['StockOutAdd']);
+                UsersAddComponent.prototype.onClose = function () {
+                    this.router.navigate(['Users']);
                 };
-                StockOutComponent.prototype.onClose = function () {
-                    this.router.navigate(['Dashboard']);
+                UsersAddComponent.prototype.onLock = function () {
                 };
-                StockOutComponent = __decorate([
+                UsersAddComponent.prototype.onUnlock = function () {
+                };
+                UsersAddComponent = __decorate([
                     core_1.Component({
-                        selector: 'stock-out',
-                        templateUrl: 'app/stockOut/stockOut.html',
+                        selector: 'user-add',
+                        templateUrl: 'app/users/usersAdd.html',
                         directives: [
                             wjNg2FlexGrid.WjFlexGrid,
                             wjNg2FlexGrid.WjFlexGridColumn,
@@ -57,12 +62,12 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             ng2_toastr_1.ToastsManager
                         ]
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager])
-                ], StockOutComponent);
-                return StockOutComponent;
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
+                ], UsersAddComponent);
+                return UsersAddComponent;
             }());
-            exports_1("StockOutComponent", StockOutComponent);
+            exports_1("UsersAddComponent", UsersAddComponent);
         }
     }
 });
-//# sourceMappingURL=stockOut.js.map
+//# sourceMappingURL=usersAdd.js.map

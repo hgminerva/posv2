@@ -107,7 +107,7 @@ export class DebitCreditMemoAddComponent implements OnInit{
     }
 
     public onClose() : void {
-        this.router.navigate(['Purchases']);
+        this.router.navigate(['DebitCreditMemo']);
     }
 
     public onSelectChange() : void {

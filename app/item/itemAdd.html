@@ -1,262 +1,278 @@
-<section class="container">
-    <div class="row">
-        <div class="contentHeader">
-            <div class="col-sm-6">
-                <div class="pull-left">
-                    <h3>Item Details</h3>
-                </div>
+<section id="item-add-page">
+<!--Header here-->
+    <div class="content-header clearfix">
+        <div class="col-sm-6">
+            <div class="pull-left">
+                <h3>Item Details</h3>
             </div>
-             <div class="col-sm-6">
-                <div class="pull-right">
-                    <button type="button" class="btn btn-primary sharp" (click)="onLock()">Lock</button>
-                    <button type="button" class="btn btn-primary sharp" (click)="onUnLock">Unlock</button>
-                    <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
-                </div>
+        </div>
+            <div class="col-sm-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary sharp" (click)="onLock()">Lock</button>
+                <button type="button" class="btn btn-primary sharp" (click)="onUnLock">Unlock</button>
+                <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-12">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tabGeneralInformation">General Information</a></li>
-                        <li><a a data-toggle="tab" href="#tabOtherInformation">Other Information</a></li>
-                        <li><a a data-toggle="tab" href="#tabImage">Image</a></li>
-                    </ul>
+<!--End of header-->
+<!--Body here-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tabGeneralInformation">General Information</a></li>
+                    <li><a a data-toggle="tab" href="#tabOtherInformation">Other Information</a></li>
+                    <li><a a data-toggle="tab" href="#tabImage">Image</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="itemAddTabContent" class="tab-content">
+            <div id="tabGeneralInformation" class="tab-pane fade in active">
+                <div class="content-body clearfix">
+                    <div class="col-sm-12">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Item Code:</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-control input-20" type="number" 
+                                           placeholder="00000" 
+                                           align="right" 
+                                           disabled />
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Bar Code:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-control input-20" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Item Description:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-controlinput-50" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Alias:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-control input-30" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Category:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                <wj-combo-box class="input-40"
+                                        [itemsSource]="testArray"
+                                >
+                                </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Unit:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                <wj-combo-box class="input-30"
+                                        [itemsSource]="testArray"
+                                >
+                                </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Default Supplier:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                <wj-combo-box class="input-40"
+                                        [itemsSource]="testArray"
+                                >
+                                </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Cost:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-controlinput-20" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Mark up:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-controlinput-20" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Price:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-control input-20" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label ">Stock Level Quantity:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-control  input-20" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label>Inventory:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="checkbox" type="checkbox" checked>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label>Package:</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="checkbox" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Remarks: </label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control input-70" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="margin">
-                        <div id="itemAddTabContent" class="tab-content">
-                            <div id="tabGeneralInformation" class="tab-pane fade in active">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Item Code:</label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input class="form-control pull-left input-20" type="number" placeholder="00000" align="right" disabled />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left ">Bar Code:</label> 
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input class="form-control pull-left input-20" type="text" required >
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Item Description:</label> 
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input class="form-control pull-left input-50" type="text" required >
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Alias:</label> 
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input class="form-control pull-left input-30" type="text" required >
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Category:</label> 
-                                        </div>
-                                        <div class="col-sm-10">
-                                        <wj-combo-box class="input-40"
-                                                [itemsSource]="testArray"
-                                        >
-                                        </wj-combo-box>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Unit:</label> 
-                                        </div>
-                                        <div class="col-sm-10">
-                                        <wj-combo-box class="input-30"
-                                                [itemsSource]="testArray"
-                                        >
-                                        </wj-combo-box>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Default Supplier:</label> 
-                                        </div>
-                                        <div class="col-sm-10">
-                                        <wj-combo-box class="input-40"
-                                                [itemsSource]="testArray"
-                                        >
-                                        </wj-combo-box>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Cost:</label> 
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input class="form-control pull-left input-20" type="text" required >
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Mark up:</label> 
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input class="form-control pull-left input-20" type="text" required >
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Price:</label> 
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input class="form-control pull-left input-20" type="text" required >
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Stock Level Quantity:</label> 
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input class="form-control pull-left input-20" type="text" required >
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="pull-left">Inventory:</label> 
-                                        </div>
-                                        <div class="col-sm-10 pull-left">
-                                            <input class="checkbox" type="checkbox" checked>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="pull-left">Package:</label> 
-                                        </div>
-                                        <div class="col-sm-10 pull-left">
-                                            <input class="checkbox" type="checkbox">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label">Remarks: </label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control input-70" rows="5"></textarea>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div id="tabOtherInformation" class="tab-pane fade">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Generic Name: </label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <input class="form-control  pull-left input-50" type="text" placeholder="NA" required />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left ">Sales Account: </label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <wj-combo-box class="input-50"
-                                                [itemsSource] = "testArray"
-                                            >
-                                            </wj-combo-box>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Asset Account: </label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <wj-combo-box class="input-50"
-                                                [itemsSource] = "testArray"
-                                            >
-                                            </wj-combo-box>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Cost Account: </label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <wj-combo-box class="input-50"
-                                                [itemsSource] = "testArray"
-                                            >
-                                            </wj-combo-box>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Purchase VAT: </label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <wj-combo-box class="input-40"
-                                                [itemsSource] = "testArray"
-                                            >
-                                            </wj-combo-box>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label class="control-label pull-left">Kitchen: </label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <wj-combo-box class="input-40"
-                                                [itemsSource] = "testArray"
-                                            >
-                                            </wj-combo-box>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <wj-flex-grid #flexOtherInformation class="grid">
-                                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                                        <button class="btn btn-primary sharp" >
-                                                                Delete
-                                                        </button>
-                                                    </template>
-                                            </wj-flex-grid-column>
-                                            <wj-flex-grid-column [header]="'Item Description'" binding="'itemDescriptionId'" [width]="'5*'">
-                                            </wj-flex-grid-column>
-                                            <wj-flex-grid-column [header]="'Price'" binding="'priceId'" [width]="'1*'">
-                                            </wj-flex-grid-column>
-                                            <wj-flex-grid-column [header]="'Trigger Quantity'" binding="'triggerQuantityId'" [width]="'2*'">
-                                            </wj-flex-grid-column>
-                                        </wj-flex-grid>                     
-                                    </div>
+            <div id="tabOtherInformation" class="tab-pane fade">
+                <div class="content-body clearfix">
+                    <div class="col-sm-12">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Generic Name: </label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-control input-50" type="text" placeholder="NA" required />
                                 </div>
                             </div>
-                            <div id="tabImage" class="tab-pane fade">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <label class="control-label pull-left">Image Path:</label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" disabled >
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <button type="button" class="btn btn-primary sharp pull-left">Open</button>
-                                    </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Sales Account: </label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                    </div>
+                                <div class="col-sm-10">
+                                    <wj-combo-box class="input-50"
+                                        [itemsSource] = "testArray"
+                                    >
+                                    </wj-combo-box>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Asset Account: </label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <wj-combo-box class="input-50"
+                                        [itemsSource] = "testArray"
+                                    >
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Cost Account: </label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <wj-combo-box class="input-50"
+                                        [itemsSource] = "testArray"
+                                    >
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Purchase VAT: </label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <wj-combo-box class="input-40"
+                                        [itemsSource] = "testArray"
+                                    >
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Kitchen: </label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <wj-combo-box class="input-40"
+                                        [itemsSource] = "testArray"
+                                    >
+                                    </wj-combo-box>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+				</div>
+                <div class="content-body clearfix">
+                    <div class="col-sm-12">
+                        <wj-flex-grid #flexItem class="grid" [itemsSource]="collectionItems" > 
+                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70" [align]="'center'">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                        <button class="btn btn-danger sharp">
+                                            <i class="fa fa-trash">Delete</i>
+                                        </button>
+                                </template>
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Price Description'" 
+                                                [binding]="'Price Description'" 
+                                                [isReadOnly]="true" 
+                                                [width]="'2*'"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Price'" 
+                                                [binding]="'Price'" 
+                                                [isReadOnly]="true" 
+                                                [width]="100"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Trigger Quantity'" 
+                                                [binding]="'TriggerQuantity'" 
+                                                [isReadOnly]="true" 
+                                                [width]="150"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                        </wj-flex-grid>     
+                    </div>
+                </div>
+			</div>
+            <div id="tabImage" class="tab-pane fade">
+                <div class="content-body clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-horizontal">
+                            <div class="col-sm-2">
+                                <label class="control-label">Image Path:</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" disabled >
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-primary sharp pull-left">Open</button>
                             </div>
                         </div>
                     </div>
@@ -264,4 +280,5 @@
             </div>
         </div>
     </div>
+<!--End of body-->
 </section>

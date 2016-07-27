@@ -47,6 +47,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.cmbAR_AccountSource = new wijmo.collections.ObservableArray();
                     this.cmbReturnSource = new wijmo.collections.ObservableArray();
                     this.cmbDefaultPrice = new wijmo.collections.ObservableArray();
+                    this.cmbAuthoritySource = new wijmo.collections.ObservableArray();
+                    this.cmbTypeSource = new wijmo.collections.ObservableArray();
                     this.disbursementDate = new wijmo.input.InputDate('#disbursementDate', {
                         format: 'MM/dd/yyyy',
                         value: new Date()
@@ -54,6 +56,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.initTypeCombobox();
                     this.initPayTypeCombobox();
                     this.initReturnComboBox();
+                    this.initCmbAuthority();
+                    this.initCmbTYpe();
                     this.cmbDefaultPrice.push('');
                 };
                 DisbursementAddComponent.prototype.onLock = function () {
@@ -111,6 +115,15 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 DisbursementAddComponent.prototype.initReturnComboBox = function () {
                     this.cmbReturnSource.push('Test');
+                };
+                DisbursementAddComponent.prototype.initCmbAuthority = function () {
+                    this.cmbAuthoritySource.push('Administrator');
+                    this.cmbAuthoritySource.push('Cashier');
+                    this.cmbAuthoritySource.push('Teller');
+                };
+                DisbursementAddComponent.prototype.initCmbTYpe = function () {
+                    this.cmbTypeSource.push('Credit');
+                    this.cmbTypeSource.push('Debit');
                 };
                 DisbursementAddComponent.CMB_TERM_SOURCE_LENGTH = 5;
                 DisbursementAddComponent = __decorate([

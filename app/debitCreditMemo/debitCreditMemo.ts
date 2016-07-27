@@ -49,7 +49,7 @@ export class DebitCreditMemoComponent implements OnInit{
     }
 
     public onClose() : void {
-        this.router.navigate(['DebitCreditMemo']);
+        this.router.navigate(['Dashboard']);
     }
 
     //getters

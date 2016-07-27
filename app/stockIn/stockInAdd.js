@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], f
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
     var StockInAddComponent;
     return {
         setters:[
@@ -22,6 +22,12 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], f
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (wjNg2FlexGrid_1) {
+                wjNg2FlexGrid = wjNg2FlexGrid_1;
+            },
+            function (wjNg2Input_1) {
+                wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
             StockInAddComponent = (function () {
@@ -30,9 +36,25 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], f
                     this.toastr = toastr;
                 }
                 StockInAddComponent.prototype.ngOnInit = function () {
+                    if (!localStorage.getItem('access_token')) {
+                    }
+                    else {
+                    }
+                    this.stockInDate = new wijmo.input.InputDate('#inputDate', {
+                        format: 'MM-dd-yyyy',
+                        value: new Date()
+                    });
+                    this.cmbSupplierSource = new wijmo.collections.ObservableArray();
+                    this.cmbPO_NoSource = new wijmo.collections.ObservableArray();
+                    this.cmbAuthority = new wijmo.collections.ObservableArray();
+                    this.cmbDownloadSource = new wijmo.collections.ObservableArray();
+                    this.initCmbSupplier();
+                    this.initCmbPO_No();
+                    this.initCmbAuthority();
+                    this.initCmbDownload();
                 };
                 StockInAddComponent.prototype.onClose = function () {
-                    this.router.navigate(['Dashboard']);
+                    this.router.navigate(['StockIn']);
                 };
                 StockInAddComponent.prototype.onLock = function () {
                 };
@@ -44,11 +66,37 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router'], f
                 };
                 //getters
                 StockInAddComponent.prototype.getToastr = function () { return this.toastr; };
+                //fill comboboxes
+                StockInAddComponent.prototype.initCmbSupplier = function () {
+                    var ctr;
+                    var NA_LENGHT = 6;
+                    for (ctr = 0; ctr < NA_LENGHT; ctr++) {
+                        this.cmbSupplierSource.push('NA');
+                    }
+                    this.cmbSupplierSource.push('Return from customer');
+                };
+                StockInAddComponent.prototype.initCmbPO_No = function () {
+                    this.cmbPO_NoSource.push('test');
+                };
+                StockInAddComponent.prototype.initCmbAuthority = function () {
+                    this.cmbAuthority.push('Administrator');
+                    this.cmbAuthority.push('Cashier');
+                    this.cmbAuthority.push('Teller');
+                };
+                StockInAddComponent.prototype.initCmbDownload = function () {
+                    this.cmbDownloadSource.push('test');
+                };
                 StockInAddComponent = __decorate([
                     core_1.Component({
                         selector: 'stock-in-add',
                         templateUrl: 'app/stockIn/stockInAdd.html',
-                        directives: [],
+                        directives: [
+                            wjNg2Input.WjInputDate,
+                            wjNg2Input.WjComboBox,
+                            wjNg2FlexGrid.WjFlexGrid,
+                            wjNg2FlexGrid.WjFlexGridColumn,
+                            wjNg2FlexGrid.WjFlexGridCellTemplate
+                        ],
                         providers: [
                             ng2_toastr_1.ToastsManager
                         ]

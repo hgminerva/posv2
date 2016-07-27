@@ -11,7 +11,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
-    var StockOutComponent;
+    var StockOutAddComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -30,23 +30,40 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
-            StockOutComponent = (function () {
-                function StockOutComponent(router, toastr) {
+            StockOutAddComponent = (function () {
+                function StockOutAddComponent(router, toastr) {
                     this.router = router;
                     this.toastr = toastr;
                 }
-                StockOutComponent.prototype.ngOnInit = function () {
+                StockOutAddComponent.prototype.ngOnInit = function () {
+                    if (true) {
+                    }
+                    else {
+                    }
+                    this.cmbAuthority = new wijmo.collections.ObservableArray();
+                    this.cmbAccount = new wijmo.collections.ObservableArray();
+                    this.stockOutDate = new wijmo.input.InputDate('#inputDate', {
+                        format: 'MM-dd-yyyy',
+                        value: new Date()
+                    });
+                    this.initCmbAuthority();
+                    this.initCmbAccount();
                 };
-                StockOutComponent.prototype.onAdd = function () {
-                    this.router.navigate(['StockOutAdd']);
+                StockOutAddComponent.prototype.onClose = function () {
+                    this.router.navigate(['StockOut']);
                 };
-                StockOutComponent.prototype.onClose = function () {
-                    this.router.navigate(['Dashboard']);
+                StockOutAddComponent.prototype.initCmbAuthority = function () {
+                    this.cmbAuthority.push('Administrator');
+                    this.cmbAuthority.push('Cashier');
+                    this.cmbAuthority.push('Teller');
                 };
-                StockOutComponent = __decorate([
+                StockOutAddComponent.prototype.initCmbAccount = function () {
+                    this.cmbAccount.push('Test');
+                };
+                StockOutAddComponent = __decorate([
                     core_1.Component({
-                        selector: 'stock-out',
-                        templateUrl: 'app/stockOut/stockOut.html',
+                        selector: 'stock-out-add',
+                        templateUrl: 'app/stockOut/stockOutAdd.html',
                         directives: [
                             wjNg2FlexGrid.WjFlexGrid,
                             wjNg2FlexGrid.WjFlexGridColumn,
@@ -58,11 +75,11 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                         ]
                     }), 
                     __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager])
-                ], StockOutComponent);
-                return StockOutComponent;
+                ], StockOutAddComponent);
+                return StockOutAddComponent;
             }());
-            exports_1("StockOutComponent", StockOutComponent);
+            exports_1("StockOutAddComponent", StockOutAddComponent);
         }
     }
 });
-//# sourceMappingURL=stockOut.js.map
+//# sourceMappingURL=stockOutAdd.js.map

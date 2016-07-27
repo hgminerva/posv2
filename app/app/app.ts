@@ -41,8 +41,11 @@ import {StockInAddComponent} from '../stockIn/stockInAdd';
 import {InventoryComponent} from '../inventory/inventory';
 import {DisbursementReportsComponent} from '../disbursementReports/disbursementReports';
 import {UsersComponent} from '../users/users';
+import {UsersAddComponent} from '../users/usersAdd';
 import {StockOutComponent} from '../stockOut/stockOut';
+import {StockOutAddComponent} from '../stockOut/stockOutAdd';
 import {StockCountComponent} from '../stockCount/stockCount';
+import {StockCountAddComponent} from '../stockCount/stockCountAdd';
 import {AccountingReportsComponent} from '../accountingReports/accountingReports';
 import {SettingsComponent} from '../settings/settings';
 import {PosReportsComponent} from '../posReports/posReports';
@@ -97,8 +100,11 @@ import {EightMmPosReportsComponent} from '../8mmPosReports/8mmPosReports';
                { path: '/inventory', name: 'Inventory', component: InventoryComponent},
                { path: '/disbursementReports', name: 'DisbursementReports', component: DisbursementReportsComponent},
                { path: '/users', name: 'Users', component: UsersComponent},
+               { path: '/addUser', name: 'UsersAdd', component: UsersAddComponent},
                { path: '/stockOut', name: 'StockOut', component: StockOutComponent},
+               { path: '/addStockOut', name: 'StockOutAdd', component: StockOutAddComponent},
                { path: '/stockCount', name: 'StockCount', component: StockCountComponent},
+               { path: '/addStockCount', name: 'StockCountAdd', component: StockCountAddComponent},
                { path: '/accountingReports', name: 'AccountingReports', component: AccountingReportsComponent},
                { path: '/settings', name: 'Settings', component: SettingsComponent},
                { path: '/posReports', name: 'PosReports', component: PosReportsComponent},

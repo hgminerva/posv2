@@ -1,31 +1,20 @@
-<section id="supplier-page" class="container">
-    <div class="row">
-        <div class="contentHeader">
-            <div class="col-sm-6">
-                <div class="pull-left">
-                    <h3>Debit/Credit Memo List</h3>
-                </div>
+<section id="supplier-page">
+    <div class="content-header clearfix">
+        <div class="col-sm-6">
+            <div class="pull-left">
+                <h3>Debit/Credit Memo List</h3>
             </div>
-            <div class="col-sm-6">
-                <div class="pull-right">
-                    <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button>
-                    <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>>
-                </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="pull-right">
+                <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button>
+                <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
             </div>
         </div>
     </div>
-     <div class="row">
-        <div class="col-sm-12">
-            <div class="contentFilter">
-                <label>Filter:</label>
-                <input id="txtFilter" class="input-20" type="text">
-                <button id="btnSearch" class="btn btn-primary sharp">Search</button>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-         <div class="col-sm-12">
-             <div class="margin">
+    <div class="container">
+        <div class="content-body clear fix">
+            <div class="col-sm-12">
                 <wj-flex-grid #flexDiscount class="grid" [itemsSource]="debitCreditMemoView">
                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
@@ -66,7 +55,7 @@
                                         [width]="'1*'">
                     </wj-flex-grid-column>
                 </wj-flex-grid>
-             </div>
+            </div>
         </div>
     </div>
 </section>

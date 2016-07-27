@@ -1,98 +1,92 @@
-<section id="collection-id" class="container">
-    <div class="row">
-        <div class="contentHeader">
-            <div class="col-sm-6">
-                <div class="pull-left">
-                    <h3>Collection List</h3>
-                </div>
+<section id="collection-id">
+<!--Header here-->
+    <div class="content-header clearfix">
+        <div class="col-sm-6">
+            <div class="pull-left">
+                <h3>Collection List</h3>
             </div>
-            <div class="col-sm-6">
-                <div class="pull-right">
-                    <button class="btn btn-primary sharp" type="button">Tender</button> 
-                    <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button> 
-                    <button class="btn btn-primary sharp" type="button" (click)="onClose()">Close</button> 
-                </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="pull-right">
+                <button class="btn btn-primary sharp" type="button">Tender</button> 
+                <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button> 
+                <button class="btn btn-primary sharp" type="button" (click)="onClose()">Close</button> 
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="contentFilter">
-                <label>Search</label>
-                <input class="input-20" type="text">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="margin">
-                <wj-flex-grid [itemsSource]="collectionView" [isReadOnly]="true">
-                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
+<!--End of Header-->
+<!--Body here-->
+    <div class="container">
+        <div class="content-body clearfix">
+            <div class="col-sm-12">
+                <wj-flex-grid id="collectionGrid" #collectionGrid class="grid"  [itemsSource]="collectionView" [isReadOnly]="true">
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-primary sharp" >
+                                            Edit
+                                    </button>
+                            </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75">
                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-primary sharp" >
-                                        Edit
+                                <button class="btn btn-danger sharp">
+                                    <i class="fa fa-trash">Delete</i>
                                 </button>
                         </template>
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75">
-                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                            <button class="btn btn-danger sharp">
-                                <i class="fa fa-trash">Delete</i>
-                            </button>
-                    </template>
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Collection Date'" 
-                                    [binding]="'CollectionDate'"
-                                    [width]="'2.5*'"
-                                    [isReadOnly]="true" 
-                                    [align]="'center'">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Collection No'" 
-                                    [binding]="'CollectionNo'"
-                                    [width]="'2.5*'"
-                                    [isReadOnly]="true" 
-                                    [align]="'center'">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Sales No'" 
-                                    [binding]="'SalesNo'" 
-                                    [width]="'2.5*'"
-                                    [isReadOnly]="true" 
-                                    [align]="'center'">>
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Customer'" 
-                                    [binding]="'Customer'" 
-                                    [width]="'4*'"
-                                    [isReadOnly]="true" 
-                                    [align]="'center'">>
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Terminal'"
-                                    [binding]="'Terminal'" 
-                                    [width]="'1.5*'"
-                                    [isReadOnly]="true" 
-                                    [align]="'center'">>
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Amount'" 
-                                    [binding]="'Amount'" 
-                                    [width]="'2*'"
-                                    [isReadOnly]="true" 
-                                    [align]="'center'">>
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Lock'" 
-                                    [binding]="'Lock'" 
-                                    [width]="'1*'" 
-                                    [data-type]="'Boolean'"
-                                    [isReadOnly]="true" 
-                                    [align]="'center'">>
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'C'" 
-                                    [binding]="'C'" 
-                                    [width]="'1*'" 
-                                    [data-type]="Boolean"
-                                    [isReadOnly]="true" 
-                                    [align]="'center'">>
-                </wj-flex-grid-column>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Collection Date'" 
+                                        [binding]="'CollectionDate'"
+                                        [width]="'2.5*'"
+                                        [isReadOnly]="true" 
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Collection No'" 
+                                        [binding]="'CollectionNo'"
+                                        [width]="'2.5*'"
+                                        [isReadOnly]="true" 
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Sales No'" 
+                                        [binding]="'SalesNo'" 
+                                        [width]="'2.5*'"
+                                        [isReadOnly]="true" 
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Customer'" 
+                                        [binding]="'Customer'" 
+                                        [width]="'4*'"
+                                        [isReadOnly]="true" 
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Terminal'"
+                                        [binding]="'Terminal'" 
+                                        [width]="'1.5*'"
+                                        [isReadOnly]="true" 
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Amount'" 
+                                        [binding]="'Amount'" 
+                                        [width]="'2*'"
+                                        [isReadOnly]="true" 
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Lock'" 
+                                        [binding]="'Lock'" 
+                                        [width]="'1*'" 
+                                        [data-type]="'Boolean'"
+                                        [isReadOnly]="true" 
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'C'" 
+                                        [binding]="'C'" 
+                                        [width]="'1*'" 
+                                        [data-type]="Boolean"
+                                        [isReadOnly]="true" 
+                                        [align]="'center'">
+                    </wj-flex-grid-column>
                 </wj-flex-grid>
             </div>
         </div>
     </div>
+<!---End of Body-->
 </section>

@@ -1,0 +1,64 @@
+<section id="stock-out-page">
+    <div class="content-header clearfix">
+        <div class="col-sm-6">
+            <h3>Stock-Out List</h3>
+        </div>
+        <div class="col-sm-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary sharp btn-margin" (click)="onAdd()">Add</button>
+                <button type="button" class="btn btn-primary sharp btn-margin" (click)="onClose()">Close</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content-body">
+            <div class="col-sm-12">
+                <wj-flex-grid id="stockOutGrid" #stockOutGrid class="grid" [itemsSource]="stockOutView">
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70" [align]="'center'">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                            <button class="btn btn-danger sharp">
+                                <i class="fa fa-trash">Delete</i>
+                            </button>
+                        </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Stock Out Date'"
+                                        [binding]="'StockOutDate'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="150">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Stock Out No.'"
+                                        [binding]="'StockOutNo'"
+                                        [align]="'center'"
+                                        [width]="160">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Account'"
+                                        [binding]="'Account'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="230">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Amount'"
+                                        [binding]="'Amount'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="100">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'L'"
+                                        [binding]="'L'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="50"
+                                        [data-type]="'Boolean'">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Remarks'"
+                                        [binding]="'Remarks'"
+                                        [isReadOnly]="true"
+                                        [align]="'center'"
+                                        [width]="'*'">
+                    </wj-flex-grid-column>
+                </wj-flex-grid>
+            </div>
+        </div>
+    </div>
+</section>

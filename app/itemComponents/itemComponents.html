@@ -1,30 +1,22 @@
-<section id="item-component-page" class="container">
-    <div class="row">
-        <div class="contentHeader">
-            <div class="col-sm-6">
-                <div class="pull-left">
-                    <h3>Item Component List</h3>
-                </div>
+<section id="item-component-page">
+<!--Header here-->
+    <div class="content-header clearfix">
+        <div class="col-sm-6">
+            <div class="pull-left">
+                <h3>Item Component List</h3>
             </div>
-            <div class="col-sm-6">
-                <div class="pull-right">
-                    <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>>
-                </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
             </div>
         </div>
     </div>
-     <div class="row">
-        <div class="col-sm-12">
-            <div class="contentFilter">
-                <label>Filter: </label>
-                <input class="input-20" type="text">
-                <button id="btnSearch" class="btn btn-primary sharp">Search</button>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-         <div class="col-sm-12">
-             <div class="margin">
+<!--End of header-->
+<!--Body here-->
+    <div class="container">
+        <div class="content-body clearfix">
+            <div class="col-sm-12">
                 <wj-flex-grid #flexDiscount class="grid" [itemsSource]="itemComponentView">
                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
@@ -67,7 +59,8 @@
                                         [width]="'1*'">
                     </wj-flex-grid-column>
                 </wj-flex-grid>
-             </div>
+            </div>
         </div>
     </div>
+<!--End of body-->
 </section>

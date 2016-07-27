@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', './usersService'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', './usersService', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, usersService_1;
+    var core_1, ng2_toastr_1, router_1, usersService_1, wjNg2FlexGrid, wjNg2Input;
     var UsersComponent;
     return {
         setters:[
@@ -25,6 +25,12 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
             },
             function (usersService_1_1) {
                 usersService_1 = usersService_1_1;
+            },
+            function (wjNg2FlexGrid_1) {
+                wjNg2FlexGrid = wjNg2FlexGrid_1;
+            },
+            function (wjNg2Input_1) {
+                wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
             UsersComponent = (function () {
@@ -35,10 +41,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 }
                 UsersComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
-                        this._router.navigate(['Login']);
                     }
                     else {
                     }
+                };
+                UsersComponent.prototype.onAdd = function () {
+                    this._router.navigate(['UsersAdd']);
+                };
+                UsersComponent.prototype.onClose = function () {
+                    this._router.navigate(['Dashboard']);
+                    console.log('back to dashboard');
                 };
                 UsersComponent.prototype.getUsers = function () {
                 };
@@ -54,6 +66,12 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     core_1.Component({
                         selector: 'users',
                         templateUrl: 'app/users/users.html',
+                        directives: [
+                            wjNg2FlexGrid.WjFlexGrid,
+                            wjNg2FlexGrid.WjFlexGridColumn,
+                            wjNg2FlexGrid.WjFlexGridCellTemplate,
+                            wjNg2Input.WjComboBox
+                        ],
                         providers: [
                             usersService_1.UsersService, ng2_toastr_1.ToastsManager
                         ]

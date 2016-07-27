@@ -21,6 +21,7 @@ export class DisbursementAddComponent implements OnInit{
     private cmbAR_AccountSource : wijmo.collections.ObservableArray;
     private cmbReturnSource : wijmo.collections.ObservableArray;
     private cmbDefaultPrice : wijmo.collections.ObservableArray;
+    private cmbTypeSource: wijmo.collections.ObservableArray;
 
     private cmbAuthoritySource : wijmo.collections.ObservableArray;
     private disbursementDate : wijmo.input.InputDate;
@@ -49,7 +50,9 @@ export class DisbursementAddComponent implements OnInit{
         this.cmbAR_AccountSource = new wijmo.collections.ObservableArray();
         this.cmbReturnSource = new wijmo.collections.ObservableArray();
         this.cmbDefaultPrice = new wijmo.collections.ObservableArray();
-        
+        this.cmbAuthoritySource = new wijmo.collections.ObservableArray();
+        this.cmbTypeSource = new wijmo.collections.ObservableArray();
+
         this.disbursementDate = new wijmo.input.InputDate('#disbursementDate', {
             format : 'MM/dd/yyyy',
             value : new Date()
@@ -58,7 +61,9 @@ export class DisbursementAddComponent implements OnInit{
         this.initTypeCombobox();
         this.initPayTypeCombobox();
         this.initReturnComboBox();
-        
+        this.initCmbAuthority();
+        this.initCmbTYpe();
+
         this.cmbDefaultPrice.push('');
     }
 
@@ -128,5 +133,16 @@ export class DisbursementAddComponent implements OnInit{
 
     private initReturnComboBox() : void{
         this.cmbReturnSource.push('Test');
+    }
+
+    private initCmbAuthority() : void {
+        this.cmbAuthoritySource.push('Administrator');
+        this.cmbAuthoritySource.push('Cashier');
+        this.cmbAuthoritySource.push('Teller');
+    }
+
+    private initCmbTYpe() : void {
+        this.cmbTypeSource.push('Credit');
+        this.cmbTypeSource.push('Debit');
     }
 }

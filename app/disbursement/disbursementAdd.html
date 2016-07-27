@@ -1,25 +1,325 @@
-<section id="disbursement-add-page" class="container">
-<!--Holds the disbursement add page header-->
-    <div class="row">
-        <div class="contentHeader">
-            <div class="col-sm-6">
-                <div class="pull-left">
-                    <h3>Disbursement Detail</h3>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                 <div class="pull-right">
-                    <button class="btn btn-primary sharp" type="button" (click)="onLock()">Lock</button>
-                    <button class="btn btn-primary sharp" type="button" (click)="onUnlock()">Unlock</button>
-                    <button class="btn btn-primary sharp" type="button" (click)="onPreview()">Preview</button>
-                    <button class="btn btn-primary sharp" type="button" (click)="onPrint()">Print</button>
-                    <button class="btn btn-primary sharp" type="button" (click)="onClose()">Close</button>
-                 </div>
+<section id="disbursement-add-page">
+<!--Header here-->
+    <div class="content-header clearfix">
+        <div class="col-sm-6">
+            <div class="pull-left">
+                <h3>Disbursement Detail</h3>
             </div>
         </div>
+        <div class="col-sm-6">
+                <div class="pull-right">
+                <button class="btn btn-primary sharp" type="button" (click)="onLock()">Lock</button>
+                <button class="btn btn-primary sharp" type="button" (click)="onUnlock()">Unlock</button>
+                <button class="btn btn-primary sharp" type="button" (click)="onPreview()">Preview</button>
+                <button class="btn btn-primary sharp" type="button" (click)="onPrint()">Print</button>
+                <button class="btn btn-primary sharp" type="button" (click)="onClose()">Close</button>
+                </div>
+        </div>
     </div>
+<!--End of header-->
+<!--Body here-->
+    <div class="container">
+        <form class="form-horizontal" role="form">
+            <div class="content-body clearfix">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Disbursement No</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input id="txtDisbursementNo" class="form-control input-60" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Period Id</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <wj-combo-box id="txtPeriodId" class="input-60" [itemsSource]="" disabled>
+                            </wj-combo-box>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Terminal</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <wj-combo-box id="txtTerminal" class="input-60" [itemsSource]="" disabled>
+                            </wj-combo-box>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Disbursement Date</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <div id="disbursementDate" class="input-60"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Prepared by</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <wj-combo-box id="cmbApprovedBy"  class="input-70" [itemsSource]="cmbAuthoritySource" disabled>
+                            </wj-combo-box>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Checked by</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <wj-combo-box id="cmbApprovedBy"  class="input-70" [itemsSource]="cmbAuthoritySource">
+                            </wj-combo-box>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Approved by</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <wj-combo-box id="cmbApprovedBy"  class="input-70" [itemsSource]="cmbAuthoritySource">
+                            </wj-combo-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body clearfix">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p>Debit - add cash to the drawer Credit - get cash from the drawer</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Type</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <wj-combo-box id="cmbType" class="input-60" [itemsSource]="cmbTypeSource">
+                            </wj-combo-box>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>You are not limited from just adding or getting cash you can also add or get checks, etc,</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Pay Type</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <wj-combo-box id="txtPayType" class="input-60" [itemsSource]="">
+                                </wj-combo-box>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Account</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <wj-combo-box id="txtAccount" class="input-90" [itemsSource]="">
+                                </wj-combo-box>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Amount</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input id="txtAmount" class="form-control text-right" placeholder="0.00" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Remarks</label>
+                            </div>
+                            <div class="col-sm-8">
+                            <textarea id="txtRemarks" class="input-100 form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-sm-6">
+                     <table id="tblDisbursementAdd" class="table table-bordered">
+                        <tr>
+                            <td rowspan="7">
+                                <label>Amount Denomination</label>
+                            </td>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount1000" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td  class="input-20">
+                                <label>x P1,000</label>
+                            </td>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount5" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x P5</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount500" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x P500</label>
+                            </td>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount2" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x P1</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount1" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x P200</label>
+                            </td>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount200" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x 25c</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-20" >
+                                <input id="tblDisbursementtxtAmount25" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x P100</label>
+                            </td>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount100" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x 10c</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount10c" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x P50</label>
+                            </td>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount50" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x 10c</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount1" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x P20</label>
+                            </td>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount2" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x 1c</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="input-20">
+                                <input id="tblDisbursementtxtAmount1" 
+                                    class="form-control text-right" 
+                                    value="0.0"
+                                    placeholder="0.00">
+                            </td>
+                            <td>
+                                <label>x P10</label>
+                            </td>
+                            <td colspan="2">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="content-body clearfix">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p>Return information for refund purposes.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Return</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input id="chkReturn" type="checkbox" class="checkbox" (click)="onReturn()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Return Stock-In No.</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <wj-combo-box id="cmbReturn" 
+                                        class="input-60" 
+                                        [itemsSource]="cmbReturnSource"
+                                        [isReadOnly]="true"
+                                        disabled>
+                            </wj-combo-box>
+                        </div>
+                    </div>
+            </div>
+                </div>
+        </form>
+    </div>
+<!--End of body-->
 <!--End of disbursement add header -->
 <!--Holds the disbursement add body-->
+<!--
     <div class="row">
         <div class="col-sm-12">
             <div class="margin">
