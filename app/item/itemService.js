@@ -25,11 +25,10 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                 function ItemService(_http) {
                     this._http = _http;
                     this.items = new wijmo.collections.ObservableArray();
-                    ItemService.page = 0;
                 }
-                ItemService.prototype.displayItems = function (component, itemsView) {
+                ItemService.prototype.initItems = function (component, itemsView) {
                     var _this = this;
-                    var url = localStorage.getItem('api_url') + "/api/item/list";
+                    var url = localStorage.getItem('api_url') + ItemService.API_ITEM_URL + "list";
                     var accessToken = localStorage.getItem('access_token');
                     var header = new http_1.Headers({ 'Authorization': 'Bearer ' + accessToken });
                     var option = new http_1.RequestOptions();
@@ -40,6 +39,22 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         _this.displayDataToGrid(itemsView);
                     }, function (error) {
                         component.getToastr().error('Server Error', '');
+                    });
+                };
+                ItemService.prototype.initUnit = function (itemComponent, cmbUnit) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + ItemService.API_UNIT_URL + "list";
+                    var accessToken = localStorage.getItem('access_token');
+                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + accessToken });
+                    var option = new http_1.RequestOptions();
+                    option.headers = header;
+                    this._http.get(url, option)
+                        .subscribe(function (response) {
+                        cmbUnit = new wijmo.input.ComboBox('#cmbUnit', {
+                            itemsSource: _this.getUnits(response.json())
+                        });
+                    }, function (error) {
+                        itemComponent.getToastr().error('Server Error', '');
                     });
                 };
                 ItemService.prototype.addItem = function (data, component) {
@@ -94,7 +109,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     });
                 };
                 /*
-                * This function will display the data by 10 to grid
+                * This function will display the data of the table MstItem from database by 10 to the wijmo flex grid.
                 */
                 ItemService.prototype.displayDataToGrid = function (itemsView) {
                     if (this.items.length > 0) {
@@ -106,13 +121,25 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             else {
                                 break;
                             }
+                            itemsView.sourceCollection = gridData;
                         }
-                        itemsView.sourceCollection = gridData;
                     }
+                };
+                ItemService.prototype.getUnits = function (units) {
+                    if (units != null) {
+                        var data = new wijmo.collections.ObservableArray();
+                        for (var i = 0; i < units.length; i++) {
+                            data.push(units[i].Unit);
+                        }
+                        return data;
+                    }
+                    return null;
                 };
                 ItemService.page = 0;
                 ItemService.SUCCESS = 200;
                 ItemService.GRID_LENGTH = 10;
+                ItemService.API_ITEM_URL = '/api/item/';
+                ItemService.API_UNIT_URL = '/api/unit/';
                 ItemService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

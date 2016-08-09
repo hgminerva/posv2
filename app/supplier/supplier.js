@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './SupplierService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, SupplierService_1;
     var SupplierComponent;
     return {
         setters:[
@@ -28,12 +28,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (SupplierService_1_1) {
+                SupplierService_1 = SupplierService_1_1;
             }],
         execute: function() {
             SupplierComponent = (function () {
-                function SupplierComponent(toastr, router) {
+                function SupplierComponent(toastr, router, supplierService) {
                     this.toastr = toastr;
                     this.router = router;
+                    this.supplierService = supplierService;
                 }
                 SupplierComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
@@ -41,9 +45,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     else {
                     }
                     /*Else*/
-                    this.supplierSource = new wijmo.collections.ObservableArray();
-                    this.supplierView = new wijmo.collections.CollectionView(this.supplierSource);
-                    this.supplierSource.push({ Lock: true });
+                    this.supplierView = new wijmo.collections.CollectionView();
+                    this.supplierService.initSuppliers(this, this.supplierView);
                 };
                 /*
                     This function will go to supplierAdd.html when clicked
@@ -67,10 +70,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager, SupplierService_1.SupplierService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, SupplierService_1.SupplierService])
                 ], SupplierComponent);
                 return SupplierComponent;
             }());

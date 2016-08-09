@@ -44,7 +44,7 @@ export class CustomerComponent implements OnInit {
         }
         /*Else*/
         this.customerView = new wijmo.collections.CollectionView();
-        this.customerService.displayCustomers(this, this.customerView);
+        this.customerService.initCustomers(this, this.customerView);
     }
 
     /**

@@ -38,8 +38,17 @@ export class DiscountingComponent implements OnInit{
     *Will go back to the login screen if you try to access this component without logging in.
     **/
     public ngOnInit() : void {
+        if(!localStorage.getItem('access_token')) {
+
+        }
+        else {
+        }
+        /*
+        *Else
+        */
         this.discountsView = new wijmo.collections.CollectionView();
-        this.discountingService.displayDicountData(this, this.discountsView);
+        this.discountingService.initDicountData(this, this.discountsView);
+        this.discountingService.displayDataToGrid(this.discountsView);
     }
 
     /*

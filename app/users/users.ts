@@ -49,23 +49,6 @@ export class UsersComponent implements OnInit{
 
     public onClose() : void {
         this._router.navigate(['Dashboard']);
-        console.log('back to dashboard');
-    }
-
-    public getUsers() : void {
-
-    }
-
-    public addUser() : void {
-        
-    }
-
-    public setUser() : void {
-
-    }
-
-    public deleteUser() : void {
-
     }
 
     //getters

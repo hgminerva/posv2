@@ -53,15 +53,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 };
                 UsersComponent.prototype.onClose = function () {
                     this._router.navigate(['Dashboard']);
-                    console.log('back to dashboard');
-                };
-                UsersComponent.prototype.getUsers = function () {
-                };
-                UsersComponent.prototype.addUser = function () {
-                };
-                UsersComponent.prototype.setUser = function () {
-                };
-                UsersComponent.prototype.deleteUser = function () {
                 };
                 //getters
                 UsersComponent.prototype.getToastr = function () { return this._toastr; };

@@ -13,8 +13,8 @@ export class DiscountingService {
         DiscountingService.page = 0;
     }
 
-    public displayDicountData(discountComponent : DiscountingComponent,
-                              discountView : wijmo.collections.CollectionView) : void {
+    public initDicountData(discountComponent : DiscountingComponent,
+                           discountView : wijmo.collections.CollectionView) : void {
         const api_url = localStorage.getItem('api_url');
         const url = api_url + "/api/discount/list";
         const header = new Headers({'Authorization' : 'Bearer ' + localStorage.getItem('access_token')});
@@ -33,13 +33,14 @@ export class DiscountingService {
     /**
     * This function will display the data by 10 to grid.
     */
-    private displayDataToGrid(discountView : wijmo.collections.CollectionView) : void {
+    public displayDataToGrid(discountView : wijmo.collections.CollectionView) : void {
         if(this.discounts.length > 0) {
             const discountData : wijmo.collections.ObservableArray = new wijmo.collections.ObservableArray();       
             for(var i = 0; i < DiscountingService.GRID_LENGTH; i++) {
-                if(DiscountingService.page < this.discounts.length || 
-                    this.discounts.length >= DiscountingService.GRID_LENGTH){
+                if(DiscountingService.page < this.discounts.length 
+                    || this.discounts.length >= DiscountingService.GRID_LENGTH){
                     discountData.push(this.discounts[DiscountingService.page++]);
+                    console.log(discountData[0].Id);
                 }
             }
             discountView.sourceCollection = discountData;

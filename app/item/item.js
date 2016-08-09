@@ -52,7 +52,7 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     /*Else*/
                     document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     this.itemsView = new wijmo.collections.CollectionView(this.items);
-                    this.itemService.displayItems(this, this.itemsView);
+                    this.itemService.initItems(this, this.itemsView);
                 };
                 /*
                     This function when clicked will go to addItem.html

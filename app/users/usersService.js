@@ -87,6 +87,9 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         }
                     });
                 };
+                /**
+                 * This function will display the data of users from table MstUser by 10 to the wijmo flex grid.
+                */
                 UsersService.prototype.displayUserToGrid = function (usersView) {
                     if (this.users.length > 0) {
                         var data = new wijmo.collections.ObservableArray();
@@ -97,8 +100,8 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             else {
                                 break;
                             }
+                            usersView.sourceCollection = data;
                         }
-                        usersView.sourceCollection = data;
                     }
                 };
                 UsersService.page = 0;

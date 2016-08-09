@@ -1,4 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
+import {ItemService} from './itemService';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 import {Router} from 'angular2/router';
 
@@ -15,14 +16,14 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
                  wjNg2Input.WjComboBox,
     ],
     providers: [
-        ToastsManager
+        ToastsManager, ItemService
     ]
 })
 
 export class ItemAddComponent implements OnInit{
     private testArray : wijmo.collections.ObservableArray;
 
-    constructor(private router : Router, private toastr : ToastsManager){
+    constructor(private router : Router, private toastr : ToastsManager,private itemService : ItemService){
 
     }
 
@@ -32,10 +33,9 @@ export class ItemAddComponent implements OnInit{
     *Will go back to the login screen if you try to access this component without logging in.
     **/
     ngOnInit() : void {
-        this.testArray = new wijmo.collections.ObservableArray();
-        this.testArray.push('test');
-        this.testArray.push('test');
-        console.log('test1' + this.testArray.length);
+        var cmb : wijmo.input.ComboBox;
+        console.log(cmb);
+        this.itemService.initUnit(cmb);
     }
 
     /**

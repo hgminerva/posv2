@@ -94,6 +94,9 @@ export class UsersService {
             )
     }
 
+    /** 
+     * This function will display the data of users from table MstUser by 10 to the wijmo flex grid.
+    */
     public displayUserToGrid(usersView : wijmo.collections.CollectionView) : void {
         if(this.users.length > 0 ) {
             const data : wijmo.collections.ObservableArray = new wijmo.collections.ObservableArray();
@@ -104,8 +107,8 @@ export class UsersService {
                 else {
                     break;
                 }
+                usersView.sourceCollection = data;
             }
-            usersView.sourceCollection = data;
         }
     }
 }

@@ -5,6 +5,8 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {SupplierService} from './SupplierService';
+
 @Component({
     selector: 'supplier',
     templateUrl: 'app/supplier/supplier.html',
@@ -15,7 +17,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
         wjNg2Input.WjComboBox
     ],
     providers: [
-        ToastsManager
+        ToastsManager, SupplierService
     ]
 })
 
@@ -23,7 +25,7 @@ export class SupplierComponent implements OnInit{
     private supplierView : wijmo.collections.CollectionView;
     private supplierSource : wijmo.collections.ObservableArray;
 
-    constructor(private toastr : ToastsManager, private router : Router) {
+    constructor(private toastr : ToastsManager, private router : Router, private supplierService : SupplierService) {
 
     }
 
@@ -35,10 +37,8 @@ export class SupplierComponent implements OnInit{
          
         }
         /*Else*/
-        this.supplierSource = new wijmo.collections.ObservableArray();
-        this.supplierView = new wijmo.collections.CollectionView(this.supplierSource);
-
-        this.supplierSource.push({Lock : true});
+        this.supplierView = new wijmo.collections.CollectionView();
+        this.supplierService.initSuppliers(this, this.supplierView);
     }
 
     /*

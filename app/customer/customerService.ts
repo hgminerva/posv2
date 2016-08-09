@@ -12,7 +12,7 @@ export class CustomerService {
         this.customers = new wijmo.collections.ObservableArray();
     }
 
-    public displayCustomers(customerComponent : CustomerComponent,
+    public initCustomers(customerComponent : CustomerComponent,
                             customerView : wijmo.collections.CollectionView) : void {
         const url = localStorage.getItem('api_url') + '/api/customer/list';
         const headers = new Headers({'Authorization': 'Bearer ' + localStorage.getItem('access_toen') });
@@ -40,8 +40,8 @@ export class CustomerService {
                 else {
                     break;
                 }
+                customerView.sourceCollection = data;
             }
-            customerView.sourceCollection = data;
         }
     }
 }

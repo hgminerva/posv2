@@ -26,7 +26,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.http = http;
                     this.customers = new wijmo.collections.ObservableArray();
                 }
-                CustomerService.prototype.displayCustomers = function (customerComponent, customerView) {
+                CustomerService.prototype.initCustomers = function (customerComponent, customerView) {
                     var _this = this;
                     var url = localStorage.getItem('api_url') + '/api/customer/list';
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_toen') });
@@ -49,8 +49,8 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             else {
                                 break;
                             }
+                            customerView.sourceCollection = data;
                         }
-                        customerView.sourceCollection = data;
                     }
                 };
                 CustomerService.page = 0;

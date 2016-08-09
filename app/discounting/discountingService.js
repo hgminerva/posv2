@@ -27,7 +27,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.discounts = new wijmo.collections.ObservableArray();
                     DiscountingService.page = 0;
                 }
-                DiscountingService.prototype.displayDicountData = function (discountComponent, discountView) {
+                DiscountingService.prototype.initDicountData = function (discountComponent, discountView) {
                     var _this = this;
                     var api_url = localStorage.getItem('api_url');
                     var url = api_url + "/api/discount/list";
@@ -48,9 +48,10 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     if (this.discounts.length > 0) {
                         var discountData = new wijmo.collections.ObservableArray();
                         for (var i = 0; i < DiscountingService.GRID_LENGTH; i++) {
-                            if (DiscountingService.page < this.discounts.length ||
-                                this.discounts.length >= DiscountingService.GRID_LENGTH) {
+                            if (DiscountingService.page < this.discounts.length
+                                || this.discounts.length >= DiscountingService.GRID_LENGTH) {
                                 discountData.push(this.discounts[DiscountingService.page++]);
+                                console.log(discountData[0].Id);
                             }
                         }
                         discountView.sourceCollection = discountData;

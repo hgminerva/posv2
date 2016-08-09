@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,12 +10,15 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, itemService_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
     var ItemAddComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (itemService_1_1) {
+                itemService_1 = itemService_1_1;
             },
             function (ng2_toastr_1_1) {
                 ng2_toastr_1 = ng2_toastr_1_1;
@@ -31,9 +34,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             }],
         execute: function() {
             ItemAddComponent = (function () {
-                function ItemAddComponent(router, toastr) {
+                function ItemAddComponent(router, toastr, itemService) {
                     this.router = router;
                     this.toastr = toastr;
+                    this.itemService = itemService;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
@@ -41,10 +45,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 *Will go back to the login screen if you try to access this component without logging in.
                 **/
                 ItemAddComponent.prototype.ngOnInit = function () {
-                    this.testArray = new wijmo.collections.ObservableArray();
-                    this.testArray.push('test');
-                    this.testArray.push('test');
-                    console.log('test1' + this.testArray.length);
+                    var cmb;
+                    console.log(cmb);
+                    this.itemService.initUnit(cmb);
                 };
                 /**
                 * This function will go back item.html when clicked
@@ -79,10 +82,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox,
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager, itemService_1.ItemService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager])
+                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager, itemService_1.ItemService])
                 ], ItemAddComponent);
                 return ItemAddComponent;
             }());

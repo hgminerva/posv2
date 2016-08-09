@@ -51,7 +51,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     }
                     /*Else*/
                     this.customerView = new wijmo.collections.CollectionView();
-                    this.customerService.displayCustomers(this, this.customerView);
+                    this.customerService.initCustomers(this, this.customerView);
                 };
                 /**
                 *This function will go to customerAdd.html when clicked

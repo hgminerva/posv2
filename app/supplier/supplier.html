@@ -18,101 +18,46 @@
     <div class="container">
         <div class="content-body-table clearfix">
             <div class="col-sm-12">
-                 <wj-flex-grid #flexCollectionDetail class="grid" [itemsSource]="collectionDetailView">
-                        <wj-flex-grid-column [header]="" [width]="70">
+                 <wj-flex-grid #flexCollectionDetail class="grid" [itemsSource]="supplierView">
+                     <wj-flex-grid-column [header]="" [width]="60" [align]="center">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                        <button class="btn btn-primary sharp">
+                                            <i class="fa fa-trash">Edit</i>
+                                        </button>
+                                </template>
+                            </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="" [width]="70" [align]="center">
                                 <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                         <button class="btn btn-danger sharp">
                                             <i class="fa fa-trash">Delete</i>
                                         </button>
                                 </template>
                             </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Amount'" 
-                                                [bindig]="'Amount'" 
-                                                [width]="150"
-                                                [align]="'center'">
+                            <wj-flex-grid-column [header]="'Supplier'" 
+                                                [binding]="'Supplier'" 
+                                                [width]="'2.5*'"
+                                                [align]="'left'">
                             </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Pay Type'" 
-                                                [bindig]="'PayType'" 
+                            <wj-flex-grid-column [header]="'Address'" 
+                                                [binding]="'Address'" 
                                                 [isEditable]="false" 
-                                                [width]="150"
-                                                [align]="'center'">
-                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <wj-combo-box #cmbPayType 
-                                                [itemsSource]="['Test', 'Test1']" 
-                                                (click)='onSelectChange(cmbPayType, collectionDetailSource)'
-                                                [align]="'center'">
-                                </wj-combo-box>
-                            </template>
+                                                [width]="'4*'"
+                                                [align]="'left'">
                             </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Check No'" 
-                                                [bindig]="'CheckNo'" 
+                            <wj-flex-grid-column [header]="'Telephone Number'" 
+                                                [binding]="'TelephoneNumber'" 
+                                                [width]="150"
+                                                [align]="'left'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Cellphone Number'" 
+                                                [binding]="'CellphoneNumber'" 
+                                                [width]="150"
+                                                [align]="'left'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'Lock'" 
+                                                [binding]="'IsLocked'" 
                                                 [width]="100"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Check Date'" 
-                                                [bindig]="'CheckDate'" 
-                                                [width]="100"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Check Bank'" 
-                                                [bindig]="'CheckBank'" 
-                                                [width]="100"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Verification Code'"
-                                                [bindig]="'VerificationCode'"  
-                                                [width]="120"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Credit Card No'" 
-                                                [bindig]="'CreditCardNo'"  
-                                                [width]="120"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Credit Card Type'" 
-                                                 [bindig]="'CreditCardType'"
-                                                 [align]="'center'" 
-                                                 [width]="130">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                    <wj-combo-box #cmbPayType 
-                                                [itemsSource]="['Test', 'Test']" 
-                                                (onSelectChange)="onSelectChange($event)">
-                                    </wj-combo-box>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Credit Card Bank'"
-                                                [bindig]="'CreditCardBank'"  
-                                                [width]="120"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Credit Card No'" 
-                                                [bindig]="'CreditCardNo'"  
-                                                [width]="120"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Gift Certificate No'" 
-                                                [bindig]="'GiftCertificateNo'"  
-                                                [width]="150"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Stock In Number'" 
-                                                [bindig]="'StockInNumber'"  
-                                                [width]="150" 
-                                                [align]="'center'">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                    <wj-combo-box #cmbPayType [itemsSource]="['Test', 'Test1']" 
-                                                (onSelectChange)="onSelectChange($event)">
-                                    </wj-combo-box>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Other Information'" 
-                                                [bindig]="'OtherInformation'"  
-                                                [width]="150"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Asset Account'" 
-                                                [bindig]="'AssetAccount'" 
-                                                [width]="150"
+                                                [data-type]="'Boolean'"
                                                 [align]="'center'">
                             </wj-flex-grid-column>
                     </wj-flex-grid>

@@ -42,7 +42,7 @@ export class ItemComponent implements OnInit{
         /*Else*/
        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
        this.itemsView = new wijmo.collections.CollectionView(this.items);
-       this.itemService.displayItems(this, this.itemsView);
+       this.itemService.initItems(this, this.itemsView);
     }   
 
 

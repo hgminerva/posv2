@@ -8,15 +8,16 @@ export class ItemService {
     public static page : number = 0;
     private static SUCCESS : number = 200;
     private static GRID_LENGTH = 10;
+    private static API_ITEM_URL = '/api/item/';
+    private static API_UNIT_URL = '/api/unit/';
     private items : wijmo.collections.ObservableArray;
 
     constructor(private _http : Http) {
         this.items = new wijmo.collections.ObservableArray();
-        ItemService.page = 0;
     }
 
-    public displayItems(component : ItemComponent, itemsView : wijmo.collections.CollectionView) {
-        const url : string = localStorage.getItem('api_url') + "/api/item/list"; 
+    public initItems(component : ItemComponent, itemsView : wijmo.collections.CollectionView) {
+        const url : string = localStorage.getItem('api_url') + ItemService.API_ITEM_URL + "list"; 
         const accessToken : string = localStorage.getItem('access_token');
         const header = new Headers({'Authorization' : 'Bearer ' + accessToken});
         const option = new RequestOptions();
@@ -30,6 +31,26 @@ export class ItemService {
                 },
                 error => {
                     component.getToastr().error('Server Error', '');
+                }
+            );
+    }
+
+    public initUnit(itemComponent : ItemComponent, cmbUnit : wijmo.input.ComboBox) : void {
+        const url : string = localStorage.getItem('api_url') + ItemService.API_UNIT_URL + "list"; 
+        const accessToken : string = localStorage.getItem('access_token');
+        const header = new Headers({'Authorization' : 'Bearer ' + accessToken});
+        const option = new RequestOptions();
+
+        option.headers = header;
+        this._http.get(url, option)
+            .subscribe(
+                response => { 
+                     cmbUnit = new wijmo.input.ComboBox('#cmbUnit',{
+                        itemsSource :   this.getUnits(response.json())
+                    });
+                },
+                error => {
+                    itemComponent.getToastr().error('Server Error', '');
                 }
             );
     }
@@ -97,7 +118,7 @@ export class ItemService {
     }
 
     /*
-    * This function will display the data by 10 to grid
+    * This function will display the data of the table MstItem from database by 10 to the wijmo flex grid.
     */
     public displayDataToGrid(itemsView : wijmo.collections.CollectionView) : void {
         if(this.items.length > 0) {
@@ -109,8 +130,19 @@ export class ItemService {
                 else {
                     break;
                 }
+                itemsView.sourceCollection = gridData;
             }
-            itemsView.sourceCollection = gridData;
         }
+    }
+
+    private getUnits(units : wijmo.collections.ObservableArray) : wijmo.collections.ObservableArray {
+        if(units != null) {
+            const data = new wijmo.collections.ObservableArray();
+            for(var i = 0; i < units.length; i++) {
+                data.push(units[i].Unit);
+            }
+            return data;
+        }
+        return null;
     }
 }
