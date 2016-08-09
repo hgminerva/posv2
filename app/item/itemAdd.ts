@@ -50,7 +50,7 @@ export class ItemAddComponent implements OnInit{
     **/
     onLock() : void {
         document.getElementById('itemAddTabContent').setAttribute('class','disable');
-        console.log('disabled');
+    console.log('disabled');
     }
 
     /**

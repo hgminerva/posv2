@@ -24,46 +24,32 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
             ItemService = (function () {
                 function ItemService(_http) {
                     this._http = _http;
-                    this.url = localStorage.getItem('api_url') + "/api/MstItem";
-                    this.accessToken = localStorage.getItem('access_token');
-                    this.option = new http_1.RequestOptions();
+                    this.items = new wijmo.collections.ObservableArray();
+                    ItemService.page = 0;
                 }
-                ItemService.prototype.getItems = function (component) {
-                    var items = new wijmo.collections.ObservableArray();
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + this.accessToken });
-                    ;
-                    this.option.headers = header;
-                    this._http.get(this.url, this.option)
+                ItemService.prototype.displayItems = function (component, itemsView) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + "/api/item/list";
+                    var accessToken = localStorage.getItem('access_token');
+                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + accessToken });
+                    var option = new http_1.RequestOptions();
+                    option.headers = header;
+                    this._http.get(url, option)
                         .subscribe(function (response) {
-                        var data = response.json();
-                        if (data.length > 0) {
-                            for (var key in data) {
-                                if (data.hasOwnProperty(key)) {
-                                    items.push({
-                                        Id: data[key].Id,
-                                        ItemCode: data[key].ItemCode,
-                                        BarCode: data[key].BarCode,
-                                        ItemDescription: data[key].ItemDescription,
-                                        Alias: data[key].Alias,
-                                        GenericName: data[key].GenericName,
-                                        Category: data[key].Category,
-                                        SalesAccountId: data[key].SalesAccountId,
-                                        AssetAccountId: data[key].AssetAccountId,
-                                        CostAccountId: data[key].CostAccountId
-                                    });
-                                }
-                            }
-                        }
+                        _this.items = response.json();
+                        _this.displayDataToGrid(itemsView);
                     }, function (error) {
                         component.getToastr().error('Server Error', '');
                     });
-                    return items;
                 };
                 ItemService.prototype.addItem = function (data, component) {
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + this.accessToken });
+                    var url = localStorage.getItem('api_url') + "/api/customer/create";
+                    var accessToken = localStorage.getItem('access_token');
+                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + accessToken });
+                    var option = new http_1.RequestOptions();
                     header.append('Content-Type', 'application/json');
-                    this.option.headers = header;
-                    this._http.post(this.url, JSON.stringify(data), this.option)
+                    option.headers = header;
+                    this._http.post(url, JSON.stringify(data), option)
                         .subscribe(function (response) {
                         if (response.status == ItemService.SUCCESS) {
                             component.getToastr().success('Save Successfull', '');
@@ -74,10 +60,13 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     });
                 };
                 ItemService.prototype.updateItem = function (data, component) {
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + this.accessToken });
+                    var url = localStorage.getItem('api_url') + "/api/customer/update";
+                    var accessToken = localStorage.getItem('access_token');
+                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + accessToken });
+                    var option = new http_1.RequestOptions();
                     header.append('Content-Type', 'application/json');
-                    this.option.headers = header;
-                    this._http.put(this.url, JSON.stringify(data), this.option)
+                    option.headers = header;
+                    this._http.put(url, JSON.stringify(data), option)
                         .subscribe(function (response) {
                         if (response.status == ItemService.SUCCESS) {
                             component.getToastr().success('Update Successfull', '');
@@ -88,11 +77,13 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     });
                 };
                 ItemService.prototype.deleteItem = function (data, component) {
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + this.accessToken });
+                    var url = localStorage.getItem('api_url') + "/api/customer/delete/" + data.id;
+                    var accessToken = localStorage.getItem('access_token');
+                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + accessToken });
                     var id = data.Id;
-                    var url = this.url + '/' + id;
-                    this.option.headers = header;
-                    this._http.delete(url, this.option)
+                    var option = new http_1.RequestOptions();
+                    option.headers = header;
+                    this._http.delete(url, option)
                         .subscribe(function (response) {
                         if (response.status == ItemService.SUCCESS) {
                             component.getToastr().success('Delete Successfull', '');
@@ -102,7 +93,26 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         }
                     });
                 };
+                /*
+                * This function will display the data by 10 to grid
+                */
+                ItemService.prototype.displayDataToGrid = function (itemsView) {
+                    if (this.items.length > 0) {
+                        var gridData = new wijmo.collections.ObservableArray();
+                        for (var i = 0; i < ItemService.GRID_LENGTH; i++) {
+                            if (ItemService.page < this.items.length || this.items.length >= ItemService.GRID_LENGTH) {
+                                gridData.push(this.items[ItemService.page++]);
+                            }
+                            else {
+                                break;
+                            }
+                        }
+                        itemsView.sourceCollection = gridData;
+                    }
+                };
+                ItemService.page = 0;
                 ItemService.SUCCESS = 200;
+                ItemService.GRID_LENGTH = 10;
                 ItemService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

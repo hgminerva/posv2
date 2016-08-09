@@ -13,9 +13,9 @@
     <div class="contentFilter clearfix">
        
     </div>
-    <div class="content-body">
+    <div class="content-body-table">
         <div class="col-sm-12">
-            <wj-flex-grid id="userGrid" #userGrid class="grid" [itemsSource]="userView">
+            <wj-flex-grid id="userGrid" #userGrid class="grid" [itemsSource]="usersView">
                 <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
                     <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                         <button class="btn btn-primary sharp" >
@@ -31,19 +31,19 @@
                     </template>
                 </wj-flex-grid-column>
                 <wj-flex-grid-column [header]="'Username'"
-                                    [binding]="'Username'"
+                                    [binding]="'UserName'"
                                     [isReadOnly]="true"
-                                    [align]="'center'"
+                                    [align]="'left'"
                                     [width]="250">
                 </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Fullname'"
-                                    [binding]="'Fullname'"
+                <wj-flex-grid-column [header]="'Full Name'"
+                                    [binding]="'FullName'"
                                     [isReadOnly]="true"
-                                    [align]="'center'"
+                                    [align]="'left'"
                                     [width]="'2*'">
                 </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'L'"
-                                [binding]="'L'"
+                <wj-flex-grid-column [header]="'Lock'"
+                                [binding]="'IsLocked'"
                                 [isReadOnly]="true"
                                 [align]="'center'"
                                 [width]="50"

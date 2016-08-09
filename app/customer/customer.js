@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './customerService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, customerService_1;
     var CustomerComponent;
     return {
         setters:[
@@ -28,12 +28,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (customerService_1_1) {
+                customerService_1 = customerService_1_1;
             }],
         execute: function() {
             CustomerComponent = (function () {
-                function CustomerComponent(toastr, router) {
+                function CustomerComponent(toastr, router, customerService) {
                     this.toastr = toastr;
                     this.router = router;
+                    this.customerService = customerService;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
@@ -46,9 +50,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     else {
                     }
                     /*Else*/
-                    this.customerSource = new wijmo.collections.ObservableArray();
-                    this.customerView = new wijmo.collections.CollectionView(this.customerSource);
-                    this.customerSource.push({ Lock: true });
+                    this.customerView = new wijmo.collections.CollectionView();
+                    this.customerService.displayCustomers(this, this.customerView);
                 };
                 /**
                 *This function will go to customerAdd.html when clicked
@@ -62,6 +65,13 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 CustomerComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                //getter
+                CustomerComponent.prototype.getToastr = function () { return this.toastr; };
+                CustomerComponent.prototype.next = function () {
+                    this.customerService.displayDataToGrid(this.customerView);
+                };
+                CustomerComponent.prototype.back = function () {
+                };
                 CustomerComponent = __decorate([
                     core_1.Component({
                         selector: 'customer',
@@ -73,10 +83,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager, customerService_1.CustomerService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, customerService_1.CustomerService])
                 ], CustomerComponent);
                 return CustomerComponent;
             }());

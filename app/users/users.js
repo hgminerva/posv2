@@ -44,6 +44,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     }
                     else {
                     }
+                    /*Else*/
+                    this.usersView = new wijmo.collections.CollectionView();
+                    this._usersService.initUsers(this, this.usersView);
                 };
                 UsersComponent.prototype.onAdd = function () {
                     this._router.navigate(['UsersAdd']);

@@ -35,7 +35,6 @@ System.register(['angular2/core', './inventoryService', 'ng2-toastr/ng2-toastr',
                 }
                 InventoryComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
-                        this._router.navigate(['Login']);
                     }
                     else {
                     }

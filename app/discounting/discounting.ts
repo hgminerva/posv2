@@ -25,7 +25,6 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
 export class DiscountingComponent implements OnInit{
     private discountsView : wijmo.collections.CollectionView;
-    private discounts : wijmo.collections.ObservableArray;
 
     constructor(private discountingService : DiscountingService,
                 private router : Router,
@@ -39,14 +38,8 @@ export class DiscountingComponent implements OnInit{
     *Will go back to the login screen if you try to access this component without logging in.
     **/
     public ngOnInit() : void {
-        this.discounts = new wijmo.collections.ObservableArray();
-        this.discountsView = new wijmo.collections.CollectionView(this.discounts);
-
-        this.discounts.push({
-            Lock : true
-        });
-
-        console.log('' + this.discounts.length);
+        this.discountsView = new wijmo.collections.CollectionView();
+        this.discountingService.displayDicountData(this, this.discountsView);
     }
 
     /*

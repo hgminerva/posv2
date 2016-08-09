@@ -24,7 +24,7 @@
                 <li><a a data-toggle="tab" href="#terminal">Terminal</a></li>
             </ul>
         </div>
-        <div class="content-body clearfix">
+        <div class="content-body-table clearfix">
                 <div id="systemTableTabContent" class="tab-content">
                      <div id="chartOfAccounts" class="tab-pane fade in active">
                         <div class="col-sm-12">
@@ -34,7 +34,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <wj-flex-grid id="chartOfAccountsGrid" #chartOfAccountsGrid class="grid" [itemsSource]="chartOfAccountsView">
+                                <wj-flex-grid id="chartOfAccountsGrid" 
+                                              #chartOfAccountsGrid class="grid"
+                                              [itemsSource]="chartOfAccountsView">
                                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                             <button class="btn btn-primary sharp" >

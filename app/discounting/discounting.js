@@ -48,12 +48,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 *Will go back to the login screen if you try to access this component without logging in.
                 **/
                 DiscountingComponent.prototype.ngOnInit = function () {
-                    this.discounts = new wijmo.collections.ObservableArray();
-                    this.discountsView = new wijmo.collections.CollectionView(this.discounts);
-                    this.discounts.push({
-                        Lock: true
-                    });
-                    console.log('' + this.discounts.length);
+                    this.discountsView = new wijmo.collections.CollectionView();
+                    this.discountingService.displayDicountData(this, this.discountsView);
                 };
                 /*
                     This function will go to discountingAdd.html when clicked

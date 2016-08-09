@@ -34,8 +34,8 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
             }],
         execute: function() {
             ItemComponent = (function () {
-                function ItemComponent(_itemService, _toastr, _router) {
-                    this._itemService = _itemService;
+                function ItemComponent(itemService, _toastr, _router) {
+                    this.itemService = itemService;
                     this._toastr = _toastr;
                     this._router = _router;
                 }
@@ -50,11 +50,9 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     else {
                     }
                     /*Else*/
-                    this.items = new wijmo.collections.ObservableArray();
-                    this.collectionItems = new wijmo.collections.CollectionView(this.items);
-                    this.items.push({ Lock: true });
-                };
-                ItemComponent.prototype.getItems = function () {
+                    document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    this.itemsView = new wijmo.collections.CollectionView(this.items);
+                    this.itemService.displayItems(this, this.itemsView);
                 };
                 /*
                     This function when clicked will go to addItem.html
@@ -67,6 +65,19 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                 };
                 //getters
                 ItemComponent.prototype.getToastr = function () { return this._toastr; };
+                ItemComponent.prototype.next = function () {
+                    this.itemService.displayDataToGrid(this.itemsView);
+                    document.getElementById('btnBack').removeAttribute('disabled');
+                };
+                ItemComponent.prototype.back = function () {
+                    if (itemService_1.ItemService.page > 10) {
+                        itemService_1.ItemService.page -= 20;
+                        this.itemService.displayDataToGrid(this.itemsView);
+                    }
+                    if (itemService_1.ItemService.page == 10) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
                 ItemComponent = __decorate([
                     core_1.Component({
                         selector: 'item',

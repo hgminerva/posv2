@@ -24,27 +24,40 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
             DiscountingService = (function () {
                 function DiscountingService(_http) {
                     this._http = _http;
+                    this.discounts = new wijmo.collections.ObservableArray();
+                    DiscountingService.page = 0;
                 }
-                DiscountingService.prototype.getDiscounting = function () {
-                    var discounts = new wijmo.collections.ObservableArray();
+                DiscountingService.prototype.displayDicountData = function (discountComponent, discountView) {
+                    var _this = this;
                     var api_url = localStorage.getItem('api_url');
-                    var url = api_url + "/api/MstDiscount";
+                    var url = api_url + "/api/discount/list";
                     var header = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
                     var options = new http_1.RequestOptions({ headers: header });
                     this._http.get(url, options)
                         .subscribe(function (response) {
-                        var data = response.json();
-                        if (data.length > 0) {
-                            for (var key in data) {
-                                if (data.hasOwnProperty(key)) {
-                                    discounts.push({});
-                                }
+                        _this.discounts = response.json();
+                        _this.displayDataToGrid(discountView);
+                    }, function (error) {
+                        discountComponent.getToastr().error('Server error', '');
+                    });
+                };
+                /**
+                * This function will display the data by 10 to grid.
+                */
+                DiscountingService.prototype.displayDataToGrid = function (discountView) {
+                    if (this.discounts.length > 0) {
+                        var discountData = new wijmo.collections.ObservableArray();
+                        for (var i = 0; i < DiscountingService.GRID_LENGTH; i++) {
+                            if (DiscountingService.page < this.discounts.length ||
+                                this.discounts.length >= DiscountingService.GRID_LENGTH) {
+                                discountData.push(this.discounts[DiscountingService.page++]);
                             }
                         }
-                    }, function (error) {
-                    });
-                    return discounts;
+                        discountView.sourceCollection = discountData;
+                    }
                 };
+                DiscountingService.page = 0;
+                DiscountingService.GRID_LENGTH = 10;
                 DiscountingService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

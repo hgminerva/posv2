@@ -20,10 +20,10 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
             ]
 })
 export class ItemComponent implements OnInit{
-    public collectionItems : wijmo.collections.CollectionView;
-    public items : wijmo.collections.ObservableArray;
+    private itemsView: wijmo.collections.CollectionView;
+    private items : wijmo.collections.ObservableArray;
 
-    constructor(private _itemService : ItemService, private _toastr : ToastsManager, private _router : Router){
+    constructor(private itemService : ItemService, private _toastr : ToastsManager, private _router : Router){
     
     }
 
@@ -40,14 +40,11 @@ export class ItemComponent implements OnInit{
          
         }
         /*Else*/
-        this.items = new wijmo.collections.ObservableArray();
-        this.collectionItems = new wijmo.collections.CollectionView(this.items);
-        this.items.push({Lock : true});
+       document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+       this.itemsView = new wijmo.collections.CollectionView(this.items);
+       this.itemService.displayItems(this, this.itemsView);
     }   
 
-    public getItems() : void {
-
-    }
 
     /*
         This function when clicked will go to addItem.html
@@ -62,5 +59,21 @@ export class ItemComponent implements OnInit{
 
     //getters
     public getToastr() : ToastsManager { return this._toastr; }
+
+    public next() : void {
+        this.itemService.displayDataToGrid(this.itemsView);
+        document.getElementById('btnBack').removeAttribute('disabled');
+    } 
+
+    public back() : void {
+        if(ItemService.page > 10) {
+                ItemService.page -= 20;
+                this.itemService.displayDataToGrid(this.itemsView);
+        }
+
+        if(ItemService.page == 10) {
+            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+        }
+    }
 
 }

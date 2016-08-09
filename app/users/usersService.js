@@ -26,31 +26,19 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this._http = _http;
                     this.url = localStorage.getItem('api_url') + "/api/MstUser";
                     this.accessToken = localStorage.getItem('access_token');
-                    this.option = new http_1.RequestOptions();
+                    this.users = new wijmo.collections.ObservableArray();
                 }
-                UsersService.prototype.getUsers = function (component) {
+                UsersService.prototype.initUsers = function (component, usersView) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + '/api/user/list';
                     var users = new wijmo.collections.ObservableArray();
                     var header = new http_1.Headers({ 'Authorization': 'Bearer ' + this.accessToken });
-                    this.option.headers = header;
-                    this._http.get(this.url, this.option)
+                    var option = new http_1.RequestOptions();
+                    option.headers = header;
+                    this._http.get(url, option)
                         .subscribe(function (response) {
-                        var data = response.json();
-                        if (data.length > 0) {
-                            for (var key in data) {
-                                users.push({
-                                    Id: data[key].Id,
-                                    UserName: data[key].UserName,
-                                    Password: data[key].Password,
-                                    FullName: data[key].FullName,
-                                    UserCardNumber: data[key].UserCardNumber,
-                                    EntryUserId: data[key].EntryUserId,
-                                    EntryDateTime: data[key].EntryDateTime,
-                                    UpdateUserId: data[key].UpdateUserId,
-                                    UpdateDateTime: data[key].UpdateDateTime,
-                                    IsLocked: data[key].IsLocked
-                                });
-                            }
-                        }
+                        _this.users = response.json();
+                        _this.displayUserToGrid(usersView);
                     }, function (error) {
                         component.getToastr().error('Server Error', '');
                     });
@@ -99,6 +87,22 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         }
                     });
                 };
+                UsersService.prototype.displayUserToGrid = function (usersView) {
+                    if (this.users.length > 0) {
+                        var data = new wijmo.collections.ObservableArray();
+                        for (var i = 0; i < UsersService.GRID_LENGTH; i++) {
+                            if (UsersService.page < this.users.length || this.users.length >= UsersService.GRID_LENGTH) {
+                                data.push(this.users[UsersService.page++]);
+                            }
+                            else {
+                                break;
+                            }
+                        }
+                        usersView.sourceCollection = data;
+                    }
+                };
+                UsersService.page = 0;
+                UsersService.GRID_LENGTH = 10;
                 UsersService.SUCCESS = 200;
                 UsersService = __decorate([
                     core_1.Injectable(), 

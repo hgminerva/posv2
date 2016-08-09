@@ -22,6 +22,8 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 
 export class UsersComponent implements OnInit{
+    
+    private usersView : wijmo.collections.CollectionView;
 
     constructor(private _usersService : UsersService,
                  private _toastr : ToastsManager,
@@ -36,6 +38,9 @@ export class UsersComponent implements OnInit{
         else {
 
         }
+        /*Else*/
+        this.usersView = new wijmo.collections.CollectionView();
+        this._usersService.initUsers(this, this.usersView);
     }
 
     public onAdd() : void {

@@ -5,6 +5,8 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {CustomerService} from './customerService';
+
 @Component({
     selector: 'customer',
     templateUrl: 'app/customer/customer.html',
@@ -15,7 +17,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
         wjNg2Input.WjComboBox
     ],
     providers: [
-        ToastsManager
+        ToastsManager, CustomerService
     ]
 })
 /**
@@ -23,9 +25,8 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 **/
 export class CustomerComponent implements OnInit {
     private customerView : wijmo.collections.CollectionView;
-    private customerSource : wijmo.collections.ObservableArray;
 
-    constructor(private toastr : ToastsManager, private router : Router ) {
+    constructor(private toastr : ToastsManager, private router : Router, private customerService : CustomerService ) {
 
     }
 
@@ -42,10 +43,8 @@ export class CustomerComponent implements OnInit {
 
         }
         /*Else*/
-        this.customerSource = new wijmo.collections.ObservableArray();
-        this.customerView = new wijmo.collections.CollectionView(this.customerSource);
-
-        this.customerSource.push({Lock:true});
+        this.customerView = new wijmo.collections.CollectionView();
+        this.customerService.displayCustomers(this, this.customerView);
     }
 
     /**
@@ -60,6 +59,17 @@ export class CustomerComponent implements OnInit {
     **/
     public onClose() : void {
         this.router.navigate(['Dashboard']);
+    }
+
+    //getter
+    public getToastr() : ToastsManager { return this.toastr; }
+
+    public next() : void {
+        this.customerService.displayDataToGrid(this.customerView);
+    }
+
+    public back() : void {
+
     }
 
 }

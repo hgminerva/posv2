@@ -21,7 +21,7 @@ export class InventoryComponent implements OnInit{
 
     ngOnInit() {
         if(!localStorage.getItem('access_token')) {
-            this._router.navigate(['Login']);
+            //this._router.navigate(['Login']);
         }
         else {
 
