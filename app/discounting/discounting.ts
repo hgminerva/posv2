@@ -47,8 +47,8 @@ export class DiscountingComponent implements OnInit{
         *Else
         */
         this.discountsView = new wijmo.collections.CollectionView();
+        this.discountsView.pageSize = 10;
         this.discountingService.initDicountData(this, this.discountsView);
-        this.discountingService.displayDataToGrid(this.discountsView);
     }
 
     /*
@@ -67,4 +67,28 @@ export class DiscountingComponent implements OnInit{
 
     //getters
     public getToastr() : ToastsManager { return this.toastr; } 
+
+    public next() : void {
+        if(this.discountsView.pageIndex < this.discountsView.pageCount){
+            if(document.getElementById('btnBack').hasAttribute('disabled')){
+                document.getElementById('btnBack').removeAttribute('disabled');
+            }
+            this.discountsView.moveToNextPage();
+        }
+        if(this.discountsView.pageIndex == this.discountsView.pageCount - 1) {
+            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
+    } 
+
+    public back() : void {
+       if(this.discountsView.pageIndex > 0) {
+            if(document.getElementById('btnNext').hasAttribute('disabled')){
+                document.getElementById('btnNext').removeAttribute('disabled');
+            }
+            this.discountsView.moveToPreviousPage();
+       }
+       if(this.discountsView.pageIndex == 0) {
+           document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+       }
+    }
 }

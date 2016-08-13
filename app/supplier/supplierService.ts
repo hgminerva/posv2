@@ -1,14 +1,12 @@
 import {Component, Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {SupplierComponent} from './supplier';
+import {Response} from '../response/response';
+
 
 @Injectable()
 export class SupplierService {
-    private static GRID_LENGTH : number = 10;
-    private static SUCCESS : number = 200;
     private static API_SUPPLIER_URL : string = '/api/supplier/list';
-    private page : number;
-    private suppliers : wijmo.collections.ObservableArray;
 
     constructor(private http : Http) {
         this.suppliers = new wijmo.collections.ObservableArray();
@@ -25,8 +23,18 @@ export class SupplierService {
         this.http.get(url, option)
         .subscribe(
             response => {
-                this.suppliers = response.json();
-                this.displaySupplierToGrid(supplierView);
+                 switch(response.status) {
+                        case Response.SUCCESS :
+                                supplierView.sourceCollection = response.json();
+                                this.checkPageCount(supplierView);
+                                break;
+                        case Response.BAD_REQUEST : break;
+                        case Response.FORBIDDEN_ERROR : break;
+                        case Response.NOT_FOUND : 
+                                component.getToastr().error('Server Error', '');
+                                break;
+                        default: break;
+                    }          
             },
             error => {
                 supplierComponent.getToastr().error('Server error', '');
@@ -34,24 +42,13 @@ export class SupplierService {
         )
     }
 
-    public displaySupplierToGrid(supplierView : wijmo.collections.CollectionView) : void {
-        const suppliersLength : number = this.suppliers.length;
-        if(suppliersLength > 0) {
-            const data : wijmo.collections.ObservableArray = new wijmo.collections.ObservableArray();
-            for(var i = 0; i < SupplierService.GRID_LENGTH; i++) {
-                if(this.page < suppliersLength || this.page >= SupplierService.GRID_LENGTH){
-                    data.push(this.suppliers[this.page++]);
-                    console.log(data[i].IsLocked);
-                }
-                else {
-                    break;
-                }
-            }
-            supplierView.sourceCollection = data;
-        }        
+    private checkPageCount(customerView: wijmo.collections.CollectionView) : void {
+        if(customerView.pageCount == 1 || customerView.itemCount == 0){
+                document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
+        else {
+                document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+        }
     }
-
-    public setPage(p : number) : void { this.page += p; }
-
-    public getPage() : number { return this.page; }
 }

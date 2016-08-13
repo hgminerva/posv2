@@ -40,9 +40,10 @@ export class ItemComponent implements OnInit{
          
         }
         /*Else*/
-       document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-       this.itemsView = new wijmo.collections.CollectionView(this.items);
+       this.itemsView = new wijmo.collections.CollectionView();
+       this.itemsView.pageSize = 10;
        this.itemService.initItems(this, this.itemsView);
+
     }   
 
 
@@ -53,6 +54,11 @@ export class ItemComponent implements OnInit{
         this._router.navigate(['AddItem']);
     }
 
+    public deleteItem() : void {
+        var grid = document.getElementById('flexItem');
+        //console.log(grid.selectedItems);
+    }
+
     public returnHome() : void {
         this._router.navigate(['Dashboard']);
     }
@@ -61,19 +67,26 @@ export class ItemComponent implements OnInit{
     public getToastr() : ToastsManager { return this._toastr; }
 
     public next() : void {
-        this.itemService.displayDataToGrid(this.itemsView);
-        document.getElementById('btnBack').removeAttribute('disabled');
+        if(this.itemsView.pageIndex < this.itemsView.pageCount){
+            if(document.getElementById('btnBack').hasAttribute('disabled')){
+                document.getElementById('btnBack').removeAttribute('disabled');
+            }
+            this.itemsView.moveToNextPage();
+        }
+        if(this.itemsView.pageIndex == this.itemsView.pageCount - 1) {
+            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
     } 
 
     public back() : void {
-        if(ItemService.page > 10) {
-                ItemService.page -= 20;
-                this.itemService.displayDataToGrid(this.itemsView);
-        }
-
-        if(ItemService.page == 10) {
-            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-        }
+       if(this.itemsView.pageIndex > 0) {
+            if(document.getElementById('btnNext').hasAttribute('disabled')){
+                document.getElementById('btnNext').removeAttribute('disabled');
+            }
+            this.itemsView.moveToPreviousPage();
+       }
+       if(this.itemsView.pageIndex == 0) {
+           document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+       }
     }
-
 }

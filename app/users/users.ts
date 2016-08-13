@@ -40,6 +40,7 @@ export class UsersComponent implements OnInit{
         }
         /*Else*/
         this.usersView = new wijmo.collections.CollectionView();
+        this.usersView.pageSize = 10;
         this._usersService.initUsers(this, this.usersView);
     }
 
@@ -53,4 +54,28 @@ export class UsersComponent implements OnInit{
 
     //getters
     public getToastr() : ToastsManager { return this._toastr }
+
+    public next() : void {
+        if(this.usersView.pageIndex < this.usersView.pageCount){
+            if(document.getElementById('btnBack').hasAttribute('disabled')){
+                document.getElementById('btnBack').removeAttribute('disabled');
+            }
+            this.usersView.moveToNextPage();
+        }
+        if(this.usersView.pageIndex == this.usersView.pageCount - 1) {
+            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
+    } 
+
+    public back() : void {
+       if(this.usersView.pageIndex > 0) {
+            if(document.getElementById('btnNext').hasAttribute('disabled')){
+                document.getElementById('btnNext').removeAttribute('disabled');
+            }
+            this.usersView.moveToPreviousPage();
+       }
+       if(this.usersView.pageIndex == 0) {
+           document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+       }
+    }
 }

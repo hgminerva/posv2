@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', '../response/response'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1;
+    var core_1, http_1, response_1;
     var UsersService;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+            },
+            function (response_1_1) {
+                response_1 = response_1_1;
             }],
         execute: function() {
             UsersService = (function () {
@@ -33,75 +36,30 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     var url = localStorage.getItem('api_url') + '/api/user/list';
                     var users = new wijmo.collections.ObservableArray();
                     var header = new http_1.Headers({ 'Authorization': 'Bearer ' + this.accessToken });
-                    var option = new http_1.RequestOptions();
-                    option.headers = header;
+                    var option = new http_1.RequestOptions({ headers: header });
                     this._http.get(url, option)
                         .subscribe(function (response) {
-                        _this.users = response.json();
-                        _this.displayUserToGrid(usersView);
-                    }, function (error) {
-                        component.getToastr().error('Server Error', '');
-                    });
-                    return users;
-                };
-                UsersService.prototype.addUser = function (data, component) {
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + this.accessToken });
-                    header.append('Content-Type', 'application/json');
-                    this.option.headers = header;
-                    this._http.post(this.url, JSON.stringify(data), this.option)
-                        .subscribe(function (response) {
-                        if (response.status == UsersService.SUCCESS) {
-                            component.getToastr().success('Save Successful', '');
-                        }
-                        else {
-                            component.getToastr().error('Server Error', '');
-                        }
-                    });
-                };
-                UsersService.prototype.setUser = function (data, component) {
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + this.accessToken });
-                    header.append('Content-Type', 'application/json');
-                    this.option.headers = header;
-                    this._http.put(this.url, JSON.stringify(data), this.option)
-                        .subscribe(function (response) {
-                        if (response.status == UsersService.SUCCESS) {
-                            component.getToastr().success('Update Successful', '');
-                        }
-                        else {
-                            component.getToastr().error('Server Error', '');
-                        }
-                    });
-                };
-                UsersService.prototype.deleteUser = function (data, component) {
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + this.accessToken });
-                    var id = data.Id;
-                    var url = this.url + '/' + id;
-                    this.option.headers = header;
-                    this._http.delete(url, this.option)
-                        .subscribe(function (response) {
-                        if (response.status == UsersService.SUCCESS) {
-                            component.getToastr().success('Delete Successful', '');
-                        }
-                        else {
-                            component.getToastr().error('Server Error', '');
-                        }
-                    });
-                };
-                /**
-                 * This function will display the data of users from table MstUser by 10 to the wijmo flex grid.
-                */
-                UsersService.prototype.displayUserToGrid = function (usersView) {
-                    if (this.users.length > 0) {
-                        var data = new wijmo.collections.ObservableArray();
-                        for (var i = 0; i < UsersService.GRID_LENGTH; i++) {
-                            if (UsersService.page < this.users.length || this.users.length >= UsersService.GRID_LENGTH) {
-                                data.push(this.users[UsersService.page++]);
-                            }
-                            else {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                usersView.sourceCollection = response.json();
+                                _this.checkPageCount(usersView);
                                 break;
-                            }
-                            usersView.sourceCollection = data;
+                            case response_1.Response.BAD_REQUEST: break;
+                            case response_1.Response.FORBIDDEN_ERROR: break;
+                            case response_1.Response.NOT_FOUND:
+                                component.getToastr().error('Server Error', '');
+                                break;
+                            default: break;
                         }
+                    });
+                };
+                UsersService.prototype.checkPageCount = function (customerView) {
+                    if (customerView.pageCount == 1 || customerView.itemCount == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    else {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };
                 UsersService.page = 0;

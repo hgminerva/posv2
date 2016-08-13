@@ -5,6 +5,8 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {CustomerService} from './customerService';
+
 @Component({
     selector: 'customer-add',
     templateUrl: 'app/customer/customerAdd.html',
@@ -15,7 +17,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
                  wjNg2Input.WjComboBox
     ],
     providers: [
-        ToastsManager
+        ToastsManager, CustomerService
     ]
 })
 
@@ -26,7 +28,7 @@ export class CustomerAddComponent implements OnInit{
 
     private static  CMB_TERM_SOURCE_LENGTH : Number = 5;
 
-    constructor(private toastr : ToastsManager, private router : Router) {
+    constructor(private toastr : ToastsManager, private router : Router, private customerService : CustomerService) {
 
     }
 
@@ -56,6 +58,10 @@ export class CustomerAddComponent implements OnInit{
     * This function will go back customer.html when clicked
     **/
     public onClose() : void {
+        var data = {
+            Customer :(<HTMLInputElement>document.getElementById('txtCustomer')).value,
+        };
+        this.customerService.addCustomer(data, this);
         this.router.navigate(['Customer']);
     }
 

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', '../response/response'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1;
+    var core_1, http_1, response_1;
     var CustomerService;
     return {
         setters:[
@@ -19,42 +19,66 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+            },
+            function (response_1_1) {
+                response_1 = response_1_1;
             }],
         execute: function() {
             CustomerService = (function () {
                 function CustomerService(http) {
                     this.http = http;
-                    this.customers = new wijmo.collections.ObservableArray();
                 }
                 CustomerService.prototype.initCustomers = function (customerComponent, customerView) {
                     var _this = this;
-                    var url = localStorage.getItem('api_url') + '/api/customer/list';
-                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_toen') });
+                    var url = localStorage.getItem('api_url') + CustomerService.CUSTOMER_API_URL + 'list';
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
                     var options = new http_1.RequestOptions();
                     this.http.get(url, options)
                         .subscribe(function (response) {
-                        _this.customers = response.json();
-                        _this.displayDataToGrid(customerView);
-                    }, function (error) {
-                        customerComponent.getToastr().error('Server error', '');
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                customerView.sourceCollection = response.json();
+                                _this.checkPageCount(customerView);
+                                break;
+                            case response_1.Response.BAD_REQUEST: break;
+                            case response_1.Response.FORBIDDEN_ERROR: break;
+                            case response_1.Response.NOT_FOUND:
+                                customerComponent.getToastr().error('Server error', '');
+                                break;
+                            default: break;
+                        }
                     });
                 };
-                CustomerService.prototype.displayDataToGrid = function (customerView) {
-                    if (this.customers.length > 0) {
-                        var data = new wijmo.collections.ObservableArray();
-                        for (var i = 0; i < CustomerService.GRID_LENGTH; i++) {
-                            if (CustomerService.page < this.customers.length) {
-                                data.push(this.customers[CustomerService.page++]);
-                            }
-                            else {
+                CustomerService.prototype.addCustomer = function (data, customerAddComponent) {
+                    var url = localStorage.getItem('api_url') + CustomerService.CUSTOMER_API_URL + 'create';
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
+                    headers.append('Content-Type', 'application/json');
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this.http.post(url, JSON.stringify(data), requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                customerAddComponent.getToastr().success('Added Successfully', '');
                                 break;
-                            }
-                            customerView.sourceCollection = data;
+                            case response_1.Response.BAD_REQUEST: break;
+                            case response_1.Response.FORBIDDEN_ERROR: break;
+                            case response_1.Response.NOT_FOUND:
+                                customerAddComponent.getToastr().error('Server error', '');
+                                break;
+                            default: break;
                         }
+                    });
+                };
+                CustomerService.prototype.checkPageCount = function (customerView) {
+                    if (customerView.pageCount == 1 || customerView.itemCount == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    else {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };
-                CustomerService.page = 0;
-                CustomerService.GRID_LENGTH = 10;
+                CustomerService.CUSTOMER_API_URL = '/api/customer/';
                 CustomerService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

@@ -25,6 +25,9 @@ import {CustomerService} from './customerService';
 **/
 export class CustomerComponent implements OnInit {
     private customerView : wijmo.collections.CollectionView;
+    private customers : wijmo.collections.ObservableArray;
+    private isNext : boolean;
+    private isPrev : boolean;
 
     constructor(private toastr : ToastsManager, private router : Router, private customerService : CustomerService ) {
 
@@ -44,7 +47,8 @@ export class CustomerComponent implements OnInit {
         }
         /*Else*/
         this.customerView = new wijmo.collections.CollectionView();
-        this.customerService.initCustomers(this, this.customerView);
+        this.customerView.pageSize = 10;
+        this.customerService.initCustomers(this,this.customerView);
     }
 
     /**
@@ -65,11 +69,27 @@ export class CustomerComponent implements OnInit {
     public getToastr() : ToastsManager { return this.toastr; }
 
     public next() : void {
-        this.customerService.displayDataToGrid(this.customerView);
+        if(this.customerView.pageIndex < this.customerView.pageCount){
+            if(document.getElementById('btnBack').hasAttribute('disabled')){
+                document.getElementById('btnBack').removeAttribute('disabled')
+            }
+            this.customerView.moveToNextPage();
+        }
+        if(this.customerView.pageIndex == this.customerView.pageCount - 1) {
+            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
     }
 
     public back() : void {
-
+        if(this.customerView.pageIndex < this.customerView.pageCount) {
+            if(document.getElementById('btnNext').hasAttribute('disabled')) {
+                document.getElementById('btnNext').removeAttribute('disabled'); 
+            }
+            this.customerView.moveToPreviousPage();
+        }
+        if(this.customerView.pageIndex == 0){
+            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+        }
     }
 
 }

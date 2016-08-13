@@ -56,8 +56,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     *Else
                     */
                     this.discountsView = new wijmo.collections.CollectionView();
+                    this.discountsView.pageSize = 10;
                     this.discountingService.initDicountData(this, this.discountsView);
-                    this.discountingService.displayDataToGrid(this.discountsView);
                 };
                 /*
                     This function will go to discountingAdd.html when clicked
@@ -73,6 +73,28 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 };
                 //getters
                 DiscountingComponent.prototype.getToastr = function () { return this.toastr; };
+                DiscountingComponent.prototype.next = function () {
+                    if (this.discountsView.pageIndex < this.discountsView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.discountsView.moveToNextPage();
+                    }
+                    if (this.discountsView.pageIndex == this.discountsView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                };
+                DiscountingComponent.prototype.back = function () {
+                    if (this.discountsView.pageIndex > 0) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.discountsView.moveToPreviousPage();
+                    }
+                    if (this.discountsView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
                 DiscountingComponent = __decorate([
                     core_1.Component({
                         selector: 'discounting',

@@ -46,6 +46,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     }
                     /*Else*/
                     this.usersView = new wijmo.collections.CollectionView();
+                    this.usersView.pageSize = 10;
                     this._usersService.initUsers(this, this.usersView);
                 };
                 UsersComponent.prototype.onAdd = function () {
@@ -56,6 +57,28 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 };
                 //getters
                 UsersComponent.prototype.getToastr = function () { return this._toastr; };
+                UsersComponent.prototype.next = function () {
+                    if (this.usersView.pageIndex < this.usersView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.usersView.moveToNextPage();
+                    }
+                    if (this.usersView.pageIndex == this.usersView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                };
+                UsersComponent.prototype.back = function () {
+                    if (this.usersView.pageIndex > 0) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.usersView.moveToPreviousPage();
+                    }
+                    if (this.usersView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
                 UsersComponent = __decorate([
                     core_1.Component({
                         selector: 'users',

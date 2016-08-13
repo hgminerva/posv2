@@ -38,6 +38,7 @@ export class SupplierComponent implements OnInit{
         }
         /*Else*/
         this.supplierView = new wijmo.collections.CollectionView();
+        this.supplierView.pageSize = 10;
         this.supplierService.initSuppliers(this, this.supplierView);
     }
 
@@ -55,5 +56,28 @@ export class SupplierComponent implements OnInit{
     //getters
     public getToastr() : ToastsManager { return this.toastr; }
 
+    public next() : void {
+        if(this.supplierView.pageIndex < this.supplierView.pageCount){
+            if(document.getElementById('btnBack').hasAttribute('disabled')){
+                document.getElementById('btnBack').removeAttribute('disabled');
+            }
+            this.supplierView.moveToNextPage();
+        }
+        if(this.supplierView.pageIndex == this.supplierView.pageCount - 1) {
+            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
+    } 
+
+    public back() : void {
+       if(this.supplierView.pageIndex > 0) {
+            if(document.getElementById('btnNext').hasAttribute('disabled')){
+                document.getElementById('btnNext').removeAttribute('disabled');
+            }
+            this.supplierView.moveToPreviousPage();
+       }
+       if(this.supplierView.pageIndex == 0) {
+           document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+       }
+    }
     
 }

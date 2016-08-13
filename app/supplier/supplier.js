@@ -46,6 +46,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     }
                     /*Else*/
                     this.supplierView = new wijmo.collections.CollectionView();
+                    this.supplierView.pageSize = 10;
                     this.supplierService.initSuppliers(this, this.supplierView);
                 };
                 /*
@@ -59,6 +60,28 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 //getters
                 SupplierComponent.prototype.getToastr = function () { return this.toastr; };
+                SupplierComponent.prototype.next = function () {
+                    if (this.supplierView.pageIndex < this.supplierView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.supplierView.moveToNextPage();
+                    }
+                    if (this.supplierView.pageIndex == this.supplierView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                };
+                SupplierComponent.prototype.back = function () {
+                    if (this.supplierView.pageIndex > 0) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.supplierView.moveToPreviousPage();
+                    }
+                    if (this.supplierView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
                 SupplierComponent = __decorate([
                     core_1.Component({
                         selector: 'supplier',

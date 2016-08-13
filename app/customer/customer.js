@@ -51,6 +51,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     }
                     /*Else*/
                     this.customerView = new wijmo.collections.CollectionView();
+                    this.customerView.pageSize = 10;
                     this.customerService.initCustomers(this, this.customerView);
                 };
                 /**
@@ -68,9 +69,26 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 //getter
                 CustomerComponent.prototype.getToastr = function () { return this.toastr; };
                 CustomerComponent.prototype.next = function () {
-                    this.customerService.displayDataToGrid(this.customerView);
+                    if (this.customerView.pageIndex < this.customerView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.customerView.moveToNextPage();
+                    }
+                    if (this.customerView.pageIndex == this.customerView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
                 };
                 CustomerComponent.prototype.back = function () {
+                    if (this.customerView.pageIndex < this.customerView.pageCount) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.customerView.moveToPreviousPage();
+                    }
+                    if (this.customerView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
                 };
                 CustomerComponent = __decorate([
                     core_1.Component({

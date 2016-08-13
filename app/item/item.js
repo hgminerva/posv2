@@ -50,8 +50,8 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     else {
                     }
                     /*Else*/
-                    document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    this.itemsView = new wijmo.collections.CollectionView(this.items);
+                    this.itemsView = new wijmo.collections.CollectionView();
+                    this.itemsView.pageSize = 10;
                     this.itemService.initItems(this, this.itemsView);
                 };
                 /*
@@ -60,21 +60,34 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                 ItemComponent.prototype.addItem = function () {
                     this._router.navigate(['AddItem']);
                 };
+                ItemComponent.prototype.deleteItem = function () {
+                    var grid = document.getElementById('flexItem');
+                    //console.log(grid.selectedItems);
+                };
                 ItemComponent.prototype.returnHome = function () {
                     this._router.navigate(['Dashboard']);
                 };
                 //getters
                 ItemComponent.prototype.getToastr = function () { return this._toastr; };
                 ItemComponent.prototype.next = function () {
-                    this.itemService.displayDataToGrid(this.itemsView);
-                    document.getElementById('btnBack').removeAttribute('disabled');
+                    if (this.itemsView.pageIndex < this.itemsView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.itemsView.moveToNextPage();
+                    }
+                    if (this.itemsView.pageIndex == this.itemsView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
                 };
                 ItemComponent.prototype.back = function () {
-                    if (itemService_1.ItemService.page > 10) {
-                        itemService_1.ItemService.page -= 20;
-                        this.itemService.displayDataToGrid(this.itemsView);
+                    if (this.itemsView.pageIndex > 0) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.itemsView.moveToPreviousPage();
                     }
-                    if (itemService_1.ItemService.page == 10) {
+                    if (this.itemsView.pageIndex == 0) {
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };

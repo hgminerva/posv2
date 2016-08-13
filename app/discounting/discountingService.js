@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', '../response/response'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1;
+    var core_1, http_1, response_1;
     var DiscountingService;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+            },
+            function (response_1_1) {
+                response_1 = response_1_1;
             }],
         execute: function() {
             DiscountingService = (function () {
@@ -35,8 +38,18 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     var options = new http_1.RequestOptions({ headers: header });
                     this._http.get(url, options)
                         .subscribe(function (response) {
-                        _this.discounts = response.json();
-                        _this.displayDataToGrid(discountView);
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                discountView.sourceCollection = response.json();
+                                _this.checkPageCount(discountView);
+                                break;
+                            case response_1.Response.BAD_REQUEST: break;
+                            case response_1.Response.FORBIDDEN_ERROR: break;
+                            case response_1.Response.NOT_FOUND:
+                                discountComponent.getToastr().error('Server Error', '');
+                                break;
+                            default: break;
+                        }
                     }, function (error) {
                         discountComponent.getToastr().error('Server error', '');
                     });
@@ -55,6 +68,15 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             }
                         }
                         discountView.sourceCollection = discountData;
+                    }
+                };
+                DiscountingService.prototype.checkPageCount = function (customerView) {
+                    if (customerView.pageCount == 1 || customerView.itemCount == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    else {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };
                 DiscountingService.page = 0;

@@ -235,3 +235,15 @@ div.col-sm-2 {
     height: 100%;
 }
 
+.modal-header {
+    background-color: #112540;
+}
+
+.modal-body {
+    color: #181000;
+}
+
+.close {
+    color: #ffffff;
+}
+

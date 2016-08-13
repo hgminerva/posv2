@@ -1,6 +1,8 @@
 import {Component, Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {UsersComponent} from './users';
+import {Response} from '../response/response';
+
 
 @Injectable()
 export class UsersService {
@@ -19,96 +21,38 @@ export class UsersService {
     }
 
     public initUsers(component : UsersComponent,
-                     usersView : wijmo.collections.CollectionView) : wijmo.collections.ObservableArray {
+                     usersView : wijmo.collections.CollectionView) : void{
         const url = localStorage.getItem('api_url') + '/api/user/list';
         const users = new wijmo.collections.ObservableArray();
         const header = new Headers({'Authorization' : 'Bearer ' + this.accessToken});
-        const option = new RequestOptions();
-
-        option.headers = header;
+        const option = new RequestOptions({headers : header});
+        
         this._http.get(url, option)
             .subscribe(
                 response => {
-                   this.users = response.json();
-                   this.displayUserToGrid(usersView);
-                },
-                error => {
-                    component.getToastr().error('Server Error', '');
+                     switch(response.status) {
+                        case Response.SUCCESS :
+                                usersView.sourceCollection = response.json();
+                                this.checkPageCount(usersView);
+                                break;
+                        case Response.BAD_REQUEST : break;
+                        case Response.FORBIDDEN_ERROR : break;
+                        case Response.NOT_FOUND : 
+                                component.getToastr().error('Server Error', '');
+                                break;
+                        default: break;
+                    }           
                 }
             );
-        return users;
     }
 
-    public addUser(data, component : UsersComponent) : void {
-        const header = new Headers({'Authorization' : 'Bearer ' + this.accessToken});
-        
-        header.append('Content-Type', 'application/json');
-        this.option.headers = header;
-        this._http.post(this.url, JSON.stringify(data), this.option)
-            .subscribe(
-                response => {
-                    if(response.status == UsersService.SUCCESS) {
-                        component.getToastr().success('Save Successful', '');
-                    }
-                    else {
-                        component.getToastr().error('Server Error', '')
-                    }
-                }
-            )
-    }
-
-    public setUser(data, component : UsersComponent) : void {
-        const header = new Headers({'Authorization' : 'Bearer ' + this.accessToken});
-
-        header.append('Content-Type', 'application/json');
-        this.option.headers = header;
-        this._http.put(this.url, JSON.stringify(data), this.option)
-            .subscribe(
-                response => {
-                    if(response.status == UsersService.SUCCESS) {
-                        component.getToastr().success('Update Successful', '');
-                    }
-                    else {
-                        component.getToastr().error('Server Error', '')
-                    }
-                }
-            )
-    }
-
-    public deleteUser(data, component : UsersComponent) : void {
-        const header = new Headers({'Authorization' : 'Bearer ' + this.accessToken});
-        const id = data.Id;
-        const url = this.url + '/' + id;
-
-        this.option.headers = header;
-        this._http.delete(url, this.option)
-            .subscribe(
-                response => {
-                    if(response.status ==  UsersService.SUCCESS) {
-                        component.getToastr().success('Delete Successful', '');
-                    }
-                    else {
-                        component.getToastr().error('Server Error', '');
-                    }
-                }
-            )
-    }
-
-    /** 
-     * This function will display the data of users from table MstUser by 10 to the wijmo flex grid.
-    */
-    public displayUserToGrid(usersView : wijmo.collections.CollectionView) : void {
-        if(this.users.length > 0 ) {
-            const data : wijmo.collections.ObservableArray = new wijmo.collections.ObservableArray();
-            for(var i = 0; i < UsersService.GRID_LENGTH; i++ ){
-                if(UsersService.page < this.users.length || this.users.length >= UsersService.GRID_LENGTH){
-                    data.push(this.users[UsersService.page++]);
-                }
-                else {
-                    break;
-                }
-                usersView.sourceCollection = data;
-            }
+    private checkPageCount(customerView: wijmo.collections.CollectionView) : void {
+        if(customerView.pageCount == 1 || customerView.itemCount == 0){
+                document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
+        else {
+                document.getElementById('btnBack').setAttribute('disabled', 'disabled');
         }
     }
 }

@@ -1,6 +1,7 @@
 import {Component, Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {DiscountingComponent} from './discounting';
+import {Response} from '../response/response';
 
 @Injectable()
 export class DiscountingService {
@@ -22,8 +23,18 @@ export class DiscountingService {
 
         this._http.get(url, options)
             .subscribe(response => {
-                this.discounts = response.json();
-                this.displayDataToGrid(discountView);
+                 switch(response.status) {
+                        case Response.SUCCESS :
+                                discountView.sourceCollection = response.json();
+                                this.checkPageCount(discountView);
+                                break;
+                        case Response.BAD_REQUEST : break;
+                        case Response.FORBIDDEN_ERROR : break;
+                        case Response.NOT_FOUND : 
+                                discountComponent.getToastr().error('Server Error', '');
+                                break;
+                        default: break;
+                    }           
             },
             error => {
                 discountComponent.getToastr().error('Server error', '');
@@ -44,6 +55,16 @@ export class DiscountingService {
                 }
             }
             discountView.sourceCollection = discountData;
+        }
+    }
+
+    private checkPageCount(customerView: wijmo.collections.CollectionView) : void {
+        if(customerView.pageCount == 1 || customerView.itemCount == 0){
+                document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
+        else {
+                document.getElementById('btnBack').setAttribute('disabled', 'disabled');
         }
     }
     

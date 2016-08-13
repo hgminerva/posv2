@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', '../response/response'], function(exports_1, context_1) {
     'use strict';
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1;
+    var core_1, http_1, response_1;
     var ItemService;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+            },
+            function (response_1_1) {
+                response_1 = response_1_1;
             }],
         execute: function() {
             ItemService = (function () {
@@ -35,10 +38,18 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     option.headers = header;
                     this._http.get(url, option)
                         .subscribe(function (response) {
-                        _this.items = response.json();
-                        _this.displayDataToGrid(itemsView);
-                    }, function (error) {
-                        component.getToastr().error('Server Error', '');
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                itemsView.sourceCollection = response.json();
+                                _this.checkPageCount(itemsView);
+                                break;
+                            case response_1.Response.BAD_REQUEST: break;
+                            case response_1.Response.FORBIDDEN_ERROR: break;
+                            case response_1.Response.NOT_FOUND:
+                                component.getToastr().error('Server Error', '');
+                                break;
+                            default: break;
+                        }
                     });
                 };
                 ItemService.prototype.initUnit = function (itemComponent, cmbUnit) {
@@ -57,74 +68,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         itemComponent.getToastr().error('Server Error', '');
                     });
                 };
-                ItemService.prototype.addItem = function (data, component) {
-                    var url = localStorage.getItem('api_url') + "/api/customer/create";
-                    var accessToken = localStorage.getItem('access_token');
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + accessToken });
-                    var option = new http_1.RequestOptions();
-                    header.append('Content-Type', 'application/json');
-                    option.headers = header;
-                    this._http.post(url, JSON.stringify(data), option)
-                        .subscribe(function (response) {
-                        if (response.status == ItemService.SUCCESS) {
-                            component.getToastr().success('Save Successfull', '');
-                        }
-                        else {
-                            component.getToastr().success('Server Error', '');
-                        }
-                    });
-                };
-                ItemService.prototype.updateItem = function (data, component) {
-                    var url = localStorage.getItem('api_url') + "/api/customer/update";
-                    var accessToken = localStorage.getItem('access_token');
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + accessToken });
-                    var option = new http_1.RequestOptions();
-                    header.append('Content-Type', 'application/json');
-                    option.headers = header;
-                    this._http.put(url, JSON.stringify(data), option)
-                        .subscribe(function (response) {
-                        if (response.status == ItemService.SUCCESS) {
-                            component.getToastr().success('Update Successfull', '');
-                        }
-                        else {
-                            component.getToastr().success('Server Error', '');
-                        }
-                    });
-                };
-                ItemService.prototype.deleteItem = function (data, component) {
-                    var url = localStorage.getItem('api_url') + "/api/customer/delete/" + data.id;
-                    var accessToken = localStorage.getItem('access_token');
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + accessToken });
-                    var id = data.Id;
-                    var option = new http_1.RequestOptions();
-                    option.headers = header;
-                    this._http.delete(url, option)
-                        .subscribe(function (response) {
-                        if (response.status == ItemService.SUCCESS) {
-                            component.getToastr().success('Delete Successfull', '');
-                        }
-                        else {
-                            component.getToastr().error('Server Error', '');
-                        }
-                    });
-                };
-                /*
-                * This function will display the data of the table MstItem from database by 10 to the wijmo flex grid.
-                */
-                ItemService.prototype.displayDataToGrid = function (itemsView) {
-                    if (this.items.length > 0) {
-                        var gridData = new wijmo.collections.ObservableArray();
-                        for (var i = 0; i < ItemService.GRID_LENGTH; i++) {
-                            if (ItemService.page < this.items.length || this.items.length >= ItemService.GRID_LENGTH) {
-                                gridData.push(this.items[ItemService.page++]);
-                            }
-                            else {
-                                break;
-                            }
-                            itemsView.sourceCollection = gridData;
-                        }
-                    }
-                };
                 ItemService.prototype.getUnits = function (units) {
                     if (units != null) {
                         var data = new wijmo.collections.ObservableArray();
@@ -134,6 +77,15 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         return data;
                     }
                     return null;
+                };
+                ItemService.prototype.checkPageCount = function (itemsView) {
+                    if (itemsView.pageCount == 1 || itemsView.itemCount == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    else {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
                 };
                 ItemService.page = 0;
                 ItemService.SUCCESS = 200;
