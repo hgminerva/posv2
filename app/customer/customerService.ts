@@ -11,8 +11,7 @@ export class CustomerService {
     public constructor(private http : Http) {
     }
 
-    public initCustomers(customerComponent : CustomerComponent,
-                            customerView : wijmo.collections.CollectionView) : void {
+    public initCustomers(customerComponent : CustomerComponent) : void {
         const url = localStorage.getItem('api_url') + CustomerService.CUSTOMER_API_URL + 'list';
         const headers = new Headers({'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
         const options = new RequestOptions();
@@ -22,14 +21,14 @@ export class CustomerService {
                     response => {
                         switch(response.status) {
                             case Response.SUCCESS :
-                                    customerView.sourceCollection = response.json();
-                                    this.checkPageCount(customerView);
-                                    break;
+                                customerComponent.getCustomerView().sourceCollection = response.json();
+                                this.checkPageCount(customerComponent.getCustomerView());
+                                break;
                             case Response.BAD_REQUEST : break;
                             case Response.FORBIDDEN_ERROR : break;
                             case Response.NOT_FOUND : 
-                                    customerComponent.getToastr().error('Server error', '');
-                                    break;
+                                customerComponent.getToastr().error('Server error', '');
+                                break;
                             default: break;
                         }
                     }
@@ -48,6 +47,7 @@ export class CustomerService {
                         switch(response.status) {
                                 case Response.SUCCESS :
                                         customerAddComponent.getToastr().success('Added Successfully', '');
+                                        customerAddComponent.getRouter().navigate(['Customer']);
                                         break;
                                 case Response.BAD_REQUEST : break;
                                 case Response.FORBIDDEN_ERROR : break;
@@ -58,6 +58,35 @@ export class CustomerService {
                             }
                     }
                 )      
+    }
+
+    public updateCustomer(data, customerComponent : CustomerAddComponent) {
+            
+    }
+
+    public deleteCustomer(data, customerComponent : CustomerComponent) : void {
+        const url : string = localStorage.getItem('api_url') + CustomerService.CUSTOMER_API_URL + "delete";
+        const headers : Headers = new Headers({'Authorization' : 'Bearer ' + localStorage.getItem('access_token') });
+        headers.append('Content-Type', 'application/json'); 
+        const requestOptions : RequestOptions = new RequestOptions({ headers : headers, body : JSON.stringify(data)});
+
+        this.http.delete(url, requestOptions)
+            .subscribe(
+                response => {
+                        switch(response.status) {
+                                case Response.SUCCESS :
+                                       this.initCustomers(customerComponent);
+                                       customerComponent.getToastr().success("Deleted successfully");
+                                        break;
+                                case Response.BAD_REQUEST : break;
+                                case Response.FORBIDDEN_ERROR : break;
+                                case Response.NOT_FOUND : 
+                                        customerComponent.getToastr().error('Server error', '');
+                                        break;
+                                default: break;
+                        }
+                }
+            )
     }
 
     private checkPageCount(customerView: wijmo.collections.CollectionView) : void {

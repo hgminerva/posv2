@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './customerService'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './customerService', './customerAdd'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, customerService_1;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, customerService_1, customerAdd_1;
     var CustomerComponent;
     return {
         setters:[
@@ -31,13 +31,17 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (customerService_1_1) {
                 customerService_1 = customerService_1_1;
+            },
+            function (customerAdd_1_1) {
+                customerAdd_1 = customerAdd_1_1;
             }],
         execute: function() {
             CustomerComponent = (function () {
-                function CustomerComponent(toastr, router, customerService) {
+                function CustomerComponent(toastr, router, customerService, customerAdd) {
                     this.toastr = toastr;
                     this.router = router;
                     this.customerService = customerService;
+                    this.customerAdd = customerAdd;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
@@ -52,7 +56,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     /*Else*/
                     this.customerView = new wijmo.collections.CollectionView();
                     this.customerView.pageSize = 10;
-                    this.customerService.initCustomers(this, this.customerView);
+                    this.customerService.initCustomers(this);
                 };
                 /**
                 *This function will go to customerAdd.html when clicked
@@ -66,8 +70,15 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 CustomerComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
-                //getter
-                CustomerComponent.prototype.getToastr = function () { return this.toastr; };
+                CustomerComponent.prototype.editCustomer = function () {
+                    var data = this.customerView.currentItem;
+                    this.router.navigate(['CustomerAdd']);
+                    this.customerAdd.setName("aaa");
+                    console.log(data);
+                };
+                CustomerComponent.prototype.deleteCustomer = function () {
+                    this.customerService.deleteCustomer(this.customerView.currentItem, this);
+                };
                 CustomerComponent.prototype.next = function () {
                     if (this.customerView.pageIndex < this.customerView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {
@@ -78,6 +89,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     if (this.customerView.pageIndex == this.customerView.pageCount - 1) {
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
                     }
+                    console.log(this.customerView.sourceCollection[0].Id);
                 };
                 CustomerComponent.prototype.back = function () {
                     if (this.customerView.pageIndex < this.customerView.pageCount) {
@@ -90,6 +102,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };
+                //getters
+                CustomerComponent.prototype.getToastr = function () { return this.toastr; };
+                CustomerComponent.prototype.getCustomerView = function () { return this.customerView; };
                 CustomerComponent = __decorate([
                     core_1.Component({
                         selector: 'customer',
@@ -101,10 +116,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager, customerService_1.CustomerService
+                            ng2_toastr_1.ToastsManager, customerService_1.CustomerService, customerAdd_1.CustomerAddComponent
                         ]
                     }), 
-                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, customerService_1.CustomerService])
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, customerService_1.CustomerService, customerAdd_1.CustomerAddComponent])
                 ], CustomerComponent);
                 return CustomerComponent;
             }());

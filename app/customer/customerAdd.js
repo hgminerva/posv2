@@ -65,7 +65,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                         Customer: document.getElementById('txtCustomer').value,
                     };
                     this.customerService.addCustomer(data, this);
-                    this.router.navigate(['Customer']);
                 };
                 /**
                 *This function will disable all of the content of the  CustomerAdd
@@ -79,6 +78,11 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 //getters
                 CustomerAddComponent.prototype.getToastr = function () { return this.toastr; };
+                CustomerAddComponent.prototype.getRouter = function () { return this.router; };
+                CustomerAddComponent.prototype.setName = function (name) {
+                    // (<HTMLInputElement>document.getElementById('txtCustomer')).value = name;
+                    console.log(name);
+                };
                 /**
                 *This function initializes the  term combobox of customer add page
                 **/

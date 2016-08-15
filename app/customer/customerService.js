@@ -28,7 +28,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                 function CustomerService(http) {
                     this.http = http;
                 }
-                CustomerService.prototype.initCustomers = function (customerComponent, customerView) {
+                CustomerService.prototype.initCustomers = function (customerComponent) {
                     var _this = this;
                     var url = localStorage.getItem('api_url') + CustomerService.CUSTOMER_API_URL + 'list';
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
@@ -37,8 +37,8 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         .subscribe(function (response) {
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
-                                customerView.sourceCollection = response.json();
-                                _this.checkPageCount(customerView);
+                                customerComponent.getCustomerView().sourceCollection = response.json();
+                                _this.checkPageCount(customerComponent.getCustomerView());
                                 break;
                             case response_1.Response.BAD_REQUEST: break;
                             case response_1.Response.FORBIDDEN_ERROR: break;
@@ -59,11 +59,36 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
                                 customerAddComponent.getToastr().success('Added Successfully', '');
+                                customerAddComponent.getRouter().navigate(['Customer']);
                                 break;
                             case response_1.Response.BAD_REQUEST: break;
                             case response_1.Response.FORBIDDEN_ERROR: break;
                             case response_1.Response.NOT_FOUND:
                                 customerAddComponent.getToastr().error('Server error', '');
+                                break;
+                            default: break;
+                        }
+                    });
+                };
+                CustomerService.prototype.updateCustomer = function (data, customerComponent) {
+                };
+                CustomerService.prototype.deleteCustomer = function (data, customerComponent) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + CustomerService.CUSTOMER_API_URL + "delete";
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
+                    headers.append('Content-Type', 'application/json');
+                    var requestOptions = new http_1.RequestOptions({ headers: headers, body: JSON.stringify(data) });
+                    this.http.delete(url, requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                _this.initCustomers(customerComponent);
+                                customerComponent.getToastr().success("Deleted successfully");
+                                break;
+                            case response_1.Response.BAD_REQUEST: break;
+                            case response_1.Response.FORBIDDEN_ERROR: break;
+                            case response_1.Response.NOT_FOUND:
+                                customerComponent.getToastr().error('Server error', '');
                                 break;
                             default: break;
                         }

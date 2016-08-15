@@ -6,6 +6,7 @@ import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
 import {CustomerService} from './customerService';
+import {CustomerAddComponent} from './customerAdd';
 
 @Component({
     selector: 'customer',
@@ -17,7 +18,7 @@ import {CustomerService} from './customerService';
         wjNg2Input.WjComboBox
     ],
     providers: [
-        ToastsManager, CustomerService
+        ToastsManager, CustomerService, CustomerAddComponent
     ]
 })
 /**
@@ -25,11 +26,8 @@ import {CustomerService} from './customerService';
 **/
 export class CustomerComponent implements OnInit {
     private customerView : wijmo.collections.CollectionView;
-    private customers : wijmo.collections.ObservableArray;
-    private isNext : boolean;
-    private isPrev : boolean;
 
-    constructor(private toastr : ToastsManager, private router : Router, private customerService : CustomerService ) {
+    constructor(private toastr : ToastsManager, private router : Router, private customerService : CustomerService, private customerAdd : CustomerAddComponent ) {
 
     }
 
@@ -40,7 +38,7 @@ export class CustomerComponent implements OnInit {
     **/
     public ngOnInit() {
         if(!localStorage.getItem('access_token')) {
-
+            
         }
         else {
 
@@ -48,7 +46,7 @@ export class CustomerComponent implements OnInit {
         /*Else*/
         this.customerView = new wijmo.collections.CollectionView();
         this.customerView.pageSize = 10;
-        this.customerService.initCustomers(this,this.customerView);
+        this.customerService.initCustomers(this);
     }
 
     /**
@@ -65,8 +63,17 @@ export class CustomerComponent implements OnInit {
         this.router.navigate(['Dashboard']);
     }
 
-    //getter
-    public getToastr() : ToastsManager { return this.toastr; }
+    public editCustomer() : void {
+        var data = this.customerView.currentItem;
+        this.router.navigate(['CustomerAdd']);
+                        this.customerAdd.setName("aaa");
+        console.log(data);
+    }
+
+    public deleteCustomer() : void {
+        this.customerService.deleteCustomer(this.customerView.currentItem, this);
+    }
+    
 
     public next() : void {
         if(this.customerView.pageIndex < this.customerView.pageCount){
@@ -78,6 +85,7 @@ export class CustomerComponent implements OnInit {
         if(this.customerView.pageIndex == this.customerView.pageCount - 1) {
             document.getElementById('btnNext').setAttribute('disabled', 'disabled');
         }
+        console.log(this.customerView.sourceCollection[0].Id);
     }
 
     public back() : void {
@@ -91,5 +99,11 @@ export class CustomerComponent implements OnInit {
             document.getElementById('btnBack').setAttribute('disabled', 'disabled');
         }
     }
+
+    //getters
+
+    public getToastr() : ToastsManager { return this.toastr; }
+    
+    public getCustomerView() : wijmo.collections.CollectionView { return this.customerView; }
 
 }

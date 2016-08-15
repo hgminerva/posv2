@@ -55,7 +55,7 @@ export class ItemService {
             .subscribe(
                 response => { 
                      cmbUnit = new wijmo.input.ComboBox('#cmbUnit',{
-                        itemsSource :   this.getUnits(response.json())
+                        itemsSource : this.getUnits(response.json())
                     });
                 },
                 error => {

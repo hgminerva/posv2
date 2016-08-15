@@ -25,6 +25,7 @@ export class CustomerAddComponent implements OnInit{
     private cmbTermSource : wijmo.collections.ObservableArray;
     private cmbAR_AccountSource : wijmo.collections.ObservableArray;
     private cmbDefaultPrice : wijmo.collections.ObservableArray;
+    
 
     private static  CMB_TERM_SOURCE_LENGTH : Number = 5;
 
@@ -62,7 +63,6 @@ export class CustomerAddComponent implements OnInit{
             Customer :(<HTMLInputElement>document.getElementById('txtCustomer')).value,
         };
         this.customerService.addCustomer(data, this);
-        this.router.navigate(['Customer']);
     }
 
     /**
@@ -81,6 +81,13 @@ export class CustomerAddComponent implements OnInit{
 
     //getters
     public getToastr() : ToastsManager { return this.toastr; } 
+
+    public getRouter() : Router { return this.router; }
+
+    public setName(name) {
+      // (<HTMLInputElement>document.getElementById('txtCustomer')).value = name;
+       console.log(name);
+    }
 
     /**
     *This function initializes the  term combobox of customer add page  
