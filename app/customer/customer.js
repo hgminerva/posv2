@@ -37,11 +37,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             }],
         execute: function() {
             CustomerComponent = (function () {
-                function CustomerComponent(toastr, router, customerService, customerAdd) {
+                function CustomerComponent(toastr, router, customerService) {
                     this.toastr = toastr;
                     this.router = router;
                     this.customerService = customerService;
-                    this.customerAdd = customerAdd;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
@@ -73,7 +72,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 CustomerComponent.prototype.editCustomer = function () {
                     var data = this.customerView.currentItem;
                     this.router.navigate(['CustomerAdd']);
-                    this.customerAdd.setName("aaa");
                     console.log(data);
                 };
                 CustomerComponent.prototype.deleteCustomer = function () {
@@ -119,7 +117,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             ng2_toastr_1.ToastsManager, customerService_1.CustomerService, customerAdd_1.CustomerAddComponent
                         ]
                     }), 
-                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, customerService_1.CustomerService, customerAdd_1.CustomerAddComponent])
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, customerService_1.CustomerService])
                 ], CustomerComponent);
                 return CustomerComponent;
             }());

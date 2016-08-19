@@ -27,9 +27,8 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
             ItemService = (function () {
                 function ItemService(_http) {
                     this._http = _http;
-                    this.items = new wijmo.collections.ObservableArray();
                 }
-                ItemService.prototype.initItems = function (component, itemsView) {
+                ItemService.prototype.listItems = function (component, itemsView) {
                     var _this = this;
                     var url = localStorage.getItem('api_url') + ItemService.API_ITEM_URL + "list";
                     var accessToken = localStorage.getItem('access_token');
@@ -46,10 +45,11 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                             case response_1.Response.BAD_REQUEST: break;
                             case response_1.Response.FORBIDDEN_ERROR: break;
                             case response_1.Response.NOT_FOUND:
-                                component.getToastr().error('Server Error', '');
                                 break;
                             default: break;
                         }
+                    }, function (error) {
+                        component.getToastr().error('Server Error', '');
                     });
                 };
                 ItemService.prototype.initUnit = function (itemComponent, cmbUnit) {
@@ -80,16 +80,10 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                 };
                 ItemService.prototype.checkPageCount = function (itemsView) {
                     if (itemsView.pageCount == 1 || itemsView.itemCount == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
                     }
-                    else {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                    document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                 };
-                ItemService.page = 0;
-                ItemService.SUCCESS = 200;
-                ItemService.GRID_LENGTH = 10;
                 ItemService.API_ITEM_URL = '/api/item/';
                 ItemService.API_UNIT_URL = '/api/unit/';
                 ItemService = __decorate([

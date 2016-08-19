@@ -5,6 +5,8 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {RestaurantTableService} from './restaurantTableService';
+
 @Component({
     selector: 'disbursement',
     templateUrl: 'app/restaurantTables/restaurantTables.html',
@@ -15,15 +17,16 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
         wjNg2Input.WjComboBox
     ],
     providers: [
-        ToastsManager
+        ToastsManager, RestaurantTableService
     ]
 })
 
 export class RestaurantTablesComponent implements OnInit{
-    private disbursementView : wijmo.collections.CollectionView;
-    private disbursementSource : wijmo.collections.ObservableArray;
+    private restaurantTableView : wijmo.collections.CollectionView;
 
-    constructor(private toastr : ToastsManager, private router : Router) {
+    constructor(private toastr : ToastsManager,
+                private router : Router,
+                private restaurantTableService : RestaurantTableService) {
 
     }
 
@@ -35,10 +38,9 @@ export class RestaurantTablesComponent implements OnInit{
          
         }
         /*Else*/
-        this.disbursementSource = new wijmo.collections.ObservableArray();
-        this.disbursementView = new wijmo.collections.CollectionView(this.disbursementSource);
-
-        this.disbursementSource.push({Lock : true});
+        this.restaurantTableView = new wijmo.collections.CollectionView();
+        this.restaurantTableView.pageSize = 10;
+        this.restaurantTableService.listRestaurantTables(this);
     }
 
     /*
@@ -52,8 +54,34 @@ export class RestaurantTablesComponent implements OnInit{
         this.router.navigate(['Dashboard']);
     }
 
+    public next() : void {
+        if(this.restaurantTableView.pageIndex < this.restaurantTableView.pageCount){
+            if(document.getElementById('btnBack').hasAttribute('disabled')){
+                document.getElementById('btnBack').removeAttribute('disabled')
+            }
+            this.restaurantTableView.moveToNextPage();
+        }
+        if(this.restaurantTableView.pageIndex == this.restaurantTableView.pageCount - 1) {
+            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
+        console.log(this.restaurantTableView.sourceCollection[0].Id);
+    }
+
+    public back() : void {
+        if(this.restaurantTableView.pageIndex < this.restaurantTableView.pageCount) {
+            if(document.getElementById('btnNext').hasAttribute('disabled')) {
+                document.getElementById('btnNext').removeAttribute('disabled'); 
+            }
+            this.restaurantTableView.moveToPreviousPage();
+        }
+        if(this.restaurantTableView.pageIndex == 0){
+            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+        }
+    }
+
     //getters
     public getToastr() : ToastsManager { return this.toastr; }
 
+    public getCollectionView() : wijmo.collections.CollectionView { return this.restaurantTableView; }
     
 }

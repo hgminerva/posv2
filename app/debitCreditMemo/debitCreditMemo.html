@@ -1,8 +1,8 @@
-<section id="supplier-page">
+<section id="supplier-page" class="container">
     <div class="content-header clearfix">
         <div class="col-sm-6">
             <div class="pull-left">
-                <h3>Debit/Credit Memo List</h3>
+                <h4>Debit/Credit Memo List</h4>
             </div>
         </div>
         <div class="col-sm-6">
@@ -12,50 +12,85 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="content-body-table clear fix">
-            <div class="col-sm-12">
-                <wj-flex-grid #flexDiscount class="grid" [itemsSource]="debitCreditMemoView">
-                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                            <button class="btn btn-primary sharp" >
-                                    Edit
-                            </button>
-                        </template>
-                    </wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75"  [align]="'center'">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                            <button class="btn btn-danger sharp" >
-                                    Delete
-                            </button>
-                        </template>
-                    </wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'DB/CR Memo Date'" 
-                                        [binding]="'DB/CR Memo Date'"
-                                        [isReadOnly]="true" 
-                                        [width]="'2*'"
-                                        [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'DB/CR Memo No'"
-                                        [binding]="'DB/CR Memo No'"
-                                        [isReadOnly]="true" 
-                                        [width]="'2*'"
-                                        [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Particulars'" 
-                                        [binding]="'Particulars'"
-                                        [width]="'5*'"
-                                        [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Lock'" 
-                                        [binding]="'Lock'"
-                                        [data-type]="'Boolean'"
-                                        [isReadOnly]="true" 
-                                        [align]="'center'"
-                                        [width]="'1*'">
-                    </wj-flex-grid-column>
-                </wj-flex-grid>
+    <div class="content-body-table clear fix">
+        <div class="col-sm-12">
+            <wj-flex-grid #flexDiscount 
+                            class="grid" 
+                            [itemsSource]="debitCreditMemoView"
+                            [selectionMode]="'Row'">
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                        <button class="btn btn-primary sharp" >
+                                Edit
+                        </button>
+                    </template>
+                </wj-flex-grid-column> 
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75"  [align]="'center'">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                        <button class="btn btn-danger sharp" 
+                                data-toggle="modal"
+                                data-target="#delModal">
+                                Delete
+                        </button>
+                    </template>
+                </wj-flex-grid-column> 
+                <wj-flex-grid-column [header]="'DB/CR Memo Date'" 
+                                    [binding]="'DCMemoDate'"
+                                    [isReadOnly]="true" 
+                                    [width]="'2*'"
+                                    [align]="'left'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'DB/CR Memo No'"
+                                    [binding]="'DCMemoNumber'"
+                                    [isReadOnly]="true" 
+                                    [width]="'2*'"
+                                    [align]="'center'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Particulars'" 
+                                    [binding]="'Particulars'"
+                                    [width]="'5*'"
+                                    [align]="'left'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [header]="'Lock'" 
+                                    [binding]="'IsLocked'"
+                                    [data-type]="'Boolean'"
+                                    [isReadOnly]="true" 
+                                    [align]="'center'"
+                                    [width]="'1*'">
+                </wj-flex-grid-column>
+            </wj-flex-grid>
+        </div>
+    </div>
+    <div class="content-footer clearfix">
+        <div class="col-sm-12">
+            <div class="page-bar">
+                <div class="pull-right">
+                    <button id="btnBack" class="btn btn-primary sharp" (click)="back()">back</button>
+                    <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
+                </div>
             </div>
         </div>
     </div>
+    <!--Modal-->
+    <div id="delModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header dark-silver">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Debit/Credit Memo</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this debit/credit memo ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnYes" type="button" class="btn btn-danger sharp" data-dismiss="modal">Yes</button>
+                    <button id="btnNo" type="button" class="btn btn-primary sharp" data-dismiss="modal">No</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<!--End of Modal-->
 </section>

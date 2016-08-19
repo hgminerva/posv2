@@ -21,7 +21,6 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 export class ItemComponent implements OnInit{
     private itemsView: wijmo.collections.CollectionView;
-    private items : wijmo.collections.ObservableArray;
 
     constructor(private itemService : ItemService, private _toastr : ToastsManager, private _router : Router){
     
@@ -42,7 +41,7 @@ export class ItemComponent implements OnInit{
         /*Else*/
        this.itemsView = new wijmo.collections.CollectionView();
        this.itemsView.pageSize = 10;
-       this.itemService.initItems(this, this.itemsView);
+       this.itemService.listItems(this, this.itemsView);
 
     }   
 

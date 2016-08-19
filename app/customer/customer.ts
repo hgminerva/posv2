@@ -27,7 +27,9 @@ import {CustomerAddComponent} from './customerAdd';
 export class CustomerComponent implements OnInit {
     private customerView : wijmo.collections.CollectionView;
 
-    constructor(private toastr : ToastsManager, private router : Router, private customerService : CustomerService, private customerAdd : CustomerAddComponent ) {
+    constructor(private toastr : ToastsManager, 
+                private router : Router, 
+                private customerService : CustomerService) {
 
     }
 
@@ -66,7 +68,6 @@ export class CustomerComponent implements OnInit {
     public editCustomer() : void {
         var data = this.customerView.currentItem;
         this.router.navigate(['CustomerAdd']);
-                        this.customerAdd.setName("aaa");
         console.log(data);
     }
 

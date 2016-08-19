@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './purchaseService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, purchaseService_1;
     var PurchasesComponent;
     return {
         setters:[
@@ -28,12 +28,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (purchaseService_1_1) {
+                purchaseService_1 = purchaseService_1_1;
             }],
         execute: function() {
             PurchasesComponent = (function () {
-                function PurchasesComponent(toastr, router) {
+                function PurchasesComponent(toastr, router, purchaseService) {
                     this.toastr = toastr;
                     this.router = router;
+                    this.purchaseService = purchaseService;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
@@ -46,9 +50,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     else {
                     }
                     /*Else*/
-                    this.purchaseSource = new wijmo.collections.ObservableArray();
-                    this.purchaseView = new wijmo.collections.CollectionView(this.purchaseSource);
-                    this.purchaseSource.push({ Lock: true });
+                    this.purchaseView = new wijmo.collections.CollectionView();
+                    this.purchaseView.pageSize = 10;
+                    this.purchaseService.listPurchase(this);
                 };
                 /*
                     This function will go to purchaseAdd.html when clicked
@@ -62,8 +66,32 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 PurchasesComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                PurchasesComponent.prototype.next = function () {
+                    if (this.purchaseView.pageIndex < this.purchaseView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.purchaseView.moveToNextPage();
+                    }
+                    if (this.purchaseView.pageIndex == this.purchaseView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    console.log(this.purchaseView.sourceCollection[0].Id);
+                };
+                PurchasesComponent.prototype.back = function () {
+                    if (this.purchaseView.pageIndex < this.purchaseView.pageCount) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.purchaseView.moveToPreviousPage();
+                    }
+                    if (this.purchaseView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
                 //getters
                 PurchasesComponent.prototype.getToastr = function () { return this.toastr; };
+                PurchasesComponent.prototype.getCollectionView = function () { return this.purchaseView; };
                 PurchasesComponent = __decorate([
                     core_1.Component({
                         selector: 'purchases',
@@ -75,10 +103,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager, purchaseService_1.PurchaseService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, purchaseService_1.PurchaseService])
                 ], PurchasesComponent);
                 return PurchasesComponent;
             }());

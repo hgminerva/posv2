@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './stockCountService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, stockCountService_1;
     var StockCountComponent;
     return {
         setters:[
@@ -28,19 +28,59 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (stockCountService_1_1) {
+                stockCountService_1 = stockCountService_1_1;
             }],
         execute: function() {
             StockCountComponent = (function () {
-                function StockCountComponent(router, toastr) {
+                function StockCountComponent(router, toastr, stockCountService) {
                     this.router = router;
                     this.toastr = toastr;
+                    this.stockCountService = stockCountService;
                 }
+                StockCountComponent.prototype.ngOnInit = function () {
+                    if (!localStorage.getItem('access_token')) {
+                    }
+                    else {
+                    }
+                    /*Else */
+                    this.stockCountView = new wijmo.collections.CollectionView();
+                    this.stockCountView.pageSize = 10;
+                    this.stockCountService.listStockCount(this);
+                };
                 StockCountComponent.prototype.onAdd = function () {
                     this.router.navigate(['StockCountAdd']);
                 };
                 StockCountComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                StockCountComponent.prototype.next = function () {
+                    if (this.stockCountView.pageIndex < this.stockCountView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.stockCountView.moveToNextPage();
+                    }
+                    if (this.stockCountView.pageIndex == this.stockCountView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    console.log(this.stockCountView.sourceCollection[0].Id);
+                };
+                StockCountComponent.prototype.back = function () {
+                    if (this.stockCountView.pageIndex < this.stockCountView.pageCount) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.stockCountView.moveToPreviousPage();
+                    }
+                    if (this.stockCountView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
+                //getters
+                StockCountComponent.prototype.getToastr = function () { return this.toastr; };
+                StockCountComponent.prototype.getCollectionView = function () { return this.stockCountView; };
                 StockCountComponent = __decorate([
                     core_1.Component({
                         selector: 'stockCount',
@@ -52,10 +92,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager, stockCountService_1.StockCountService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager])
+                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager, stockCountService_1.StockCountService])
                 ], StockCountComponent);
                 return StockCountComponent;
             }());

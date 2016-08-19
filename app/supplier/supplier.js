@@ -47,7 +47,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     /*Else*/
                     this.supplierView = new wijmo.collections.CollectionView();
                     this.supplierView.pageSize = 10;
-                    this.supplierService.initSuppliers(this, this.supplierView);
+                    this.supplierService.initSuppliers(this);
                 };
                 /*
                     This function will go to supplierAdd.html when clicked
@@ -58,8 +58,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 SupplierComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
-                //getters
-                SupplierComponent.prototype.getToastr = function () { return this.toastr; };
                 SupplierComponent.prototype.next = function () {
                     if (this.supplierView.pageIndex < this.supplierView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {
@@ -82,6 +80,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };
+                //getters
+                SupplierComponent.prototype.getToastr = function () { return this.toastr; };
+                SupplierComponent.prototype.getCollectionView = function () { return this.supplierView; };
                 SupplierComponent = __decorate([
                     core_1.Component({
                         selector: 'supplier',

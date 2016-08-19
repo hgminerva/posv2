@@ -1,54 +1,40 @@
 import {Component, Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
+import {StockInComponent} from './stockIn';
+import {Response} from '../response/response';
 
 @Injectable()
 export class StockInService {
+    private static API_URL_STOCK_IN : string = "/api/transaction/stockIn/";
 
-    constructor(private _http : Http) {
+    public constructor(private http : Http) {}
 
+    public listStockIn(component : StockInComponent) : void {
+        const url = localStorage.getItem('api_url') + StockInService. API_URL_STOCK_IN + "list";
+        const headers = new Headers({'Authorization' : 'Bearer ' + localStorage.getItem('access_token')});
+        const requestOptions = new RequestOptions();
+
+        this.http.get(url, requestOptions)
+                 .subscribe(
+                     response=> {
+                         switch(response.status) {
+                             case Response.SUCCESS: 
+                                    component.getCollectionView().sourceCollection = response.json();
+                                    this.checkPageCount(component.getCollectionView());
+                                    break;
+                             default: break;
+                         }
+                     },
+                     error => {
+                         component.getToastr().error('Server error');
+                     }
+                )
     }
 
-    public getStockIn() : wijmo.collections.ObservableArray {
-        let stockIns = new wijmo.collections.ObservableArray();
-        let api_url = localStorage.getItem('api_url');
-        let url = api_url + "/api/TrnStockIn";
-        let header = new Headers({'Authorization' : 'Bearer ' + localStorage.getItem('access_token')});
-        let option = new RequestOptions({headers : header});
-
-        this._http.get(url, option)
-            .subscribe(
-                response => {
-                    let data = response.json();
-                    if(data.length > 0) {
-                        for(let key in data) {
-                            if(data.hasOwnProperty(key)) {
-                                data.push({
-                                    Id : data[key].Id,
-                                    PeriodId : data[key].PeriodId,
-                                    StockInDate :  data[key].StockInDate,
-                                    StockInNumber :  data[key].StockInNumber,
-                                    SupplierId :  data[key].SupplierId,
-                                    Remarks :  data[key].Remarks,
-                                    IsReturn :  data[key].IsReturn,
-                                    CollectionId :  data[key].CollectionId,
-                                    PurchaseOrderId :  data[key].PurchaseOrderId,
-                                    PreparedBy :  data[key].PeriodId.PreparedBy,
-                                    CheckedBy :  data[key].CheckedBy,
-                                    ApprovedBy : data[key].ApprovedBy,
-                                    IsLocked : data[key].IsLocked,
-                                    EntryUserId : data[key].EntryUserId,
-                                    EntryDateTime : data[key].EntryDateTime,
-                                    UpdateUserId : data[key].UpdateUserId,
-                                    UpdateDateTime : data[key].UpdateDateTime,
-                                    SalesId : data[key].SalesId
-                                })
-                            }
-                        }
-                    }
-            },
-                error => {
-
-            });
-        return stockIns;
+    private checkPageCount(collectionView: wijmo.collections.CollectionView) : void {
+        if(collectionView.pageCount == 1 || collectionView.itemCount == 0){
+            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
+        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
     }
 }

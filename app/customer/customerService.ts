@@ -14,7 +14,7 @@ export class CustomerService {
     public initCustomers(customerComponent : CustomerComponent) : void {
         const url = localStorage.getItem('api_url') + CustomerService.CUSTOMER_API_URL + 'list';
         const headers = new Headers({'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
-        const options = new RequestOptions();
+        const options = new RequestOptions(headers);
 
         this.http.get(url, options)
                  .subscribe(

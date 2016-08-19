@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './itemGroupService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, itemGroupService_1;
     var ItemGroupComponent;
     return {
         setters:[
@@ -28,12 +28,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (itemGroupService_1_1) {
+                itemGroupService_1 = itemGroupService_1_1;
             }],
         execute: function() {
             ItemGroupComponent = (function () {
-                function ItemGroupComponent(toastr, router) {
+                function ItemGroupComponent(toastr, router, itemGroupServe) {
                     this.toastr = toastr;
                     this.router = router;
+                    this.itemGroupServe = itemGroupServe;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
@@ -46,9 +50,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     else {
                     }
                     /*Else */
-                    this.itemGroupListSource = new wijmo.collections.ObservableArray();
-                    this.itemGroupListView = new wijmo.collections.CollectionView(this.itemGroupListSource);
-                    this.itemGroupListSource.push({ Lock: true });
+                    this.itemGroupView = new wijmo.collections.CollectionView();
+                    this.itemGroupView.pageSize = 10;
+                    this.itemGroupServe.listItemGroup(this);
                 };
                 ItemGroupComponent.prototype.onAdd = function () {
                     this.router.navigate(['ItemGroupAdd']);
@@ -56,8 +60,32 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 ItemGroupComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                ItemGroupComponent.prototype.next = function () {
+                    if (this.itemGroupView.pageIndex < this.itemGroupView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.itemGroupView.moveToNextPage();
+                    }
+                    if (this.itemGroupView.pageIndex == this.itemGroupView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    console.log(this.itemGroupView.sourceCollection[0].Id);
+                };
+                ItemGroupComponent.prototype.back = function () {
+                    if (this.itemGroupView.pageIndex < this.itemGroupView.pageCount) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.itemGroupView.moveToPreviousPage();
+                    }
+                    if (this.itemGroupView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
                 //getters
                 ItemGroupComponent.prototype.getToastr = function () { return this.toastr; };
+                ItemGroupComponent.prototype.getCollectionView = function () { return this.itemGroupView; };
                 ItemGroupComponent = __decorate([
                     core_1.Component({
                         selector: 'itemGroup',
@@ -69,10 +97,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager, itemGroupService_1.ItemGroupService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, itemGroupService_1.ItemGroupService])
                 ], ItemGroupComponent);
                 return ItemGroupComponent;
             }());

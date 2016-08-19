@@ -32,7 +32,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     var _this = this;
                     var url = localStorage.getItem('api_url') + CustomerService.CUSTOMER_API_URL + 'list';
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
-                    var options = new http_1.RequestOptions();
+                    var options = new http_1.RequestOptions(headers);
                     this.http.get(url, options)
                         .subscribe(function (response) {
                         switch (response.status) {

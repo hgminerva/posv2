@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', '../response/response'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1;
+    var core_1, http_1, response_1;
     var StockInService;
     return {
         setters:[
@@ -19,51 +19,40 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+            },
+            function (response_1_1) {
+                response_1 = response_1_1;
             }],
         execute: function() {
             StockInService = (function () {
-                function StockInService(_http) {
-                    this._http = _http;
+                function StockInService(http) {
+                    this.http = http;
                 }
-                StockInService.prototype.getStockIn = function () {
-                    var stockIns = new wijmo.collections.ObservableArray();
-                    var api_url = localStorage.getItem('api_url');
-                    var url = api_url + "/api/TrnStockIn";
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
-                    var option = new http_1.RequestOptions({ headers: header });
-                    this._http.get(url, option)
+                StockInService.prototype.listStockIn = function (component) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + StockInService.API_URL_STOCK_IN + "list";
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
+                    var requestOptions = new http_1.RequestOptions();
+                    this.http.get(url, requestOptions)
                         .subscribe(function (response) {
-                        var data = response.json();
-                        if (data.length > 0) {
-                            for (var key in data) {
-                                if (data.hasOwnProperty(key)) {
-                                    data.push({
-                                        Id: data[key].Id,
-                                        PeriodId: data[key].PeriodId,
-                                        StockInDate: data[key].StockInDate,
-                                        StockInNumber: data[key].StockInNumber,
-                                        SupplierId: data[key].SupplierId,
-                                        Remarks: data[key].Remarks,
-                                        IsReturn: data[key].IsReturn,
-                                        CollectionId: data[key].CollectionId,
-                                        PurchaseOrderId: data[key].PurchaseOrderId,
-                                        PreparedBy: data[key].PeriodId.PreparedBy,
-                                        CheckedBy: data[key].CheckedBy,
-                                        ApprovedBy: data[key].ApprovedBy,
-                                        IsLocked: data[key].IsLocked,
-                                        EntryUserId: data[key].EntryUserId,
-                                        EntryDateTime: data[key].EntryDateTime,
-                                        UpdateUserId: data[key].UpdateUserId,
-                                        UpdateDateTime: data[key].UpdateDateTime,
-                                        SalesId: data[key].SalesId
-                                    });
-                                }
-                            }
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                component.getCollectionView().sourceCollection = response.json();
+                                _this.checkPageCount(component.getCollectionView());
+                                break;
+                            default: break;
                         }
                     }, function (error) {
+                        component.getToastr().error('Server error');
                     });
-                    return stockIns;
                 };
+                StockInService.prototype.checkPageCount = function (collectionView) {
+                    if (collectionView.pageCount == 1 || collectionView.itemCount == 0) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                };
+                StockInService.API_URL_STOCK_IN = "/api/transaction/stockIn/";
                 StockInService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

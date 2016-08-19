@@ -52,7 +52,7 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     /*Else*/
                     this.itemsView = new wijmo.collections.CollectionView();
                     this.itemsView.pageSize = 10;
-                    this.itemService.initItems(this, this.itemsView);
+                    this.itemService.listItems(this, this.itemsView);
                 };
                 /*
                     This function when clicked will go to addItem.html

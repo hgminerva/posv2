@@ -5,6 +5,8 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {ItemComponentService} from './itemComponentService';
+
 @Component({
     selector: 'itemComponents',
     templateUrl: 'app/itemComponents/itemComponents.html',
@@ -15,15 +17,16 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
         wjNg2Input.WjComboBox
     ],
     providers: [
-        ToastsManager
+        ToastsManager, ItemComponentService
     ]
 })
 
 export class ItemComponentsComponent implements OnInit{
     private itemComponentView : wijmo.collections.CollectionView;
-    private itemComponentSource : wijmo.collections.ObservableArray;
 
-    constructor(private toastr : ToastsManager, private router : Router) {
+    constructor(private toastr : ToastsManager,
+                private router : Router,
+                private itemComponentsService : ItemComponentService) {
 
     }
 
@@ -35,16 +38,43 @@ export class ItemComponentsComponent implements OnInit{
          
         }
         /*Else*/
-        this.itemComponentSource = new wijmo.collections.ObservableArray();
-        this.itemComponentView = new wijmo.collections.CollectionView(this.itemComponentSource);
-
-        this.itemComponentSource.push({Lock : true});
+        this.itemComponentView = new wijmo.collections.CollectionView();
+        this.itemComponentView.pageSize = 10;
+        this.itemComponentsService.listItemComponent(this);
     }
     
     public onClose() : void {
         this.router.navigate(['Dashboard']);
     }
 
+    public next() : void {
+        if(this.itemComponentView .pageIndex < this.itemComponentView .pageCount){
+            if(document.getElementById('btnBack').hasAttribute('disabled')){
+                document.getElementById('btnBack').removeAttribute('disabled')
+            }
+            this.itemComponentView .moveToNextPage();
+        }
+        if(this.itemComponentView .pageIndex == this.itemComponentView .pageCount - 1) {
+            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
+        console.log(this.itemComponentView .sourceCollection[0].Id);
+    }
+
+    public back() : void {
+        if(this.itemComponentView .pageIndex < this.itemComponentView .pageCount) {
+            if(document.getElementById('btnNext').hasAttribute('disabled')) {
+                document.getElementById('btnNext').removeAttribute('disabled'); 
+            }
+            this.itemComponentView .moveToPreviousPage();
+        }
+        if(this.itemComponentView.pageIndex == 0){
+            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+        }
+    }
+
     //getters
-    public getToastr() : ToastsManager { return this.toastr; }
+    //getters
+    public getToastr() : ToastsManager { return this.toastr; }  
+
+    public getCollectionView() : wijmo.collections.CollectionView { return this.itemComponentView; }; 
 }

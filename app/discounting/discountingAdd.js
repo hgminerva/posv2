@@ -62,6 +62,24 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 */
                 DiscountingAddComponent.prototype.onUnlock = function () {
                 };
+                DiscountingAddComponent.prototype.addDiscount = function () {
+                    var discount = this.createDiscount();
+                    if (this.validate(discount)) {
+                    }
+                    else {
+                    }
+                };
+                DiscountingAddComponent.prototype.createDiscount = function () {
+                    var discount = {};
+                    return true;
+                };
+                //validation
+                DiscountingAddComponent.prototype.validate = function (dicount) {
+                    return true;
+                };
+                DiscountingAddComponent.prototype.validateDiscount = function (discount) {
+                    return true;
+                };
                 DiscountingAddComponent = __decorate([
                     core_1.Component({
                         selector: 'discount-add',

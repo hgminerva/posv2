@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './stockOutService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, stockOutService_1;
     var StockOutComponent;
     return {
         setters:[
@@ -28,14 +28,26 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (stockOutService_1_1) {
+                stockOutService_1 = stockOutService_1_1;
             }],
         execute: function() {
             StockOutComponent = (function () {
-                function StockOutComponent(router, toastr) {
+                function StockOutComponent(router, toastr, stockOutService) {
                     this.router = router;
                     this.toastr = toastr;
+                    this.stockOutService = stockOutService;
                 }
                 StockOutComponent.prototype.ngOnInit = function () {
+                    if (!localStorage.getItem('access_token')) {
+                    }
+                    else {
+                    }
+                    /*Else*/
+                    this.stockOutView = new wijmo.collections.CollectionView();
+                    this.stockOutView.pageSize = 10;
+                    this.stockOutService.listStockOut(this);
                 };
                 StockOutComponent.prototype.onAdd = function () {
                     this.router.navigate(['StockOutAdd']);
@@ -43,6 +55,32 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 StockOutComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                StockOutComponent.prototype.next = function () {
+                    if (this.stockOutView.pageIndex < this.stockOutView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.stockOutView.moveToNextPage();
+                    }
+                    if (this.stockOutView.pageIndex == this.stockOutView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    console.log(this.stockOutView.sourceCollection[0].Id);
+                };
+                StockOutComponent.prototype.back = function () {
+                    if (this.stockOutView.pageIndex < this.stockOutView.pageCount) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.stockOutView.moveToPreviousPage();
+                    }
+                    if (this.stockOutView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
+                //getters
+                StockOutComponent.prototype.getToastr = function () { return this.toastr; };
+                StockOutComponent.prototype.getCollectionView = function () { return this.stockOutView; };
                 StockOutComponent = __decorate([
                     core_1.Component({
                         selector: 'stock-out',
@@ -54,10 +92,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager, stockOutService_1.StockOutService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager])
+                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager, stockOutService_1.StockOutService])
                 ], StockOutComponent);
                 return StockOutComponent;
             }());

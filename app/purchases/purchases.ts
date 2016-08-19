@@ -5,6 +5,8 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {PurchaseService} from './purchaseService';
+
 @Component({
     selector: 'purchases',
     templateUrl: 'app/purchases/purchases.html',
@@ -15,15 +17,14 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
         wjNg2Input.WjComboBox
     ],
     providers: [
-        ToastsManager
+        ToastsManager, PurchaseService
     ]
 })
 
 export class PurchasesComponent implements OnInit{
     private purchaseView : wijmo.collections.CollectionView;
-    private purchaseSource : wijmo.collections.ObservableArray;
 
-    constructor(private toastr : ToastsManager, private router : Router) {
+    constructor(private toastr : ToastsManager, private router : Router, private purchaseService : PurchaseService) {
 
     }
 
@@ -40,10 +41,9 @@ export class PurchasesComponent implements OnInit{
          
         }
         /*Else*/
-        this.purchaseSource = new wijmo.collections.ObservableArray();
-        this.purchaseView = new wijmo.collections.CollectionView(this.purchaseSource);
-
-        this.purchaseSource.push({Lock:true});
+        this.purchaseView = new wijmo.collections.CollectionView();
+        this.purchaseView.pageSize = 10;
+        this.purchaseService.listPurchase(this);
     }  
 
     /*
@@ -60,6 +60,33 @@ export class PurchasesComponent implements OnInit{
         this.router.navigate(['Dashboard']);
     }
 
+    public next() : void {
+        if(this.purchaseView .pageIndex < this.purchaseView .pageCount){
+            if(document.getElementById('btnBack').hasAttribute('disabled')){
+                document.getElementById('btnBack').removeAttribute('disabled')
+            }
+            this.purchaseView .moveToNextPage();
+        }
+        if(this.purchaseView .pageIndex == this.purchaseView .pageCount - 1) {
+            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+        }
+        console.log(this.purchaseView .sourceCollection[0].Id);
+    }
+
+    public back() : void {
+        if(this.purchaseView .pageIndex < this.purchaseView .pageCount) {
+            if(document.getElementById('btnNext').hasAttribute('disabled')) {
+                document.getElementById('btnNext').removeAttribute('disabled'); 
+            }
+            this.purchaseView .moveToPreviousPage();
+        }
+        if(this.purchaseView.pageIndex == 0){
+            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+        }
+    }
+
     //getters
     public getToastr() : ToastsManager { return this.toastr; }  
+
+    public getCollectionView() : wijmo.collections.CollectionView { return this.purchaseView; }
 }

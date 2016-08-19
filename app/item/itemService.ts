@@ -7,18 +7,13 @@ import {Response} from '../response/response';
 
 @Injectable()
 export class ItemService {
-    public static page : number = 0;
-    private static SUCCESS : number = 200;
-    private static GRID_LENGTH = 10;
     private static API_ITEM_URL = '/api/item/';
     private static API_UNIT_URL = '/api/unit/';
-    private items : wijmo.collections.ObservableArray;
 
-    constructor(private _http : Http) {
-        this.items = new wijmo.collections.ObservableArray();
+    public constructor(private _http : Http) {
     }
 
-    public initItems(component : ItemComponent, itemsView : wijmo.collections.CollectionView) {
+    public listItems(component : ItemComponent, itemsView : wijmo.collections.CollectionView) {
         const url : string = localStorage.getItem('api_url') + ItemService.API_ITEM_URL + "list"; 
         const accessToken : string = localStorage.getItem('access_token');
         const header = new Headers({'Authorization' : 'Bearer ' + accessToken});
@@ -36,10 +31,12 @@ export class ItemService {
                         case Response.BAD_REQUEST : break;
                         case Response.FORBIDDEN_ERROR : break;
                         case Response.NOT_FOUND : 
-                                component.getToastr().error('Server Error', '');
                                 break;
                         default: break;
                     }           
+                },
+                error => {
+                    component.getToastr().error('Server Error', '');
                 }
             );
     }
@@ -77,11 +74,8 @@ export class ItemService {
 
     private checkPageCount(itemsView : wijmo.collections.CollectionView) : void {
         if(itemsView.pageCount == 1 || itemsView.itemCount == 0){
-                document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
         }
-        else {
-                document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-        }
+        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
     }
 }

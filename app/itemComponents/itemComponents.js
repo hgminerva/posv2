@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './itemComponentService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, itemComponentService_1;
     var ItemComponentsComponent;
     return {
         setters:[
@@ -28,12 +28,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (itemComponentService_1_1) {
+                itemComponentService_1 = itemComponentService_1_1;
             }],
         execute: function() {
             ItemComponentsComponent = (function () {
-                function ItemComponentsComponent(toastr, router) {
+                function ItemComponentsComponent(toastr, router, itemComponentsService) {
                     this.toastr = toastr;
                     this.router = router;
+                    this.itemComponentsService = itemComponentsService;
                 }
                 ItemComponentsComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
@@ -41,15 +45,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     else {
                     }
                     /*Else*/
-                    this.itemComponentSource = new wijmo.collections.ObservableArray();
-                    this.itemComponentView = new wijmo.collections.CollectionView(this.itemComponentSource);
-                    this.itemComponentSource.push({ Lock: true });
+                    this.itemComponentView = new wijmo.collections.CollectionView();
+                    this.itemComponentView.pageSize = 10;
+                    this.itemComponentsService.listItemComponent(this);
                 };
                 ItemComponentsComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                ItemComponentsComponent.prototype.next = function () {
+                    if (this.itemComponentView.pageIndex < this.itemComponentView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.itemComponentView.moveToNextPage();
+                    }
+                    if (this.itemComponentView.pageIndex == this.itemComponentView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    console.log(this.itemComponentView.sourceCollection[0].Id);
+                };
+                ItemComponentsComponent.prototype.back = function () {
+                    if (this.itemComponentView.pageIndex < this.itemComponentView.pageCount) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.itemComponentView.moveToPreviousPage();
+                    }
+                    if (this.itemComponentView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
+                //getters
                 //getters
                 ItemComponentsComponent.prototype.getToastr = function () { return this.toastr; };
+                ItemComponentsComponent.prototype.getCollectionView = function () { return this.itemComponentView; };
+                ;
                 ItemComponentsComponent = __decorate([
                     core_1.Component({
                         selector: 'itemComponents',
@@ -61,10 +91,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager, itemComponentService_1.ItemComponentService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, itemComponentService_1.ItemComponentService])
                 ], ItemComponentsComponent);
                 return ItemComponentsComponent;
             }());

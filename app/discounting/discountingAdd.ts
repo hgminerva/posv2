@@ -66,4 +66,29 @@ export class DiscountingAddComponent implements OnInit{
        
     }
 
+    private addDiscount() : void {
+        const discount = this.createDiscount();
+        if(this.validate(discount)) {
+
+        }
+        else {
+
+        }
+    }
+    
+    private createDiscount() {
+        const discount = {
+
+        };
+        return true;
+    }
+    //validation
+    private validate(dicount) : boolean {
+        return true;
+    } 
+
+    private validateDiscount(discount : string ) : boolean {
+        return true;
+    }
+
 }

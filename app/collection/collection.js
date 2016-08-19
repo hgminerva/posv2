@@ -34,8 +34,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
             }],
         execute: function() {
             CollectionComponent = (function () {
-                function CollectionComponent(_collectionService, _toastr, _router) {
-                    this._collectionService = _collectionService;
+                function CollectionComponent(collectionService, _toastr, _router) {
+                    this.collectionService = collectionService;
                     this._toastr = _toastr;
                     this._router = _router;
                 }
@@ -50,9 +50,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     else {
                     }
                     /*Else*/
-                    this.collection = new wijmo.collections.ObservableArray();
-                    this.collectionView = new wijmo.collections.CollectionView(this.collection);
-                    this.collection.push({ Lock: true, C: false });
+                    this.collectionView = new wijmo.collections.CollectionView();
+                    this.collectionView.pageSize = 10;
+                    this.collectionService.listCollection(this);
                 };
                 /*
                     This function will go to discountingAdd.html when clicked
@@ -66,8 +66,32 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 CollectionComponent.prototype.onClose = function () {
                     this._router.navigate(['Dashboard']);
                 };
+                CollectionComponent.prototype.next = function () {
+                    if (this.collectionView.pageIndex < this.collectionView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.collectionView.moveToNextPage();
+                    }
+                    if (this.collectionView.pageIndex == this.collectionView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    console.log(this.collectionView.sourceCollection[0].Id);
+                };
+                CollectionComponent.prototype.back = function () {
+                    if (this.collectionView.pageIndex < this.collectionView.pageCount) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.collectionView.moveToPreviousPage();
+                    }
+                    if (this.collectionView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
                 //getters
                 CollectionComponent.prototype.getToastr = function () { return this._toastr; };
+                CollectionComponent.prototype.getCollectionView = function () { return this.collectionView; };
                 CollectionComponent = __decorate([
                     core_1.Component({
                         selector: 'collection',

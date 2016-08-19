@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './restaurantTableService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, restaurantTableService_1;
     var RestaurantTablesComponent;
     return {
         setters:[
@@ -28,12 +28,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (restaurantTableService_1_1) {
+                restaurantTableService_1 = restaurantTableService_1_1;
             }],
         execute: function() {
             RestaurantTablesComponent = (function () {
-                function RestaurantTablesComponent(toastr, router) {
+                function RestaurantTablesComponent(toastr, router, restaurantTableService) {
                     this.toastr = toastr;
                     this.router = router;
+                    this.restaurantTableService = restaurantTableService;
                 }
                 RestaurantTablesComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
@@ -41,9 +45,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     else {
                     }
                     /*Else*/
-                    this.disbursementSource = new wijmo.collections.ObservableArray();
-                    this.disbursementView = new wijmo.collections.CollectionView(this.disbursementSource);
-                    this.disbursementSource.push({ Lock: true });
+                    this.restaurantTableView = new wijmo.collections.CollectionView();
+                    this.restaurantTableView.pageSize = 10;
+                    this.restaurantTableService.listRestaurantTables(this);
                 };
                 /*
                     This function will go to disbursementAdd.html when clicked
@@ -54,8 +58,32 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 RestaurantTablesComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                RestaurantTablesComponent.prototype.next = function () {
+                    if (this.restaurantTableView.pageIndex < this.restaurantTableView.pageCount) {
+                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
+                            document.getElementById('btnBack').removeAttribute('disabled');
+                        }
+                        this.restaurantTableView.moveToNextPage();
+                    }
+                    if (this.restaurantTableView.pageIndex == this.restaurantTableView.pageCount - 1) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                    }
+                    console.log(this.restaurantTableView.sourceCollection[0].Id);
+                };
+                RestaurantTablesComponent.prototype.back = function () {
+                    if (this.restaurantTableView.pageIndex < this.restaurantTableView.pageCount) {
+                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
+                            document.getElementById('btnNext').removeAttribute('disabled');
+                        }
+                        this.restaurantTableView.moveToPreviousPage();
+                    }
+                    if (this.restaurantTableView.pageIndex == 0) {
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
                 //getters
                 RestaurantTablesComponent.prototype.getToastr = function () { return this.toastr; };
+                RestaurantTablesComponent.prototype.getCollectionView = function () { return this.restaurantTableView; };
                 RestaurantTablesComponent = __decorate([
                     core_1.Component({
                         selector: 'disbursement',
@@ -67,10 +95,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager, restaurantTableService_1.RestaurantTableService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, restaurantTableService_1.RestaurantTableService])
                 ], RestaurantTablesComponent);
                 return RestaurantTablesComponent;
             }());

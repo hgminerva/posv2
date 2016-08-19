@@ -23,7 +23,6 @@ import {SupplierService} from './SupplierService';
 
 export class SupplierComponent implements OnInit{
     private supplierView : wijmo.collections.CollectionView;
-    private supplierSource : wijmo.collections.ObservableArray;
 
     constructor(private toastr : ToastsManager, private router : Router, private supplierService : SupplierService) {
 
@@ -39,7 +38,7 @@ export class SupplierComponent implements OnInit{
         /*Else*/
         this.supplierView = new wijmo.collections.CollectionView();
         this.supplierView.pageSize = 10;
-        this.supplierService.initSuppliers(this, this.supplierView);
+        this.supplierService.initSuppliers(this);
     }
 
     /*
@@ -52,9 +51,6 @@ export class SupplierComponent implements OnInit{
     public onClose() : void {
         this.router.navigate(['Dashboard']);
     }
-
-    //getters
-    public getToastr() : ToastsManager { return this.toastr; }
 
     public next() : void {
         if(this.supplierView.pageIndex < this.supplierView.pageCount){
@@ -79,5 +75,10 @@ export class SupplierComponent implements OnInit{
            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
        }
     }
+
+    //getters
+    public getToastr() : ToastsManager { return this.toastr; }
+
+    public getCollectionView() : wijmo.collections.CollectionView { return this.supplierView; }
     
 }

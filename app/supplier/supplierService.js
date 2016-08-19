@@ -27,10 +27,8 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
             SupplierService = (function () {
                 function SupplierService(http) {
                     this.http = http;
-                    this.suppliers = new wijmo.collections.ObservableArray();
-                    this.page = 0;
                 }
-                SupplierService.prototype.initSuppliers = function (supplierComponent, supplierView) {
+                SupplierService.prototype.initSuppliers = function (supplierComponent) {
                     var _this = this;
                     var url = localStorage.getItem('api_url') + SupplierService.API_SUPPLIER_URL;
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
@@ -40,13 +38,12 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         .subscribe(function (response) {
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
-                                supplierView.sourceCollection = response.json();
-                                _this.checkPageCount(supplierView);
+                                supplierComponent.getCollectionView().sourceCollection = response.json();
+                                _this.checkPageCount(supplierComponent.getCollectionView());
                                 break;
                             case response_1.Response.BAD_REQUEST: break;
                             case response_1.Response.FORBIDDEN_ERROR: break;
                             case response_1.Response.NOT_FOUND:
-                                component.getToastr().error('Server Error', '');
                                 break;
                             default: break;
                         }
@@ -56,12 +53,9 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                 };
                 SupplierService.prototype.checkPageCount = function (customerView) {
                     if (customerView.pageCount == 1 || customerView.itemCount == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
                     }
-                    else {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                    document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                 };
                 SupplierService.API_SUPPLIER_URL = '/api/supplier/list';
                 SupplierService = __decorate([

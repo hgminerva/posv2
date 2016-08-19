@@ -57,7 +57,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     */
                     this.discountsView = new wijmo.collections.CollectionView();
                     this.discountsView.pageSize = 10;
-                    this.discountingService.initDicountData(this, this.discountsView);
+                    this.discountingService.listDicount(this, this.discountsView);
                 };
                 /*
                     This function will go to discountingAdd.html when clicked
@@ -70,10 +70,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 */
                 DiscountingComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
-                    this.addDiscount();
                 };
-                //getters
-                DiscountingComponent.prototype.getToastr = function () { return this.toastr; };
                 DiscountingComponent.prototype.next = function () {
                     if (this.discountsView.pageIndex < this.discountsView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {
@@ -96,24 +93,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };
-                DiscountingComponent.prototype.addDiscount = function () {
-                    var discount = this.createDiscount();
-                    if (this.validate(discount)) {
-                    }
-                    else {
-                    }
-                };
-                DiscountingComponent.prototype.createDiscount = function () {
-                    var discount = {};
-                    return true;
-                };
-                //validation
-                DiscountingComponent.prototype.validate = function (dicount) {
-                    return true;
-                };
-                DiscountingComponent.prototype.validateDiscount = function (discount) {
-                    return true;
-                };
+                //getters
+                DiscountingComponent.prototype.getToastr = function () { return this.toastr; };
+                ;
+                DiscountingComponent.prototype.getCollectionView = function () { return this.discountsView; };
                 DiscountingComponent = __decorate([
                     core_1.Component({
                         selector: 'discounting',
