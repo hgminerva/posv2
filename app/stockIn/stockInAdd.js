@@ -55,6 +55,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 StockInAddComponent.prototype.onClose = function () {
                     this.router.navigate(['StockIn']);
+                    this.addStockIn();
                 };
                 StockInAddComponent.prototype.onLock = function () {
                 };
@@ -63,6 +64,19 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 StockInAddComponent.prototype.onPreview = function () {
                 };
                 StockInAddComponent.prototype.onPrint = function () {
+                };
+                StockInAddComponent.prototype.enableReturnFields = function () {
+                    var chkReturn = document.getElementById('chkReturn');
+                    var txtReturnOrNo = document.getElementById('txtReturnNo');
+                    var txtReturnSales = document.getElementById('txtReturnSales');
+                    if (chkReturn.checked) {
+                        txtReturnOrNo.removeAttribute('disabled');
+                        txtReturnSales.removeAttribute('disabled');
+                    }
+                    else {
+                        txtReturnOrNo.setAttribute('disabled', 'disabled');
+                        txtReturnSales.setAttribute('disabled', 'disabled');
+                    }
                 };
                 //getters
                 StockInAddComponent.prototype.getToastr = function () { return this.toastr; };
@@ -85,6 +99,30 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 StockInAddComponent.prototype.initCmbDownload = function () {
                     this.cmbDownloadSource.push('test');
+                };
+                StockInAddComponent.prototype.addStockIn = function () {
+                    var stockIn = this.createStockIn();
+                    if (this.validate(stockIn)) {
+                    }
+                    else {
+                    }
+                };
+                StockInAddComponent.prototype.createStockIn = function () {
+                    var stockIn = {};
+                    return stockIn;
+                };
+                //validation
+                StockInAddComponent.prototype.validate = function (stockIn) {
+                    return true;
+                };
+                StockInAddComponent.prototype.validateRemarks = function (remarks) {
+                    return true;
+                };
+                StockInAddComponent.prototype.validateReturn_OR_NO = function (return_OR_NO) {
+                    return true;
+                };
+                StockInAddComponent.prototype.validateSalesInVoice = function (salesInVoice) {
+                    return true;
                 };
                 StockInAddComponent = __decorate([
                     core_1.Component({

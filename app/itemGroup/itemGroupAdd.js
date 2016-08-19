@@ -63,6 +63,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 ItemGroupAddComponent.prototype.onClose = function () {
                     this.router.navigate(['ItemGroup']);
+                    this.addItemGroup();
                 };
                 //getters
                 ItemGroupAddComponent.prototype.getToastr = function () { return this.toastr; };
@@ -71,6 +72,24 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     for (i = 1; i <= ItemGroupAddComponent.KITCHEN_REPORT_LENGTH; i++) {
                         this.kitchenReportSource.push('Kitchen' + i);
                     }
+                };
+                ItemGroupAddComponent.prototype.addItemGroup = function () {
+                    var itemGroup = this.createItemGroup();
+                    if (this.validate(itemGroup)) {
+                    }
+                    else {
+                    }
+                };
+                ItemGroupAddComponent.prototype.createItemGroup = function () {
+                    var itemGroup = {};
+                    return itemGroup;
+                };
+                //validation
+                ItemGroupAddComponent.prototype.validate = function (itemGroup) {
+                    return true;
+                };
+                ItemGroupAddComponent.prototype.validateItemGroup = function (itemGroup) {
+                    return true;
                 };
                 ItemGroupAddComponent.KITCHEN_REPORT_LENGTH = 9;
                 ItemGroupAddComponent = __decorate([

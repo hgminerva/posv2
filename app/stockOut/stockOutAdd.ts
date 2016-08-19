@@ -52,6 +52,7 @@ export class StockOutAddComponent implements OnInit{
 
     public onClose() : void {
         this.router.navigate(['StockOut']);
+        this.addStockOut();
     }
 
     private initCmbAuthority() : void {
@@ -62,5 +63,31 @@ export class StockOutAddComponent implements OnInit{
 
     private initCmbAccount() : void {
         this.cmbAccount.push('Test');
+    }
+
+    private addStockOut() : void {
+        const stockOut = this.createStockOut();
+        if(this.validate(stockOut)) {
+
+        }
+        else {
+
+        }
+    }
+
+    private createStockOut() {
+        const stockOut = {
+
+        };
+        return stockOut;
+    }
+
+    //validation
+    private validate(stockOut) : boolean {
+        return true;
+    }
+
+    private validateRemarks(remarks : string) : boolean {
+        return true;
     }
 }

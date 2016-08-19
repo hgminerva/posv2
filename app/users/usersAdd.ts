@@ -36,6 +36,7 @@ export class UsersAddComponent implements OnInit{
 
     public onClose() : void {
         this.router.navigate(['Users']);
+        this.addUser();
     }
 
     public onLock() : void {
@@ -44,5 +45,43 @@ export class UsersAddComponent implements OnInit{
 
     public onUnlock() : void {
         
+    }
+
+    private addUser() : void {
+        const user = this.createUser();
+        if(this.validate(user)) {
+
+        }
+        else {
+
+        }
+    }
+
+    private createUser() {
+        const user = {
+
+        };
+        return user;
+    }
+
+    //validation
+    private validate(user) : boolean {
+        return true;
+    } 
+
+    private validateUsername(username : string ) : boolean {
+        return true;
+    }
+
+    private validatePassword(password : string ) : boolean {
+        return true;
+    }
+
+    private validateAddress(address : string ) : boolean {
+        return true;
+    }
+
+    private validateUserCardNo(userCardNo : string ) : boolean {
+        return true;
     }
 }

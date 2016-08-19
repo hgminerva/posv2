@@ -61,10 +61,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 * This function will go back customer.html when clicked
                 **/
                 CustomerAddComponent.prototype.onClose = function () {
-                    var data = {
-                        Customer: document.getElementById('txtCustomer').value,
-                    };
-                    this.customerService.addCustomer(data, this);
+                    this.addCustomer();
                 };
                 /**
                 *This function will disable all of the content of the  CustomerAdd
@@ -76,13 +73,17 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 **/
                 CustomerAddComponent.prototype.onUnlock = function () {
                 };
+                CustomerAddComponent.prototype.addCustomer = function () {
+                    var customer = this.createCustomer();
+                    if (this.validate(customer)) {
+                        this.customerService.addCustomer(customer, this);
+                    }
+                    else {
+                    }
+                };
                 //getters
                 CustomerAddComponent.prototype.getToastr = function () { return this.toastr; };
                 CustomerAddComponent.prototype.getRouter = function () { return this.router; };
-                CustomerAddComponent.prototype.setName = function (name) {
-                    // (<HTMLInputElement>document.getElementById('txtCustomer')).value = name;
-                    console.log(name);
-                };
                 /**
                 *This function initializes the  term combobox of customer add page
                 **/
@@ -102,6 +103,37 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.cmbAR_AccountSource.push('Account Receviable - Sales');
                     this.cmbAR_AccountSource.push('Cash on Hand');
                     this.cmbAR_AccountSource.push('Inventory');
+                };
+                CustomerAddComponent.prototype.createCustomer = function () {
+                    var data = {
+                        Customer: document.getElementById('txtCustomer').value,
+                    };
+                    return data;
+                };
+                //validation
+                CustomerAddComponent.prototype.validate = function (data) {
+                    return true;
+                };
+                CustomerAddComponent.prototype.validateCustomer = function (customer) {
+                    return true;
+                };
+                CustomerAddComponent.prototype.validateAddress = function (address) {
+                    return true;
+                };
+                CustomerAddComponent.prototype.validateContacNumber = function (contactNumber) {
+                    return true;
+                };
+                CustomerAddComponent.prototype.validateContactPerson = function (contactPerson) {
+                    return true;
+                };
+                CustomerAddComponent.prototype.validateTin = function (TIN) {
+                    return true;
+                };
+                CustomerAddComponent.prototype.validateRewardCardNo = function (rewardCardNo) {
+                    return true;
+                };
+                CustomerAddComponent.prototype.validateRewardConversion = function (rewardConversion) {
+                    return true;
                 };
                 CustomerAddComponent.CMB_TERM_SOURCE_LENGTH = 5;
                 CustomerAddComponent = __decorate([

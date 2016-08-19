@@ -64,6 +64,7 @@ export class SupplierAddComponent implements OnInit{
 
     public onClose() : void {
         this.router.navigate(['Supplier']);
+        this.addSupplier();
     }
 
     //getters
@@ -96,10 +97,47 @@ export class SupplierAddComponent implements OnInit{
     }
 
     private addSupplier() : void {
-        
+        const supplier = this.createSupplier();
+        if(this.validate(supplier)) {
+
+        }
+        else {
+
+        }
     }    
 
-    private validateUserInput() : boolean {
+    private createSupplier() {
+        const supplier = {
+
+        };
+        return supplier;
+    }
+
+    private validate(supplier) : boolean {
+        return true;
+    }
+
+    private validateSupplier(supplier : string ) : boolean {
+        return true;
+    }
+
+    private validateAddress(address : string ) : boolean {
+        return true;
+    }
+
+    private validateTelNumber(telNumber : string ) : boolean {
+        return true;
+    }
+
+    private validateCelNumber(celNumber : string ) : boolean {
+        return true;
+    }
+
+    private validateFaxNumber(faxNumber : string ) : boolean {
+        return true;
+    }
+
+    private validateTin(TIN : string ) : boolean {
         return true;
     }
 }

@@ -71,6 +71,7 @@ export class ItemGroupAddComponent implements OnInit{
 
     public onClose() : void {
         this.router.navigate(['ItemGroup']);
+        this.addItemGroup();
     }
 
     //getters
@@ -81,5 +82,30 @@ export class ItemGroupAddComponent implements OnInit{
         for(i = 1; i <=ItemGroupAddComponent.KITCHEN_REPORT_LENGTH; i++ ) {
             this.kitchenReportSource.push('Kitchen' + i);
         }
+    }
+
+    private addItemGroup() : void {
+        const itemGroup = this.createItemGroup();
+        if(this.validate(itemGroup)) {
+
+        }
+        else {
+
+        }
+    }
+
+    private createItemGroup() {
+        const itemGroup = {
+
+        };
+        return itemGroup;
+    }
+    //validation
+    private validate(itemGroup) : boolean {
+        return true;
+    }
+
+    private validateItemGroup(itemGroup : string) : boolean  {
+        return true;
     }
 }

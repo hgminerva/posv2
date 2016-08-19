@@ -59,10 +59,7 @@ export class CustomerAddComponent implements OnInit{
     * This function will go back customer.html when clicked
     **/
     public onClose() : void {
-        var data = {
-            Customer :(<HTMLInputElement>document.getElementById('txtCustomer')).value,
-        };
-        this.customerService.addCustomer(data, this);
+        this.addCustomer();
     }
 
     /**
@@ -79,15 +76,20 @@ export class CustomerAddComponent implements OnInit{
        
     }
 
+    public addCustomer() : void {
+         const customer = this.createCustomer();
+         if(this.validate(customer)) {
+            this.customerService.addCustomer(customer, this);
+         }
+         else {
+             
+         }
+    }
+
     //getters
     public getToastr() : ToastsManager { return this.toastr; } 
 
     public getRouter() : Router { return this.router; }
-
-    public setName(name) {
-      // (<HTMLInputElement>document.getElementById('txtCustomer')).value = name;
-       console.log(name);
-    }
 
     /**
     *This function initializes the  term combobox of customer add page  
@@ -111,4 +113,46 @@ export class CustomerAddComponent implements OnInit{
         this.cmbAR_AccountSource.push('Cash on Hand');
         this.cmbAR_AccountSource.push('Inventory');
     }
+
+    private createCustomer() : Object {
+        var data = {
+             Customer :(<HTMLInputElement>document.getElementById('txtCustomer')).value,
+        };
+        return data;
+    }
+
+    //validation
+    private validate(data) : boolean {
+        return true;
+    }
+    
+    private validateCustomer(customer : string) : boolean {
+        return true;
+    }
+
+    private validateAddress(address : string) : boolean {
+        return true;
+    }
+
+    private validateContacNumber(contactNumber : string) : boolean {
+        return true;
+    }
+
+    private validateContactPerson(contactPerson : string) : boolean {
+        return true;
+    }
+
+    private validateTin(TIN : string ) : boolean {
+        return true;
+    } 
+
+    private validateRewardCardNo(rewardCardNo : string ) : boolean {
+        return true;
+    }
+
+    private validateRewardConversion(rewardConversion : string ) {
+        return true;
+    }
+
+
 }

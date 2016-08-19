@@ -70,6 +70,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 */
                 DiscountingComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
+                    this.addDiscount();
                 };
                 //getters
                 DiscountingComponent.prototype.getToastr = function () { return this.toastr; };
@@ -94,6 +95,24 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     if (this.discountsView.pageIndex == 0) {
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
+                };
+                DiscountingComponent.prototype.addDiscount = function () {
+                    var discount = this.createDiscount();
+                    if (this.validate(discount)) {
+                    }
+                    else {
+                    }
+                };
+                DiscountingComponent.prototype.createDiscount = function () {
+                    var discount = {};
+                    return true;
+                };
+                //validation
+                DiscountingComponent.prototype.validate = function (dicount) {
+                    return true;
+                };
+                DiscountingComponent.prototype.validateDiscount = function (discount) {
+                    return true;
                 };
                 DiscountingComponent = __decorate([
                     core_1.Component({

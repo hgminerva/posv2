@@ -41,6 +41,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.cmbAuthoritySource = new wijmo.collections.ObservableArray();
                     this.collectionDetailSource = new wijmo.collections.ObservableArray();
                     this.collectionDetailView = new wijmo.collections.CollectionView(this.collectionDetailSource);
+                    this.collectionDate = new wijmo.input.InputDate("#collectionDate", {
+                        format: "MM/dd/yyyy",
+                        value: new Date()
+                    });
                     this.cmbCustomerSource.push('Test');
                     this.cmbSalesNumberSource.push('Test');
                     this.cmbAuthoritySource.push('Test');
@@ -56,6 +60,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 CollectionAddComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
+                    this.addCollection();
                 };
                 CollectionAddComponent.prototype.onSelectChange = function (combobox, source) {
                     var s = source;
@@ -65,6 +70,27 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 //getters
                 CollectionAddComponent.prototype.getToastr = function () { return this.toastr; };
+                CollectionAddComponent.prototype.addCollection = function () {
+                    var collection = this.createCollection();
+                    if (this.validate(collection)) {
+                    }
+                    else {
+                    }
+                };
+                CollectionAddComponent.prototype.createCollection = function () {
+                    var collection = {};
+                    return collection;
+                };
+                //validation
+                CollectionAddComponent.prototype.validate = function (collection) {
+                    return true;
+                };
+                CollectionAddComponent.prototype.validateManualOR = function (manualOR) {
+                    return true;
+                };
+                CollectionAddComponent.prototype.validateRemarks = function (remarks) {
+                    return true;
+                };
                 CollectionAddComponent = __decorate([
                     core_1.Component({
                         selector: 'collection-add',

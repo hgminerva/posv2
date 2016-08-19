@@ -20,13 +20,32 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 
 export class DiscountingAddComponent implements OnInit{
+    private dateStart : wijmo.input.InputDate;
+    private dateEnd : wijmo.input.InputDate;
 
     constructor(private router : Router) {
 
     }
 
     public ngOnInit() : void {
+        if(!localStorage.getItem('access_token')) {
 
+        }
+        else {
+
+        }
+
+        /*Else*/
+        
+        this.dateStart = new wijmo.input.InputDate('#dateStart', {
+            format : 'MM/dd/yyyy',
+            value : new Date()
+        });
+
+         this.dateEnd = new wijmo.input.InputDate('#dateEnd', {
+            format : 'MM/dd/yyyy',
+            value : new Date()
+        });
     }
 
     public onClose() : void {

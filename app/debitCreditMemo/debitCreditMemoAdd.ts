@@ -108,6 +108,7 @@ export class DebitCreditMemoAddComponent implements OnInit{
 
     public onClose() : void {
         this.router.navigate(['DebitCreditMemo']);
+        this.addDebitCredit()
     }
 
     public onSelectChange() : void {
@@ -131,14 +132,28 @@ export class DebitCreditMemoAddComponent implements OnInit{
         this.cmbAccount.push('Test');
     }
 
-    private addPurchaseOrder() : void {
-        var data = {
+    private addDebitCredit() : void {
+       const debitCredit = this.createDebitCredit();
+       if(this.validate(debitCredit)) {
 
-        }
+       }
+       else {
+
+       }
+    }
+
+    private createDebitCredit() {
+        const debitCredit = {
+
+        };
+        return true;
     }
     
-    private validateUserInput() : boolean {
+    private validate(debitCredit) : boolean {
         return true;
     }
 
+    private validateRemarks() : boolean {
+        return true;
+    }
 }

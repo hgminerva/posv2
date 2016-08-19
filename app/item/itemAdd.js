@@ -53,6 +53,7 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                 * This function will go back item.html when clicked
                 **/
                 ItemAddComponent.prototype.onClose = function () {
+                    this.addItem();
                     this.router.navigate(['Item']);
                 };
                 /**
@@ -69,8 +70,50 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     document.getElementById('itemAddTabContent').setAttribute('class', 'enable');
                     console.log('disabled');
                 };
+                ItemAddComponent.prototype.addItem = function () {
+                    var item = this.createItem();
+                    if (this.validate(item)) {
+                    }
+                    else {
+                    }
+                };
+                ItemAddComponent.prototype.createItem = function () {
+                    var item = {};
+                    return item;
+                };
                 //getters
                 ItemAddComponent.prototype.getToastr = function () { return this.toastr; };
+                //validation
+                ItemAddComponent.prototype.validate = function (item) {
+                    return true;
+                };
+                ItemAddComponent.prototype.validateBarCode = function (barCode) {
+                    return true;
+                };
+                ItemAddComponent.prototype.validateItemDescription = function (itemDescription) {
+                    return true;
+                };
+                ItemAddComponent.prototype.validateAlias = function (alias) {
+                    return true;
+                };
+                ItemAddComponent.prototype.validateCost = function (cost) {
+                    return true;
+                };
+                ItemAddComponent.prototype.validateMarkUp = function (markUp) {
+                    return true;
+                };
+                ItemAddComponent.prototype.validatePrice = function (price) {
+                    return true;
+                };
+                ItemAddComponent.prototype.validateStockLevelQuantity = function (stockLevelQty) {
+                    return true;
+                };
+                ItemAddComponent.prototype.validateRemarks = function (remarks) {
+                    return true;
+                };
+                ItemAddComponent.prototype.validateGenericName = function (genericName) {
+                    return true;
+                };
                 ItemAddComponent = __decorate([
                     core_1.Component({
                         selector: 'itemAdd',

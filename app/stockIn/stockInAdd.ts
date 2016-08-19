@@ -57,6 +57,7 @@ export class StockInAddComponent implements OnInit{
 
     public onClose() : void {
         this.router.navigate(['StockIn']);
+        this.addStockIn();
     }
 
     
@@ -77,6 +78,20 @@ export class StockInAddComponent implements OnInit{
     
     public onPrint() : void {
         
+    }
+
+    public enableReturnFields() : void {
+        const chkReturn = <HTMLInputElement>document.getElementById('chkReturn');
+        const txtReturnOrNo = document.getElementById('txtReturnNo');
+        const txtReturnSales = document.getElementById('txtReturnSales');
+        if(chkReturn.checked) {
+            txtReturnOrNo.removeAttribute('disabled');
+            txtReturnSales.removeAttribute('disabled');
+        } 
+        else {
+            txtReturnOrNo.setAttribute('disabled', 'disabled');
+            txtReturnSales.setAttribute('disabled', 'disabled');
+        }
     }
 
     //getters
@@ -106,4 +121,39 @@ export class StockInAddComponent implements OnInit{
     private initCmbDownload() : void {
         this.cmbDownloadSource.push('test');
     }
+
+    private addStockIn() : void {
+        const stockIn = this.createStockIn();
+        if(this.validate(stockIn)) {
+
+        }
+        else {
+
+        }
+    }
+
+    private createStockIn() {
+        const stockIn = {
+
+        };
+        return stockIn;
+    }
+
+    //validation
+    private validate(stockIn) : boolean {
+        return true;
+    }
+
+    private validateRemarks(remarks : string ) : boolean {
+        return true;
+    }
+
+    private validateReturn_OR_NO(return_OR_NO : string ) : boolean {
+        return true;
+    }
+
+    private validateSalesInVoice(salesInVoice : string ) : boolean {
+        return true;
+    }
+
 }

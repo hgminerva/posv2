@@ -28,6 +28,8 @@ export class CollectionAddComponent implements OnInit{
     private collectionDetailView : wijmo.collections.CollectionView;
     private collectionDetailSource : wijmo.collections.ObservableArray;
 
+    private collectionDate : wijmo.input.InputDate;
+
     constructor(private router : Router, private toastr : ToastsManager) {
 
     }
@@ -39,6 +41,11 @@ export class CollectionAddComponent implements OnInit{
 
         this.collectionDetailSource = new wijmo.collections.ObservableArray();
         this.collectionDetailView = new wijmo.collections.CollectionView(this.collectionDetailSource);
+
+        this.collectionDate = new wijmo.input.InputDate("#collectionDate", {
+            format : "MM/dd/yyyy",
+            value : new Date()
+        });
 
         this.cmbCustomerSource.push('Test');
         this.cmbSalesNumberSource.push('Test');
@@ -64,6 +71,7 @@ export class CollectionAddComponent implements OnInit{
 
     public onClose() : void {
         this.router.navigate(['Dashboard']);
+        this.addCollection();
     }
 
     public onSelectChange(combobox : wijmo.input.ComboBox, source : wijmo.collections.ObservableArray) : void {
@@ -75,4 +83,34 @@ export class CollectionAddComponent implements OnInit{
 
     //getters
     public getToastr() : ToastsManager { return this.toastr; }
+
+    private addCollection() : void {
+        const collection = this.createCollection();
+        if(this.validate(collection)) {
+
+        }
+        else {
+
+        }
+    }
+
+    private createCollection() {
+        const collection = {
+
+        };
+        return collection;
+    }
+
+    //validation
+    private validate(collection) : boolean {
+        return true;
+    }
+
+    private validateManualOR(manualOR : string) : boolean {
+        return true;
+    }
+
+    private validateRemarks(remarks : string) : boolean {
+        return true;
+    }
 }

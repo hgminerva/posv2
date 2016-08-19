@@ -35,6 +35,19 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.router = router;
                 }
                 DiscountingAddComponent.prototype.ngOnInit = function () {
+                    if (!localStorage.getItem('access_token')) {
+                    }
+                    else {
+                    }
+                    /*Else*/
+                    this.dateStart = new wijmo.input.InputDate('#dateStart', {
+                        format: 'MM/dd/yyyy',
+                        value: new Date()
+                    });
+                    this.dateEnd = new wijmo.input.InputDate('#dateEnd', {
+                        format: 'MM/dd/yyyy',
+                        value: new Date()
+                    });
                 };
                 DiscountingAddComponent.prototype.onClose = function () {
                     this.router.navigate(['Discounting']);

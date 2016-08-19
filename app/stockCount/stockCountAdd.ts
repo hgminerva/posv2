@@ -57,4 +57,29 @@ export class StockCountAddComponent implements OnInit{
         this.cmbAuthority.push('Teller');
     }
 
+     private addStockCount() : void {
+        const stockCount = this.createStockCount();
+        if(this.validate(stockCount)) {
+
+        }
+        else {
+
+        }
+    }
+
+    private createStockCount() {
+        const stockCount = {
+
+        };
+        return stockCount;
+    }
+
+    //validation
+    private validate(stockCount) : boolean {
+        return true;
+    }
+
+    private validateRemarks(remarks : string) : boolean {
+        return true;
+    }
 }

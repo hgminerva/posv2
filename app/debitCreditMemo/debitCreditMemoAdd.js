@@ -83,6 +83,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 DebitCreditMemoAddComponent.prototype.onClose = function () {
                     this.router.navigate(['DebitCreditMemo']);
+                    this.addDebitCredit();
                 };
                 DebitCreditMemoAddComponent.prototype.onSelectChange = function () {
                 };
@@ -99,10 +100,21 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 DebitCreditMemoAddComponent.prototype.initCmbAccount = function () {
                     this.cmbAccount.push('Test');
                 };
-                DebitCreditMemoAddComponent.prototype.addPurchaseOrder = function () {
-                    var data = {};
+                DebitCreditMemoAddComponent.prototype.addDebitCredit = function () {
+                    var debitCredit = this.createDebitCredit();
+                    if (this.validate(debitCredit)) {
+                    }
+                    else {
+                    }
                 };
-                DebitCreditMemoAddComponent.prototype.validateUserInput = function () {
+                DebitCreditMemoAddComponent.prototype.createDebitCredit = function () {
+                    var debitCredit = {};
+                    return true;
+                };
+                DebitCreditMemoAddComponent.prototype.validate = function (debitCredit) {
+                    return true;
+                };
+                DebitCreditMemoAddComponent.prototype.validateRemarks = function () {
                     return true;
                 };
                 DebitCreditMemoAddComponent = __decorate([

@@ -84,19 +84,33 @@ export class RestaurantTablesAddComponent implements OnInit{
    //getters
     public getToastr() : ToastsManager { return this.toastr; }
 
-
-    private addRestaurantTable() : void {
-        var data = {
-
-        }
-    }
-    
-    private validateUserInput() : boolean {
-        return true;
-    }
-
     private addRow() : void {
         this.restaurantTableAddSource.push({Table : '<input type="text" class="input-100">'});
     }
 
+    private addRestaurantTable() : void {
+        const restaurantTable = this.createRestaurantTable();
+        if(this.validate(restaurantTable)) {
+
+        }
+        else {
+
+        }
+    }
+    
+    private createRestaurantTable() {
+        const restaurantTable = {
+
+        };
+        return restaurantTable;    
+    }
+
+    //validation
+    private validate(restaurantTable) : boolean {
+        return true;
+    }
+
+    private validateTableGroup(restaurantTable : string ) {
+        return true;
+    }
 }   

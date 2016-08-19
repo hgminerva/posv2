@@ -116,6 +116,7 @@ export class PurchaseAddComponent implements OnInit{
 
     public onClose() : void {
         this.router.navigate(['Purchases']);
+        this.addPurchase();
     }
 
     public onSelectChange() : void {
@@ -139,14 +140,29 @@ export class PurchaseAddComponent implements OnInit{
         this.cmbUnit.push('Pc(s)');
     }
 
-    private addPurchaseOrder() : void {
-        var data = {
+    private addPurchase() : void {
+       const purchase = this.createPurchase();
+       if(this.validate(purchase)) {
 
-        }
+       }
+       else {
+
+       }
     }
     
-    private validateUserInput() : boolean {
+    private createPurchase() {
+        const purchase = {
+
+        };
+        return purchase;
+    }
+
+    private validate(purchase) : boolean {
         return true;
     }
+
+    private validateRemarks(remarks : string ) : boolean {
+        return true;
+    } 
 
 }

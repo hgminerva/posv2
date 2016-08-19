@@ -56,4 +56,5 @@ export class ItemGroupComponent implements OnInit{
 
     //getters
     public getToastr() : ToastsManager { return this.toastr; }
+
 }

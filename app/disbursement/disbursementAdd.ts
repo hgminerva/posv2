@@ -145,4 +145,9 @@ export class DisbursementAddComponent implements OnInit{
         this.cmbTypeSource.push('Credit');
         this.cmbTypeSource.push('Debit');
     }
+
+    //validation
+    private validate(disburement) : boolean {
+        return true;
+    }
 }

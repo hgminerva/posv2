@@ -55,6 +55,24 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.cmbAuthority.push('Cashier');
                     this.cmbAuthority.push('Teller');
                 };
+                StockCountAddComponent.prototype.addStockCount = function () {
+                    var stockCount = this.createStockCount();
+                    if (this.validate(stockCount)) {
+                    }
+                    else {
+                    }
+                };
+                StockCountAddComponent.prototype.createStockCount = function () {
+                    var stockCount = {};
+                    return stockCount;
+                };
+                //validation
+                StockCountAddComponent.prototype.validate = function (stockCount) {
+                    return true;
+                };
+                StockCountAddComponent.prototype.validateRemarks = function (remarks) {
+                    return true;
+                };
                 StockCountAddComponent = __decorate([
                     core_1.Component({
                         selector: 'stock-out-add',

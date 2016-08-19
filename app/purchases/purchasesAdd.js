@@ -91,6 +91,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 PurchaseAddComponent.prototype.onClose = function () {
                     this.router.navigate(['Purchases']);
+                    this.addPurchase();
                 };
                 PurchaseAddComponent.prototype.onSelectChange = function () {
                 };
@@ -107,10 +108,21 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 PurchaseAddComponent.prototype.initCmbUnit = function () {
                     this.cmbUnit.push('Pc(s)');
                 };
-                PurchaseAddComponent.prototype.addPurchaseOrder = function () {
-                    var data = {};
+                PurchaseAddComponent.prototype.addPurchase = function () {
+                    var purchase = this.createPurchase();
+                    if (this.validate(purchase)) {
+                    }
+                    else {
+                    }
                 };
-                PurchaseAddComponent.prototype.validateUserInput = function () {
+                PurchaseAddComponent.prototype.createPurchase = function () {
+                    var purchase = {};
+                    return purchase;
+                };
+                PurchaseAddComponent.prototype.validate = function (purchase) {
+                    return true;
+                };
+                PurchaseAddComponent.prototype.validateRemarks = function (remarks) {
                     return true;
                 };
                 PurchaseAddComponent = __decorate([

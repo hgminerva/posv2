@@ -48,7 +48,7 @@ export class DiscountingComponent implements OnInit{
         */
         this.discountsView = new wijmo.collections.CollectionView();
         this.discountsView.pageSize = 10;
-        this.discountingService.initDicountData(this, this.discountsView);
+        this.discountingService.initDicountData(this, this.discountsView)
     }
 
     /*
@@ -63,6 +63,7 @@ export class DiscountingComponent implements OnInit{
     */
     public onClose() : void{
         this.router.navigate(['Dashboard']);
+        this.addDiscount();
     }
 
     //getters
@@ -90,5 +91,30 @@ export class DiscountingComponent implements OnInit{
        if(this.discountsView.pageIndex == 0) {
            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
        }
+    }
+
+    private addDiscount() : void {
+        const discount = this.createDiscount();
+        if(this.validate(discount)) {
+
+        }
+        else {
+
+        }
+    }
+    
+    private createDiscount() {
+        const discount = {
+
+        };
+        return true;
+    }
+    //validation
+    private validate(dicount) : boolean {
+        return true;
+    } 
+
+    private validateDiscount(discount : string ) : boolean {
+        return true;
     }
 }

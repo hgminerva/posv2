@@ -65,6 +65,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 SupplierAddComponent.prototype.onClose = function () {
                     this.router.navigate(['Supplier']);
+                    this.addSupplier();
                 };
                 //getters
                 SupplierAddComponent.prototype.getToastr = function () { return this.toastr; };
@@ -90,8 +91,35 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.cmbAPAccountSource.push('VAT Payable-Output');
                 };
                 SupplierAddComponent.prototype.addSupplier = function () {
+                    var supplier = this.createSupplier();
+                    if (this.validate(supplier)) {
+                    }
+                    else {
+                    }
                 };
-                SupplierAddComponent.prototype.validateUserInput = function () {
+                SupplierAddComponent.prototype.createSupplier = function () {
+                    var supplier = {};
+                    return supplier;
+                };
+                SupplierAddComponent.prototype.validate = function (supplier) {
+                    return true;
+                };
+                SupplierAddComponent.prototype.validateSupplier = function (supplier) {
+                    return true;
+                };
+                SupplierAddComponent.prototype.validateAddress = function (address) {
+                    return true;
+                };
+                SupplierAddComponent.prototype.validateTelNumber = function (telNumber) {
+                    return true;
+                };
+                SupplierAddComponent.prototype.validateCelNumber = function (celNumber) {
+                    return true;
+                };
+                SupplierAddComponent.prototype.validateFaxNumber = function (faxNumber) {
+                    return true;
+                };
+                SupplierAddComponent.prototype.validateTin = function (TIN) {
                     return true;
                 };
                 SupplierAddComponent.CMB_TERM_LEMGTH = 5;

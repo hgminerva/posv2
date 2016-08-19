@@ -43,10 +43,38 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 UsersAddComponent.prototype.onClose = function () {
                     this.router.navigate(['Users']);
+                    this.addUser();
                 };
                 UsersAddComponent.prototype.onLock = function () {
                 };
                 UsersAddComponent.prototype.onUnlock = function () {
+                };
+                UsersAddComponent.prototype.addUser = function () {
+                    var user = this.createUser();
+                    if (this.validate(user)) {
+                    }
+                    else {
+                    }
+                };
+                UsersAddComponent.prototype.createUser = function () {
+                    var user = {};
+                    return user;
+                };
+                //validation
+                UsersAddComponent.prototype.validate = function (user) {
+                    return true;
+                };
+                UsersAddComponent.prototype.validateUsername = function (username) {
+                    return true;
+                };
+                UsersAddComponent.prototype.validatePassword = function (password) {
+                    return true;
+                };
+                UsersAddComponent.prototype.validateAddress = function (address) {
+                    return true;
+                };
+                UsersAddComponent.prototype.validateUserCardNo = function (userCardNo) {
+                    return true;
                 };
                 UsersAddComponent = __decorate([
                     core_1.Component({

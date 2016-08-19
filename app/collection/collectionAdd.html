@@ -27,7 +27,15 @@
                             <label class="control-label">Collection No.</label>
                         </div>
                         <div class="col-sm-8">
-                            <input id="txtCollectionNo" class="form-control input-50" type="text" disabled>
+                            <input id="txtCollectionNo" class="form-control input-50 text-right" type="text" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Period</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input id="txtPeriod" class="form-control input-50 text-right" type="text" value="0001" disabled>
                         </div>
                     </div>
                     <div class="form-group">
@@ -35,7 +43,7 @@
                             <label class="control-label">Collection Date</label>
                         </div>
                         <div class="col-sm-8">
-                            <input id="txtCollectionDate" class="form-control input-50" type="text">
+                            <div id="collectionDate" class="input-50"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -148,7 +156,10 @@
                                             [width]="120"
                                             [align]="'center'">
                         </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Credit Card Type'" [bindig]="'CreditCardType'" [width]="130" [align]="'center'">
+                        <wj-flex-grid-column [header]="'Credit Card Type'" 
+                                             [bindig]="'CreditCardType'" 
+                                             [width]="130" 
+                                             [align]="'center'">
                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                 <wj-combo-box #cmbPayType 
                                             [itemsSource]="['Test', 'Test']" 

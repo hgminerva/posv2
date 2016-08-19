@@ -125,6 +125,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.cmbTypeSource.push('Credit');
                     this.cmbTypeSource.push('Debit');
                 };
+                //validation
+                DisbursementAddComponent.prototype.validate = function (disburement) {
+                    return true;
+                };
                 DisbursementAddComponent.CMB_TERM_SOURCE_LENGTH = 5;
                 DisbursementAddComponent = __decorate([
                     core_1.Component({

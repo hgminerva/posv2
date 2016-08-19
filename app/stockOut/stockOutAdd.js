@@ -51,6 +51,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 StockOutAddComponent.prototype.onClose = function () {
                     this.router.navigate(['StockOut']);
+                    this.addStockOut();
                 };
                 StockOutAddComponent.prototype.initCmbAuthority = function () {
                     this.cmbAuthority.push('Administrator');
@@ -59,6 +60,24 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 StockOutAddComponent.prototype.initCmbAccount = function () {
                     this.cmbAccount.push('Test');
+                };
+                StockOutAddComponent.prototype.addStockOut = function () {
+                    var stockOut = this.createStockOut();
+                    if (this.validate(stockOut)) {
+                    }
+                    else {
+                    }
+                };
+                StockOutAddComponent.prototype.createStockOut = function () {
+                    var stockOut = {};
+                    return stockOut;
+                };
+                //validation
+                StockOutAddComponent.prototype.validate = function (stockOut) {
+                    return true;
+                };
+                StockOutAddComponent.prototype.validateRemarks = function (remarks) {
+                    return true;
                 };
                 StockOutAddComponent = __decorate([
                     core_1.Component({

@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-sm-10">
                             <input id = "txtPO_Number"
-                                class="form-control input-40"
+                                class="form-control input-40 text-right"
                                 type="text" disabled>
                         </div>
                     </div>
@@ -38,8 +38,10 @@
                         </div>
                         <div class="col-sm-10">
                             <input id="txtPeriod" 
-                                class="form-control input-40"
-                                type="text" disabled>
+                                class="form-control input-40 text-right"
+                                type="text"
+                                value="0001" 
+                                disabled>
                         </div>
                     </div>
                     <div class="form-group">
@@ -136,7 +138,10 @@
         </div>
         <div class="content-body clearfix">
              <div class="col-sm-9">
-                <wj-flex-grid id="flexPurchaseAdd" #flexPurchaseAdd class="grid" [itemsSource]="purchaseAddView" [isReadOnly]="true">
+                <wj-flex-grid id="flexPurchaseAdd" 
+                              #flexPurchaseAdd 
+                              class="grid" 
+                              [itemsSource]="purchaseAddView" [isReadOnly]="true">
                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                             <button class="btn btn-danger sharp" >

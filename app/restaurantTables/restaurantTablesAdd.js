@@ -70,14 +70,26 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 //getters
                 RestaurantTablesAddComponent.prototype.getToastr = function () { return this.toastr; };
-                RestaurantTablesAddComponent.prototype.addRestaurantTable = function () {
-                    var data = {};
-                };
-                RestaurantTablesAddComponent.prototype.validateUserInput = function () {
-                    return true;
-                };
                 RestaurantTablesAddComponent.prototype.addRow = function () {
                     this.restaurantTableAddSource.push({ Table: '<input type="text" class="input-100">' });
+                };
+                RestaurantTablesAddComponent.prototype.addRestaurantTable = function () {
+                    var restaurantTable = this.createRestaurantTable();
+                    if (this.validate(restaurantTable)) {
+                    }
+                    else {
+                    }
+                };
+                RestaurantTablesAddComponent.prototype.createRestaurantTable = function () {
+                    var restaurantTable = {};
+                    return restaurantTable;
+                };
+                //validation
+                RestaurantTablesAddComponent.prototype.validate = function (restaurantTable) {
+                    return true;
+                };
+                RestaurantTablesAddComponent.prototype.validateTableGroup = function (restaurantTable) {
+                    return true;
                 };
                 RestaurantTablesAddComponent = __decorate([
                     core_1.Component({
