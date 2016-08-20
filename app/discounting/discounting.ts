@@ -25,6 +25,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
 export class DiscountingComponent implements OnInit{
     private discountsView : wijmo.collections.CollectionView;
+    private discountSource : wijmo.collections.ObservableArray;
 
     constructor(private discountingService : DiscountingService,
                 private router : Router,
@@ -46,9 +47,10 @@ export class DiscountingComponent implements OnInit{
         /*
         *Else
         */
+        this.discountSource = new wijmo.collections.ObservableArray();
         this.discountsView = new wijmo.collections.CollectionView();
         this.discountsView.pageSize = 10;
-        this.discountingService.listDicount(this, this.discountsView)
+        this.discountingService.listDicount(this);
     }
 
     /*
@@ -65,7 +67,11 @@ export class DiscountingComponent implements OnInit{
         this.router.navigate(['Dashboard']);
     }
 
-      public next() : void {
+    public deleteItem() : void {
+        this.discountingService.deleteDiscount(this.discountsView.currentItem, this);
+    }
+
+    public next() : void {
         if(this.discountsView.pageIndex < this.discountsView.pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){
                 document.getElementById('btnBack').removeAttribute('disabled');
@@ -94,4 +100,10 @@ export class DiscountingComponent implements OnInit{
 
     public getCollectionView() : wijmo.collections.CollectionView { return this.discountsView; }
 
+    public getSource() : wijmo.collections.ObservableArray { return this.discountSource; }
+
+    //setter
+    public setSource(s : wijmo.collections.ObservableArray) : void {
+        this.discountSource = s;
+    }
 }

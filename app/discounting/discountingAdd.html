@@ -1,9 +1,9 @@
-<section id="discount-add-page">
+<section id="discount-add-page" class="container">
 <!--Header here-->
     <div class="content-header clearfix">
         <div class="col-sm-6">
             <div class="pull-left">
-                <h3>Discount Detail</h3>
+                <h4>Discount Detail</h4>
             </div>
         </div>
         <div class="col-sm-6">
@@ -16,35 +16,36 @@
     </div>
 <!--End of header-->
 <!--Body here-->
-    <div class="container">
-        <div class="content-body clearfix">
-            <div class="col-sm-12">
-                    <form id="formDiscountInput" class="form-horizontal" role="form">
-                     <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">Discount</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <input class="form-control input-50">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">Discount Rate</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <input class="form-control input-20" placeholder="0">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class>VAT Exempt</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <input class="checkbox" type="checkbox">
-                        </div>
-                    </div>
-                     <table id="tableDiscountSchedule" class="table table-bordered">
+<div class="content-body clearfix">
+    <div class="col-sm-12">
+        <form id="formDiscountInput" class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label class="control-label">Discount</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control input-50">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label class="control-label">Discount Rate</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control input-20" placeholder="0">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label class>VAT Exempt</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="checkbox" type="checkbox">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <table id="tableDiscountSchedule" class="table table-bordered">
                         <tr>
                             <th>Date Scheduled</th>
                             <td><input class="checkbox" type="checkbox"></td>
@@ -65,7 +66,7 @@
                             <th>Sat</th>
                             <th>Sun</th>
                             <th>Time Start</th>
-                            <td><input class="form-control input-100" type="text"></td>
+                            <td><div id="timeStart"></div></td>
                         </tr>
                         <tr>
                             <th>Date End</th>
@@ -78,35 +79,48 @@
                             <td><input class="checkbox" type="checkbox"></td>
                             <td><input class="checkbox" type="checkbox"></td>
                             <th>Time End</th>
-                            <td><input class="form-control input-100" type="text"></td>
+                            <td><div id="timeEnd"></div></td>
                         </tr>
                     </table>
-                </form>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="content-body-table clearfix">
+    <div class="col-sm-12">
+        <wj-flex-grid #flexDiscount class="grid" [itemsSource]="discountsView">
+            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                    <button class="btn btn-danger sharp" >
+                            Delete
+                    </button>
+                </template>
+            </wj-flex-grid-column> 
+            <wj-flex-grid-column [header]="'Item'" 
+                                [binding]="'Item'"
+                                [isReadOnly]="true" 
+                                [width]="'3*'"
+                                [align]="'center'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'A'" 
+                                [binding]="'A'"
+                                [data-type]="'Boolean'"
+                                [isReadOnly]="true" 
+                                [align]="'center'">
+            </wj-flex-grid-column>
+        </wj-flex-grid>
+    </div>
+ </div>
+ <div class="content-footer clearfix">
+    <div class="col-sm-12">
+        <div class="page-bar clearfix">
+            <div class="pull-right">
+                <button id="btnBack" class="btn btn-primary sharp" (click)="back()">back</button>
+                <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
             </div>
         </div>
-         <div class="content-body clearfix">
-             <wj-flex-grid #flexDiscount class="grid" [itemsSource]="discountsView">
-                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <button class="btn btn-danger sharp" >
-                                Delete
-                        </button>
-                    </template>
-                </wj-flex-grid-column> 
-                <wj-flex-grid-column [header]="'Item'" 
-                                    [binding]="'Item'"
-                                    [isReadOnly]="true" 
-                                    [width]="'3*'"
-                                    [align]="'center'">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'A'" 
-                                    [binding]="'A'"
-                                    [data-type]="'Boolean'"
-                                    [isReadOnly]="true" 
-                                    [align]="'center'">
-                </wj-flex-grid-column>
-            </wj-flex-grid>
-         </div>
     </div>
+</div>
 <!--End of body-->
 </section>

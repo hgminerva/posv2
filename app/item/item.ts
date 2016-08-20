@@ -41,31 +41,26 @@ export class ItemComponent implements OnInit{
         /*Else*/
        this.itemsView = new wijmo.collections.CollectionView();
        this.itemsView.pageSize = 10;
-       this.itemService.listItems(this, this.itemsView);
-
+       this.itemService.listItems(this);
     }   
 
 
     /*
         This function when clicked will go to addItem.html
     */
-    public addItem() : void {
+    public onAdd() : void {
         this._router.navigate(['AddItem']);
     }
 
     public deleteItem() : void {
-        var grid = document.getElementById('flexItem');
-        //console.log(grid.selectedItems);
+        this.itemService.deleteItem(this.itemsView.currentItem, this);
     }
 
-    public returnHome() : void {
+    public onClose() : void {
         this._router.navigate(['Dashboard']);
     }
 
-    //getters
-    public getToastr() : ToastsManager { return this._toastr; }
-
-    public next() : void {
+     public next() : void {
         if(this.itemsView.pageIndex < this.itemsView.pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){
                 document.getElementById('btnBack').removeAttribute('disabled');
@@ -88,4 +83,10 @@ export class ItemComponent implements OnInit{
            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
        }
     }
+
+    //getters
+    public getToastr() : ToastsManager { return this._toastr; }
+
+    public getCollectionView() : wijmo.collections.CollectionView { return this.itemsView; }
+
 }

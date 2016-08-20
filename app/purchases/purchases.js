@@ -66,6 +66,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 PurchasesComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                PurchasesComponent.prototype.deletePurchase = function () {
+                    this.purchaseService.deletePurchase(this.purchaseView.currentItem, this);
+                };
                 PurchasesComponent.prototype.next = function () {
                     if (this.purchaseView.pageIndex < this.purchaseView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {

@@ -99,9 +99,6 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
                     }
-                    else {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
                 };
                 CustomerService.CUSTOMER_API_URL = '/api/customer/';
                 CustomerService = __decorate([

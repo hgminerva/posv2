@@ -34,10 +34,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             }],
         execute: function() {
             ItemGroupComponent = (function () {
-                function ItemGroupComponent(toastr, router, itemGroupServe) {
+                function ItemGroupComponent(toastr, router, itemGroupService) {
                     this.toastr = toastr;
                     this.router = router;
-                    this.itemGroupServe = itemGroupServe;
+                    this.itemGroupService = itemGroupService;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
@@ -52,13 +52,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     /*Else */
                     this.itemGroupView = new wijmo.collections.CollectionView();
                     this.itemGroupView.pageSize = 10;
-                    this.itemGroupServe.listItemGroup(this);
+                    this.itemGroupService.listItemGroup(this);
                 };
                 ItemGroupComponent.prototype.onAdd = function () {
                     this.router.navigate(['ItemGroupAdd']);
                 };
                 ItemGroupComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
+                };
+                ItemGroupComponent.prototype.deleteItemGroup = function () {
+                    this.itemGroupService.deleteItemGroup(this.itemGroupView.currentItem, this);
                 };
                 ItemGroupComponent.prototype.next = function () {
                     if (this.itemGroupView.pageIndex < this.itemGroupView.pageCount) {

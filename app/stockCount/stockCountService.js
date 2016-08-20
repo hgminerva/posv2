@@ -30,7 +30,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                 }
                 StockCountService.prototype.listStockCount = function (component) {
                     var _this = this;
-                    var url = localStorage.getItem('api_url') + StockCountService.API_URL_STOCK_IN + "list";
+                    var url = localStorage.getItem('api_url') + StockCountService.API_URL_STOCK_COUNT + "list";
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
                     var requestOptions = new http_1.RequestOptions(headers);
                     this.http.get(url, requestOptions)
@@ -47,13 +47,37 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         component.getToastr().error('Server error');
                     });
                 };
-                StockCountService.prototype.checkPageCount = function (collectionView) {
-                    if (collectionView.pageCount == 1 || collectionView.pageCount == 0) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
-                    document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                StockCountService.prototype.deleteStockCount = function (data, component) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + StockCountService.API_URL_STOCK_COUNT + "delete";
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json'
+                    });
+                    var requestOptions = new http_1.RequestOptions({
+                        headers: headers,
+                        body: JSON.stringify(data)
+                    });
+                    this.http.delete(url, requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                component.getToastr().success('Deleted successfully');
+                                _this.listStockCount(component);
+                                break;
+                            default: break;
+                        }
+                    }, function (error) {
+                        component.getToastr().error('Server error');
+                    });
                 };
-                StockCountService.API_URL_STOCK_IN = "/api/transaction/stockCount/";
+                StockCountService.prototype.checkPageCount = function (collectionView) {
+                    if (collectionView.pageCount == 1 || collectionView.itemCount == 0) {
+                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                    }
+                };
+                StockCountService.API_URL_STOCK_COUNT = "/api/transaction/stockCount/";
                 StockCountService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

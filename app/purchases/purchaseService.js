@@ -45,13 +45,34 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     }, function (error) {
                     });
                 };
+                PurchaseService.prototype.deletePurchase = function (data, component) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + PurchaseService.API_URL_IPURCHASE + "delete";
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json'
+                    });
+                    var requestOptions = new http_1.RequestOptions({
+                        headers: headers,
+                        body: JSON.stringify(data)
+                    });
+                    this.http.delete(url, requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                component.getToastr().success('Deleted successfully');
+                                _this.listPurchase(component);
+                                break;
+                            default: break;
+                        }
+                    }, function (error) {
+                        component.getToastr().error('Server error');
+                    });
+                };
                 PurchaseService.prototype.checkPageCount = function (collectionView) {
                     if (collectionView.pageCount == 1 || collectionView.itemCount == 0) {
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
-                    else {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };
                 PurchaseService.API_URL_IPURCHASE = "/api/transaction/purchaseOrder/";

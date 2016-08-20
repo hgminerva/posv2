@@ -54,8 +54,8 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                 SupplierService.prototype.checkPageCount = function (customerView) {
                     if (customerView.pageCount == 1 || customerView.itemCount == 0) {
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
-                    document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                 };
                 SupplierService.API_SUPPLIER_URL = '/api/supplier/list';
                 SupplierService = __decorate([

@@ -20,6 +20,8 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 
 export class DiscountingAddComponent implements OnInit{
+    private timeStart : wijmo.input.InputTime;
+    private timeEnd : wijmo.input.InputTime;
     private dateStart : wijmo.input.InputDate;
     private dateEnd : wijmo.input.InputDate;
 
@@ -36,7 +38,14 @@ export class DiscountingAddComponent implements OnInit{
         }
 
         /*Else*/
-        
+        this.timeStart = new wijmo.input.InputTime('#timeStart', {
+            format: 'hh:mm tt',
+            value : new Date()
+        });
+        this.timeStart = new wijmo.input.InputTime('#timeEnd', {
+            format: 'hh:mm tt',
+            value : new Date()
+        });
         this.dateStart = new wijmo.input.InputDate('#dateStart', {
             format : 'MM/dd/yyyy',
             value : new Date()

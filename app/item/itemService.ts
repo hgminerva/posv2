@@ -13,7 +13,7 @@ export class ItemService {
     public constructor(private _http : Http) {
     }
 
-    public listItems(component : ItemComponent, itemsView : wijmo.collections.CollectionView) {
+    public listItems(component : ItemComponent) {
         const url : string = localStorage.getItem('api_url') + ItemService.API_ITEM_URL + "list"; 
         const accessToken : string = localStorage.getItem('access_token');
         const header = new Headers({'Authorization' : 'Bearer ' + accessToken});
@@ -25,8 +25,8 @@ export class ItemService {
                 response => {
                     switch(response.status) {
                         case Response.SUCCESS :
-                                itemsView.sourceCollection = response.json();
-                                this.checkPageCount(itemsView);
+                                component.getCollectionView().sourceCollection = response.json();
+                                this.checkPageCount(component.getCollectionView());
                                 break;
                         case Response.BAD_REQUEST : break;
                         case Response.FORBIDDEN_ERROR : break;
@@ -41,6 +41,42 @@ export class ItemService {
             );
     }
 
+    public addItem(data, itemComponent : ItemComponent) : void {
+
+    }
+
+    public deleteItem(data, itemComponent : ItemComponent) : void {
+        const url : string = localStorage.getItem('api_url') + ItemService.API_ITEM_URL + "delete";
+        const headers = new Headers(
+            {
+                'Authorization' : 'Bearer ' + localStorage.getItem('access_token'),
+                'Content-Type' : 'application/json' 
+            }
+        );
+        const requestOptions = new RequestOptions(
+            { 
+                headers : headers,
+                body : JSON.stringify(data)
+            }
+        )
+
+        this._http.delete(url, requestOptions)
+                  .subscribe(
+                      response => {
+                          switch(response.status) {
+                              case Response.SUCCESS:
+                                   itemComponent.getToastr().success('Deleted successfully');
+                                   this.listItems(itemComponent);
+                                   break;
+                              default: break;
+                          }
+                      },
+                      error => {
+                          itemComponent.getToastr().error('Server Error');
+                      }
+                  );
+    }
+
     public initUnit(itemComponent : ItemComponent, cmbUnit : wijmo.input.ComboBox) : void {
         const url : string = localStorage.getItem('api_url') + ItemService.API_UNIT_URL + "list"; 
         const accessToken : string = localStorage.getItem('access_token');
@@ -51,7 +87,7 @@ export class ItemService {
         this._http.get(url, option)
             .subscribe(
                 response => { 
-                     cmbUnit = new wijmo.input.ComboBox('#cmbUnit',{
+                        cmbUnit = new wijmo.input.ComboBox('#cmbUnit',{
                         itemsSource : this.getUnits(response.json())
                     });
                 },
@@ -75,7 +111,7 @@ export class ItemService {
     private checkPageCount(itemsView : wijmo.collections.CollectionView) : void {
         if(itemsView.pageCount == 1 || itemsView.itemCount == 0){
             document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
         }
-        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
     }
 }

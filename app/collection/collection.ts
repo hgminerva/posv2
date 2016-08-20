@@ -63,6 +63,10 @@ export class CollectionComponent implements OnInit{
         this._router.navigate(['Dashboard']);
     }
 
+    public deleteCollection() : void {
+        this.collectionService.deleteCollection(this.collectionView.currentItem, this);
+    }
+
     public next() : void {
         if(this.collectionView.pageIndex < this.collectionView.pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){

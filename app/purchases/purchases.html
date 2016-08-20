@@ -97,8 +97,19 @@
                     <p>Are you sure you want to delete this purchase order ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button id="btnYes" type="button" class="btn btn-danger sharp" data-dismiss="modal">Yes</button>
-                    <button id="btnNo" type="button" class="btn btn-primary sharp" data-dismiss="modal">No</button>
+                    <button id="btnYes" 
+                            type="button" 
+                            class="btn btn-danger sharp" 
+                            data-dismiss="modal"
+                            (click)="deletePurchase()">
+                            Yes
+                    </button>
+                     <button id="btnNo" 
+                            type="button" 
+                            class="btn btn-primary sharp" 
+                            data-dismiss="modal">
+                            No
+                    </button>
                 </div>
             </div>
 

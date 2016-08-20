@@ -46,11 +46,35 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         component.getToastr().error('Server error');
                     });
                 };
+                StockOutService.prototype.deleteStockOut = function (data, component) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + StockOutService.API_URL_STOCK_OUT + "delete";
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json'
+                    });
+                    var requestOptions = new http_1.RequestOptions({
+                        headers: headers,
+                        body: JSON.stringify(data)
+                    });
+                    this.http.delete(url, requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                component.getToastr().success('Deleted successfully');
+                                _this.listStockOut(component);
+                                break;
+                            default: break;
+                        }
+                    }, function (error) {
+                        component.getToastr().error('Server error');
+                    });
+                };
                 StockOutService.prototype.checkPageCount = function (collectionView) {
                     if (collectionView.pageCount == 1 || collectionView.itemCount == 0) {
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
-                    document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                 };
                 StockOutService.API_URL_STOCK_OUT = "/api/transaction/stockOut/";
                 StockOutService = __decorate([

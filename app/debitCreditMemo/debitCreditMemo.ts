@@ -40,7 +40,7 @@ export class DebitCreditMemoComponent implements OnInit{
         /*Else*/
         this.debitCreditMemoView = new wijmo.collections.CollectionView();
         this.debitCreditMemoView.pageSize = 10;
-        this.debitCreditMemoService.listItemGroup(this);
+        this.debitCreditMemoService.listDebitCreditMemo(this);
     }
 
     /*
@@ -52,6 +52,10 @@ export class DebitCreditMemoComponent implements OnInit{
 
     public onClose() : void {
         this.router.navigate(['Dashboard']);
+    }
+
+    public deleteDebitCreditMemo() : void {
+        this.debitCreditMemoService.deleteCollection(this.debitCreditMemoView.currentItem, this);
     }
 
     public next() : void {

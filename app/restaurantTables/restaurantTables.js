@@ -58,6 +58,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 RestaurantTablesComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                RestaurantTablesComponent.prototype.deleteRestaurantTable = function () {
+                    this.restaurantTableService.deleteCollection(this.restaurantTableView.currentItem, this);
+                };
                 RestaurantTablesComponent.prototype.next = function () {
                     if (this.restaurantTableView.pageIndex < this.restaurantTableView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {

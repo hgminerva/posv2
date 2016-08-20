@@ -21,7 +21,22 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 
 export class ItemAddComponent implements OnInit{
-    private testArray : wijmo.collections.ObservableArray;
+    private itemCode : String
+    private barCode : String;
+    private itemDescription : String;
+    private alias : String;
+    private cmbCategory : wijmo.input.ComboBox;
+    private cmbUnit : wijmo.input.ComboBox;
+    private cmbDefaultSupplier : wijmo.input.ComboBox;
+    private cost : String;
+    private markUp : String;
+    private price : String;
+    private stockLevelQuantity : String;
+    private onHandQuantity : String;
+    private inventoty : Boolean;
+    private package : Boolean;
+    private expiryDate : wijmo.input.InputDate;
+    private lotNumber : String;
 
     constructor(private router : Router, private toastr : ToastsManager,private itemService : ItemService){
 
@@ -33,9 +48,18 @@ export class ItemAddComponent implements OnInit{
     *Will go back to the login screen if you try to access this component without logging in.
     **/
     public ngOnInit() : void {
-        var cmb : wijmo.input.ComboBox;
-        console.log(cmb);
-        this.itemService.initUnit(cmb);
+        if(!localStorage.getItem('access_token')) {
+
+        }
+        else {
+
+        }
+        /*Else */
+        this.expiryDate = new wijmo.input.InputDate('#expiryDate', {
+            format: 'MM/dd/yyyy',
+            value: new Date()
+        });
+        this.itemService.initUnit(cmbUnit);
     }
 
     /**

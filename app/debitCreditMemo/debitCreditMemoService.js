@@ -28,7 +28,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                 function DebitCreditMemoService(http) {
                     this.http = http;
                 }
-                DebitCreditMemoService.prototype.listItemGroup = function (component) {
+                DebitCreditMemoService.prototype.listDebitCreditMemo = function (component) {
                     var _this = this;
                     var url = localStorage.getItem('api_url') + DebitCreditMemoService.API_URL_RESTAURANT_TABLE + "list";
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
@@ -47,11 +47,35 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         component.getToastr().error('Server error');
                     });
                 };
+                DebitCreditMemoService.prototype.deleteCollection = function (data, component) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + DebitCreditMemoService.API_URL_RESTAURANT_TABLE + "delete";
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json'
+                    });
+                    var requestOptions = new http_1.RequestOptions({
+                        headers: headers,
+                        body: JSON.stringify(data)
+                    });
+                    this.http.delete(url, requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                component.getToastr().success('Deleted successfully');
+                                _this.listDebitCreditMemo(component);
+                                break;
+                            default: break;
+                        }
+                    }, function (error) {
+                        component.getToastr().error('Server error');
+                    });
+                };
                 DebitCreditMemoService.prototype.checkPageCount = function (collectionView) {
                     if (collectionView.pageCount == 1 || collectionView.itemCount == 0) {
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
-                    document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                 };
                 DebitCreditMemoService.API_URL_RESTAURANT_TABLE = "/api/transaction/debitCreditMemo/";
                 DebitCreditMemoService = __decorate([

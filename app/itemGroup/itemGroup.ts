@@ -24,7 +24,7 @@ import {ItemGroupService} from './itemGroupService';
 export class ItemGroupComponent implements OnInit{
     private itemGroupView : wijmo.collections.CollectionView;
 
-    constructor(private toastr : ToastsManager, private router : Router, private itemGroupServe : ItemGroupService) {
+    constructor(private toastr : ToastsManager, private router : Router, private itemGroupService : ItemGroupService) {
 
     }
 
@@ -43,7 +43,7 @@ export class ItemGroupComponent implements OnInit{
         /*Else */
         this.itemGroupView = new wijmo.collections.CollectionView();
         this.itemGroupView.pageSize = 10;
-        this.itemGroupServe.listItemGroup(this);      
+        this.itemGroupService.listItemGroup(this);      
     } 
 
     public onAdd() : void {
@@ -52,6 +52,10 @@ export class ItemGroupComponent implements OnInit{
 
     public onClose() : void {
         this.router.navigate(['Dashboard']);
+    }
+
+    public deleteItemGroup() : void {
+        this.itemGroupService.deleteItemGroup(this.itemGroupView.currentItem, this);
     }
 
     public next() : void {

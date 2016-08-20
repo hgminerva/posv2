@@ -47,7 +47,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     /*Else*/
                     this.debitCreditMemoView = new wijmo.collections.CollectionView();
                     this.debitCreditMemoView.pageSize = 10;
-                    this.debitCreditMemoService.listItemGroup(this);
+                    this.debitCreditMemoService.listDebitCreditMemo(this);
                 };
                 /*
                     This function will go to debitCreditMemoAdd.html when click
@@ -57,6 +57,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 DebitCreditMemoComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
+                };
+                DebitCreditMemoComponent.prototype.deleteDebitCreditMemo = function () {
+                    this.debitCreditMemoService.deleteCollection(this.debitCreditMemoView.currentItem, this);
                 };
                 DebitCreditMemoComponent.prototype.next = function () {
                     if (this.debitCreditMemoView.pageIndex < this.debitCreditMemoView.pageCount) {

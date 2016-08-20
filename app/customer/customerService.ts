@@ -94,8 +94,5 @@ export class CustomerService {
                 document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                 document.getElementById('btnNext').setAttribute('disabled', 'disabled');
         }
-        else {
-                document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-        }
     }
 }

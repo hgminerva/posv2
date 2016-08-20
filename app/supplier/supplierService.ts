@@ -41,7 +41,7 @@ export class SupplierService {
     private checkPageCount(customerView: wijmo.collections.CollectionView) : void {
         if(customerView.pageCount == 1 || customerView.itemCount == 0){
             document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
         }
-        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
     }
 }

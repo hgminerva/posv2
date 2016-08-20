@@ -45,9 +45,16 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                 *Will go back to the login screen if you try to access this component without logging in.
                 **/
                 ItemAddComponent.prototype.ngOnInit = function () {
-                    var cmb;
-                    console.log(cmb);
-                    this.itemService.initUnit(cmb);
+                    if (!localStorage.getItem('access_token')) {
+                    }
+                    else {
+                    }
+                    /*Else */
+                    this.expiryDate = new wijmo.input.InputDate('#expiryDate', {
+                        format: 'MM/dd/yyyy',
+                        value: new Date()
+                    });
+                    this.itemService.initUnit(cmbUnit);
                 };
                 /**
                 * This function will go back item.html when clicked

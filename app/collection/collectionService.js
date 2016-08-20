@@ -30,7 +30,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                 }
                 CollectionService.prototype.listCollection = function (component) {
                     var _this = this;
-                    var url = localStorage.getItem('api_url') + CollectionService.API_URL_COLLECTION + "list";
+                    var url = localStorage.getItem('api_url') + CollectionService.API_COLLECTION_URL + "list";
                     var header = new http_1.Headers({ 'Authorization': 'Bearer' + localStorage.getItem('access_token') });
                     var option = new http_1.RequestOptions({ headers: header });
                     this._http.get(url, option)
@@ -46,29 +46,40 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     });
                 };
                 CollectionService.prototype.addCollection = function (data, component) {
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
-                    header.append('Content-Type', 'application/json');
-                    var option = new http_1.RequestOptions({ headers: header });
                 };
                 CollectionService.prototype.updateCollection = function (data, component) {
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
-                    header.append('Content-Type', 'application/json');
-                    var option = new http_1.RequestOptions({ headers: header });
                 };
                 CollectionService.prototype.deleteCollection = function (data, component) {
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
-                    var option = new http_1.RequestOptions({ headers: header });
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + CollectionService.API_COLLECTION_URL + "delete";
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json'
+                    });
+                    var requestOptions = new http_1.RequestOptions({
+                        headers: headers,
+                        body: JSON.stringify(data)
+                    });
+                    this._http.delete(url, requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                component.getToastr().success('Deleted successfully');
+                                _this.listCollection(component);
+                                break;
+                            default: break;
+                        }
+                    }, function (error) {
+                        component.getToastr().error('Server error');
+                    });
                 };
                 CollectionService.prototype.checkPageCount = function (collectionView) {
                     if (collectionView.pageCount == 1 || collectionView.itemCount == 0) {
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
                     }
-                    else {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
                 };
-                CollectionService.API_URL_COLLECTION = "/api/transaction/collection/";
+                CollectionService.API_COLLECTION_URL = "/api/transaction/collection/";
                 CollectionService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

@@ -47,6 +47,10 @@ export class ItemComponentsComponent implements OnInit{
         this.router.navigate(['Dashboard']);
     }
 
+    public deleteItemComponent() : void {
+        
+    }
+
     public next() : void {
         if(this.itemComponentView .pageIndex < this.itemComponentView .pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){

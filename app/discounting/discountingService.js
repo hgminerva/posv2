@@ -37,7 +37,8 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         .subscribe(function (response) {
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
-                                discountComponent.getCollectionView().sourceCollection = response.json();
+                                discountComponent.setSource(response.json());
+                                discountComponent.getCollectionView().sourceCollection = discountComponent.getSource();
                                 _this.checkPageCount(discountComponent.getCollectionView());
                                 break;
                             case response_1.Response.BAD_REQUEST: break;
@@ -50,11 +51,35 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         discountComponent.getToastr().error('Server error', '');
                     });
                 };
+                DiscountingService.prototype.deleteDiscount = function (data, component) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + DiscountingService.API_DISCOUNT_URL + "delete";
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json'
+                    });
+                    var requestOptions = new http_1.RequestOptions({
+                        headers: headers,
+                        body: JSON.stringify(data)
+                    });
+                    this._http.delete(url, requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                component.getToastr().success('Deleted successfully');
+                                _this.listDicount(component);
+                                break;
+                            default: break;
+                        }
+                    }, function (error) {
+                        component.getToastr().error('Server error');
+                    });
+                };
                 DiscountingService.prototype.checkPageCount = function (customerView) {
                     if (customerView.pageCount == 1 || customerView.itemCount == 0) {
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
-                    document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                 };
                 DiscountingService.API_DISCOUNT_URL = "/api/discount/";
                 DiscountingService = __decorate([

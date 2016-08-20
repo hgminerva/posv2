@@ -40,6 +40,14 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     else {
                     }
                     /*Else*/
+                    this.timeStart = new wijmo.input.InputTime('#timeStart', {
+                        format: 'hh:mm tt',
+                        value: new Date()
+                    });
+                    this.timeStart = new wijmo.input.InputTime('#timeEnd', {
+                        format: 'hh:mm tt',
+                        value: new Date()
+                    });
                     this.dateStart = new wijmo.input.InputDate('#dateStart', {
                         format: 'MM/dd/yyyy',
                         value: new Date()

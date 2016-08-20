@@ -54,6 +54,10 @@ export class RestaurantTablesComponent implements OnInit{
         this.router.navigate(['Dashboard']);
     }
 
+    public deleteRestaurantTable() : void {
+        this.restaurantTableService.deleteCollection(this.restaurantTableView.currentItem, this);
+    }
+
     public next() : void {
         if(this.restaurantTableView.pageIndex < this.restaurantTableView.pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){

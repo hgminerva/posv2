@@ -52,6 +52,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 ItemComponentsComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                ItemComponentsComponent.prototype.deleteItemComponent = function () {
+                };
                 ItemComponentsComponent.prototype.next = function () {
                     if (this.itemComponentView.pageIndex < this.itemComponentView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {

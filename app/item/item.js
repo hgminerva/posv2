@@ -52,23 +52,20 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     /*Else*/
                     this.itemsView = new wijmo.collections.CollectionView();
                     this.itemsView.pageSize = 10;
-                    this.itemService.listItems(this, this.itemsView);
+                    this.itemService.listItems(this);
                 };
                 /*
                     This function when clicked will go to addItem.html
                 */
-                ItemComponent.prototype.addItem = function () {
+                ItemComponent.prototype.onAdd = function () {
                     this._router.navigate(['AddItem']);
                 };
                 ItemComponent.prototype.deleteItem = function () {
-                    var grid = document.getElementById('flexItem');
-                    //console.log(grid.selectedItems);
+                    this.itemService.deleteItem(this.itemsView.currentItem, this);
                 };
-                ItemComponent.prototype.returnHome = function () {
+                ItemComponent.prototype.onClose = function () {
                     this._router.navigate(['Dashboard']);
                 };
-                //getters
-                ItemComponent.prototype.getToastr = function () { return this._toastr; };
                 ItemComponent.prototype.next = function () {
                     if (this.itemsView.pageIndex < this.itemsView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {
@@ -91,6 +88,9 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };
+                //getters
+                ItemComponent.prototype.getToastr = function () { return this._toastr; };
+                ItemComponent.prototype.getCollectionView = function () { return this.itemsView; };
                 ItemComponent = __decorate([
                     core_1.Component({
                         selector: 'item',

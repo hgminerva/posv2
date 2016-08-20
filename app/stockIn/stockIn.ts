@@ -51,6 +51,10 @@ export class StockInComponent implements OnInit{
         this.router.navigate(['Dashboard']);
     }
 
+    public deleteStockIn() : void {
+        this.stockInService.deleteStockIn(this.stockInView.currentItem, this);
+    }
+
     public next() : void {
         if(this.stockInView.pageIndex < this.stockInView.pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){

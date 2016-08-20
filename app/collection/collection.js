@@ -66,6 +66,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 CollectionComponent.prototype.onClose = function () {
                     this._router.navigate(['Dashboard']);
                 };
+                CollectionComponent.prototype.deleteCollection = function () {
+                    this.collectionService.deleteCollection(this.collectionView.currentItem, this);
+                };
                 CollectionComponent.prototype.next = function () {
                     if (this.collectionView.pageIndex < this.collectionView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {

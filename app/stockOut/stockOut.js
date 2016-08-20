@@ -55,6 +55,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 StockOutComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                StockOutComponent.prototype.deleteStockOut = function () {
+                    this.stockOutService.deleteStockOut(this.stockOutView.currentItem, this);
+                };
                 StockOutComponent.prototype.next = function () {
                     if (this.stockOutView.pageIndex < this.stockOutView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {

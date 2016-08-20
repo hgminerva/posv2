@@ -58,6 +58,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 DisbursementComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                DisbursementComponent.prototype.deleteDisbursement = function () {
+                    this.disbursementService.deleteDisbursement(this.disbursementView.currentItem, this);
+                };
                 DisbursementComponent.prototype.next = function () {
                     if (this.disbursementView.pageIndex < this.disbursementView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {

@@ -54,6 +54,10 @@ export class DisbursementComponent implements OnInit{
         this.router.navigate(['Dashboard']);
     }
 
+    public deleteDisbursement() : void {
+        this.disbursementService.deleteDisbursement(this.disbursementView.currentItem, this);
+    }
+
     public next() : void {
         if(this.disbursementView.pageIndex < this.disbursementView.pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){

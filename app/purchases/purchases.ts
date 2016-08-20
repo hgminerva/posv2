@@ -60,6 +60,10 @@ export class PurchasesComponent implements OnInit{
         this.router.navigate(['Dashboard']);
     }
 
+    public deletePurchase() : void {
+        this.purchaseService.deletePurchase(this.purchaseView.currentItem, this);
+    }
+
     public next() : void {
         if(this.purchaseView .pageIndex < this.purchaseView .pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){
