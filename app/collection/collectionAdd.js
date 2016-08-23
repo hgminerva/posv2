@@ -36,23 +36,44 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.toastr = toastr;
                 }
                 CollectionAddComponent.prototype.ngOnInit = function () {
-                    this.cmbCustomerSource = new wijmo.collections.ObservableArray();
-                    this.cmbSalesNumberSource = new wijmo.collections.ObservableArray();
-                    this.cmbAuthoritySource = new wijmo.collections.ObservableArray();
                     this.collectionDetailSource = new wijmo.collections.ObservableArray();
                     this.collectionDetailView = new wijmo.collections.CollectionView(this.collectionDetailSource);
+                    this.cmbCustomer = new wijmo.input.ComboBox('#cmbCustomer');
+                    this.cmbApprovedBy = new wijmo.input.ComboBox('#cmbApprovedBy');
+                    this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
+                    this.cmbPreparedBy = new wijmo.input.ComboBox('#cmbPreparedBy');
+                    this.cmbSalesNumber = new wijmo.input.ComboBox('#cmbSalesNumber');
                     this.collectionDate = new wijmo.input.InputDate("#collectionDate", {
                         format: "MM/dd/yyyy",
                         value: new Date()
                     });
-                    this.cmbCustomerSource.push('Test');
-                    this.cmbSalesNumberSource.push('Test');
-                    this.cmbAuthoritySource.push('Test');
                     this.collectionDetailSource.push({ Amount: '200' });
                 };
                 CollectionAddComponent.prototype.onLock = function () {
+                    document.getElementById('collectionNumber').setAttribute('disabled', 'disabled');
+                    document.getElementById('period').setAttribute('disabled', 'disabled');
+                    document.getElementById('manualORNumber').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbCustomer').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbSalesNumber').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbPreparedBy').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbApprovedBy').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbCheckedBy').setAttribute('disabled', 'disabled');
+                    document.getElementById('collectionDate').setAttribute('disabled', 'disabled');
+                    document.getElementById('remarks').setAttribute('disabled', 'disabled');
+                    document.getElementById('flexCollectionDetail').setAttribute('disabled', 'disabled');
                 };
                 CollectionAddComponent.prototype.onUnlock = function () {
+                    document.getElementById('collectionNumber').removeAttribute('disabled');
+                    document.getElementById('period').removeAttribute('disabled');
+                    document.getElementById('manualORNumber').removeAttribute('disabled');
+                    document.getElementById('cmbCustomer').removeAttribute('disabled');
+                    document.getElementById('cmbSalesNumber').removeAttribute('disabled');
+                    document.getElementById('cmbPreparedBy').removeAttribute('disabled');
+                    document.getElementById('cmbApprovedBy').removeAttribute('disabled');
+                    document.getElementById('cmbCheckedBy').removeAttribute('disabled');
+                    document.getElementById('collectionDate').removeAttribute('disabled');
+                    document.getElementById('remarks').removeAttribute('disabled');
+                    document.getElementById('flexCollectionDetail').removeAttribute('disabled');
                 };
                 CollectionAddComponent.prototype.onPreview = function () {
                 };

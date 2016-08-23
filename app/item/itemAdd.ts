@@ -33,8 +33,8 @@ export class ItemAddComponent implements OnInit{
     private price : String;
     private stockLevelQuantity : String;
     private onHandQuantity : String;
-    private inventoty : Boolean;
-    private package : Boolean;
+    private inventoty : Boolean = false;
+    private package : Boolean = false;
     private expiryDate : wijmo.input.InputDate;
     private lotNumber : String;
 

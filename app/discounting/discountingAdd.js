@@ -33,6 +33,17 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             DiscountingAddComponent = (function () {
                 function DiscountingAddComponent(router) {
                     this.router = router;
+                    this.vatExempt = false;
+                    this.dayScheduled = false;
+                    this.dateScheduled = false;
+                    this.timeScheduled = false;
+                    this.monday = false;
+                    this.tuesday = false;
+                    this.wednesday = false;
+                    this.thursday = false;
+                    this.friday = false;
+                    this.saturday = false;
+                    this.sunday = false;
                 }
                 DiscountingAddComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
@@ -64,11 +75,47 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     This function will disable all of the content of the itemAddTabContent Tab
                 */
                 DiscountingAddComponent.prototype.onLock = function () {
+                    document.getElementById('discount').setAttribute('disabled', 'disabled');
+                    document.getElementById('discountRate').setAttribute('disabled', 'disabled');
+                    document.getElementById('vatExempt').setAttribute('disabled', 'disabled');
+                    document.getElementById('dayScheduled').setAttribute('disabled', 'disabled');
+                    document.getElementById('dateScheduled').setAttribute('disabled', 'disabled');
+                    document.getElementById('timeScheduled').setAttribute('disabled', 'disabled');
+                    document.getElementById('dateStart').setAttribute('disabled', 'disabled');
+                    document.getElementById('timeStart').setAttribute('disabled', 'disabled');
+                    document.getElementById('dateEnd').setAttribute('disabled', 'disabled');
+                    document.getElementById('timeEnd').setAttribute('disabled', 'disabled');
+                    document.getElementById('monday').setAttribute('disabled', 'disabled');
+                    document.getElementById('tuesday').setAttribute('disabled', 'disabled');
+                    document.getElementById('wednesday').setAttribute('disabled', 'disabled');
+                    document.getElementById('thursday').setAttribute('disabled', 'disabled');
+                    document.getElementById('friday').setAttribute('disabled', 'disabled');
+                    document.getElementById('saturday').setAttribute('disabled', 'disabled');
+                    document.getElementById('sunday').setAttribute('disabled', 'disabled');
+                    document.getElementById('flexDiscount').setAttribute('disabled', 'disabled');
                 };
                 /*
                     This function will enable all of the content of the itemAddTabContent Tab
                 */
                 DiscountingAddComponent.prototype.onUnlock = function () {
+                    document.getElementById('discount').removeAttribute('disabled');
+                    document.getElementById('discountRate').removeAttribute('disabled');
+                    document.getElementById('vatExempt').removeAttribute('disabled');
+                    document.getElementById('dayScheduled').removeAttribute('disabled');
+                    document.getElementById('dateScheduled').removeAttribute('disabled');
+                    document.getElementById('timeScheduled').removeAttribute('disabled');
+                    document.getElementById('dateStart').removeAttribute('disabled');
+                    document.getElementById('timeStart').removeAttribute('disabled');
+                    document.getElementById('dateEnd').removeAttribute('disabled');
+                    document.getElementById('timeEnd').removeAttribute('disabled');
+                    document.getElementById('monday').removeAttribute('disabled');
+                    document.getElementById('tuesday').removeAttribute('disabled');
+                    document.getElementById('wednesday').removeAttribute('disabled');
+                    document.getElementById('thursday').removeAttribute('disabled');
+                    document.getElementById('friday').removeAttribute('disabled');
+                    document.getElementById('saturday').removeAttribute('disabled');
+                    document.getElementById('sunday').removeAttribute('disabled');
+                    document.getElementById('flexDiscount').removeAttribute('disabled');
                 };
                 DiscountingAddComponent.prototype.addDiscount = function () {
                     var discount = this.createDiscount();

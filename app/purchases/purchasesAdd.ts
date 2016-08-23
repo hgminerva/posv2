@@ -33,15 +33,15 @@ export class PurchaseAddComponent implements OnInit{
     private cmbSupplierSource : wijmo.collections.ObservableArray;
     private cmbAuthority : wijmo.collections.ObservableArray;
     //html elements input
-    private txtPO_Number : String;
-    private txtPeriod : Number;
-    private theDate : Date;
-    private cmbSupplier : String;
-    private txtRemarks : String ;
-    private cmbPreparedBy : String;
-    private cmbCheckedBy : String;
-    private cmbApprovedBy : String;
-    private txtTotalAmount : Number;
+    private poNumber : String;
+    private period : Number;
+    private cmbSupplier : wijmo.input.ComboBox;
+    private remarks : String ;
+    private cmbPreparedBy : wijmo.input.ComboBox;
+    private cmbCheckedBy : wijmo.input.ComboBox;
+    private cmbApprovedBy : wijmo.input.ComboBox;
+    private totalAmount : Number;
+    private download : String;
     private inputDate : wijmo.input.InputDate;
 
     constructor(private toastr : ToastsManager, private router : Router) {
@@ -63,10 +63,6 @@ export class PurchaseAddComponent implements OnInit{
         /*Else*/
         this.purchaseAddSource = new wijmo.collections.ObservableArray();
         this.purchaseAddView = new wijmo.collections.CollectionView(this.purchaseAddSource);
-        this.cmbItemSource = new wijmo.collections.ObservableArray();
-        this.cmbUnit = new wijmo.collections.ObservableArray();
-
-        this.cmbSupplierSource = new wijmo.collections.ObservableArray();
         this.cmbAuthority = new wijmo.collections.ObservableArray();
 
         this.inputDate = new  wijmo.input.InputDate('#inputDate', {
@@ -74,19 +70,17 @@ export class PurchaseAddComponent implements OnInit{
             value : new Date()
         });
 
-        this.initCmbSupplier();
-        this.initCmbAuthority();
-        this.initCmbUnit();
+        this.cmbPreparedBy = new wijmo.input.ComboBox('#cmbPreparedBy');
+        this.cmbApprovedBy = new wijmo.input.ComboBox('#cmbApprovedBy');
+        this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
 
         this.purchaseAddSource.push({Quantity : 1});
-        this.cmbItemSource.push('Test');
-        this.cmbItemSource.push('Test1');
     }  
 
     public onLock() : void {
         document.getElementById('inputDate').setAttribute('disabled', 'disabled');
         document.getElementById('cmbSupplier').setAttribute('disabled', 'disabled');
-        document.getElementById('txtRemarks').setAttribute('disabled', 'disabled');
+        document.getElementById('remarks').setAttribute('disabled', 'disabled');
         document.getElementById('cmbCheckedBy').setAttribute('disabled', 'disabled');
         document.getElementById('cmbApprovedBy').setAttribute('disabled', 'disabled');
         document.getElementById('flexPurchaseAdd').setAttribute('disabled','disabled');
@@ -98,7 +92,7 @@ export class PurchaseAddComponent implements OnInit{
     public onUnlock() : void {
         document.getElementById('inputDate').removeAttribute('disabled');
         document.getElementById('cmbSupplier').removeAttribute('disabled');
-        document.getElementById('txtRemarks').removeAttribute('disabled');
+        document.getElementById('remarks').removeAttribute('disabled');
         document.getElementById('cmbCheckedBy').removeAttribute('disabled');
         document.getElementById('cmbApprovedBy').removeAttribute('disabled');
         document.getElementById('flexPurchaseAdd').removeAttribute('disabled');
@@ -125,20 +119,6 @@ export class PurchaseAddComponent implements OnInit{
 
    //getters
     public getToastr() : ToastsManager { return this.toastr; }
-
-    private initCmbSupplier() : void {
-        this.cmbSupplierSource.push('Return from Customer');
-    }
-
-    private initCmbAuthority() : void {
-        this.cmbAuthority.push('Administrator');
-        this.cmbAuthority.push('Cashier');
-        this.cmbAuthority.push('Teller');
-    }
-
-    private initCmbUnit() : void {
-        this.cmbUnit.push('Pc(s)');
-    }
 
     private addPurchase() : void {
        const purchase = this.createPurchase();

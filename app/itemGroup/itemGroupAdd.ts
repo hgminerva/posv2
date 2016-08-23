@@ -19,12 +19,14 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
     ]
 })
 
-export class ItemGroupAddComponent implements OnInit{
+export class ItemGroupAddComponent implements OnInit {
+    private itemGroup : String;
+    private image : ImageData;
+    private cmbKitchen : wijmo.input.ComboBox;
+
     private itemGroupAddView : wijmo.collections.CollectionView;
     private itemGroupAddSource : wijmo.collections.ObservableArray;
 
-    private static KITCHEN_REPORT_LENGTH : Number  = 9;
-    private kitchenReportSource: wijmo.collections.ObservableArray;
 
     constructor(private toastr : ToastsManager, private router : Router) {
 
@@ -45,20 +47,22 @@ export class ItemGroupAddComponent implements OnInit{
         /*Else*/
         this.itemGroupAddSource = new wijmo.collections.ObservableArray();
         this.itemGroupAddView = new wijmo.collections.CollectionView(this.itemGroupAddSource);
-        this.kitchenReportSource = new wijmo.collections.ObservableArray();
 
-        this.initComboKitchenReports();
-
+        this.cmbKitchen = new wijmo.input.ComboBox('#cmbKitchen');
         this.itemGroupAddSource.push({});
-        console.log(this.itemGroupAddSource.length)
+        
     }
 
     public onLock() : void {
-
+        document.getElementById('itemGroup').setAttribute('disabled', 'disabled');
+        document.getElementById('cmbKitchen').setAttribute('disabled', 'disabled');
+        document.getElementById('flexItemGroupAdd').setAttribute('disabled', 'disabled');
     }
 
     public onUnlock() : void {
-        
+        document.getElementById('itemGroup').removeAttribute('disabled');
+        document.getElementById('cmbKitchen').removeAttribute('disabled');
+        document.getElementById('flexItemGroupAdd').removeAttribute('disabled');
     }
 
     public onPreview() : void {
@@ -77,12 +81,6 @@ export class ItemGroupAddComponent implements OnInit{
     //getters
     public getToastr() : ToastsManager { return this.toastr; }
 
-    private initComboKitchenReports() : void {
-        var i;
-        for(i = 1; i <=ItemGroupAddComponent.KITCHEN_REPORT_LENGTH; i++ ) {
-            this.kitchenReportSource.push('Kitchen' + i);
-        }
-    }
 
     private addItemGroup() : void {
         const itemGroup = this.createItemGroup();

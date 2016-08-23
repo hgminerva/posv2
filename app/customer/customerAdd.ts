@@ -22,9 +22,19 @@ import {CustomerService} from './customerService';
 })
 
 export class CustomerAddComponent implements OnInit{
+    private customer : String;
+    private address : String;
+    private contactPerson : String;
+    private contactNumber : String;
+    private creditLimit : String;
+    private tin : String;
+    private withReward : Boolean = false;
+    private rewardCardNumber : String;
+    private rewardConversion : String;
+    private cmbDefaultPrice : wijmo.input.ComboBox;
+
     private cmbTermSource : wijmo.collections.ObservableArray;
     private cmbAR_AccountSource : wijmo.collections.ObservableArray;
-    private cmbDefaultPrice : wijmo.collections.ObservableArray;
     
 
     private static  CMB_TERM_SOURCE_LENGTH : Number = 5;
@@ -48,11 +58,11 @@ export class CustomerAddComponent implements OnInit{
         /*Else*/
         this.cmbTermSource = new wijmo.collections.ObservableArray();
         this.cmbAR_AccountSource = new wijmo.collections.ObservableArray();
-        this.cmbDefaultPrice = new wijmo.collections.ObservableArray();
+
+        this.cmbDefaultPrice = new wijmo.input.ComboBox('#cmbDefaultPrice');
 
         this.initTermCombobox();
         this.initARCombobox();
-        this.cmbDefaultPrice.push('');
     }
 
     /**
@@ -66,14 +76,36 @@ export class CustomerAddComponent implements OnInit{
     *This function will disable all of the content of the  CustomerAdd 
     **/
     public onLock() : void {
-       
+       document.getElementById('customer').setAttribute('disabled', 'disabled');
+       document.getElementById('address').setAttribute('disabled', 'disabled');
+       document.getElementById('contactPerson').setAttribute('disabled', 'disabled');
+       document.getElementById('contactNumber').setAttribute('disabled', 'disabled');
+       document.getElementById('creditLimit').setAttribute('disabled', 'disabled');
+       document.getElementById('cmbTerm').setAttribute('disabled', 'disabled');
+       document.getElementById('tin').setAttribute('disabled', 'disabled');
+       document.getElementById('cmbARAccount').setAttribute('disabled', 'disabled');
+       document.getElementById('withReward').setAttribute('disabled', 'disabled');
+       document.getElementById('rewardCardNumber').setAttribute('disabled', 'disabled');
+       document.getElementById('rewardConversion').setAttribute('disabled', 'disabled');
+       document.getElementById('cmbDefaultPrice').setAttribute('disabled', 'disabled');
     }
 
     /**
     *This function will enable all of the content of the CustomerAdd 
     **/
     public onUnlock() : void {
-       
+       document.getElementById('customer').removeAttribute('disabled');
+       document.getElementById('address').removeAttribute('disabled');
+       document.getElementById('contactPerson').removeAttribute('disabled');
+       document.getElementById('contactNumber').removeAttribute('disabled');
+       document.getElementById('creditLimit').removeAttribute('disabled');
+       document.getElementById('cmbTerm').removeAttribute('disabled');
+       document.getElementById('tin').removeAttribute('disabled');
+       document.getElementById('cmbARAccount').removeAttribute('disabled');
+       document.getElementById('withReward').removeAttribute('disabled');
+       document.getElementById('rewardCardNumber').removeAttribute('disabled');
+       document.getElementById('rewardConversion').removeAttribute('disabled');
+       document.getElementById('cmbDefaultPrice').removeAttribute('disabled');
     }
 
     public addCustomer() : void {
@@ -116,7 +148,7 @@ export class CustomerAddComponent implements OnInit{
 
     private createCustomer() : Object {
         var data = {
-             Customer :(<HTMLInputElement>document.getElementById('txtCustomer')).value,
+             Customer : this.customer
         };
         return data;
     }

@@ -16,6 +16,13 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 
 export class SupplierAddComponent implements OnInit{
+    private supplier : String;
+    private address : String;
+    private telephoneNumber : String;
+    private cellphoneNumber : String;
+    private faxNumber : String;
+    private tin : String;
+
     private cmbTermSource : wijmo.collections.ObservableArray;
     private cmbAPAccountSource : wijmo.collections.ObservableArray;
 
@@ -41,24 +48,24 @@ export class SupplierAddComponent implements OnInit{
     }
 
      public onLock() : void {
-        document.getElementById('txtSupplier').setAttribute('disabled', 'disabled');
-        document.getElementById('txtAddress').setAttribute('disabled', 'disabled');
-        document.getElementById('txtTelephone').setAttribute('disabled', 'disabled');
-        document.getElementById('txtCellphone').setAttribute('disabled', 'disabled');
-        document.getElementById('txtFax').setAttribute('disabled', 'disabled');
+        document.getElementById('supplier').setAttribute('disabled', 'disabled');
+        document.getElementById('address').setAttribute('disabled', 'disabled');
+        document.getElementById('telephoneNumber').setAttribute('disabled', 'disabled');
+        document.getElementById('cellphoneNumber').setAttribute('disabled', 'disabled');
+        document.getElementById('faxNumber').setAttribute('disabled', 'disabled');
         document.getElementById('cmbTerm').setAttribute('disabled','disabled');
-        document.getElementById('txtTIN').setAttribute('disabled','disabled');
+        document.getElementById('tin').setAttribute('disabled','disabled');
         document.getElementById('cmbAPAccount').setAttribute('disabled','disabled');
     }
 
     public onUnlock() : void {
-        document.getElementById('txtSupplier').removeAttribute('disabled');
-        document.getElementById('txtAddress').removeAttribute('disabled');
-        document.getElementById('txtTelephone').removeAttribute('disabled');
-        document.getElementById('txtCellphone').removeAttribute('disabled');
-        document.getElementById('txtFax').removeAttribute('disabled');
+        document.getElementById('supplier').removeAttribute('disabled');
+        document.getElementById('address').removeAttribute('disabled');
+        document.getElementById('telephoneNumber').removeAttribute('disabled');
+        document.getElementById('cellphoneNumber').removeAttribute('disabled');
+        document.getElementById('faxNumber').removeAttribute('disabled');
         document.getElementById('cmbTerm').removeAttribute('disabled');
-        document.getElementById('txtTIN').removeAttribute('disabled');
+        document.getElementById('tin').removeAttribute('disabled');
         document.getElementById('cmbAPAccount').removeAttribute('disabled');
     }
 

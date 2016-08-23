@@ -48,14 +48,18 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     /*Else*/
                     this.itemGroupAddSource = new wijmo.collections.ObservableArray();
                     this.itemGroupAddView = new wijmo.collections.CollectionView(this.itemGroupAddSource);
-                    this.kitchenReportSource = new wijmo.collections.ObservableArray();
-                    this.initComboKitchenReports();
+                    this.cmbKitchen = new wijmo.input.ComboBox('#cmbKitchen');
                     this.itemGroupAddSource.push({});
-                    console.log(this.itemGroupAddSource.length);
                 };
                 ItemGroupAddComponent.prototype.onLock = function () {
+                    document.getElementById('itemGroup').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbKitchen').setAttribute('disabled', 'disabled');
+                    document.getElementById('flexItemGroupAdd').setAttribute('disabled', 'disabled');
                 };
                 ItemGroupAddComponent.prototype.onUnlock = function () {
+                    document.getElementById('itemGroup').removeAttribute('disabled');
+                    document.getElementById('cmbKitchen').removeAttribute('disabled');
+                    document.getElementById('flexItemGroupAdd').removeAttribute('disabled');
                 };
                 ItemGroupAddComponent.prototype.onPreview = function () {
                 };
@@ -67,12 +71,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 //getters
                 ItemGroupAddComponent.prototype.getToastr = function () { return this.toastr; };
-                ItemGroupAddComponent.prototype.initComboKitchenReports = function () {
-                    var i;
-                    for (i = 1; i <= ItemGroupAddComponent.KITCHEN_REPORT_LENGTH; i++) {
-                        this.kitchenReportSource.push('Kitchen' + i);
-                    }
-                };
                 ItemGroupAddComponent.prototype.addItemGroup = function () {
                     var itemGroup = this.createItemGroup();
                     if (this.validate(itemGroup)) {
@@ -91,7 +89,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 ItemGroupAddComponent.prototype.validateItemGroup = function (itemGroup) {
                     return true;
                 };
-                ItemGroupAddComponent.KITCHEN_REPORT_LENGTH = 9;
                 ItemGroupAddComponent = __decorate([
                     core_1.Component({
                         selector: 'item-group-add',

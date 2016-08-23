@@ -25,6 +25,8 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 */
 export class RestaurantTablesAddComponent implements OnInit{
     //grid
+    private tableGroup : String;
+
     private restaurantTableAddView : wijmo.collections.CollectionView;
     private restaurantTableAddSource : wijmo.collections.ObservableArray;
 
@@ -57,12 +59,12 @@ export class RestaurantTablesAddComponent implements OnInit{
     }  
 
     public onLock() : void {
-        document.getElementById('txtTableGroup').setAttribute('disabled', 'disabled');
+        document.getElementById('tableGroup').setAttribute('disabled', 'disabled');
         document.getElementById('restaurantTablesAdd').setAttribute('disabled', 'disabled');
     }
 
     public onUnlock() : void {
-        document.getElementById('txtTableGroup').removeAttribute('disabled');
+        document.getElementById('tableGroup').removeAttribute('disabled');
         document.getElementById('restaurantTablesAdd').removeAttribute('disabled');
     }
 

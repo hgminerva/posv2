@@ -38,6 +38,8 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     this.router = router;
                     this.toastr = toastr;
                     this.itemService = itemService;
+                    this.inventoty = false;
+                    this.package = false;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements

@@ -20,10 +20,19 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
     ]
 })
 
-export class CollectionAddComponent implements OnInit{
-    private cmbCustomerSource : wijmo.collections.ObservableArray;
-    private cmbSalesNumberSource : wijmo.collections.ObservableArray;
-    private cmbAuthoritySource : wijmo.collections.ObservableArray;
+export class CollectionAddComponent implements OnInit {
+    private collectionNumber : String;
+    private period : String;
+    private manualORNumber : String;
+    private cmbCustomer : wijmo.input.ComboBox;
+    private cmbSalesNumber : wijmo.input.ComboBox;
+    private cmbPreparedBy : wijmo.input.ComboBox;
+    private cmbApprovedBy : wijmo.input.ComboBox;
+    private cmbCheckedBy : wijmo.input.ComboBox;
+    private salesBalance : Number;
+    private amount : Number;
+    private terminal : Number;
+    private remarks : String;
 
     private collectionDetailView : wijmo.collections.CollectionView;
     private collectionDetailSource : wijmo.collections.ObservableArray;
@@ -35,30 +44,49 @@ export class CollectionAddComponent implements OnInit{
     }
 
     public ngOnInit() : void {
-        this.cmbCustomerSource = new wijmo.collections.ObservableArray();
-        this.cmbSalesNumberSource = new wijmo.collections.ObservableArray();
-        this.cmbAuthoritySource = new wijmo.collections.ObservableArray();
-
         this.collectionDetailSource = new wijmo.collections.ObservableArray();
         this.collectionDetailView = new wijmo.collections.CollectionView(this.collectionDetailSource);
+
+        this.cmbCustomer = new wijmo.input.ComboBox('#cmbCustomer');
+        this.cmbApprovedBy = new wijmo.input.ComboBox('#cmbApprovedBy');
+        this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
+        this.cmbPreparedBy = new wijmo.input.ComboBox('#cmbPreparedBy');
+        this.cmbSalesNumber = new wijmo.input.ComboBox('#cmbSalesNumber');
 
         this.collectionDate = new wijmo.input.InputDate("#collectionDate", {
             format : "MM/dd/yyyy",
             value : new Date()
         });
 
-        this.cmbCustomerSource.push('Test');
-        this.cmbSalesNumberSource.push('Test');
-        this.cmbAuthoritySource.push('Test');
         this.collectionDetailSource.push({Amount : '200'});
     }
 
     public onLock() : void {
-
+        document.getElementById('collectionNumber').setAttribute('disabled', 'disabled');
+        document.getElementById('period').setAttribute('disabled', 'disabled');
+        document.getElementById('manualORNumber').setAttribute('disabled', 'disabled');
+        document.getElementById('cmbCustomer').setAttribute('disabled', 'disabled');
+        document.getElementById('cmbSalesNumber').setAttribute('disabled', 'disabled');
+        document.getElementById('cmbPreparedBy').setAttribute('disabled', 'disabled');
+        document.getElementById('cmbApprovedBy').setAttribute('disabled', 'disabled');
+        document.getElementById('cmbCheckedBy').setAttribute('disabled', 'disabled');
+        document.getElementById('collectionDate').setAttribute('disabled', 'disabled');
+        document.getElementById('remarks').setAttribute('disabled', 'disabled');
+        document.getElementById('flexCollectionDetail').setAttribute('disabled', 'disabled');
     }
 
     public onUnlock() : void {
-        
+        document.getElementById('collectionNumber').removeAttribute('disabled');
+        document.getElementById('period').removeAttribute('disabled');
+        document.getElementById('manualORNumber').removeAttribute('disabled');
+        document.getElementById('cmbCustomer').removeAttribute('disabled');
+        document.getElementById('cmbSalesNumber').removeAttribute('disabled');
+        document.getElementById('cmbPreparedBy').removeAttribute('disabled');
+        document.getElementById('cmbApprovedBy').removeAttribute('disabled');
+        document.getElementById('cmbCheckedBy').removeAttribute('disabled');
+        document.getElementById('collectionDate').removeAttribute('disabled');
+        document.getElementById('remarks').removeAttribute('disabled');
+        document.getElementById('flexCollectionDetail').removeAttribute('disabled');
     }
 
     public onPreview() : void {

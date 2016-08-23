@@ -51,11 +51,11 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.addRow();
                 };
                 RestaurantTablesAddComponent.prototype.onLock = function () {
-                    document.getElementById('txtTableGroup').setAttribute('disabled', 'disabled');
+                    document.getElementById('tableGroup').setAttribute('disabled', 'disabled');
                     document.getElementById('restaurantTablesAdd').setAttribute('disabled', 'disabled');
                 };
                 RestaurantTablesAddComponent.prototype.onUnlock = function () {
-                    document.getElementById('txtTableGroup').removeAttribute('disabled');
+                    document.getElementById('tableGroup').removeAttribute('disabled');
                     document.getElementById('restaurantTablesAdd').removeAttribute('disabled');
                 };
                 RestaurantTablesAddComponent.prototype.onPreview = function () {

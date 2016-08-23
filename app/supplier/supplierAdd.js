@@ -44,23 +44,23 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.initAPAccountCombobox();
                 };
                 SupplierAddComponent.prototype.onLock = function () {
-                    document.getElementById('txtSupplier').setAttribute('disabled', 'disabled');
-                    document.getElementById('txtAddress').setAttribute('disabled', 'disabled');
-                    document.getElementById('txtTelephone').setAttribute('disabled', 'disabled');
-                    document.getElementById('txtCellphone').setAttribute('disabled', 'disabled');
-                    document.getElementById('txtFax').setAttribute('disabled', 'disabled');
+                    document.getElementById('supplier').setAttribute('disabled', 'disabled');
+                    document.getElementById('address').setAttribute('disabled', 'disabled');
+                    document.getElementById('telephoneNumber').setAttribute('disabled', 'disabled');
+                    document.getElementById('cellphoneNumber').setAttribute('disabled', 'disabled');
+                    document.getElementById('faxNumber').setAttribute('disabled', 'disabled');
                     document.getElementById('cmbTerm').setAttribute('disabled', 'disabled');
-                    document.getElementById('txtTIN').setAttribute('disabled', 'disabled');
+                    document.getElementById('tin').setAttribute('disabled', 'disabled');
                     document.getElementById('cmbAPAccount').setAttribute('disabled', 'disabled');
                 };
                 SupplierAddComponent.prototype.onUnlock = function () {
-                    document.getElementById('txtSupplier').removeAttribute('disabled');
-                    document.getElementById('txtAddress').removeAttribute('disabled');
-                    document.getElementById('txtTelephone').removeAttribute('disabled');
-                    document.getElementById('txtCellphone').removeAttribute('disabled');
-                    document.getElementById('txtFax').removeAttribute('disabled');
+                    document.getElementById('supplier').removeAttribute('disabled');
+                    document.getElementById('address').removeAttribute('disabled');
+                    document.getElementById('telephoneNumber').removeAttribute('disabled');
+                    document.getElementById('cellphoneNumber').removeAttribute('disabled');
+                    document.getElementById('faxNumber').removeAttribute('disabled');
                     document.getElementById('cmbTerm').removeAttribute('disabled');
-                    document.getElementById('txtTIN').removeAttribute('disabled');
+                    document.getElementById('tin').removeAttribute('disabled');
                     document.getElementById('cmbAPAccount').removeAttribute('disabled');
                 };
                 SupplierAddComponent.prototype.onClose = function () {

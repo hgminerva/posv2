@@ -38,6 +38,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.toastr = toastr;
                     this.router = router;
                     this.customerService = customerService;
+                    this.withReward = false;
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
@@ -52,10 +53,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     /*Else*/
                     this.cmbTermSource = new wijmo.collections.ObservableArray();
                     this.cmbAR_AccountSource = new wijmo.collections.ObservableArray();
-                    this.cmbDefaultPrice = new wijmo.collections.ObservableArray();
+                    this.cmbDefaultPrice = new wijmo.input.ComboBox('#cmbDefaultPrice');
                     this.initTermCombobox();
                     this.initARCombobox();
-                    this.cmbDefaultPrice.push('');
                 };
                 /**
                 * This function will go back customer.html when clicked
@@ -67,11 +67,35 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 *This function will disable all of the content of the  CustomerAdd
                 **/
                 CustomerAddComponent.prototype.onLock = function () {
+                    document.getElementById('customer').setAttribute('disabled', 'disabled');
+                    document.getElementById('address').setAttribute('disabled', 'disabled');
+                    document.getElementById('contactPerson').setAttribute('disabled', 'disabled');
+                    document.getElementById('contactNumber').setAttribute('disabled', 'disabled');
+                    document.getElementById('creditLimit').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbTerm').setAttribute('disabled', 'disabled');
+                    document.getElementById('tin').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbARAccount').setAttribute('disabled', 'disabled');
+                    document.getElementById('withReward').setAttribute('disabled', 'disabled');
+                    document.getElementById('rewardCardNumber').setAttribute('disabled', 'disabled');
+                    document.getElementById('rewardConversion').setAttribute('disabled', 'disabled');
+                    document.getElementById('cmbDefaultPrice').setAttribute('disabled', 'disabled');
                 };
                 /**
                 *This function will enable all of the content of the CustomerAdd
                 **/
                 CustomerAddComponent.prototype.onUnlock = function () {
+                    document.getElementById('customer').removeAttribute('disabled');
+                    document.getElementById('address').removeAttribute('disabled');
+                    document.getElementById('contactPerson').removeAttribute('disabled');
+                    document.getElementById('contactNumber').removeAttribute('disabled');
+                    document.getElementById('creditLimit').removeAttribute('disabled');
+                    document.getElementById('cmbTerm').removeAttribute('disabled');
+                    document.getElementById('tin').removeAttribute('disabled');
+                    document.getElementById('cmbARAccount').removeAttribute('disabled');
+                    document.getElementById('withReward').removeAttribute('disabled');
+                    document.getElementById('rewardCardNumber').removeAttribute('disabled');
+                    document.getElementById('rewardConversion').removeAttribute('disabled');
+                    document.getElementById('cmbDefaultPrice').removeAttribute('disabled');
                 };
                 CustomerAddComponent.prototype.addCustomer = function () {
                     var customer = this.createCustomer();
@@ -106,7 +130,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 CustomerAddComponent.prototype.createCustomer = function () {
                     var data = {
-                        Customer: document.getElementById('txtCustomer').value,
+                        Customer: this.customer
                     };
                     return data;
                 };

@@ -1,9 +1,9 @@
-<section id="purchase-add-page">
+<section id="purchase-add-page" class="container">
 <!--Holds the header-->
         <div class="content-header clearfix">
             <div class="col-sm-6">
                 <div class="pull-left">
-                    <h3>Purchase Order Detail</h3>
+                    <h4>Purchase Order Detail</h4>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -18,182 +18,172 @@
         </div>
 <!--End of Header-->
 <!--Body here-->
-    <div class="container">
-        <div class="content-body clearfix">
-            <form id="formAddPurchaseOrder" class="form-horizontal" role="form">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">P.O. No.</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <input id = "txtPO_Number"
-                                class="form-control input-40 text-right"
-                                type="text" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">Period</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <input id="txtPeriod" 
-                                class="form-control input-40 text-right"
-                                type="text"
-                                value="0001" 
-                                disabled>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-labe">Date</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <div id="inputDate"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">Supplier</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <wj-combo-box id="cmbSupplier" [cmbSupplier]
-                                        class="input-70"
-                                        [itemsSource]="cmbSupplierSource"
-                                        [isReadOnly]="true">
-                            </wj-combo-box>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">Remarks</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <textarea id="txtRemarks"  class="input-70" rows="5">
-                            </textarea>
-                        </div>
+<div class="content-body clearfix">
+    <form id="formAddPurchaseOrder" class="form-horizontal" role="form">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label class="control-label">P.O. No.</label>
+                </div>
+                <div class="col-sm-10">
+                    <input [(ngModel)]="poNumber"
+                        id = "poNumber"
+                        class="form-control input-40 text-right"
+                        type="text" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label class="control-label">Period</label>
+                </div>
+                <div class="col-sm-10">
+                    <input [(ngModel)]="period"
+                        id="period" 
+                        class="form-control input-40 text-right"
+                        type="text"
+                        value="0001" 
+                        disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label class="control-labe">Date</label>
+                </div>
+                <div class="col-sm-10">
+                    <div id="inputDate"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label class="control-label">Supplier</label>
+                </div>
+                <div class="col-sm-10">
+                    <div id="cmbSupplier" class="input-70">
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <div class="col-sm-3">
-                            <label class="control-label">Prepared By</label>
-                        </div>
-                        <div class="col-sm-9">
-                            <wj-combo-box id="cmbPreparedBy" 
-                                        class="input-70"
-                                        [itemsSource]="cmbAuthority"
-                                        [isReadOnly]="true" disabled>
-                            </wj-combo-box>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-3">
-                            <label class="control-label">Checked By</label>
-                        </div>
-                        <div class="col-sm-9">
-                            <wj-combo-box id="cmbCheckedBy"
-                                        class="input-70"
-                                        [itemsSource]="cmbAuthority"
-                                        [isReadOnly]="true">
-                            </wj-combo-box>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-3">
-                            <label class="control-label">Approved By</label>
-                        </div>
-                        <div class="col-sm-9">
-                            <wj-combo-box id="cmbApprovedBy"
-                                        class="input-70"
-                                        [itemsSource]="cmbAuthority"
-                                        [isReadOnly]="true">
-                            </wj-combo-box>
-                        </div>
-                    </div>
-                        <div class="form-group">
-                            <div class="col-sm-3">
-                                <label class="control-label">Total Amount</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <input id="txtTotalAmount"
-                                    class="form-control input-70"
-                                    placeholder="0.00"
-                                    disabled>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-6">
-                                <input id="txtTotalAmount"
-                                    class="form-control input-100"
-                                    placeholder="Download items from stock alert."
-                                    disabled>
-                            </div>
-                            <div class="col-sm-6">
-                                <button id="btnDownload" class="btn btn-primary sharp ">Download</button>
-                            </div>
-                        </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label class="control-label">Remarks</label>
                 </div>
-            </form>
+                <div class="col-sm-10">
+                    <textarea [(ngModel)]="remarks" id="remarks"  class="input-70" rows="5">
+                    </textarea>
+                </div>
+            </div>
         </div>
-        <div class="content-body clearfix">
-             <div class="col-sm-9">
-                <wj-flex-grid id="flexPurchaseAdd" 
-                              #flexPurchaseAdd 
-                              class="grid" 
-                              [itemsSource]="purchaseAddView" [isReadOnly]="true">
-                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                            <button class="btn btn-danger sharp" >
-                                    Delete
-                            </button>
-                        </template>
-                    </wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Item'" 
-                                        [binding]="'Item'"
-                                        [align]="'center'"
-                                        [width]="'8*'">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <wj-combo-box [itemsSource]="cmbItemSource" class="input-100">
-                        </wj-combo-box>
-                        </template>
-                    </wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Unit'"
-                                        [binding]="'Unit'"
-                                        [align]="'center'"
-                                        [width]="'3*'">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <wj-combo-box [itemsSource]="cmbUnit" class="input-100" disabled>
-                        </wj-combo-box>
-                        </template>
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Quantity'"
-                                        [binding]="'Quantity'"
-                                        [align]="'center'"
-                                        [width]="'2*'"
-                                        [data-type]="'Number'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Unit Cost'"
-                                        [binding]="'UnitCost'"
-                                        [align]="'center'"
-                                        [width]="'2*'"
-                                        [data-type]="'Number'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Total Cost'"
-                                        [binding]="'TotalCost'"
-                                        [align]="'center'"
-                                        [width]="'2*'"
-                                        [data-type]="'Number'">
-                    </wj-flex-grid-column>
-                </wj-flex-grid>
-            </div>
-            <div class="col-sm-3">
-                <div class="pull-right">
-                    <button id="btnImportXLS" class="btn btn-primary sharp">Import XLS</button>
-                    <button id="btnExportXLS" class="btn btn-primary sharp">Export XLS</button>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label class="control-label">Prepared By</label>
+                </div>
+                <div class="col-sm-9">
+                    <div id="cmbPreparedBy" class="input-70" disabled>
+                    </div>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label class="control-label">Checked By</label>
+                </div>
+                <div class="col-sm-9">
+                    <div id="cmbCheckedBy" class="input-70">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label class="control-label">Approved By</label>
+                </div>
+                <div class="col-sm-9">
+                    <div id="cmbApprovedBy" class="input-70">
+                    </div>
+                </div>
+            </div>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label class="control-label">Total Amount</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input [(ngModel)]="totalAmount"
+                            id="totalAmount"
+                            class="form-control input-70"
+                            placeholder="0.00"
+                            disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <input [(ngModel)]="download"
+                            id="download"
+                            class="form-control input-100"
+                            placeholder="Download items from stock alert."
+                            disabled>
+                    </div>
+                    <div class="col-sm-6">
+                        <button id="btnDownload" class="btn btn-primary sharp ">Download</button>
+                    </div>
+                </div>
+        </div>
+    </form>
+</div>
+<div class="content-body clearfix">
+        <div class="col-sm-9">
+        <wj-flex-grid id="flexPurchaseAdd" 
+                        #flexPurchaseAdd 
+                        class="grid" 
+                        [itemsSource]="purchaseAddView" [isReadOnly]="true">
+            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                    <button class="btn btn-danger sharp" >
+                            Delete
+                    </button>
+                </template>
+            </wj-flex-grid-column> 
+            <wj-flex-grid-column [header]="'Item'" 
+                                [binding]="'Item'"
+                                [align]="'center'"
+                                [width]="'8*'">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                <wj-combo-box [itemsSource]="cmbItemSource" class="input-100">
+                </wj-combo-box>
+                </template>
+            </wj-flex-grid-column> 
+            <wj-flex-grid-column [header]="'Unit'"
+                                [binding]="'Unit'"
+                                [align]="'center'"
+                                [width]="'3*'">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                <wj-combo-box [itemsSource]="cmbUnit" class="input-100" disabled>
+                </wj-combo-box>
+                </template>
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Quantity'"
+                                [binding]="'Quantity'"
+                                [align]="'center'"
+                                [width]="'2*'"
+                                [data-type]="'Number'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Unit Cost'"
+                                [binding]="'UnitCost'"
+                                [align]="'center'"
+                                [width]="'2*'"
+                                [data-type]="'Number'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Total Cost'"
+                                [binding]="'TotalCost'"
+                                [align]="'center'"
+                                [width]="'2*'"
+                                [data-type]="'Number'">
+            </wj-flex-grid-column>
+        </wj-flex-grid>
+    </div>
+    <div class="col-sm-3">
+        <div class="pull-right">
+            <button id="btnImportXLS" class="btn btn-primary sharp">Import XLS</button>
+            <button id="btnExportXLS" class="btn btn-primary sharp">Export XLS</button>
         </div>
     </div>
+</div>
 <!--End of body-->
 </section>
