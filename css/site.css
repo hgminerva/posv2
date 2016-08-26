@@ -3,6 +3,8 @@ body {
     height: 100%;
     background-color: #ffffff;
     color: #181009;
+    padding: 0;
+    margin: 0;
     }
 
     /* Wrapper for page content to push down footer */

@@ -1,16 +1,37 @@
-<section id="title" class="dark-blue">
+<section id="title" class="navbar navbar-inverse navbar-fixed-top dark-silver">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand"  href="/"><img src="images/logo4.png" alt="logo"></a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-right">
+                <div class="col-sm-6 collapse navbar-collapse pull-right">
+                    <ul class="breadcrumb pull-right">
+                        <li *ngIf="!login"><a [routerLink]="['Login']">Login</a></li>
+                        <li *ngIf="login"><a [routerLink]="['Logout']">Logout</a></li>
+                        <li><a [routerLink]="['Dashboard']">Dashboard</a></li>                  
+                    </ul>
+                    </div>           
+            </div>
+        </div>     
+</section>
+<router-outlet></router-outlet>
+<footer id="footer" class="dark-silver">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">        
+            <div class="col-sm-6">
+                &copy; 2016 <a target="_blank" href="#" title="WebPOS">Web POS</a>. All Rights Reserved.<br>
             </div>
-            <div class="col-sm-6 collapse navbar-collapse pull-right">
-                <ul class="breadcrumb pull-right">
-                    <li *ngIf="!login"><a [routerLink]="['Login']">Login</a></li>
-                    <li *ngIf="login"><a [routerLink]="['Logout']">Logout</a></li>
-                    <li><a [routerLink]="['Dashboard']">Dashboard</a></li>                  
+            <div class="col-sm-6">
+                <ul class="pull-right">
+                    <li><a id="gototop" class="gototop" href="#"><i class="icon-chevron-up"></i></a></li>
                 </ul>
             </div>
         </div>
     </div>
-</section>
-<router-outlet></router-outlet>
+</footer>          
