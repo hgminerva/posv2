@@ -48,33 +48,27 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     /*Else*/
                     this.purchaseAddSource = new wijmo.collections.ObservableArray();
                     this.purchaseAddView = new wijmo.collections.CollectionView(this.purchaseAddSource);
-                    this.cmbItemSource = new wijmo.collections.ObservableArray();
-                    this.cmbAccount = new wijmo.collections.ObservableArray();
-                    this.cmbSupplierSource = new wijmo.collections.ObservableArray();
-                    this.cmbAuthority = new wijmo.collections.ObservableArray();
                     this.inputDate = new wijmo.input.InputDate('#inputDate', {
                         format: 'MM/dd/yyyy',
                         value: new Date()
                     });
-                    this.initCmbSupplier();
-                    this.initCmbAuthority();
-                    this.initCmbAccount();
+                    this.cmbPreparedBy = new wijmo.input.ComboBox('#cmbPreparedBy');
+                    this.cmbApprovedBy = new wijmo.input.ComboBox('#cmbApprovedBy');
+                    this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
                     this.purchaseAddSource.push({ Quantity: 1 });
-                    this.cmbItemSource.push('Test');
-                    this.cmbItemSource.push('Test1');
                 };
                 DebitCreditMemoAddComponent.prototype.onLock = function () {
                     document.getElementById('flexDebitCreditAdd').setAttribute('disabled', 'disabled');
                     document.getElementById('cmbCheckedBy').setAttribute('disabled', 'disabled');
                     document.getElementById('cmbApprovedBy').setAttribute('disabled', 'disabled');
-                    document.getElementById('txtParticulars').setAttribute('disabled', 'disabled');
+                    document.getElementById('particulars').setAttribute('disabled', 'disabled');
                     document.getElementById('inputDate').setAttribute('disabled', 'disabled');
                 };
                 DebitCreditMemoAddComponent.prototype.onUnlock = function () {
                     document.getElementById('flexDebitCreditAdd').removeAttribute('disabled');
                     document.getElementById('cmbCheckedBy').removeAttribute('disabled');
                     document.getElementById('cmbApprovedBy').removeAttribute('disabled');
-                    document.getElementById('txtParticulars').removeAttribute('disabled');
+                    document.getElementById('particulars').removeAttribute('disabled');
                     document.getElementById('inputDate').removeAttribute('disabled');
                 };
                 DebitCreditMemoAddComponent.prototype.onPreview = function () {
@@ -89,17 +83,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 //getters
                 DebitCreditMemoAddComponent.prototype.getToastr = function () { return this.toastr; };
-                DebitCreditMemoAddComponent.prototype.initCmbSupplier = function () {
-                    this.cmbSupplierSource.push('Return from Customer');
-                };
-                DebitCreditMemoAddComponent.prototype.initCmbAuthority = function () {
-                    this.cmbAuthority.push('Administrator');
-                    this.cmbAuthority.push('Cashier');
-                    this.cmbAuthority.push('Teller');
-                };
-                DebitCreditMemoAddComponent.prototype.initCmbAccount = function () {
-                    this.cmbAccount.push('Test');
-                };
                 DebitCreditMemoAddComponent.prototype.addDebitCredit = function () {
                     var debitCredit = this.createDebitCredit();
                     if (this.validate(debitCredit)) {

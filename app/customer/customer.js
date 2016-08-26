@@ -42,11 +42,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.router = router;
                     this.customerService = customerService;
                 }
-                /**
-                *This function is just like a constructor will initialize all the component elements
-                *when Customer in dashboard is clicked.
-                *Will go back to the login screen if you try to access this component without logging in.
-                **/
                 CustomerComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
@@ -57,15 +52,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.customerView.pageSize = 10;
                     this.customerService.initCustomers(this);
                 };
-                /**
-                *This function will go to customerAdd.html when clicked
-                **/
                 CustomerComponent.prototype.onAdd = function () {
                     this.router.navigate(['CustomerAdd']);
                 };
-                /**
-                *This function will go back dashboard.html when clicked
-                **/
                 CustomerComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };

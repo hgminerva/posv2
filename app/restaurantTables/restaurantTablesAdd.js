@@ -37,7 +37,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 }
                 /**
                 *This function is just like a constructor will initialize all the component elements
-                *when there will be new purchase order.
+                *when there will be a new purchase order.
                 *Will go back to the login screen if you try to access this component without logging in.
                 **/
                 RestaurantTablesAddComponent.prototype.ngOnInit = function () {

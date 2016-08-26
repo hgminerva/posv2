@@ -23,26 +23,20 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 /**
 * 
 */
-export class DebitCreditMemoAddComponent implements OnInit{
+export class DebitCreditMemoAddComponent implements OnInit {
+    private debitCreditMemoNumber : String;
+    private period : String;
+    private inputDate : wijmo.input.InputDate;
+    private particulars : String;
+    private cmbPreparedBy : wijmo.input.ComboBox;
+    private cmbCheckedBy : wijmo.input.ComboBox;
+    private cmbApprovedBy : wijmo.input.ComboBox;
+
+
     //grid
     private purchaseAddView : wijmo.collections.CollectionView;
     private purchaseAddSource : wijmo.collections.ObservableArray;
-    private cmbItemSource : wijmo.collections.ObservableArray;
-    private cmbAccount : wijmo.collections.ObservableArray;
-    //html elements sources
-    private cmbSupplierSource : wijmo.collections.ObservableArray;
-    private cmbAuthority : wijmo.collections.ObservableArray;
-    //html elements input
-    private txtPO_Number : String;
-    private txtPeriod : Number;
-    private theDate : Date;
-    private cmbSupplier : String;
-    private txtRemarks : String ;
-    private cmbPreparedBy : String;
-    private cmbCheckedBy : String;
-    private cmbApprovedBy : String;
-    private txtTotalAmount : Number;
-    private inputDate : wijmo.input.InputDate;
+
 
     constructor(private toastr : ToastsManager, private router : Router) {
 
@@ -63,31 +57,25 @@ export class DebitCreditMemoAddComponent implements OnInit{
         /*Else*/
         this.purchaseAddSource = new wijmo.collections.ObservableArray();
         this.purchaseAddView = new wijmo.collections.CollectionView(this.purchaseAddSource);
-        this.cmbItemSource = new wijmo.collections.ObservableArray();
-        this.cmbAccount = new wijmo.collections.ObservableArray();
 
-        this.cmbSupplierSource = new wijmo.collections.ObservableArray();
-        this.cmbAuthority = new wijmo.collections.ObservableArray();
 
         this.inputDate = new  wijmo.input.InputDate('#inputDate', {
             format : 'MM/dd/yyyy',
             value : new Date()
         });
 
-        this.initCmbSupplier();
-        this.initCmbAuthority();
-        this.initCmbAccount();
+        this.cmbPreparedBy = new wijmo.input.ComboBox('#cmbPreparedBy');
+        this.cmbApprovedBy = new wijmo.input.ComboBox('#cmbApprovedBy');
+        this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
 
         this.purchaseAddSource.push({Quantity : 1});
-        this.cmbItemSource.push('Test');
-        this.cmbItemSource.push('Test1');
     }  
 
     public onLock() : void {
         document.getElementById('flexDebitCreditAdd').setAttribute('disabled', 'disabled');
         document.getElementById('cmbCheckedBy').setAttribute('disabled', 'disabled');
         document.getElementById('cmbApprovedBy').setAttribute('disabled', 'disabled');
-        document.getElementById('txtParticulars').setAttribute('disabled','disabled');
+        document.getElementById('particulars').setAttribute('disabled','disabled');
         document.getElementById('inputDate').setAttribute('disabled','disabled');
     }
 
@@ -95,7 +83,7 @@ export class DebitCreditMemoAddComponent implements OnInit{
         document.getElementById('flexDebitCreditAdd').removeAttribute('disabled');
         document.getElementById('cmbCheckedBy').removeAttribute('disabled');
         document.getElementById('cmbApprovedBy').removeAttribute('disabled');
-        document.getElementById('txtParticulars').removeAttribute('disabled');
+        document.getElementById('particulars').removeAttribute('disabled');
         document.getElementById('inputDate').removeAttribute('disabled');
     }
 
@@ -117,20 +105,6 @@ export class DebitCreditMemoAddComponent implements OnInit{
 
    //getters
     public getToastr() : ToastsManager { return this.toastr; }
-
-    private initCmbSupplier() : void {
-        this.cmbSupplierSource.push('Return from Customer');
-    }
-
-    private initCmbAuthority() : void {
-        this.cmbAuthority.push('Administrator');
-        this.cmbAuthority.push('Cashier');
-        this.cmbAuthority.push('Teller');
-    }
-
-    private initCmbAccount() : void {
-        this.cmbAccount.push('Test');
-    }
 
     private addDebitCredit() : void {
        const debitCredit = this.createDebitCredit();

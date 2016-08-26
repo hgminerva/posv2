@@ -1,9 +1,9 @@
-<section id="debit-credit-memo-add-page">
+<section id="debit-credit-memo-add-page" class="container">
 <!--Holds the header-->
     <div class="content-header clearfix">
         <div class="col-sm-6">
             <div class="pull-left">
-                <h3>Debit/Credit Memo Detail</h3>
+                <h4>Debit/Credit Memo Detail</h4>
             </div>
         </div>
         <div class="col-sm-6">
@@ -18,140 +18,134 @@
     </div>
 <!--End of header-->
 <!--Body here-->
-    <div class="container">
-        <div class="content-body clearfix">
-            <form id="formDebitCreditMemoAdd" class="form-horizontal" role="form">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <label class="control-label">DB/CR Memo No.</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <input id = "txtDB_CR_Memo_NO"
-                                    class="form-control input-60"
-                                    type="text" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <label class="control-label">Period</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <input id="txtPeriod" 
-                                    class="form-control input-60"
-                                    type="text" disabled>
-                        </div>
-                        </div>
-                        <div class="form-group">
-                        <div class="col-sm-4">
-                            <label class="control-label">DB/CR Memo Date</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <div id="inputDate"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <label class="control-label">Particulars</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <textarea id="txtParticulars"  class="input-70" rows="5">
-                            </textarea>
-                        </div>
-                    </div>
+<div class="content-body clearfix">
+    <form id="formDebitCreditMemoAdd" class="form-horizontal" role="form">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <label class="control-label">DB/CR Memo No.</label>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <div class="col-sm-3">
-                            <label class="control-label">Prepared By</label>
-                        </div>
-                        <div class="col-sm-9">
-                            <wj-combo-box id="cmbPreparedBy" 
-                                        class="input-70"
-                                        [itemsSource]="cmbAuthority"
-                                        [isReadOnly]="true" disabled>
-                            </wj-combo-box>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-3">
-                            <label class="control-label">Checked By</label>
-                        </div>
-                        <div class="col-sm-9">
-                            <wj-combo-box id="cmbCheckedBy"
-                                        class="input-70"
-                                        [itemsSource]="cmbAuthority"
-                                        [isReadOnly]="true">
-                            </wj-combo-box>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-3">
-                            <label class="control-label">Approved By</label>
-                        </div>
-                        <div class="col-sm-9">
-                            <wj-combo-box id="cmbApprovedBy"
-                                        class="input-70"
-                                        [itemsSource]="cmbAuthority"
-                                        [isReadOnly]="true">
-                            </wj-combo-box>
-                        </div>
-                    </div>
+                <div class="col-sm-8">
+                    <input id = "debitCreditMemoNumber"
+                        [(ngModel)] = "debitCreditMemoNumber"
+                        class="form-control input-60"
+                        type="text" disabled>
                 </div>
-            </form>
-        </div>
-        <div class="content-body clearfix">
-             <div class="col-sm-12">
-                <wj-flex-grid id="flexDebitCreditAdd" 
-                            #flexPurchaseAdd class="grid" 
-                            [itemsSource]="purchaseAddView"
-                            [isReadOnly]="true">
-                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                            <button class="btn btn-danger sharp" >
-                                    Delete
-                            </button>
-                        </template>
-                    </wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Sales Invoice No.'" 
-                                        [binding]="'Sales Invoice No'"
-                                        [align]="'center'"
-                                        [width]="'3*'">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <wj-combo-box [itemsSource]="cmbItemSource" class="input-100">
-                        </wj-combo-box>
-                        </template>
-                    </wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Account'"
-                                        [binding]="'Account'"
-                                        [align]="'center'"
-                                        [width]="'5*'">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <wj-combo-box [itemsSource]="cmbAccount" class="input-100">
-                        </wj-combo-box>
-                        </template>
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Particulars'"
-                                        [binding]="'Particulars'"
-                                        [align]="'center'"
-                                        [width]="'2*'"
-                                        [data-type]="'Number'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Debit'"
-                                        [binding]="'Debit'"
-                                        [align]="'center'"
-                                        [width]="'2*'"
-                                        [data-type]="'Number'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'Credit'"
-                                        [binding]="'Credit'"
-                                        [align]="'center'"
-                                        [width]="'2*'"
-                                        [data-type]="'Number'">
-                    </wj-flex-grid-column>
-                </wj-flex-grid>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <label class="control-label">Period</label>
+                </div>
+                <div class="col-sm-8">
+                    <input id="period" 
+                        [(ngModel)]="period"
+                        class="form-control input-60"
+                        type="text" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <label class="control-label">DB/CR Memo Date</label>
+                </div>
+                <div class="col-sm-8">
+                    <div id="inputDate"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <label class="control-label">Particulars</label>
+                </div>
+                <div class="col-sm-8">
+                    <textarea [(ngModel)]="particulars" id="particulars"  class="input-70" rows="5">
+                    </textarea>
+                </div>
             </div>
         </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label class="control-label">Prepared By</label>
+                </div>
+                <div class="col-sm-9">
+                    <div id="cmbPreparedBy" 
+                        class="input-70" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label class="control-label">Checked By</label>
+                </div>
+                <div class="col-sm-9">
+                    <div id="cmbCheckedBy"
+                        class="input-70">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label class="control-label">Approved By</label>
+                </div>
+                <div class="col-sm-9">
+                    <div id="cmbApprovedBy"
+                         class="input-70">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="content-body clearfix">
+        <div class="col-sm-12">
+        <wj-flex-grid id="flexDebitCreditAdd" 
+                    #flexPurchaseAdd class="grid" 
+                    [itemsSource]="purchaseAddView"
+                    [isReadOnly]="true">
+            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                    <button class="btn btn-danger sharp" >
+                            Delete
+                    </button>
+                </template>
+            </wj-flex-grid-column> 
+            <wj-flex-grid-column [header]="'Sales Invoice No.'" 
+                                [binding]="'Sales Invoice No'"
+                                [align]="'center'"
+                                [width]="'3*'">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                <wj-combo-box [itemsSource]="cmbItemSource" class="input-100">
+                </wj-combo-box>
+                </template>
+            </wj-flex-grid-column> 
+            <wj-flex-grid-column [header]="'Account'"
+                                [binding]="'Account'"
+                                [align]="'center'"
+                                [width]="'5*'">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                <wj-combo-box [itemsSource]="cmbAccount" class="input-100">
+                </wj-combo-box>
+                </template>
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Particulars'"
+                                [binding]="'Particulars'"
+                                [align]="'center'"
+                                [width]="'2*'"
+                                [data-type]="'Number'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Debit'"
+                                [binding]="'Debit'"
+                                [align]="'center'"
+                                [width]="'2*'"
+                                [data-type]="'Number'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Credit'"
+                                [binding]="'Credit'"
+                                [align]="'center'"
+                                [width]="'2*'"
+                                [data-type]="'Number'">
+            </wj-flex-grid-column>
+        </wj-flex-grid>
     </div>
+</div>
 <!--End of body-->
 </section>

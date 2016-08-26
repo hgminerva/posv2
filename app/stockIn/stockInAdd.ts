@@ -21,8 +21,17 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 
 export class StockInAddComponent implements OnInit{
-
+    private stockInNumber : String;
+    private period : String;
     private stockInDate : wijmo.input.InputDate;
+    private cmbSupplier : wijmo.input.ComboBox;
+    private cmbPoNumber : wijmo.input.ComboBox;
+    private remarks : String;
+    private return : Boolean = false;
+    private returnOrNumber : String;
+    private returnSalesInvoice : String;
+    private cmbDownloadCategory : wijmo.input.ComboBox;
+
     private cmbSupplierSource : wijmo.collections.ObservableArray;
     private cmbPO_NoSource : wijmo.collections.ObservableArray;
     private cmbAuthority : wijmo.collections.ObservableArray;

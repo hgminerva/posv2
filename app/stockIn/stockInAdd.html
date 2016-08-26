@@ -1,7 +1,7 @@
 <section id="stock-in-add-page">
     <div class="content-header clearfix">
         <div class="col-sm-6">
-            <h3>Stock-In Details</h3>
+            <h4>Stock-In Details</h4>
         </div>
         <div class="col-sm-6">
                 <div class="pull-right">
@@ -23,7 +23,7 @@
                                 <label class="control-label">Stock In No.</label>
                             </div>
                             <div class="col-sm-9">
-                                <input id="txtStockInNo" class="form-control input-40" type="text" disabled>
+                                <input [(ngModel)]="stockInNumber" id="stockInNumber" class="form-control input-40" type="text" disabled>
                             </div>
                         </div>
                         <div class="form-group">
@@ -31,7 +31,7 @@
                                 <label class="control-label">Period</label>
                             </div>
                             <div class="col-sm-9">
-                                <input id="txtPeriod" class="form-control input-40" type="text" disabled>
+                                <input [(ngModel)]="period" id="period" class="form-control input-40" type="text" disabled>
                             </div>
                         </div>
                         <div class="form-group">
@@ -47,8 +47,8 @@
                                 <label class="control-label">Supplier</label>
                             </div>
                             <div class="col-sm-9">
-                                <wj-combo-box id="cmbSupplier" [itemsSource]="cmbSupplierSource">
-                                </wj-combo-box>
+                                <div id="cmbSupplier">
+                                </div>
                             </div>
                         </div>
                             <div class="form-group">
@@ -56,8 +56,8 @@
                                 <label class="control-label">PO No.</label>
                             </div>
                             <div class="col-sm-9">
-                                <wj-combo-box id="cmbPO_No" [itemsSource]="cmbPO_NoSource">
-                                </wj-combo-box>
+                                <div id="cmbPoNumber">
+                                </div>
                             </div>
                         </div>
                             <div class="form-group">
@@ -65,7 +65,7 @@
                                 <label class="control-label">Remarks</label>
                             </div>
                             <div class="col-sm-9">
-                                <textarea id="txtRemarks" rows="5" class="input-70">
+                                <textarea [(ngModel)]="remarks" id="remarks" rows="5" class="form-control">
                                 </textarea>
                             </div>
                         </div>
@@ -76,15 +76,15 @@
                                 <label>Return</label>
                             </div>
                             <div class="col-sm-8">
-                                <input id="chkReturn" class="checkbox" type="checkbox" (click)="enableReturnFields() ">
+                                <input [(ngModel)]="return" id="return" class="checkbox" type="checkbox" (click)="enableReturnFields()">
                             </div>
                         </div>
                         <div class="form-group">
-                                <div class="col-sm-4">
+                            <div class="col-sm-4">
                                 <label class="control-label">Return OR No.</label>
                             </div>
                             <div class="col-sm-8">
-                                <input id="txtReturnNo" class="form-control" type="text" disabled>
+                                <input [(ngModel)]="returnOrNumber" id="returnOrNumber" class="form-control" type="text" disabled>
                             </div>
                         </div>
                         <div class="form-group">
@@ -92,19 +92,16 @@
                                 <label class="control-label">Return Sales Invoice</label>
                             </div>
                             <div class="col-sm-8">
-                                <input id="txtReturnSales" class="form-control" type="text" disabled>
+                                <input id="returnSalesTicket" class="form-control" type="text" disabled>
                             </div>
                         </div>
-                            <div class="form-group">
+                        <div class="form-group">
                             <div class="col-sm-4">
                                 <label class="control-label">Prepared By</label>
                             </div>
                             <div class="col-sm-8">
-                                <wj-combo-box id="cmbPreparedBy" 
-                                            class="input-70"
-                                            [itemsSource]="cmbAuthority"
-                                            [isReadOnly]="true" disabled>
-                                </wj-combo-box>
+                                <div id="cmbPreparedBy" disabled>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -112,11 +109,8 @@
                                 <label class="control-label">Checked By</label>
                             </div>
                             <div class="col-sm-8">
-                                <wj-combo-box id="cmbCheckedBy"
-                                            class="input-70"
-                                            [itemsSource]="cmbAuthority"
-                                            [isReadOnly]="true">
-                                </wj-combo-box>
+                                <div id="cmbCheckedBy" class="input-70">
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -124,11 +118,8 @@
                                 <label class="control-label">Approved By</label>
                             </div>
                             <div class="col-sm-8">
-                                <wj-combo-box id="cmbApprovedBy"
-                                            class="input-70"
-                                            [itemsSource]="cmbAuthority"
-                                            [isReadOnly]="true">
-                                </wj-combo-box>
+                                <div id="cmbApprovedBy" class="input-70">
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -137,11 +128,8 @@
                                 <label class="control-label">from the category</label>
                             </div>
                             <div class="col-sm-5">
-                                    <wj-combo-box id="cmbDownload"
-                                            class="input-100"
-                                            [itemsSource]="cmbDownloadSource"
-                                            [isReadOnly]="true">
-                                </wj-combo-box>
+                                <div id="cmbDownload" class="input-100">
+                                </div>
                             </div>
                             <div class="col-sm-3">
                                 <button id="btnDownload" class="btn btn-primary sharp pull-left">Download</button>

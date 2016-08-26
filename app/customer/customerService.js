@@ -73,7 +73,6 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                 CustomerService.prototype.updateCustomer = function (data, customerComponent) {
                 };
                 CustomerService.prototype.deleteCustomer = function (data, customerComponent) {
-                    var _this = this;
                     var url = localStorage.getItem('api_url') + CustomerService.CUSTOMER_API_URL + "delete";
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
                     headers.append('Content-Type', 'application/json');
@@ -82,8 +81,8 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         .subscribe(function (response) {
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
-                                _this.initCustomers(customerComponent);
                                 customerComponent.getToastr().success("Deleted successfully");
+                                customerComponent.getCustomerView().remove(data);
                                 break;
                             case response_1.Response.BAD_REQUEST: break;
                             case response_1.Response.FORBIDDEN_ERROR: break;

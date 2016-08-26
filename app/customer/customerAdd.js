@@ -40,11 +40,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.customerService = customerService;
                     this.withReward = false;
                 }
-                /**
-                *This function is just like a constructor will initialize all the component elements
-                *when you add a customer.
-                *Will go back to the login screen if you try to access this component without logging in.
-                **/
                 CustomerAddComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
@@ -57,15 +52,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.initTermCombobox();
                     this.initARCombobox();
                 };
-                /**
-                * This function will go back customer.html when clicked
-                **/
                 CustomerAddComponent.prototype.onClose = function () {
                     this.addCustomer();
                 };
-                /**
-                *This function will disable all of the content of the  CustomerAdd
-                **/
                 CustomerAddComponent.prototype.onLock = function () {
                     document.getElementById('customer').setAttribute('disabled', 'disabled');
                     document.getElementById('address').setAttribute('disabled', 'disabled');
@@ -80,9 +69,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     document.getElementById('rewardConversion').setAttribute('disabled', 'disabled');
                     document.getElementById('cmbDefaultPrice').setAttribute('disabled', 'disabled');
                 };
-                /**
-                *This function will enable all of the content of the CustomerAdd
-                **/
                 CustomerAddComponent.prototype.onUnlock = function () {
                     document.getElementById('customer').removeAttribute('disabled');
                     document.getElementById('address').removeAttribute('disabled');
@@ -108,9 +94,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 //getters
                 CustomerAddComponent.prototype.getToastr = function () { return this.toastr; };
                 CustomerAddComponent.prototype.getRouter = function () { return this.router; };
-                /**
-                *This function initializes the  term combobox of customer add page
-                **/
                 CustomerAddComponent.prototype.initTermCombobox = function () {
                     var i, day = 15;
                     for (i = 1; i < CustomerAddComponent.CMB_TERM_SOURCE_LENGTH; i++) {
@@ -119,9 +102,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     }
                     this.cmbTermSource.push('COD');
                 };
-                /**
-                *This function initializes the  AR Account combobox of customer add page
-                **/
                 CustomerAddComponent.prototype.initARCombobox = function () {
                     this.cmbAR_AccountSource.push('Account Receviable - Others');
                     this.cmbAR_AccountSource.push('Account Receviable - Sales');

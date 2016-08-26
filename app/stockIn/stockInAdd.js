@@ -34,6 +34,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 function StockInAddComponent(router, toastr) {
                     this.router = router;
                     this.toastr = toastr;
+                    this.return = false;
                 }
                 StockInAddComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {

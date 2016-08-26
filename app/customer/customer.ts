@@ -21,9 +21,7 @@ import {CustomerAddComponent} from './customerAdd';
         ToastsManager, CustomerService, CustomerAddComponent
     ]
 })
-/**
-*This class component will read and display all the customers from the database. 
-**/
+
 export class CustomerComponent implements OnInit {
     private customerView : wijmo.collections.CollectionView;
 
@@ -33,11 +31,6 @@ export class CustomerComponent implements OnInit {
 
     }
 
-    /** 
-    *This function is just like a constructor will initialize all the component elements
-    *when Customer in dashboard is clicked. 
-    *Will go back to the login screen if you try to access this component without logging in.
-    **/
     public ngOnInit() {
         if(!localStorage.getItem('access_token')) {
             
@@ -51,16 +44,11 @@ export class CustomerComponent implements OnInit {
         this.customerService.initCustomers(this);
     }
 
-    /**
-    *This function will go to customerAdd.html when clicked
-    **/
     public onAdd() : void  {
         this.router.navigate(['CustomerAdd']);
     }
 
-    /**
-    *This function will go back dashboard.html when clicked
-    **/
+
     public onClose() : void {
         this.router.navigate(['Dashboard']);
     }

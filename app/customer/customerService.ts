@@ -75,8 +75,8 @@ export class CustomerService {
                 response => {
                         switch(response.status) {
                                 case Response.SUCCESS :
-                                       this.initCustomers(customerComponent);
                                        customerComponent.getToastr().success("Deleted successfully");
+                                       customerComponent.getCustomerView().remove(data);
                                         break;
                                 case Response.BAD_REQUEST : break;
                                 case Response.FORBIDDEN_ERROR : break;

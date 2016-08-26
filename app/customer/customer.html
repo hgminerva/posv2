@@ -1,20 +1,82 @@
 <section id="customer-page" class="container">
-<!--Header here-->
-        <div class="content-header clearfix">
-            <div class="col-sm-6">
-                <div class="pull-left">
-                    <h4>Customer List</h4>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                 <div class="pull-right">
-                    <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Customer List</h4>
+    </div>
+    <div class="panel-heading">
+        <table style="width: 100%" border="0">
+            <tr>
+                <td style="width: 50%">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input type="text" class="form-control input-sm" id="InputFilter" placeholder="Search">
+                    </div>
+                </td>
+                <td style="width: 50%" align="right">
+                     <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button>
                     <button class="btn btn-primary sharp" type="button" (click)="onClose()">Close</button>
-                 </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="panel-body">
+        <wj-flex-grid id="customerGrid" #flexCustomerList class="grid" 
+                                        [itemsSource]="customerView" 
+                                        [isReadOnly]="true"
+                                        [selectionMode]="'Row'">
+            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                    <button class="btn btn-primary sharp" 
+                            (click)="editCustomer()">
+                            Edit
+                    </button>
+                </template>
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                    <button class="btn btn-danger sharp" 
+                            data-toggle="modal"
+                            data-target="#delModal">
+                            <i class="fa fa-trash">Delete</i>
+                    </button>
+                </template>
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Customer'"
+                                [binding]="'Customer'" 
+                                [isReadOnly]="true" 
+                                [width]="'3*'"
+                                [align]="'left'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Address'" 
+                                [binding]="'Address'" 
+                                [isReadOnly]="true" 
+                                [width]="'4*'"
+                                [align]="'left'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Contact No'" 
+                                [binding]="'ContactNumber'" 
+                                [isReadOnly]="true"
+                                [width]="'2*'"
+                                [align]="'left'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Lock'"
+                                [binding]="'IsLocked'" 
+                                [isReadOnly]="true" 
+                                [width]="'1*'"
+                                [align]="'center'"
+                                [data-type]="'Boolean'">
+            </wj-flex-grid-column>
+        </wj-flex-grid>
+          <div class="pull-right">
+                <button id="btnBack" class="btn btn-primary sharp" (click)="back()">back</button>
+                <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
             </div>
-        </div>
-<!--End of header -->
-<!--Body here-->
+    </div>
+    <div class="panel-footer">
+
+    </div>
+</div>
+<!--
 <div class="content-body-table clearfix">
     <div class="col-sm-12">
         <wj-flex-grid id="customerGrid" #flexCustomerList class="grid" 
@@ -76,6 +138,7 @@
         </div>
     </div>
 </div>
+-->
 <!--End of body-->
 <!--Modal-->
     <div id="delModal" class="modal fade" role="dialog">
