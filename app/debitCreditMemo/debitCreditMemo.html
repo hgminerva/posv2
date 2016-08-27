@@ -1,80 +1,91 @@
-<section id="supplier-page" class="container">
-    <div class="content-header clearfix">
-        <div class="col-sm-6">
-            <div class="pull-left">
-                <h4>Debit/Credit Memo List</h4>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="pull-right">
-                <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button>
-                <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
-            </div>
-        </div>
-    </div>
-    <div class="content-body-table clear fix">
-        <div class="col-sm-12">
-            <wj-flex-grid #flexDiscount 
-                            class="grid" 
-                            [itemsSource]="debitCreditMemoView"
-                            [selectionMode]="'Row'">
-                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
-                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <button class="btn btn-primary sharp" >
-                                Edit
-                        </button>
-                    </template>
-                </wj-flex-grid-column> 
-                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75"  [align]="'center'">
-                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <button class="btn btn-danger sharp" 
-                                data-toggle="modal"
-                                data-target="#delModal">
-                                Delete
-                        </button>
-                    </template>
-                </wj-flex-grid-column> 
-                <wj-flex-grid-column [header]="'DB/CR Memo Date'" 
-                                    [binding]="'DCMemoDate'"
-                                    [isReadOnly]="true" 
-                                    [width]="'2*'"
-                                    [align]="'left'">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'DB/CR Memo No'"
-                                    [binding]="'DCMemoNumber'"
-                                    [isReadOnly]="true" 
-                                    [width]="'2*'"
-                                    [align]="'center'">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Particulars'" 
-                                    [binding]="'Particulars'"
-                                    [width]="'5*'"
-                                    [align]="'left'">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Lock'" 
-                                    [binding]="'IsLocked'"
-                                    [data-type]="'Boolean'"
-                                    [isReadOnly]="true" 
-                                    [align]="'center'"
-                                    [width]="'1*'">
-                </wj-flex-grid-column>
-            </wj-flex-grid>
-        </div>
-    </div>
-    <div class="content-footer clearfix">
-        <div class="col-sm-12">
-            <div class="page-bar">
-                <div class="pull-right">
-                    <button id="btnBack" class="btn btn-primary sharp" (click)="back()">back</button>
-                    <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
+<section id="debiCreditMemo-page" class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Debit Credit Memo List</h4>
+                </div>
+                <div class="col-sm-6">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
+                        <button type="submit" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="panel-heading">
+            <table style="width: 100%" border="0">
+                <tr>
+                    <td style="width: 50%;">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input type="text" class="input-sm form-control" style="width:40%;" id="InputFilter" placeholder="Search">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-body">
+            <wj-flex-grid #flexDebitCreditMemo
+                        class="grid" 
+                        [itemsSource]="debitCreditMemoView"
+                        [selectionMode]="'Row'">
+            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                    <button class="btn btn-primary sharp" >
+                            Edit
+                    </button>
+                </template>
+            </wj-flex-grid-column> 
+            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75"  [align]="'center'">
+                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                    <button class="btn btn-danger sharp" 
+                            data-toggle="modal"
+                            data-target="#delModal">
+                            Delete
+                    </button>
+                </template>
+            </wj-flex-grid-column> 
+            <wj-flex-grid-column [header]="'DB/CR Memo Date'" 
+                                [binding]="'DCMemoDate'"
+                                [isReadOnly]="true" 
+                                [width]="'2*'"
+                                [align]="'left'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'DB/CR Memo No'"
+                                [binding]="'DCMemoNumber'"
+                                [isReadOnly]="true" 
+                                [width]="'2*'"
+                                [align]="'center'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Particulars'" 
+                                [binding]="'Particulars'"
+                                [width]="'5*'"
+                                [align]="'left'">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column [header]="'Lock'" 
+                                [binding]="'IsLocked'"
+                                [data-type]="'Boolean'"
+                                [isReadOnly]="true" 
+                                [align]="'center'"
+                                [width]="'1*'">
+            </wj-flex-grid-column>
+        </wj-flex-grid>
+        <div id="page-button">
+            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">first</button>
+            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">previous</button>
+            <label id="pageCount"></label>
+            <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
+            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">last</button>
+        </div>
+        </div>
+        <div class="panel-footer">
+
         </div>
     </div>
     <!--Modal-->
     <div id="delModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header dark-silver">
@@ -92,7 +103,7 @@
                             (click)="deleteDebitCreditMemo()">
                             Yes
                     </button>
-                     <button id="btnNo" 
+                        <button id="btnNo" 
                             type="button" 
                             class="btn btn-primary sharp" 
                             data-dismiss="modal">
@@ -100,8 +111,6 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </div>
-<!--End of Modal-->
 </section>

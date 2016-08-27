@@ -1,4 +1,4 @@
-import {Component, Injectable} from 'angular2/core';
+import {Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {SupplierComponent} from './supplier';
 import {Response} from '../response/response';

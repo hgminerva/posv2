@@ -1,93 +1,107 @@
 <section id="stockin-page" class="container">
-    <div class="content-header clearfix">
-        <div class="col-sm-6">
-            <h4>Stock-In List</h4>
-        </div>
-        <div class="col-sm-6">
-            <div class="pull-right">
-                <button id="btnAdd" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
-                <button id="btnClose" class="btn btn-primary sharp" (click)="onClose()">Close</button>
-            </div>
-        </div>
-    </div>
-    <div class="content-body-table">
-        <div class="col-sm-12">
-                <wj-flex-grid id="stockInGrid"  
-                            #stockInGrid 
-                            class="grid" 
-                            [itemsSource]="stockInView"
-                            [selectionMode]="'Row'">
-                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="55">
-                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <button class="btn btn-primary sharp" >
-                                Edit
-                        </button>
-                    </template>
-                </wj-flex-grid-column> 
-                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                            <button class="btn btn-danger sharp"
-                                    data-toggle="modal"
-                                    data-target="#delModal">
-                                <i class="fa fa-trash">Delete</i>
-                            </button>
-                    </template>
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Stock-In Date'"
-                                        [binding]="'StockInDate'"
-                                        [width]="150"
-                                        [align]="'left'"
-                                        [isReadOnly]="true">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Stock-In Number'"
-                                        [binding]="'StockInNumber'"
-                                        [width]="180"
-                                        [align]="'center'"
-                                        [isReadOnly]="true">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Supplier'"
-                                        [binding]="'SupplierId'"
-                                        [width]="300"
-                                        [align]="'center'"
-                                        [isReadOnly]="true">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Amount'"
-                                        [binding]="'Amount'"
-                                        [width]="100"
-                                        [align]="'center'"
-                                        [isReadOnly]="true">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Lock'"
-                                        [binding]="'IsLocked'"
-                                        [width]="50"
-                                        [align]="'center'"
-                                        [isReadOnly]="true"
-                                        [data-type]="Boolean">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Return'"
-                                        [binding]="'IsReturn'"
-                                        [width]="55"
-                                        [align]="'center'"
-                                        [isReadOnly]="true"
-                                        [data-type]="Boolean">
-                </wj-flex-grid-column>
-                <wj-flex-grid-column [header]="'Remarks'"
-                                        [binding]="'Remarks'"
-                                        [width]="500"
-                                        [align]="'left'"
-                                        [isReadOnly]="true">
-                </wj-flex-grid-column>
-            </wj-flex-grid>
-        </div>
-    </div>
-        <div class="content-footer clearfix">
-        <div class="col-sm-12">
-            <div class="page-bar">
-                <div class="pull-right">
-                    <button id="btnBack" class="btn btn-primary sharp" (click)="back()">back</button>
-                    <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Stock-In List</h4>
+                </div>
+                <div class="col-sm-6">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
+                        <button type="submit" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="panel-heading">
+            <table style="width: 100%" border="0">
+                <tr>
+                    <td style="width: 50%;">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input type="text" class="input-sm form-control"  style="width:40%;" id="InputFilter" placeholder="Search">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-body">
+                <wj-flex-grid id="stockInGrid"  
+                                #stockInGrid 
+                                class="grid" 
+                                [itemsSource]="stockInView"
+                                [selectionMode]="'Row'">
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="55">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                            <button class="btn btn-primary sharp" >
+                                    Edit
+                            </button>
+                        </template>
+                    </wj-flex-grid-column> 
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-danger sharp"
+                                        data-toggle="modal"
+                                        data-target="#delModal">
+                                    <i class="fa fa-trash">Delete</i>
+                                </button>
+                        </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Stock-In Date'"
+                                            [binding]="'StockInDate'"
+                                            [width]="150"
+                                            [align]="'left'"
+                                            [isReadOnly]="true">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Stock-In Number'"
+                                            [binding]="'StockInNumber'"
+                                            [width]="180"
+                                            [align]="'center'"
+                                            [isReadOnly]="true">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Supplier'"
+                                            [binding]="'SupplierId'"
+                                            [width]="300"
+                                            [align]="'center'"
+                                            [isReadOnly]="true">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Amount'"
+                                            [binding]="'Amount'"
+                                            [width]="100"
+                                            [align]="'center'"
+                                            [isReadOnly]="true">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Lock'"
+                                            [binding]="'IsLocked'"
+                                            [width]="50"
+                                            [align]="'center'"
+                                            [isReadOnly]="true"
+                                            [data-type]="Boolean">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Return'"
+                                            [binding]="'IsReturn'"
+                                            [width]="55"
+                                            [align]="'center'"
+                                            [isReadOnly]="true"
+                                            [data-type]="Boolean">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Remarks'"
+                                            [binding]="'Remarks'"
+                                            [width]="500"
+                                            [align]="'left'"
+                                            [isReadOnly]="true">
+                    </wj-flex-grid-column>
+                </wj-flex-grid>
+            <div id="page-button">
+                <button id="btnBack" class="btn btn-primary sharp" (click)="back()">first</button>
+                <button id="btnBack" class="btn btn-primary sharp" (click)="back()">previous</button>
+                <label id="pageCount"></label>
+                <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
+                <button id="btnBack" class="btn btn-primary sharp" (click)="back()">last</button>
+            </div>
+        </div>
+        <div class="panel-footer">
+
         </div>
     </div>
     <!--Modal-->
@@ -111,7 +125,7 @@
                             (click)="deleteStockIn()">
                             Yes
                     </button>
-                     <button id="btnNo" 
+                        <button id="btnNo" 
                             type="button" 
                             class="btn btn-primary sharp" 
                             data-dismiss="modal">

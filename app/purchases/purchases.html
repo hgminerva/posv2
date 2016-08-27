@@ -1,23 +1,32 @@
 <section id="purchase-page" class="container">
-<!--Header here-->
-<div class="content-header clearfix">
-    <div class="col-sm-6">
-        <div class="pull-left">
-            <h4>Purchase Order List</h4>
-        </div>
-    </div>
-    <div class="col-sm-6">
-            <div class="pull-right">
-            <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button>
-            <button class="btn btn-primary sharp" type="button" (click)="onClose()">Close</button>
+     <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Purchase List</h4>
+                </div>
+                <div class="col-sm-6">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
+                        <button type="submit" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                    </div>
+                </div>
             </div>
+        </div>
+    <div class="panel-heading">
+        <table style="width: 100%" border="0">
+            <tr>
+                <td style="width: 50%;">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input type="text" class="input-sm form-control"  style="width:40%;" id="InputFilter" placeholder="Search">
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
-</div>
-<!--End of header -->
-<!--Body here-->
-<div class="content-body-table clearfix">
-    <div class="col-sm-12">
-            <wj-flex-grid #flexPurchaseList 
+    <div class="panel-body">
+             <wj-flex-grid #flexPurchaseList 
                             class="grid" 
                             [itemsSource]="purchaseView" 
                             [isReadOnly]="true"
@@ -70,19 +79,18 @@
                                     [data-type]="Boolean">
                 </wj-flex-grid-column>       
         </wj-flex-grid>
-    </div>
-</div>
-<div class="content-footer clearfix">
-    <div class="col-sm-12">
-        <div class="page-bar">
-            <div class="pull-right">
-                <button id="btnBack" class="btn btn-primary sharp" (click)="back()">back</button>
-                <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
-            </div>
+        <div id="page-button">
+            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">first</button>
+            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">previous</button>
+            <label id="pageCount"></label>
+            <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
+            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">last</button>
         </div>
     </div>
+    <div class="panel-footer">
+
+    </div>
 </div>
-<!--End of body-->
 <!--Modal-->
     <div id="delModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
