@@ -1,7 +1,172 @@
 <section id="item-add-page" class="container">
-    
-    <div class="panel panel-default">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="pull-left">
+                            <h4>Item Details</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-primary sharp" (click)="onLock()">Lock</button>
+                            <button type="button" class="btn btn-primary sharp" (click)="onUnLock">Unlock</button>
+                            <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tabGeneralInformation">General Information</a></li>
+                    <li><a a data-toggle="tab" href="#tabOtherInformation">Other Information</a></li>
+                    <li><a a data-toggle="tab" href="#tabImage">Image</a></li>
+                </ul>
+                <div id="itemAddTabContent" class="tab-content">
+                    <div id="tabGeneralInformation" class="tab-pane fade in active">
+                        <form class="form-horizontal panel-body" role="form">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Item Code</label>
+                                <div class="col-sm-10">
+                                    <input [(ngModel)] = "itemCode"
+                                        class="form-control input-20" 
+                                        type="number" 
+                                        placeholder="00000" 
+                                        align="right" 
+                                        disabled />
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Bar Code (SKU)</label> 
+                                <div class="col-sm-10">
+                                    <input [(ngModel)]="barCode" class="form-control input-20" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Item Description</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input [(ngModel)]="itemDescription" class="form-control input-50" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Alias</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input [(ngModel)]="alias" class="form-control input-30" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Category</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <div id="cmbCategory" class="input-30">
 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Unit</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <div id="cmbUnit" class="input-30">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Default Supplier</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <div id="cmbDefaultSupplier" class="input-30">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Cost</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input [(ngModel)]="cost" class="form-control input-20" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Mark up</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input [(ngModel)]="markUp" class="form-control input-20" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Price</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input [(ngModel)]="price" class="form-control input-20" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label ">Stock Level Quantity</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input [(ngModel)]="stockLevelQuantity" class="form-control  input-20" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label>Inventory</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input [(ngModel)]="inventory" class="checkbox" type="checkbox" checked>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label>Package</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input [(ngModel)]="package" class="checkbox" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Expiry Date</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div id="expiryDate"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Lot Number</label> 
+                                </div>
+                                <div class="col-sm-10">
+                                    <input [(ngModel)]="lotNumber" class="form-control input-40" type="text" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Remarks</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <textarea [(ngModel)]="remarks" class="form-control input-70" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+
+            </div>
+        </div>
     </div>
 <!--Header here-->
 <!--

@@ -21,130 +21,116 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 
 export class ItemAddComponent implements OnInit{
-    private itemCode : String
-    private barCode : String;
-    private itemDescription : String;
-    private alias : String;
-    private cmbCategory : wijmo.input.ComboBox;
-    private cmbUnit : wijmo.input.ComboBox;
-    private cmbDefaultSupplier : wijmo.input.ComboBox;
-    private cost : String;
-    private markUp : String;
-    private price : String;
-    private stockLevelQuantity : String;
-    private onHandQuantity : String;
-    private inventoty : Boolean = false;
-    private package : Boolean = false;
-    private expiryDate : wijmo.input.InputDate;
-    private lotNumber : String;
+    // private itemCode : String
+    // private barCode : String;
+    // private itemDescription : String;
+    // private alias : String;
+    // private cmbCategory : wijmo.input.ComboBox;
+    // private cmbUnit : wijmo.input.ComboBox;
+    // private cmbDefaultSupplier : wijmo.input.ComboBox;
+    // private cost : String;
+    // private markUp : String;
+    // private price : String;
+    // private stockLevelQuantity : String;
+    // private onHandQuantity : String;
+    // private inventoty : Boolean = false;
+    // private package : Boolean = false;
+    // private expiryDate : wijmo.input.InputDate;
+    // private lotNumber : String;
 
-    constructor(private router : Router, private toastr : ToastsManager,private itemService : ItemService){
+    // constructor(private router : Router, private toastr : ToastsManager,private itemService : ItemService){
 
-    }
+    // }
 
-    /** 
-    *This function is just like a constructor will initialize all the component elements
-    *when discounting in dashboard is clicked. 
-    *Will go back to the login screen if you try to access this component without logging in.
-    **/
-    public ngOnInit() : void {
-        if(!localStorage.getItem('access_token')) {
+    // public ngOnInit() : void {
+    //     if(!localStorage.getItem('access_token')) {
 
-        }
-        else {
+    //     }
+    //     else {
 
-        }
-        /*Else */
-        this.expiryDate = new wijmo.input.InputDate('#expiryDate', {
-            format: 'MM/dd/yyyy',
-            value: new Date()
-        });
-        this.itemService.initUnit(cmbUnit);
-    }
+    //     }
+    //     /*Else */
+    //     this.expiryDate = new wijmo.input.InputDate('#expiryDate', {
+    //         format: 'MM/dd/yyyy',
+    //         value: new Date()
+    //     });
+    //     this.itemService.initUnit(cmbUnit);
+    // }
 
-    /**
-    * This function will go back item.html when clicked
-    **/
-    public onClose() : void {
-        this.addItem();
-        this.router.navigate(['Item']);
-    }
+    // public onClose() : void {
+    //     this.addItem();
+    //     this.router.navigate(['Item']);
+    // }
 
-    /**
-    *This function will disable all of the content of the itemAddTabContent Tab 
-    **/
-    public onLock() : void {
-        document.getElementById('itemAddTabContent').setAttribute('class','disable');
-        console.log('disabled');
-    }
+    // public onLock() : void {
+    //     document.getElementById('itemAddTabContent').setAttribute('class','disable');
+    //     console.log('disabled');
+    // }
 
-    /**
-    *This function will enable all of the content of the itemAddTabContent Tab 
-    **/
-    public onUnLock() : void {
-        document.getElementById('itemAddTabContent').setAttribute('class','enable');
-        console.log('disabled');
-    }
+    // public onUnLock() : void {
+    //     document.getElementById('itemAddTabContent').setAttribute('class','enable');
+    //     console.log('disabled');
+    // }
 
-    public addItem() : void {
-        var item = this.createItem();
-        if(this.validate(item)) {
+    // public addItem() : void {
+    //     var item = this.createItem();
+    //     if(this.validate(item)) {
 
-        }
-        else {
+    //     }
+    //     else {
 
-        }
-    }
+    //     }
+    // }
 
-    public createItem() {
-        var item = {
+    // public createItem() {
+    //     var item = {
 
-        };
-        return item;
-    }
+    //     };
+    //     return item;
+    // }
 
-    //getters
-    public getToastr() : ToastsManager { return this.toastr; } 
+    // //getters
+    // public getToastr() : ToastsManager { return this.toastr; } 
 
-    //validation
-    private validate(item) : boolean {
-        return true;
-    }
+    // //validation
+    // private validate(item) : boolean {
+    //     return true;
+    // }
 
-    private validateBarCode(barCode : string) : boolean {
-        return true;
-    }
+    // private validateBarCode(barCode : string) : boolean {
+    //     return true;
+    // }
 
-    private validateItemDescription(itemDescription : string) : boolean {
-        return true;
-    }
+    // private validateItemDescription(itemDescription : string) : boolean {
+    //     return true;
+    // }
 
-    private validateAlias(alias : string) : boolean {
-        return true;
-    }
+    // private validateAlias(alias : string) : boolean {
+    //     return true;
+    // }
 
-    private validateCost(cost : string ) : boolean {
-        return true;
-    }
+    // private validateCost(cost : string ) : boolean {
+    //     return true;
+    // }
 
-    private validateMarkUp(markUp : string ) : boolean {
-        return true;
-    }
+    // private validateMarkUp(markUp : string ) : boolean {
+    //     return true;
+    // }
 
-    private validatePrice(price : string ) : boolean {
-        return true;
-    }
+    // private validatePrice(price : string ) : boolean {
+    //     return true;
+    // }
 
-    private validateStockLevelQuantity(stockLevelQty : string ) : boolean {
-        return true;
-    } 
+    // private validateStockLevelQuantity(stockLevelQty : string ) : boolean {
+    //     return true;
+    // } 
 
-    private validateRemarks(remarks : string ) : booean {
-        return true;
-    }
+    // private validateRemarks(remarks : string ) : booean {
+    //     return true;
+    // }
 
-    private validateGenericName(genericName : string ) : boolean {
-        return true;
-    }
+    // private validateGenericName(genericName : string ) : boolean {
+    //     return true;
+    // }
 
 }
