@@ -49,9 +49,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.disbursementView.pageSize = 10;
                     this.disbursementService.listDisbursement(this);
                 };
-                /*
-                    This function will go to disbursementAdd.html when clicked
-                */
                 DisbursementComponent.prototype.onAdd = function () {
                     this.router.navigate(['DisbursementAdd']);
                 };

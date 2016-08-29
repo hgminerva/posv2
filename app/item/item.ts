@@ -79,4 +79,6 @@ export class ItemComponent implements OnInit{
     public getToastr() : ToastsManager { return this._toastr; }
 
     public getCollectionView() : wijmo.collections.CollectionView { return this.itemsView; }
+
+
 }

@@ -37,8 +37,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         .subscribe(function (response) {
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
-                                discountComponent.setSource(response.json());
-                                discountComponent.getCollectionView().sourceCollection = discountComponent.getSource();
+                                discountComponent.getCollectionView().sourceCollection = response.json();
                                 _this.checkPageCount(discountComponent.getCollectionView());
                                 break;
                             case response_1.Response.BAD_REQUEST: break;
@@ -52,7 +51,6 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     });
                 };
                 DiscountingService.prototype.deleteDiscount = function (data, component) {
-                    var _this = this;
                     var url = localStorage.getItem('api_url') + DiscountingService.API_DISCOUNT_URL + "delete";
                     var headers = new http_1.Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
@@ -67,7 +65,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
                                 component.getToastr().success('Deleted successfully');
-                                _this.listDicount(component);
+                                component.getCollectionView().remove(data);
                                 break;
                             default: break;
                         }

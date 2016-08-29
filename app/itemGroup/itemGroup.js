@@ -39,11 +39,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.router = router;
                     this.itemGroupService = itemGroupService;
                 }
-                /**
-                *This function is just like a constructor will initialize all the component elements
-                *when discounting in dashboard is clicked.
-                *Will go back to the login screen if you try to access this component without logging in.
-                **/
                 ItemGroupComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }

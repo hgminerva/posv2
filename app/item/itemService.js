@@ -41,6 +41,8 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                             case response_1.Response.SUCCESS:
                                 component.getCollectionView().sourceCollection = response.json();
                                 _this.checkPageCount(component.getCollectionView());
+                                var pageCount = document.getElementById('pageCount');
+                                pageCount.innerHTML = component.getCollectionView().pageIndex + 1 + "/" + (component.getCollectionView().pageCount + 1);
                                 break;
                             case response_1.Response.BAD_REQUEST: break;
                             case response_1.Response.FORBIDDEN_ERROR: break;
@@ -55,7 +57,6 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                 ItemService.prototype.addItem = function (data, itemComponent) {
                 };
                 ItemService.prototype.deleteItem = function (data, itemComponent) {
-                    var _this = this;
                     var url = localStorage.getItem('api_url') + ItemService.API_ITEM_URL + "delete";
                     var headers = new http_1.Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
@@ -70,7 +71,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
                                 itemComponent.getToastr().success('Deleted successfully');
-                                _this.listItems(itemComponent);
+                                itemComponent.getCollectionView().remove(data);
                                 break;
                             default: break;
                         }
@@ -78,7 +79,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         itemComponent.getToastr().error('Server Error');
                     });
                 };
-                ItemService.prototype.initUnit = function (itemComponent, cmbUnit) {
+                ItemService.prototype.initUnit = function (itemAddComponent, cmbUnit) {
                     var _this = this;
                     var url = localStorage.getItem('api_url') + ItemService.API_UNIT_URL + "list";
                     var accessToken = localStorage.getItem('access_token');
@@ -91,7 +92,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                             itemsSource: _this.getUnits(response.json())
                         });
                     }, function (error) {
-                        itemComponent.getToastr().error('Server Error', '');
+                        itemAddComponent.getToastr().error('Server Error', '');
                     });
                 };
                 ItemService.prototype.getUnits = function (units) {

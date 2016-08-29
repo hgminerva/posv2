@@ -45,14 +45,13 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                         format: 'MM-dd-yyyy',
                         value: new Date()
                     });
-                    this.cmbSupplierSource = new wijmo.collections.ObservableArray();
-                    this.cmbPO_NoSource = new wijmo.collections.ObservableArray();
-                    this.cmbAuthority = new wijmo.collections.ObservableArray();
-                    this.cmbDownloadSource = new wijmo.collections.ObservableArray();
-                    this.initCmbSupplier();
-                    this.initCmbPO_No();
-                    this.initCmbAuthority();
-                    this.initCmbDownload();
+                    this.cmbAuthoritySource = new wijmo.collections.ObservableArray();
+                    this.cmbApprovedBy = new wijmo.input.ComboBox('#cmbApprovedBy');
+                    this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
+                    this.cmbPreparedBy = new wijmo.input.ComboBox('#cmbPreparedBy');
+                    this.cmbSupplier = new wijmo.input.ComboBox('#cmbSupplier');
+                    this.cmbPoNumber = new wijmo.input.ComboBox('#cmbPoNumber');
+                    this.cmbDownloadCatergory = new wijmo.input.ComboBox('#cmbDownload');
                 };
                 StockInAddComponent.prototype.onClose = function () {
                     this.router.navigate(['StockIn']);
@@ -67,9 +66,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 StockInAddComponent.prototype.onPrint = function () {
                 };
                 StockInAddComponent.prototype.enableReturnFields = function () {
-                    var chkReturn = document.getElementById('chkReturn');
-                    var txtReturnOrNo = document.getElementById('txtReturnNo');
-                    var txtReturnSales = document.getElementById('txtReturnSales');
+                    var chkReturn = document.getElementById('return');
+                    var txtReturnOrNo = document.getElementById('returnOrNumber');
+                    var txtReturnSales = document.getElementById('returnSalesInvoice');
                     if (chkReturn.checked) {
                         txtReturnOrNo.removeAttribute('disabled');
                         txtReturnSales.removeAttribute('disabled');
@@ -81,26 +80,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 //getters
                 StockInAddComponent.prototype.getToastr = function () { return this.toastr; };
-                //fill comboboxes
-                StockInAddComponent.prototype.initCmbSupplier = function () {
-                    var ctr;
-                    var NA_LENGHT = 6;
-                    for (ctr = 0; ctr < NA_LENGHT; ctr++) {
-                        this.cmbSupplierSource.push('NA');
-                    }
-                    this.cmbSupplierSource.push('Return from customer');
-                };
-                StockInAddComponent.prototype.initCmbPO_No = function () {
-                    this.cmbPO_NoSource.push('test');
-                };
-                StockInAddComponent.prototype.initCmbAuthority = function () {
-                    this.cmbAuthority.push('Administrator');
-                    this.cmbAuthority.push('Cashier');
-                    this.cmbAuthority.push('Teller');
-                };
-                StockInAddComponent.prototype.initCmbDownload = function () {
-                    this.cmbDownloadSource.push('test');
-                };
                 StockInAddComponent.prototype.addStockIn = function () {
                     var stockIn = this.createStockIn();
                     if (this.validate(stockIn)) {

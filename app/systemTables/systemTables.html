@@ -1,228 +1,330 @@
 <section id="system-table-page" class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
+            <h4>System Tables List</h4>
+        </div>
+        <div class="panel-body">
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="pull-left">
-                        <h4>System Tables</h4>
-                    </div>
+                <div class="col-sm-6">     
+                    <table style="width: 100%" border="0">
+                        <tr>
+                            <td style="width: 50%;">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <input type="text" class="input-sm form-control"  style="width:40%;" id="InputFilter" placeholder="Search">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="col-sm-6">
                     <div class="pull-right">
-                        <button id="btnLock" class="btn btn-primary sharp" (click)="onLock()">Lock</button>
-                        <button id="btnUnlock" class="btn btn-primary sharp" (click)="onUnlock" >Unlock</button>
-                        <button id="btnClose" class="btn btn-primary sharp" (click)="onClose()" >Close</button>
+                        <button type="button" class="btn btn-primary sharp" (click)="onLock()">Lock</button>
+                        <button type="button" class="btn btn-primary sharp" (click)="onUnlock()">Unlock</button>
+                        <button type="submit" class="btn btn-primary sharp" (click)="onClose()">Close</button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="panel-heading">
-            <table style="width: 100%" border="0">
-                <tr>
-                    <td style="width: 50%;">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                            <input type="text" class="input-sm form-control"  style="width:40%;" id="InputFilter" placeholder="Search">
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="panel-body">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#chartOfAccounts">Chart of Accounts</a></li>
-                <li><a a data-toggle="tab" href="#payType">Pay type</a></li>
-                <li><a a data-toggle="tab" href="#tax">Tax</a></li>
-                <li><a a data-toggle="tab" href="#unit">Unit</a></li>
-                <li><a a data-toggle="tab" href="#period">Period</a></li>
-                <li><a a data-toggle="tab" href="#terminal">Terminal</a></li>
-            </ul>
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#chartOfAccounts">Chart of Accounts</a></li>
+                        <li><a a data-toggle="tab" href="#payType">Pay type</a></li>
+                        <li><a a data-toggle="tab" href="#tax">Tax</a></li>
+                        <li><a a data-toggle="tab" href="#unit">Unit</a></li>
+                        <li><a a data-toggle="tab" href="#period">Period</a></li>
+                        <li><a a data-toggle="tab" href="#terminal">Terminal</a></li>
+                    </ul>
+                </div>
+            </div>
             <div id="systemTableTabContent" class="tab-content">
                 <div id="chartOfAccounts" class="tab-pane fade in active">
-                        <wj-flex-grid id="chartOfAccountsGrid" 
-                                        #chartOfAccountsGrid 
-                                        class="grid"
-                                        [itemsSource]="chartOfAccountsView">
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                    <button class="btn btn-primary sharp" >
-                                        Edit
-                                    </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                        <button class="btn btn-danger sharp">
-                                            <i class="fa fa-trash">Delete</i>
-                                        </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Account Code'"
-                                                [binding]="'Account Code'"
-                                                [width]="'2*'"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Account'"
-                                                [binding]="'Account'"
-                                                [width]="'5*'"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Type'"
-                                                [binding]="'ChartOfAccountType'"
-                                                [width]="'2*'"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                        </wj-flex-grid>
-                    </div>
-                    <div id="payType" class="tab-pane fade">
-                        <wj-flex-grid id="payTypeGrid"  #payTypeGrid class="grid" [itemsSource]="payTypeView">
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                        <button class="btn btn-primary sharp" >
-                                                Edit
-                                        </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                        <button class="btn btn-danger sharp">
-                                            <i class="fa fa-trash">Delete</i>
-                                        </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Pay Type'"
-                                                [binding]="'PayType'"
-                                                [width]="'2*'"
-                                                [align]="'left'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Account'"
-                                                [binding]="'AccountId'"
-                                                [width]="'2*'"
-                                                [align]="'left'">
-                            </wj-flex-grid-column>
-                        </wj-flex-grid>
-                    </div>
-                    <div id="tax" class="tab-pane fade">
+                    <div class="row">
                         <div class="col-sm-12">
-                            <wj-flex-grid id="taxGrid" #taxGrid class="grid" [itemsSource]="taxView">
-                                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                            <button class="btn btn-primary sharp" >
-                                                    Edit
+                            <wj-flex-grid id="chartOfAccountsGrid" 
+                                            #chartOfAccountsGrid 
+                                            class="grid"
+                                            [itemsSource]="chartOfAccountsView">
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                            <button class="btn btn-primary btn-xs btn-block  sharp" >
+                                                Edit
                                             </button>
-                                    </template>
-                                </wj-flex-grid-column>
-                                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                            <button class="btn btn-danger sharp">
-                                                <i class="fa fa-trash">Delete</i>
-                                            </button>
-                                    </template>
-                                </wj-flex-grid-column>
-                                <wj-flex-grid-column [header]="'Tax'"
-                                                        [binding]="'Tax'"
-                                                        [width]="'2*'"
-                                                        [align]="'left'">
-                                </wj-flex-grid-column>
-                                <wj-flex-grid-column [header]="'Type'"
-                                                        [binding]="'TaxType'"
-                                                        [width]="'2*'"
-                                                        [align]="'left'">
-                                </wj-flex-grid-column>
-                                <wj-flex-grid-column [header]="'Rate(%)'"
-                                                        [binding]="'Rate'"
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-danger  btn-xs btn-block sharp">
+                                                    <i class="fa fa-trash">Delete</i>
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Account Code'"
+                                                        [binding]="'Account Code'"
                                                         [width]="'2*'"
                                                         [align]="'center'">
-                                </wj-flex-grid-column>
-                                <wj-flex-grid-column [header]="'Account'"
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Account'"
+                                                        [binding]="'Account'"
+                                                        [width]="'5*'"
+                                                        [align]="'center'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Type'"
+                                                        [binding]="'ChartOfAccountType'"
+                                                        [width]="'2*'"
+                                                        [align]="'center'">
+                                    </wj-flex-grid-column>
+                                </wj-flex-grid>
+                            </div>
+                        </div>
+                        <div class="row"> 
+                            <div class="col-sm-12">  
+                                <div id="page-button">
+                                    <table>
+                                        <tr>
+                                            <td><button id="btnFirst" class="" (click)="back()">first</button></td>
+                                            <td><button id="btnBack" class="" (click)="back()">previous</button></td>
+                                            <td><button class="text-center" id="pageCount" disabled></button></td>
+                                            <td><button id="btnNext" class="" (click)="next()">next</button></td>
+                                            <td><button id="btnLast" class="" (click)="back()">last</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="payType" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <wj-flex-grid id="payTypeGrid"  #payTypeGrid class="grid" [itemsSource]="payTypeView">
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-primary btn-xs btn-block sharp" >
+                                                        Edit
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-danger btn-xs btn-block sharp">
+                                                    <i class="fa fa-trash">Delete</i>
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Pay Type'"
+                                                        [binding]="'PayType'"
+                                                        [width]="'2*'"
+                                                        [align]="'left'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Account'"
                                                         [binding]="'AccountId'"
                                                         [width]="'2*'"
                                                         [align]="'left'">
-                                </wj-flex-grid-column>
-                            </wj-flex-grid>
+                                    </wj-flex-grid-column>
+                                </wj-flex-grid>
+                            </div>
+                        </div>
+                        <div class="row"> 
+                            <div class="col-sm-12">  
+                                <div id="page-button">
+                                    <table>
+                                        <tr>
+                                            <td><button id="btnFirst" class="" (click)="back()">first</button></td>
+                                            <td><button id="btnBack" class="" (click)="back()">previous</button></td>
+                                            <td><button class="text-center" id="pageCount" disabled></button></td>
+                                            <td><button id="btnNext" class="" (click)="next()">next</button></td>
+                                            <td><button id="btnLast" class="" (click)="back()">last</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tax" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <wj-flex-grid id="taxGrid" #taxGrid class="grid" [itemsSource]="taxView">
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-primary btn-xs btn-block sharp" >
+                                                        Edit
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-danger btn-xs btn-block sharp">
+                                                    <i class="fa fa-trash">Delete</i>
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Tax'"
+                                                            [binding]="'Tax'"
+                                                            [width]="'2*'"
+                                                            [align]="'left'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Type'"
+                                                            [binding]="'TaxType'"
+                                                            [width]="'2*'"
+                                                            [align]="'left'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Rate(%)'"
+                                                            [binding]="'Rate'"
+                                                            [width]="'2*'"
+                                                            [align]="'center'">
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Account'"
+                                                            [binding]="'AccountId'"
+                                                            [width]="'2*'"
+                                                            [align]="'left'">
+                                    </wj-flex-grid-column>
+                                </wj-flex-grid>
+                            </div>
+                        </div>
+                        <div class="row"> 
+                            <div class="col-sm-12">  
+                                <div id="page-button">
+                                    <table>
+                                        <tr>
+                                            <td><button id="btnFirst" class="" (click)="back()">first</button></td>
+                                            <td><button id="btnBack" class="" (click)="back()">previous</button></td>
+                                            <td><button class="text-center" id="pageCount" disabled></button></td>
+                                            <td><button id="btnNext" class="" (click)="next()">next</button></td>
+                                            <td><button id="btnLast" class="" (click)="back()">last</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="unit" class="tab-pane fade">
-                        <wj-flex-grid id="unitGrid"  #unitGrid class="grid" [itemsSource]="unitView">
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                        <button class="btn btn-primary sharp" >
-                                                Edit
-                                        </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                        <button class="btn btn-danger sharp">
-                                            <i class="fa fa-trash">Delete</i>
-                                        </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Unit'"
-                                                [binding]="'Unit'"
-                                                [width]="'*'"
-                                                [align]="'left'">
-                            </wj-flex-grid-column>
-                        </wj-flex-grid>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <wj-flex-grid id="unitGrid"  #unitGrid class="grid" [itemsSource]="unitView">
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-primary btn-xs btn-block sharp" >
+                                                        Edit
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-danger btn-xs btn-block sharp">
+                                                    <i class="fa fa-trash">Delete</i>
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Unit'"
+                                                        [binding]="'Unit'"
+                                                        [width]="'*'"
+                                                        [align]="'left'">
+                                    </wj-flex-grid-column>
+                                </wj-flex-grid>
+                            </div>
+                        </div>
+                        <div class="row"> 
+                            <div class="col-sm-12">  
+                                <div id="page-button">
+                                    <table>
+                                        <tr>
+                                            <td><button id="btnFirst" class="" (click)="back()">first</button></td>
+                                            <td><button id="btnBack" class="" (click)="back()">previous</button></td>
+                                            <td><button class="text-center" id="pageCount" disabled></button></td>
+                                            <td><button id="btnNext" class="" (click)="next()">next</button></td>
+                                            <td><button id="btnLast" class="" (click)="back()">last</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div id="period" class="tab-pane fade">
-                        <wj-flex-grid id="periodGrid"  #periodtGrid class="grid" [itemsSource]="periodView">
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                        <button class="btn btn-primary sharp" >
-                                                Edit
-                                        </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                        <button class="btn btn-danger sharp">
-                                            <i class="fa fa-trash">Delete</i>
-                                        </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Period'"
-                                                [binding]="'Period'"
-                                                [width]="'*'"
-                                                [align]="'left'">
-                            </wj-flex-grid-column>
-                        </wj-flex-grid>
+                        <div class="row">
+                            <div class="col-sm-12">>
+                                <wj-flex-grid id="periodGrid"  #periodtGrid class="grid" [itemsSource]="periodView">
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-primary btn-xs btn-block sharp" >
+                                                        Edit
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-danger btn-xs btn-block sharp">
+                                                    <i class="fa fa-trash">Delete</i>
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Period'"
+                                                        [binding]="'Period'"
+                                                        [width]="'*'"
+                                                        [align]="'left'">
+                                    </wj-flex-grid-column>
+                                </wj-flex-grid>
+                            </div>
+                        </div>
+                        <div class="row"> 
+                            <div class="col-sm-12">  
+                                <div id="page-button">
+                                    <table>
+                                        <tr>
+                                            <td><button id="btnFirst" class="" (click)="back()">first</button></td>
+                                            <td><button id="btnBack" class="" (click)="back()">previous</button></td>
+                                            <td><button class="text-center" id="pageCount" disabled></button></td>
+                                            <td><button id="btnNext" class="" (click)="next()">next</button></td>
+                                            <td><button id="btnLast" class="" (click)="back()">last</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div id="terminal" class="tab-pane">
-                        <wj-flex-grid id="terminalGrid"  #terminalGrid class="grid" [itemsSource]="terminalView">
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                        <button class="btn btn-primary sharp" >
-                                                Edit
-                                        </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                        <button class="btn btn-danger sharp">
-                                            <i class="fa fa-trash">Delete</i>
-                                        </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Terminal'"
-                                                [binding]="'Terminal'"
-                                                [width]="'*'"
-                                                [align]="'left'">
-                            </wj-flex-grid-column>
-                        </wj-flex-grid>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <wj-flex-grid id="terminalGrid"  #terminalGrid class="grid" [itemsSource]="terminalView">
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-primary btn-xs btn-block sharp" >
+                                                        Edit
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-danger sharp btn-xs btn-block">
+                                                    <i class="fa fa-trash">Delete</i>
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Terminal'"
+                                                        [binding]="'Terminal'"
+                                                        [width]="'*'"
+                                                        [align]="'left'">
+                                    </wj-flex-grid-column>
+                                </wj-flex-grid>
+                            </div>
+                        </div>
+                        <div class="row"> 
+                            <div class="col-sm-12">  
+                                <div id="page-button">
+                                    <table>
+                                        <tr>
+                                            <td><button id="btnFirst" class="" (click)="back()">first</button></td>
+                                            <td><button id="btnBack" class="" (click)="back()">previous</button></td>
+                                            <td><button class="text-center" id="pageCount" disabled></button></td>
+                                            <td><button id="btnNext" class="" (click)="next()">next</button></td>
+                                            <td><button id="btnLast" class="" (click)="back()">last</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div id="page-button">
-                    <button id="btnBack" class="btn btn-primary sharp" (click)="back()">first</button>
-                    <button id="btnBack" class="btn btn-primary sharp" (click)="back()">previous</button>
-                    <label id="pageCount"></label>
-                    <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
-                    <button id="btnBack" class="btn btn-primary sharp" (click)="back()">last</button>
-                </div>
             </div>
-        <div class="panel-footer">
-
-        </div>
     </div>
 <!--
     <div class="content-header clearfix">

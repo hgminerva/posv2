@@ -39,11 +39,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     this._toastr = _toastr;
                     this._router = _router;
                 }
-                /**
-                *This function is just like a constructor will initialize all the component elements
-                *when discounting in dashboard is clicked.
-                *Will go back to the login screen if you try to access this component without logging in.
-                **/
                 CollectionComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
@@ -54,15 +49,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     this.collectionView.pageSize = 10;
                     this.collectionService.listCollection(this);
                 };
-                /*
-                    This function will go to discountingAdd.html when clicked
-                */
                 CollectionComponent.prototype.onAdd = function () {
                     this._router.navigate(['AddCollection']);
                 };
-                /*
-                    This function will go back dashboard.html when clicked
-                */
                 CollectionComponent.prototype.onClose = function () {
                     this._router.navigate(['Dashboard']);
                 };

@@ -47,7 +47,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     /*Else*/
                     this.usersView = new wijmo.collections.CollectionView();
                     this.usersView.pageSize = 10;
-                    this._usersService.initUsers(this, this.usersView);
+                    this._usersService.initUsers(this);
                 };
                 UsersComponent.prototype.onAdd = function () {
                     this._router.navigate(['UsersAdd']);
@@ -55,8 +55,12 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 UsersComponent.prototype.onClose = function () {
                     this._router.navigate(['Dashboard']);
                 };
+                UsersComponent.prototype.deleteUser = function () {
+                    this._usersService.deleteUserr(this.usersView.currentItem, this);
+                };
                 //getters
                 UsersComponent.prototype.getToastr = function () { return this._toastr; };
+                UsersComponent.prototype.getCollectionView = function () { return this.usersView; };
                 UsersComponent.prototype.next = function () {
                     if (this.usersView.pageIndex < this.usersView.pageCount) {
                         if (document.getElementById('btnBack').hasAttribute('disabled')) {

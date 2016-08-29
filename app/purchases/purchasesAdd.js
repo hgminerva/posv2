@@ -56,6 +56,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.cmbPreparedBy = new wijmo.input.ComboBox('#cmbPreparedBy');
                     this.cmbApprovedBy = new wijmo.input.ComboBox('#cmbApprovedBy');
                     this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
+                    this.cmbSupplier = new wijmo.input.ComboBox('#cmbSupplier');
                     this.purchaseAddSource.push({ Quantity: 1 });
                 };
                 PurchaseAddComponent.prototype.onLock = function () {

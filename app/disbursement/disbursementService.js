@@ -47,7 +47,6 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     });
                 };
                 DisbursementService.prototype.deleteDisbursement = function (data, component) {
-                    var _this = this;
                     var url = localStorage.getItem('api_url') + DisbursementService.DISBURSEMENT_API_URL + "delete";
                     var headers = new http_1.Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
@@ -62,7 +61,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
                                 component.getToastr().success('Deleted successfully');
-                                _this.listDisbursement(component);
+                                component.getCollectionView().remove(data);
                                 break;
                             default: break;
                         }

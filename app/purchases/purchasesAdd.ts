@@ -30,7 +30,6 @@ export class PurchaseAddComponent implements OnInit{
     private cmbItemSource : wijmo.collections.ObservableArray;
     private cmbUnit : wijmo.collections.ObservableArray;
     //html elements sources
-    private cmbSupplierSource : wijmo.collections.ObservableArray;
     private cmbAuthority : wijmo.collections.ObservableArray;
     //html elements input
     private poNumber : String;
@@ -73,6 +72,7 @@ export class PurchaseAddComponent implements OnInit{
         this.cmbPreparedBy = new wijmo.input.ComboBox('#cmbPreparedBy');
         this.cmbApprovedBy = new wijmo.input.ComboBox('#cmbApprovedBy');
         this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
+        this.cmbSupplier = new wijmo.input.ComboBox('#cmbSupplier');
 
         this.purchaseAddSource.push({Quantity : 1});
     }  

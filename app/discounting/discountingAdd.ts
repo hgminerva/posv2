@@ -34,7 +34,6 @@ export class DiscountingAddComponent implements OnInit {
     private saturday : Boolean = false;
     private sunday : Boolean = false;
 
-
     private timeStart : wijmo.input.InputTime;
     private timeEnd : wijmo.input.InputTime;
     private dateStart : wijmo.input.InputDate;

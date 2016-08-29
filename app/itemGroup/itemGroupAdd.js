@@ -34,12 +34,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 function ItemGroupAddComponent(toastr, router) {
                     this.toastr = toastr;
                     this.router = router;
+                    this.gridCombobox = [];
+                    //id of cmbKitchen
+                    this.id = 0;
                 }
-                /**
-                *This function is just like a constructor will initialize all the component elements
-                *when discounting in dashboard is clicked.
-                *Will go back to the login screen if you try to access this component without logging in.
-                **/
                 ItemGroupAddComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
@@ -49,7 +47,12 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.itemGroupAddSource = new wijmo.collections.ObservableArray();
                     this.itemGroupAddView = new wijmo.collections.CollectionView(this.itemGroupAddSource);
                     this.cmbKitchen = new wijmo.input.ComboBox('#cmbKitchen');
-                    this.itemGroupAddSource.push({});
+                    this.initFlexGrid();
+                    // this.cmb = new wijmo.input.ComboBox('#cmbKitchen1', {
+                    //     itemsSource : ['asa','asas']
+                    // });
+                    // this.cmb.showDropDownButton = true;
+                    // console.log(this.cmb.selectedItem);
                 };
                 ItemGroupAddComponent.prototype.onLock = function () {
                     document.getElementById('itemGroup').setAttribute('disabled', 'disabled');
@@ -64,6 +67,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 ItemGroupAddComponent.prototype.onPreview = function () {
                 };
                 ItemGroupAddComponent.prototype.onPrint = function () {
+                    console.log(this.gridCombobox[0].selectedItem);
                 };
                 ItemGroupAddComponent.prototype.onClose = function () {
                     this.router.navigate(['ItemGroup']);
@@ -71,6 +75,49 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 //getters
                 ItemGroupAddComponent.prototype.getToastr = function () { return this.toastr; };
+                ItemGroupAddComponent.prototype.addRow = function () {
+                    var cmb;
+                    var id = this.id += 1;
+                    var gridCombobox = this.gridCombobox;
+                    var source = this.itemGroupAddSource;
+                    source.push({
+                        delete: '<button class="btn btn-danger btn-xs btn-block sharp ">Delete</button>'
+                    });
+                    this.flexGrid.formatItem.addHandler(function (s, e) {
+                        var grid = s;
+                    });
+                };
+                ItemGroupAddComponent.prototype.test = function (grid, r, c, cell) {
+                    console.log('test');
+                };
+                ItemGroupAddComponent.prototype.initFlexGrid = function () {
+                    this.flexGrid = new wijmo.grid.FlexGrid('#flexGrid', {
+                        autoGenerateColumns: false,
+                        selectionMode: "Row",
+                        columns: [
+                            {
+                                header: " ",
+                                binding: "delete",
+                                width: 70,
+                                align: "center",
+                                isContentHtml: true,
+                                isReadOnly: true
+                            },
+                            {
+                                header: "Item",
+                                binding: "item",
+                                width: "*",
+                                align: "center",
+                                isContentHtml: true,
+                                isReadOnly: true
+                            }
+                        ],
+                        itemsSource: this.itemGroupAddView
+                    });
+                };
+                ItemGroupAddComponent.prototype.count = function () {
+                    console.log(this.itemGroupAddSource.length);
+                };
                 ItemGroupAddComponent.prototype.addItemGroup = function () {
                     var itemGroup = this.createItemGroup();
                     if (this.validate(itemGroup)) {

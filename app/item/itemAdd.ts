@@ -20,7 +20,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
     ]
 })
 
-export class ItemAddComponent implements OnInit{
+export class ItemAddComponent implements OnInit {
     private itemCode : String
     private barCode : String;
     private itemDescription : String;
@@ -49,11 +49,16 @@ export class ItemAddComponent implements OnInit{
         else {
 
         }
-     
+        /*Else */
         this.expiryDate = new wijmo.input.InputDate('#expiryDate', {
             format: 'MM/dd/yyyy',
             value: new Date()
         });
+
+        this.cmbCategory = new wijmo.input.ComboBox('#cmbCategory');
+        this.cmbUnit = new wijmo.input.ComboBox('#cmbUnit');
+        this.cmbDefaultSupplier = new wijmo.input.ComboBox('#cmbDefaultSupplier');
+
         this.itemService.initUnit(this,this.cmbUnit);
     }
 
@@ -125,7 +130,7 @@ export class ItemAddComponent implements OnInit{
         return true;
     } 
 
-    private validateRemarks(remarks : string ) : booean {
+    private validateRemarks(remarks : string ) : boolean {
         return true;
     }
 

@@ -47,16 +47,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     /*Else*/
                     this.supplierView = new wijmo.collections.CollectionView();
                     this.supplierView.pageSize = 10;
-                    this.supplierService.initSuppliers(this);
+                    this.supplierService.listSuppliers(this);
                 };
-                /*
-                    This function will go to supplierAdd.html when clicked
-                */
                 SupplierComponent.prototype.onAdd = function () {
                     this.router.navigate(['SupplierAdd']);
                 };
                 SupplierComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
+                };
+                SupplierComponent.prototype.deleteSupplier = function () {
+                    this.supplierService.deleteSupplier(this.supplierView.currentItem, this);
                 };
                 SupplierComponent.prototype.next = function () {
                     if (this.supplierView.pageIndex < this.supplierView.pageCount) {

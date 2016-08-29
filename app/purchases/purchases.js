@@ -39,11 +39,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.router = router;
                     this.purchaseService = purchaseService;
                 }
-                /**
-                *This function is just like a constructor will initialize all the component elements
-                *when purchases in dashboard is clicked.
-                *Will go back to the login screen if you try to access this component without logging in.
-                **/
                 PurchasesComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
@@ -54,15 +49,9 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.purchaseView.pageSize = 10;
                     this.purchaseService.listPurchase(this);
                 };
-                /*
-                    This function will go to purchaseAdd.html when clicked
-                */
                 PurchasesComponent.prototype.onAdd = function () {
                     this.router.navigate(['PurchasesAdd']);
                 };
-                /*
-                    This function will go back dashboard.html when clicked
-                */
                 PurchasesComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };

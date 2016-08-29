@@ -47,7 +47,6 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     });
                 };
                 ItemComponentService.prototype.deleteCollection = function (data, component) {
-                    var _this = this;
                     var url = localStorage.getItem('api_url') + ItemComponentService.API_URL_ITEM_COMPONENT + "delete";
                     var headers = new http_1.Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
@@ -62,7 +61,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
                                 component.getToastr().success('Deleted successfully');
-                                _this.listItemComponent(component);
+                                component.getCollectionView().remove(data);
                                 break;
                             default: break;
                         }

@@ -49,9 +49,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.restaurantTableView.pageSize = 10;
                     this.restaurantTableService.listRestaurantTables(this);
                 };
-                /*
-                    This function will go to disbursementAdd.html when clicked
-                */
                 RestaurantTablesComponent.prototype.onAdd = function () {
                     this.router.navigate(['RestaurantTablesAdd']);
                 };

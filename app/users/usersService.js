@@ -25,24 +25,20 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
             }],
         execute: function() {
             UsersService = (function () {
-                function UsersService(_http) {
-                    this._http = _http;
-                    this.url = localStorage.getItem('api_url') + "/api/MstUser";
-                    this.accessToken = localStorage.getItem('access_token');
-                    this.users = new wijmo.collections.ObservableArray();
+                function UsersService(http) {
+                    this.http = http;
                 }
-                UsersService.prototype.initUsers = function (component, usersView) {
+                UsersService.prototype.initUsers = function (component) {
                     var _this = this;
-                    var url = localStorage.getItem('api_url') + '/api/user/list';
-                    var users = new wijmo.collections.ObservableArray();
-                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + this.accessToken });
+                    var url = localStorage.getItem('api_url') + UsersService.API_URL_USER + "list";
+                    var header = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
                     var option = new http_1.RequestOptions({ headers: header });
-                    this._http.get(url, option)
+                    this.http.get(url, option)
                         .subscribe(function (response) {
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
-                                usersView.sourceCollection = response.json();
-                                _this.checkPageCount(usersView);
+                                component.getCollectionView().sourceCollection = response.json();
+                                _this.checkPageCount(component.getCollectionView());
                                 break;
                             case response_1.Response.BAD_REQUEST: break;
                             case response_1.Response.FORBIDDEN_ERROR: break;
@@ -51,6 +47,30 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                                 break;
                             default: break;
                         }
+                    });
+                };
+                UsersService.prototype.deleteUserr = function (data, component) {
+                    var url = localStorage.getItem('api_url') + UsersService.API_URL_USER + "delete";
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json'
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers, body: JSON.stringify(data) });
+                    this.http.delete(url, requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                component.getCollectionView().remove(data);
+                                component.getToastr().success('Delete Successful');
+                                break;
+                            case response_1.Response.BAD_REQUEST: break;
+                            case response_1.Response.FORBIDDEN_ERROR: break;
+                            case response_1.Response.NOT_FOUND:
+                                break;
+                            default: break;
+                        }
+                    }, function (error) {
+                        component.getToastr().error('Server error', '');
                     });
                 };
                 UsersService.prototype.checkPageCount = function (customerView) {
@@ -62,9 +82,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };
-                UsersService.page = 0;
-                UsersService.GRID_LENGTH = 10;
-                UsersService.SUCCESS = 200;
+                UsersService.API_URL_USER = "/api/user/";
                 UsersService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

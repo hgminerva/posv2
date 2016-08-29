@@ -33,20 +33,12 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 wjNg2Input = wjNg2Input_1;
             }],
         execute: function() {
-            /*
-                This Component controls the behavior of all the dashboard: discounting module.
-            */
             DiscountingComponent = (function () {
                 function DiscountingComponent(discountingService, router, toastr) {
                     this.discountingService = discountingService;
                     this.router = router;
                     this.toastr = toastr;
                 }
-                /**
-                *This function is just like a constructor will initialize all the component elements
-                *when discounting in dashboard is clicked.
-                *Will go back to the login screen if you try to access this component without logging in.
-                **/
                 DiscountingComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
@@ -57,18 +49,14 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                     */
                     this.discountSource = new wijmo.collections.ObservableArray();
                     this.discountsView = new wijmo.collections.CollectionView();
-                    this.discountsView.pageSize = 10;
+                    this.discountsView.pageSize = 15;
                     this.discountingService.listDicount(this);
+                    var pageCount = document.getElementById('pageCount');
+                    pageCount.innerHTML = this.discountsView.pageIndex + 1 + "/" + (this.discountsView.pageCount + 1);
                 };
-                /*
-                    This function will go to discountingAdd.html when clicked
-                */
                 DiscountingComponent.prototype.onAdd = function () {
                     this.router.navigate(['AddDiscount']);
                 };
-                /*
-                    This function will go back dashboard.html when clicked
-                */
                 DiscountingComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
@@ -102,10 +90,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 ;
                 DiscountingComponent.prototype.getCollectionView = function () { return this.discountsView; };
                 DiscountingComponent.prototype.getSource = function () { return this.discountSource; };
-                //setter
-                DiscountingComponent.prototype.setSource = function (s) {
-                    this.discountSource = s;
-                };
                 DiscountingComponent = __decorate([
                     core_1.Component({
                         selector: 'discounting',

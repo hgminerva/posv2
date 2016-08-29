@@ -49,9 +49,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.debitCreditMemoView.pageSize = 10;
                     this.debitCreditMemoService.listDebitCreditMemo(this);
                 };
-                /*
-                    This function will go to debitCreditMemoAdd.html when click
-                */
                 DebitCreditMemoComponent.prototype.onAdd = function () {
                     this.router.navigate(['DebitCreditMemoAdd']);
                 };

@@ -39,11 +39,6 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     this._toastr = _toastr;
                     this._router = _router;
                 }
-                /**
-                *This function is just like a constructor will initialize all the component elements
-                *when discounting in dashboard is clicked.
-                *Will go back to the login screen if you try to access this component without logging in.
-                **/
                 ItemComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
@@ -51,12 +46,9 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     }
                     /*Else*/
                     this.itemsView = new wijmo.collections.CollectionView();
-                    this.itemsView.pageSize = 10;
+                    this.itemsView.pageSize = 15;
                     this.itemService.listItems(this);
                 };
-                /*
-                    This function when clicked will go to addItem.html
-                */
                 ItemComponent.prototype.onAdd = function () {
                     this._router.navigate(['AddItem']);
                 };

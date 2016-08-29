@@ -20,6 +20,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 
 export class UsersAddComponent implements OnInit{
+    private cmbRights : wijmo.input.ComboBox;
 
     public constructor(private toastr : ToastsManager, private router : Router) {
 
@@ -32,6 +33,8 @@ export class UsersAddComponent implements OnInit{
         else {
 
         }
+        /*Else*/
+        this.cmbRights = new wijmo.input.ComboBox('#cmbRights');
     }
 
     public onClose() : void {

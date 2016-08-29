@@ -47,7 +47,6 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     });
                 };
                 RestaurantTableService.prototype.deleteCollection = function (data, component) {
-                    var _this = this;
                     var url = localStorage.getItem('api_url') + RestaurantTableService.API_URL_RESTAURANT_TABLE + "delete";
                     var headers = new http_1.Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
@@ -61,8 +60,8 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         .subscribe(function (response) {
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
-                                component.getToastr().success('Deleted successfully');
-                                _this.listRestaurantTables(component);
+                                component.getToastr().success('Delete Successful');
+                                component.getCollectionView().remove(data);
                                 break;
                             default: break;
                         }

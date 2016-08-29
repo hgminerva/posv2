@@ -28,9 +28,9 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                 function SupplierService(http) {
                     this.http = http;
                 }
-                SupplierService.prototype.initSuppliers = function (supplierComponent) {
+                SupplierService.prototype.listSuppliers = function (supplierComponent) {
                     var _this = this;
-                    var url = localStorage.getItem('api_url') + SupplierService.API_SUPPLIER_URL;
+                    var url = localStorage.getItem('api_url') + SupplierService.API_SUPPLIER_URL + "list";
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
                     var option = new http_1.RequestOptions();
                     option.headers = headers;
@@ -51,13 +51,37 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         supplierComponent.getToastr().error('Server error', '');
                     });
                 };
+                SupplierService.prototype.deleteSupplier = function (data, component) {
+                    var url = localStorage.getItem('api_url') + SupplierService.API_SUPPLIER_URL + "delete";
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json',
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers, body: JSON.stringify(data) });
+                    this.http.delete(url, requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                component.getCollectionView().remove(data);
+                                component.getToastr().success('Delete Successful');
+                                break;
+                            case response_1.Response.BAD_REQUEST: break;
+                            case response_1.Response.FORBIDDEN_ERROR: break;
+                            case response_1.Response.NOT_FOUND:
+                                break;
+                            default: break;
+                        }
+                    }, function (error) {
+                        component.getToastr().error('Server error', '');
+                    });
+                };
                 SupplierService.prototype.checkPageCount = function (customerView) {
                     if (customerView.pageCount == 1 || customerView.itemCount == 0) {
                         document.getElementById('btnNext').setAttribute('disabled', 'disabled');
                         document.getElementById('btnBack').setAttribute('disabled', 'disabled');
                     }
                 };
-                SupplierService.API_SUPPLIER_URL = '/api/supplier/list';
+                SupplierService.API_SUPPLIER_URL = '/api/supplier/';
                 SupplierService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

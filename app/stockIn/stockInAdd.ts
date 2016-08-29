@@ -26,16 +26,17 @@ export class StockInAddComponent implements OnInit{
     private stockInDate : wijmo.input.InputDate;
     private cmbSupplier : wijmo.input.ComboBox;
     private cmbPoNumber : wijmo.input.ComboBox;
+    private cmbPreparedBy : wijmo.input.ComboBox;
+    private cmbApprovedBy : wijmo.input.ComboBox;
+    private cmbCheckedBy : wijmo.input.ComboBox;
+    private cmbDownloadCatergory : wijmo.input.ComboBox;
     private remarks : String;
     private return : Boolean = false;
     private returnOrNumber : String;
     private returnSalesInvoice : String;
     private cmbDownloadCategory : wijmo.input.ComboBox;
 
-    private cmbSupplierSource : wijmo.collections.ObservableArray;
-    private cmbPO_NoSource : wijmo.collections.ObservableArray;
-    private cmbAuthority : wijmo.collections.ObservableArray;
-    private cmbDownloadSource : wijmo.collections.ObservableArray;
+    private cmbAuthoritySource : wijmo.collections.ObservableArray;
 
     public constructor(private router : Router, private toastr : ToastsManager) {
 
@@ -53,15 +54,15 @@ export class StockInAddComponent implements OnInit{
             format: 'MM-dd-yyyy',
             value: new Date()
         });
-        this.cmbSupplierSource = new wijmo.collections.ObservableArray();
-        this.cmbPO_NoSource = new wijmo.collections.ObservableArray();
-        this.cmbAuthority = new wijmo.collections.ObservableArray();
-        this.cmbDownloadSource = new wijmo.collections.ObservableArray();
 
-        this.initCmbSupplier();
-        this.initCmbPO_No();
-        this.initCmbAuthority();
-        this.initCmbDownload();
+        this.cmbAuthoritySource = new wijmo.collections.ObservableArray();
+
+        this.cmbApprovedBy = new wijmo.input.ComboBox('#cmbApprovedBy');
+        this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
+        this.cmbPreparedBy = new wijmo.input.ComboBox('#cmbPreparedBy');
+        this.cmbSupplier = new wijmo.input.ComboBox('#cmbSupplier');
+        this.cmbPoNumber = new wijmo.input.ComboBox('#cmbPoNumber');
+        this.cmbDownloadCatergory = new wijmo.input.ComboBox('#cmbDownload');
     }
 
     public onClose() : void {
@@ -90,9 +91,9 @@ export class StockInAddComponent implements OnInit{
     }
 
     public enableReturnFields() : void {
-        const chkReturn = <HTMLInputElement>document.getElementById('chkReturn');
-        const txtReturnOrNo = document.getElementById('txtReturnNo');
-        const txtReturnSales = document.getElementById('txtReturnSales');
+        const chkReturn = <HTMLInputElement>document.getElementById('return');
+        const txtReturnOrNo = document.getElementById('returnOrNumber');
+        const txtReturnSales = document.getElementById('returnSalesInvoice');
         if(chkReturn.checked) {
             txtReturnOrNo.removeAttribute('disabled');
             txtReturnSales.removeAttribute('disabled');
@@ -105,31 +106,6 @@ export class StockInAddComponent implements OnInit{
 
     //getters
     public getToastr() : ToastsManager { return this.toastr; }
-
-    //fill comboboxes
-    private initCmbSupplier() : void {
-        var ctr;
-        const NA_LENGHT = 6;
-
-        for(ctr = 0; ctr < NA_LENGHT; ctr++) {
-            this.cmbSupplierSource.push('NA');
-        }
-        this.cmbSupplierSource.push('Return from customer');
-    }
-
-    private initCmbPO_No() : void {
-        this.cmbPO_NoSource.push('test');
-    }
-
-    private initCmbAuthority() : void {
-        this.cmbAuthority.push('Administrator');
-        this.cmbAuthority.push('Cashier');
-        this.cmbAuthority.push('Teller');
-    }
-
-    private initCmbDownload() : void {
-        this.cmbDownloadSource.push('test');
-    }
 
     private addStockIn() : void {
         const stockIn = this.createStockIn();

@@ -1,56 +1,69 @@
 <section id="supplier-page" class="container">
-<!--Header here-->
-<div class="content-header clearfix">
-    <div class="col-sm-6">
-        <div class="pull-left">
-            <h4>Table Group Detail</h4>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="pull-right">
-            <button class="btn btn-primary sharp" type="button" (click)="onLock()">Lock</button>
-            <button type="button" class="btn btn-primary sharp" (click)="onUnlock()">Unlock</button>
-            <button class="btn btn-primary sharp" type="button" (click)="onPreview()">Preview</button>
-            <button type="button" class="btn btn-primary sharp" (click)="onPrint()">Print</button>
-            <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
-        </div>
-    </div>
-</div>
-<!--End of header-->
-<!--Body here-->
-<div class="content-body clearfix">
-    <div class="col-sm-12">
-        <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <div class="col-sm-2">
-                    <label class="control-label">Table Group</label>
-                </div>
-                <div class="col-sm-10">
-                    <input [(ngModel)]="tableGroup" id="tableGroup" class="form-control input-50" placeholder="NA">
+     <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="pull-left">
+                        <h4>Table Group Detail</h4>
+                    </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="pull-right">
+                            <button class="btn btn-primary sharp" type="button" (click)="onLock()">Lock</button>
+                            <button type="button" class="btn btn-primary sharp" (click)="onUnlock()">Unlock</button>
+                            <button class="btn btn-primary sharp" type="button" (click)="onPreview()">Preview</button>
+                            <button type="button" class="btn btn-primary sharp" (click)="onPrint()">Print</button>
+                            <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
-<div class="content-body clearfix">
-    <wj-flex-grid id="restaurantTablesAdd" 
+            <div class="panel-body">
+                 <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label pull-right">Table Group</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input [(ngModel)]="tableGroup" id="tableGroup" class="form-control input-50" placeholder="NA">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+         <div class="panel panel-default">
+            <div class="panel-body">
+                 <wj-flex-grid id="restaurantTablesAdd" 
                         #restaurantTablesAdd 
                         class="grid" 
                         [itemsSource]="restaurantTableAddView">
-        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                <button class="btn btn-danger sharp" >
-                        Delete
-                </button>
-            </template>
-        </wj-flex-grid-column>  
-        <wj-flex-grid-column [header]="'Table'" 
-                            [binding]="'Table'" 
-                            [width]="'*'" 
-                            [align]="'center'"
-                            [isContentHtml]="true">
-        </wj-flex-grid-column>         
-    </wj-flex-grid>
-</div>
-    <!--End of body-->
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                            <button class="btn btn-danger sharp" >
+                                    Delete
+                            </button>
+                        </template>
+                    </wj-flex-grid-column>  
+                    <wj-flex-grid-column [header]="'Table'" 
+                                        [binding]="'Table'" 
+                                        [width]="'*'" 
+                                        [align]="'center'"
+                                        [isContentHtml]="true">
+                    </wj-flex-grid-column>         
+                </wj-flex-grid>
+                <div id="grid-page-button">
+                    <table>
+                        <tr>
+                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
+                            <td><button id="btnBack" class="btn btn-primary sharp" (click)="back()">back</button></td>
+                            <td></td>
+                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
+                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+         </div>
+     </div>
 </section>

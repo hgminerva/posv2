@@ -20,6 +20,8 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 
 export class ItemGroupAddComponent implements OnInit {
+    private flexGrid : wijmo.grid.FlexGrid;
+
     private itemGroup : String;
     private image : ImageData;
     private cmbKitchen : wijmo.input.ComboBox;
@@ -27,16 +29,14 @@ export class ItemGroupAddComponent implements OnInit {
     private itemGroupAddView : wijmo.collections.CollectionView;
     private itemGroupAddSource : wijmo.collections.ObservableArray;
 
+    private gridCombobox = []
+    //id of cmbKitchen
+    private id : number = 0;
 
     constructor(private toastr : ToastsManager, private router : Router) {
 
     }
 
-    /** 
-    *This function is just like a constructor will initialize all the component elements
-    *when discounting in dashboard is clicked. 
-    *Will go back to the login screen if you try to access this component without logging in.
-    **/
     public ngOnInit() : void {
         if(!localStorage.getItem('access_token')) {
 
@@ -45,12 +45,19 @@ export class ItemGroupAddComponent implements OnInit {
 
         }
         /*Else*/
+
         this.itemGroupAddSource = new wijmo.collections.ObservableArray();
         this.itemGroupAddView = new wijmo.collections.CollectionView(this.itemGroupAddSource);
-
         this.cmbKitchen = new wijmo.input.ComboBox('#cmbKitchen');
-        this.itemGroupAddSource.push({});
-        
+
+
+        this.initFlexGrid();
+        // this.cmb = new wijmo.input.ComboBox('#cmbKitchen1', {
+        //     itemsSource : ['asa','asas']
+        // });
+        // this.cmb.showDropDownButton = true;
+
+        // console.log(this.cmb.selectedItem);
     }
 
     public onLock() : void {
@@ -70,7 +77,7 @@ export class ItemGroupAddComponent implements OnInit {
     }
 
     public onPrint() : void {
-        
+                 console.log(this.gridCombobox[0].selectedItem);
     }
 
     public onClose() : void {
@@ -81,7 +88,58 @@ export class ItemGroupAddComponent implements OnInit {
     //getters
     public getToastr() : ToastsManager { return this.toastr; }
 
+    private addRow() : void {
+        var cmb : wijmo.input.ComboBox;
+        var id = this.id += 1;
+        var gridCombobox = this.gridCombobox;
+        var source = this.itemGroupAddSource;
 
+       source.push({
+            delete : '<button class="btn btn-danger btn-xs btn-block sharp ">Delete</button>'
+        })
+        this.flexGrid.formatItem.addHandler(function(s, e) {
+            var grid = s;
+           
+        });
+    }
+
+    private test(grid, r, c, cell) {
+        console.log('test');
+    }
+
+    private initFlexGrid() {
+        this.flexGrid = new wijmo.grid.FlexGrid('#flexGrid', 
+            {
+                autoGenerateColumns : false,
+                selectionMode : "Row",
+                columns: 
+                [
+                    {
+                        header : " ",
+                        binding : "delete",
+                        width : 70,
+                        align : "center",
+                        isContentHtml : true,
+                        isReadOnly : true
+                    },
+                    {
+                        header : "Item",
+                        binding : "item",
+                        width: "*",
+                        align : "center",
+                        isContentHtml : true,
+                        isReadOnly : true
+                    }
+                ],
+                itemsSource : this.itemGroupAddView
+            }
+        );
+    }
+
+    public count() {
+        console.log(this.itemGroupAddSource.length);
+    }
+ 
     private addItemGroup() : void {
         const itemGroup = this.createItemGroup();
         if(this.validate(itemGroup)) {

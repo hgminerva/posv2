@@ -40,6 +40,8 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     }
                     else {
                     }
+                    /*Else*/
+                    this.cmbRights = new wijmo.input.ComboBox('#cmbRights');
                 };
                 UsersAddComponent.prototype.onClose = function () {
                     this.router.navigate(['Users']);

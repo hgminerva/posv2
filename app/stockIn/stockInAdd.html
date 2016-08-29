@@ -1,4 +1,225 @@
-<section id="stock-in-add-page">
+<section id="stock-in-add-page" class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Stock-In Details</h4>
+                    </div>
+                    <div class="col-sm-6">
+                            <div class="pull-right">
+                            <button type="button" class="btn btn-primary sharp" (click)="onLock()">Lock</button>
+                            <button type="button" class="btn btn-primary sharp" (click)="onUnLock">Unlock</button>
+                            <button type="button" class="btn btn-primary sharp" (click)="onPreview">Preview</button>
+                            <button type="button" class="btn btn-primary sharp" (click)="onPrint">Print</button>
+                            <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                 <form class="form-horizontal row" role="form">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label pull-right">Stock In Number</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="stockInNumber" id="stockInNumber" class="form-control input-40" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label  pull-right">Period</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="period" id="period" class="form-control input-40" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label  pull-right">Stock In Date</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <div id="inputDate"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label  pull-right">Supplier</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <div id="cmbSupplier">
+                                </div>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label  pull-right">PO Number</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <div id="cmbPoNumber">
+                                </div>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label  pull-right">Remarks</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <textarea [(ngModel)]="remarks" id="remarks" rows="5" class="form-control">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="pull-right">Return</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="return" id="return" class="checkbox" type="checkbox" (click)="enableReturnFields()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label  pull-right">Return OR Number</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="returnOrNumber" id="returnOrNumber" class="form-control input-80" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label  pull-right">Return Sales Invoice</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="returnSalesInvoice" id="returnSalesInvoice" class="form-control input-80" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label  pull-right">Prepared By</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <div id="cmbPreparedBy" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label  pull-right">Checked By</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <div id="cmbCheckedBy" class="input-70">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label  pull-right">Approved By</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <div id="cmbApprovedBy" class="input-70">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label  pull-right">Download the items</label>
+                                <label class="control-label  pull-right">from the category</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div id="cmbDownload" class="input-100"></div>
+                                        </td>
+                                        <td>
+                                            <span style="margin-left:5px;"><button id="btnDownload" class="btn btn-primary sharp">Download</button></span>
+                                        </td>
+                                    <tr>
+                                 </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <wj-flex-grid id="addStockInGrid" #addStockInGrid class="grid" [itemsSource]="" [isReadOnly]="true" >
+                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-danger sharp">
+                                    <i class="fa fa-trash">Delete</i>
+                                </button>
+                        </template>
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Item'"
+                                            [binding]="'Item'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="250">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Unit'"
+                                            [binding]="'Unit'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="80">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Cost'"
+                                            [binding]="'Cost'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="90">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Quanity'"
+                                            [binding]="'Quanity'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="80">
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Amount'"
+                                            [binding]="'Amount'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="100">
+                    </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Expiry Date'"
+                                            [binding]="'Expiry Date'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="120">
+                    </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Lot Number'"
+                                            [binding]="'Lot Number'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="140">
+                    </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Asset Account'"
+                                            [binding]="'Asset Account'"
+                                            [isReadOnly]="true"
+                                            [align]="'center'"
+                                            [width]="140">
+                    </wj-flex-grid-column>                
+                </wj-flex-grid>
+                 <div id="grid-page-button">
+                    <table>
+                        <tr>
+                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
+                            <td><button id="btnBack" class="btn btn-primary sharp" (click)="back()">back</button></td>
+                            <td></td>
+                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
+                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>   
+    </div>
+    <!--
     <div class="content-header clearfix">
         <div class="col-sm-6">
             <h4>Stock-In Details</h4>
@@ -217,4 +438,5 @@
             </div>
         </div>
     </div>
+    -->
 </section>
