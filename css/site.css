@@ -1,7 +1,7 @@
 html,
 body {
     height: 100%;
-    background-color: #ffffff;
+    background-color: #f1f1f1;
     color: #181009;
     padding: 0;
     margin: 0;
@@ -228,5 +228,10 @@ div.col-sm-2 {
 
 .close {
     color: #ffffff;
+}
+
+.panel-heading {
+    background-color: #fff !important;
+    border-bottom: 1px solid #d7d7d7!important;
 }
 
