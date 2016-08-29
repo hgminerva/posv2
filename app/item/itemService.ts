@@ -2,6 +2,7 @@
 import { Component, Injectable } from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {ItemComponent} from './item';
+import {ItemAddComponent} from './itemAdd';
 
 import {Response} from '../response/response';
 
@@ -77,7 +78,7 @@ export class ItemService {
                   );
     }
 
-    public initUnit(itemComponent : ItemComponent, cmbUnit : wijmo.input.ComboBox) : void {
+    public initUnit(itemAddComponent : ItemAddComponent, cmbUnit : wijmo.input.ComboBox) : void {
         const url : string = localStorage.getItem('api_url') + ItemService.API_UNIT_URL + "list"; 
         const accessToken : string = localStorage.getItem('access_token');
         const header = new Headers({'Authorization' : 'Bearer ' + accessToken});
@@ -92,7 +93,7 @@ export class ItemService {
                     });
                 },
                 error => {
-                    itemComponent.getToastr().error('Server Error', '');
+                    itemAddComponent.getToastr().error('Server Error', '');
                 }
             );
     }
