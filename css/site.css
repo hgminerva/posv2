@@ -230,8 +230,20 @@ div.col-sm-2 {
     color: #ffffff;
 }
 
+.panel-footer,
 .panel-heading {
     background-color: #fff !important;
-    border-bottom: 1px solid #d7d7d7!important;
+}
+
+.panel-heading {
+        border-bottom: 1px solid #d7d7d7!important;
+}
+
+.btn-primary {
+    background-color: #003366;
+}
+
+.btn-danger {
+    background-color: #FF3333;
 }
 
