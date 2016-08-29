@@ -52,7 +52,7 @@ export class ItemComponentService {
                           switch(response.status) {
                                 case Response.SUCCESS:
                                     component.getToastr().success('Deleted successfully');
-                                    this.listItemComponent(component);
+                                    component.getCollectionView().remove(data);
                                     break;
                                 default: break;
                           }

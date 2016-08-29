@@ -43,9 +43,6 @@ export class RestaurantTablesComponent implements OnInit{
         this.restaurantTableService.listRestaurantTables(this);
     }
 
-    /*
-        This function will go to disbursementAdd.html when clicked
-    */
     public onAdd() : void{
         this.router.navigate(['RestaurantTablesAdd']);
     }

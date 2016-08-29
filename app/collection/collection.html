@@ -1,11 +1,23 @@
 <section id="collection-id" class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
+            <h4>Collections</h4>
+        </div>
+        <div class="panel-body">
             <div class="row">
-                <div class="col-sm-6">
-                    <h4>Collection List</h4>
+                <div class="col-sm-6">     
+                    <table style="width: 100%" border="0">
+                        <tr>
+                            <td style="width: 50%;">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <input type="text" class="input-sm form-control"  style="width:40%;" id="InputFilter" placeholder="Search">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="col-sm-6">
+                 <div class="col-sm-6">
                     <div class="pull-right">
                         <button class="btn btn-primary sharp" type="button">Tender</button> 
                         <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button> 
@@ -13,103 +25,98 @@
                     </div>
                 </div>
             </div>
-    </div>
-    <div class="panel-heading">
-        <table style="width: 100%" border="0">
-            <tr>
-                <td style="width: 50%;">
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                        <input type="text" class="input-sm form-control"  style="width:40%;" id="InputFilter" placeholder="Search">
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="panel-body">
-             <wj-flex-grid id="collectionGrid" 
+            <div class="row">
+                <div class="col-sm-12">    
+                     <wj-flex-grid id="collectionGrid" 
                         #collectionGrid class="grid" 
                         [itemsSource]="collectionView" 
                         [isReadOnly]="true"
                         [selectionMode]="'Row'"
                         >
-            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
-                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                            <button class="btn btn-primary sharp" >
-                                    Edit
-                            </button>
-                    </template>
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75">
-                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <button class="btn btn-danger sharp"
-                                data-toggle="modal"
-                                data-target="#delModal">
-                            <i class="fa fa-trash">Delete</i>
-                        </button>
-                </template>
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="'Collection Date'" 
-                                [binding]="'CollectionDate'"
-                                [width]="'2.5*'"
-                                [isReadOnly]="true" 
-                                [align]="'center'">
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="'Collection No'" 
-                                [binding]="'CollectionNumber'"
-                                [width]="'2.5*'"
-                                [isReadOnly]="true" 
-                                [align]="'center'">
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="'Sales No'" 
-                                [binding]="'SalesId'" 
-                                [width]="'2.5*'"
-                                [isReadOnly]="true" 
-                                [align]="'center'">
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="'Customer'" 
-                                [binding]="'CustomerId'" 
-                                [width]="'4*'"
-                                [isReadOnly]="true" 
-                                [align]="'center'">
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="'Terminal'"
-                                [binding]="'TerminalId'" 
-                                [width]="'1.5*'"
-                                [isReadOnly]="true" 
-                                [align]="'center'">
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="'Amount'" 
-                                [binding]="'Amount'" 
-                                [width]="'2*'"
-                                [isReadOnly]="true" 
-                                [align]="'center'">
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="'Lock'" 
-                                [binding]="'IsLocked'" 
-                                [width]="'1*'" 
-                                [data-type]="'Boolean'"
-                                [isReadOnly]="true" 
-                                [align]="'center'">
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="'C'" 
-                                [binding]="'IsCancelled'" 
-                                [width]="'1*'" 
-                                [data-type]="Boolean"
-                                [isReadOnly]="true" 
-                                [align]="'center'">
-            </wj-flex-grid-column>
-        </wj-flex-grid>
-        <div id="page-button">
-            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">first</button>
-            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">previous</button>
-            <label id="pageCount"></label>
-            <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
-            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">last</button>
-        </div>
-    </div>
-    <div class="panel-footer">
-
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                        <button class="btn btn-primary btn-xs btn-block sharp" >
+                                                Edit
+                                        </button>
+                                </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger btn-xs btn-block sharp"
+                                            data-toggle="modal"
+                                            data-target="#delModal">
+                                        <i class="fa fa-trash">Delete</i>
+                                    </button>
+                            </template>
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Collection Date'" 
+                                            [binding]="'CollectionDate'"
+                                            [width]="'2.5*'"
+                                            [isReadOnly]="true" 
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Collection No'" 
+                                            [binding]="'CollectionNumber'"
+                                            [width]="'2.5*'"
+                                            [isReadOnly]="true" 
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Sales No'" 
+                                            [binding]="'SalesId'" 
+                                            [width]="'2.5*'"
+                                            [isReadOnly]="true" 
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Customer'" 
+                                            [binding]="'CustomerId'" 
+                                            [width]="'4*'"
+                                            [isReadOnly]="true" 
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Terminal'"
+                                            [binding]="'TerminalId'" 
+                                            [width]="'1.5*'"
+                                            [isReadOnly]="true" 
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Amount'" 
+                                            [binding]="'Amount'" 
+                                            [width]="'2*'"
+                                            [isReadOnly]="true" 
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Lock'" 
+                                            [binding]="'IsLocked'" 
+                                            [width]="'1*'" 
+                                            [data-type]="'Boolean'"
+                                            [isReadOnly]="true" 
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'C'" 
+                                            [binding]="'IsCancelled'" 
+                                            [width]="'1*'" 
+                                            [data-type]="Boolean"
+                                            [isReadOnly]="true" 
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                    </wj-flex-grid>
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-sm-12">  
+                    <div id="page-button">
+                        <table>
+                            <tr>
+                                <td><button id="btnFirst" class="" (click)="back()">first</button></td>
+                                <td><button id="btnBack" class="" (click)="back()">previous</button></td>
+                                <td><button class="text-center" id="pageCount" disabled></button></td>
+                                <td><button id="btnNext" class="" (click)="next()">next</button></td>
+                                <td><button id="btnLast" class="" (click)="back()">last</button></td>
+                            <tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 <!--Modal-->

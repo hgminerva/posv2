@@ -1,9 +1,21 @@
 <section id="discounting-page" class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
+            <h4>Discounts</h4>
+        </div>
+        <div class="panel-body">
             <div class="row">
-                <div class="col-sm-6">
-                    <h4>Discount List</h4>
+                <div class="col-sm-6">     
+                    <table style="width: 100%" border="0">
+                        <tr>
+                            <td style="width: 50%;">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <input type="text" class="input-sm form-control"  style="width:40%;" id="InputFilter" placeholder="Search">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="col-sm-6">
                     <div class="pull-right">
@@ -12,71 +24,66 @@
                     </div>
                 </div>
             </div>
-    </div>
-    <div class="panel-heading">
-        <table style="width: 100%" border="0">
-            <tr>
-                <td style="width: 50%;">
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                        <input type="text" class="input-sm form-control"  style="width:40%;" id="InputFilter" placeholder="Search">
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="panel-body">
-            <wj-flex-grid #flexDiscount 
+            <div class="row">
+                <div class="col-sm-12">    
+                    <wj-flex-grid #flexDiscount 
                         class="grid" 
                         [itemsSource]="discountsView"
                         [selectionMode]="'Row'">
-            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="55">
-                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                    <button class="btn btn-primary sharp" >
-                            Edit
-                    </button>
-                </template>
-            </wj-flex-grid-column> 
-            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                    <button class="btn btn-danger sharp" 
-                            data-toggle="modal"
-                            data-target="#delModal">
-                            Delete
-                    </button>
-                </template>
-            </wj-flex-grid-column> 
-            <wj-flex-grid-column [header]="'Discount'" 
-                                [binding]="'Discount'"
-                                [isReadOnly]="true" 
-                                [width]="'3*'"
-                                [align]="'left'">
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="'Discount Rate(%)'"
-                                [binding]="'DiscountRate'"
-                                [isReadOnly]="true" 
-                                [width]="'2*'"
-                                [align]="'center'">
-            </wj-flex-grid-column>
-            <wj-flex-grid-column [header]="'Lock'" 
-                                [binding]="'IsLocked'"
-                                [data-type]="'Boolean'"
-                                [isReadOnly]="true" 
-                                [align]="'center'">
-            </wj-flex-grid-column>
-        </wj-flex-grid>
-        <div id="page-button">
-            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">first</button>
-            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">previous</button>
-            <label id="pageCount"></label>
-            <button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button>
-            <button id="btnBack" class="btn btn-primary sharp" (click)="back()">last</button>
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="55">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-primary btn-xs btn-block sharp" >
+                                        Edit
+                                </button>
+                            </template>
+                        </wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-danger btn-xs btn-block sharp" 
+                                        data-toggle="modal"
+                                        data-target="#delModal">
+                                        Delete
+                                </button>
+                            </template>
+                        </wj-flex-grid-column> 
+                        <wj-flex-grid-column [header]="'Discount'" 
+                                            [binding]="'Discount'"
+                                            [isReadOnly]="true" 
+                                            [width]="'3*'"
+                                            [align]="'left'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Discount Rate(%)'"
+                                            [binding]="'DiscountRate'"
+                                            [isReadOnly]="true" 
+                                            [width]="'2*'"
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Lock'" 
+                                            [binding]="'IsLocked'"
+                                            [data-type]="'Boolean'"
+                                            [isReadOnly]="true" 
+                                            [align]="'center'">
+                        </wj-flex-grid-column>
+                    </wj-flex-grid>
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-sm-12">  
+                    <div id="page-button">
+                        <table>
+                            <tr>
+                                <td><button id="btnFirst" class="" (click)="back()">first</button></td>
+                                <td><button id="btnBack" class="" (click)="back()">previous</button></td>
+                                <td><button class="text-center" id="pageCount" disabled></button></td>
+                                <td><button id="btnNext" class="" (click)="next()">next</button></td>
+                                <td><button id="btnLast" class="" (click)="back()">last</button></td>
+                            <tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="panel-footer">
-
-    </div>
-</div>
 <!--Modal-->
     <div id="delModal" class="modal fade" role="dialog">
         <div class="modal-dialog">

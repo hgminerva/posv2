@@ -30,11 +30,6 @@ export class CollectionComponent implements OnInit{
 
     }
 
-    /** 
-    *This function is just like a constructor will initialize all the component elements
-    *when discounting in dashboard is clicked. 
-    *Will go back to the login screen if you try to access this component without logging in.
-    **/
     public ngOnInit() : void {
         if(!localStorage.getItem('access_token')) {
            // this._router.navigate(['Login']);
@@ -47,18 +42,11 @@ export class CollectionComponent implements OnInit{
         this.collectionService.listCollection(this);
     }
 
-    /*
-        This function will go to discountingAdd.html when clicked
-    */
-
     public onAdd() : void {
         this._router.navigate(['AddCollection']);
     }
 
     
-    /*
-        This function will go back dashboard.html when clicked
-    */
     public onClose() : void {
         this._router.navigate(['Dashboard']);
     }

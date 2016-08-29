@@ -52,7 +52,7 @@ export class StockOutService {
                           switch(response.status) {
                                 case Response.SUCCESS:
                                     component.getToastr().success('Deleted successfully');
-                                    this.listStockOut(component);
+                                    component.getCollectionView().remove(data);
                                     break;
                                 default: break;
                           }

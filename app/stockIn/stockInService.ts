@@ -52,7 +52,7 @@ export class StockInService {
                           switch(response.status) {
                                 case Response.SUCCESS:
                                     component.getToastr().success('Deleted successfully');
-                                    this.listStockIn(component);
+                                    component.getCollectionView().remove(data);
                                     break;
                                 default: break;
                           }

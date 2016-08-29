@@ -43,9 +43,6 @@ export class DisbursementComponent implements OnInit{
         this.disbursementService.listDisbursement(this);
     }
 
-    /*
-        This function will go to disbursementAdd.html when clicked
-    */
     public onAdd() : void{
         this.router.navigate(['DisbursementAdd']);
     }

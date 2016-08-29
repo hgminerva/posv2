@@ -53,7 +53,7 @@ export class  DebitCreditMemoService{
                           switch(response.status) {
                                 case Response.SUCCESS:
                                     component.getToastr().success('Deleted successfully');
-                                    this.listDebitCreditMemo(component);
+                                    component.getCollectionView().remove(data);
                                     break;
                                 default: break;
                           }

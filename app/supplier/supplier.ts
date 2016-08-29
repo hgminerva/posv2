@@ -38,18 +38,20 @@ export class SupplierComponent implements OnInit{
         /*Else*/
         this.supplierView = new wijmo.collections.CollectionView();
         this.supplierView.pageSize = 10;
-        this.supplierService.initSuppliers(this);
+        this.supplierService.listSuppliers(this);
     }
 
-    /*
-        This function will go to supplierAdd.html when clicked
-    */
     public onAdd() : void{
         this.router.navigate(['SupplierAdd']);
     }
 
     public onClose() : void {
         this.router.navigate(['Dashboard']);
+    }
+
+
+    public deleteSupplier() : void {
+        this.supplierService.deleteSupplier(this.supplierView.currentItem, this);
     }
 
     public next() : void {

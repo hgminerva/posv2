@@ -28,11 +28,6 @@ export class PurchasesComponent implements OnInit{
 
     }
 
-    /** 
-    *This function is just like a constructor will initialize all the component elements
-    *when purchases in dashboard is clicked. 
-    *Will go back to the login screen if you try to access this component without logging in.
-    **/
     public ngOnInit() : void {
         if(!localStorage.getItem('access_token')) {
             //this._router.navigate(['Login']);
@@ -46,16 +41,10 @@ export class PurchasesComponent implements OnInit{
         this.purchaseService.listPurchase(this);
     }  
 
-    /*
-        This function will go to purchaseAdd.html when clicked
-    */
     public onAdd() : void{
         this.router.navigate(['PurchasesAdd']);
     }
 
-    /*
-        This function will go back dashboard.html when clicked
-    */
     public onClose() : void{
         this.router.navigate(['Dashboard']);
     }

@@ -41,7 +41,7 @@ export class UsersComponent implements OnInit{
         /*Else*/
         this.usersView = new wijmo.collections.CollectionView();
         this.usersView.pageSize = 10;
-        this._usersService.initUsers(this, this.usersView);
+        this._usersService.initUsers(this);
     }
 
     public onAdd() : void {
@@ -52,9 +52,14 @@ export class UsersComponent implements OnInit{
         this._router.navigate(['Dashboard']);
     }
 
+    public deleteUser() : void {
+        this._usersService.deleteUserr(this.usersView.currentItem, this);
+    }
+
     //getters
     public getToastr() : ToastsManager { return this._toastr }
 
+    public getCollectionView() : wijmo.collections.CollectionView { return this.usersView; }
     public next() : void {
         if(this.usersView.pageIndex < this.usersView.pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){

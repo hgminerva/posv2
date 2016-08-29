@@ -6,9 +6,6 @@ import {DiscountingService} from './discountingService';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
-/*
-    This Component controls the behavior of all the dashboard: discounting module.
-*/
 @Component({
     selector: 'discounting',
     templateUrl: 'app/discounting/discounting.html',
@@ -33,11 +30,6 @@ export class DiscountingComponent implements OnInit{
                ) {
     }
 
-    /** 
-    *This function is just like a constructor will initialize all the component elements
-    *when discounting in dashboard is clicked. 
-    *Will go back to the login screen if you try to access this component without logging in.
-    **/
     public ngOnInit() : void {
         if(!localStorage.getItem('access_token')) {
 
@@ -49,20 +41,17 @@ export class DiscountingComponent implements OnInit{
         */
         this.discountSource = new wijmo.collections.ObservableArray();
         this.discountsView = new wijmo.collections.CollectionView();
-        this.discountsView.pageSize = 10;
+        this.discountsView.pageSize = 15;
         this.discountingService.listDicount(this);
+
+        var pageCount = (<HTMLInputElement>document.getElementById('pageCount'));
+        pageCount.innerHTML = this.discountsView.pageIndex + 1 + "/" + (this.discountsView.pageCount + 1);
     }
 
-    /*
-        This function will go to discountingAdd.html when clicked
-    */
     public onAdd() : void{
         this.router.navigate(['AddDiscount']);
     }
 
-    /*
-        This function will go back dashboard.html when clicked
-    */
     public onClose() : void{
         this.router.navigate(['Dashboard']);
     }
@@ -102,8 +91,4 @@ export class DiscountingComponent implements OnInit{
 
     public getSource() : wijmo.collections.ObservableArray { return this.discountSource; }
 
-    //setter
-    public setSource(s : wijmo.collections.ObservableArray) : void {
-        this.discountSource = s;
-    }
 }

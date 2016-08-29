@@ -26,11 +26,6 @@ export class ItemComponent implements OnInit{
     
     }
 
-    /** 
-    *This function is just like a constructor will initialize all the component elements
-    *when discounting in dashboard is clicked. 
-    *Will go back to the login screen if you try to access this component without logging in.
-    **/
     ngOnInit() : void {
         if(!localStorage.getItem('access_token')) {
             //this._router.navigate(['Login']);
@@ -40,14 +35,10 @@ export class ItemComponent implements OnInit{
         }
         /*Else*/
        this.itemsView = new wijmo.collections.CollectionView();
-       this.itemsView.pageSize = 10;
+       this.itemsView.pageSize = 15;
        this.itemService.listItems(this);
     }   
 
-
-    /*
-        This function when clicked will go to addItem.html
-    */
     public onAdd() : void {
         this._router.navigate(['AddItem']);
     }
@@ -60,7 +51,7 @@ export class ItemComponent implements OnInit{
         this._router.navigate(['Dashboard']);
     }
 
-     public next() : void {
+    public next() : void {
         if(this.itemsView.pageIndex < this.itemsView.pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){
                 document.getElementById('btnBack').removeAttribute('disabled');
@@ -88,5 +79,4 @@ export class ItemComponent implements OnInit{
     public getToastr() : ToastsManager { return this._toastr; }
 
     public getCollectionView() : wijmo.collections.CollectionView { return this.itemsView; }
-
 }

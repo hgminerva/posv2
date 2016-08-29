@@ -19,8 +19,7 @@ export class DiscountingService {
             .subscribe(response => {
                  switch(response.status) {
                         case Response.SUCCESS :
-                                discountComponent.setSource(response.json());
-                                discountComponent.getCollectionView().sourceCollection = discountComponent.getSource()
+                                discountComponent.getCollectionView().sourceCollection = response.json();
                                 this.checkPageCount(discountComponent.getCollectionView());
                                 break;
                         case Response.BAD_REQUEST : break;
@@ -56,7 +55,7 @@ export class DiscountingService {
                           switch(response.status) {
                                 case Response.SUCCESS:
                                     component.getToastr().success('Deleted successfully');
-                                    this.listDicount(component);
+                                    component.getCollectionView().remove(data);
                                     break;
                                 default: break;
                           }

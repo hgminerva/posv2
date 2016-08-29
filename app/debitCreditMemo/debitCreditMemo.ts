@@ -43,9 +43,6 @@ export class DebitCreditMemoComponent implements OnInit{
         this.debitCreditMemoService.listDebitCreditMemo(this);
     }
 
-    /*
-        This function will go to debitCreditMemoAdd.html when click
-    */
     public onAdd() : void{
         this.router.navigate(['DebitCreditMemoAdd']);
     }

@@ -27,12 +27,7 @@ export class ItemGroupComponent implements OnInit{
     constructor(private toastr : ToastsManager, private router : Router, private itemGroupService : ItemGroupService) {
 
     }
-
-    /** 
-    *This function is just like a constructor will initialize all the component elements
-    *when discounting in dashboard is clicked. 
-    *Will go back to the login screen if you try to access this component without logging in.
-    **/
+    
     public ngOnInit() : void {
         if(!localStorage.getItem('access_token')) {
 

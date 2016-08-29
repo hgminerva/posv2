@@ -52,7 +52,7 @@ export class ItemGroupService {
                           switch(response.status) {
                                 case Response.SUCCESS:
                                     component.getToastr().success('Deleted successfully');
-                                    this.listItemGroup(component);
+                                    component.getCollectionView().remove(data);
                                     break;
                                 default: break;
                           }

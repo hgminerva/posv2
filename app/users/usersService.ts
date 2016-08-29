@@ -6,34 +6,24 @@ import {Response} from '../response/response';
 
 @Injectable()
 export class UsersService {
-    public static page : number = 0;
-    private static GRID_LENGTH : number = 10;
-    private url : string;
-    private accessToken : string;
-    private option : RequestOptions;
-    private static SUCCESS : number = 200;
-    private users : wijmo.collections.ObservableArray;
+    private static API_URL_USER : string = "/api/user/";
 
-    constructor(private _http : Http) {
-        this.url = localStorage.getItem('api_url') + "/api/MstUser"; 
-        this.accessToken = localStorage.getItem('access_token');
-        this.users = new wijmo.collections.ObservableArray();
+    constructor(private http : Http) {
+
     }
 
-    public initUsers(component : UsersComponent,
-                     usersView : wijmo.collections.CollectionView) : void{
-        const url = localStorage.getItem('api_url') + '/api/user/list';
-        const users = new wijmo.collections.ObservableArray();
-        const header = new Headers({'Authorization' : 'Bearer ' + this.accessToken});
+    public initUsers(component : UsersComponent) : void{
+        const url = localStorage.getItem('api_url') + UsersService.API_URL_USER + "list";
+        const header = new Headers({'Authorization' : 'Bearer ' + localStorage.getItem('access_token')});
         const option = new RequestOptions({headers : header});
         
-        this._http.get(url, option)
+        this.http.get(url, option)
             .subscribe(
                 response => {
                      switch(response.status) {
                         case Response.SUCCESS :
-                                usersView.sourceCollection = response.json();
-                                this.checkPageCount(usersView);
+                                component.getCollectionView().sourceCollection = response.json();
+                                this.checkPageCount(component.getCollectionView());
                                 break;
                         case Response.BAD_REQUEST : break;
                         case Response.FORBIDDEN_ERROR : break;
@@ -44,6 +34,37 @@ export class UsersService {
                     }           
                 }
             );
+    }
+
+     public deleteUserr(data, component : UsersComponent) : void {
+        const url = localStorage.getItem('api_url') + UsersService.API_URL_USER +  "delete";
+        const headers = new Headers(
+            {
+                'Authorization' : 'Bearer ' + localStorage.getItem('access_token'),
+                'Content-Type' : 'application/json'
+            }
+        )
+        const requestOptions = new RequestOptions({headers : headers,  body : JSON.stringify(data)});
+
+        this.http.delete(url, requestOptions)
+                .subscribe(
+                    response => {
+                         switch(response.status) {
+                        case Response.SUCCESS :
+                                component.getCollectionView().remove(data);
+                                component.getToastr().success('Delete Successful');
+                                break;
+                        case Response.BAD_REQUEST : break;
+                        case Response.FORBIDDEN_ERROR : break;
+                        case Response.NOT_FOUND : 
+                                break;
+                        default: break;
+                    }          
+                    },
+                    error => {
+                        component.getToastr().error('Server error', '');
+                    }
+                )
     }
 
     private checkPageCount(customerView: wijmo.collections.CollectionView) : void {

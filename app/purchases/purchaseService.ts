@@ -52,7 +52,7 @@ export class PurchaseService {
                           switch(response.status) {
                                 case Response.SUCCESS:
                                     component.getToastr().success('Deleted successfully');
-                                    this.listPurchase(component);
+                                    component.getCollectionView().remove(data);
                                     break;
                                 default: break;
                           }

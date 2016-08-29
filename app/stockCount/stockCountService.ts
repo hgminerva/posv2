@@ -53,7 +53,7 @@ export class StockCountService {
                           switch(response.status) {
                                 case Response.SUCCESS:
                                     component.getToastr().success('Deleted successfully');
-                                    this.listStockCount(component);
+                                    component.getCollectionView().remove(data);
                                     break;
                                 default: break;
                           }

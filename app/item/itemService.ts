@@ -28,6 +28,8 @@ export class ItemService {
                         case Response.SUCCESS :
                                 component.getCollectionView().sourceCollection = response.json();
                                 this.checkPageCount(component.getCollectionView());
+                                var pageCount = (<HTMLInputElement>document.getElementById('pageCount'));
+                                pageCount.innerHTML = component.getCollectionView().pageIndex + 1 + "/" + (component.getCollectionView().pageCount + 1);
                                 break;
                         case Response.BAD_REQUEST : break;
                         case Response.FORBIDDEN_ERROR : break;
@@ -67,7 +69,7 @@ export class ItemService {
                           switch(response.status) {
                               case Response.SUCCESS:
                                    itemComponent.getToastr().success('Deleted successfully');
-                                   this.listItems(itemComponent);
+                                   itemComponent.getCollectionView().remove(data);
                                    break;
                               default: break;
                           }

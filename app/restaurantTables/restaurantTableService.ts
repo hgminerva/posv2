@@ -51,8 +51,8 @@ export class RestaurantTableService {
                       response => {
                           switch(response.status) {
                                 case Response.SUCCESS:
-                                    component.getToastr().success('Deleted successfully');
-                                    this.listRestaurantTables(component);
+                                    component.getToastr().success('Delete Successful');
+                                    component.getCollectionView().remove(data);
                                     break;
                                 default: break;
                           }
