@@ -37,6 +37,8 @@ export class ItemComponent implements OnInit{
        this.itemsView = new wijmo.collections.CollectionView();
        this.itemsView.pageSize = 15;
        this.itemService.listItems(this);
+
+       this.setFilters();
     }   
 
     public onAdd() : void {
@@ -51,34 +53,56 @@ export class ItemComponent implements OnInit{
         this._router.navigate(['Dashboard']);
     }
 
+    public first() : void {
+        this.itemsView.moveToFirstPage();
+         this.itemService.updatePageButtons(this);
+    }
+ 
     public next() : void {
-        if(this.itemsView.pageIndex < this.itemsView.pageCount){
-            if(document.getElementById('btnBack').hasAttribute('disabled')){
-                document.getElementById('btnBack').removeAttribute('disabled');
-            }
-            this.itemsView.moveToNextPage();
-        }
-        if(this.itemsView.pageIndex == this.itemsView.pageCount - 1) {
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-        }
+        this.itemsView.moveToNextPage();
+        this.itemService.updatePageButtons(this);
     } 
 
-    public back() : void {
-       if(this.itemsView.pageIndex > 0) {
-            if(document.getElementById('btnNext').hasAttribute('disabled')){
-                document.getElementById('btnNext').removeAttribute('disabled');
-            }
-            this.itemsView.moveToPreviousPage();
-       }
-       if(this.itemsView.pageIndex == 0) {
-           document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-       }
+    public previous() : void {
+        this.itemsView.moveToPreviousPage();
+        this.itemService.updatePageButtons(this);
     }
+
+    public last() : void {
+        this.itemsView.moveToLastPage();
+        this.itemService.updatePageButtons(this);
+    }
+
 
     //getters
     public getToastr() : ToastsManager { return this._toastr; }
 
     public getCollectionView() : wijmo.collections.CollectionView { return this.itemsView; }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.itemsView;
+        var service = this.itemService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
+        }
+
+        this.itemsView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
+        }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+    }
 
 
 }

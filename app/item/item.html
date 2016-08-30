@@ -1,7 +1,17 @@
 <section id="item-page" class="container">
    <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>Items</h4>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Item List</h4>
+                </div>
+                 <div class="col-sm-6">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
+                        <button type="submit" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -11,17 +21,15 @@
                             <td style="width: 50%;">
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                    <input type="text" class="input-sm form-control"  style="width:40%;" id="InputFilter" placeholder="Search">
+                                    <input type="text" 
+                                           class="input-sm form-control"  
+                                           style="width:40%;" 
+                                           id="InputFilter" 
+                                           placeholder="Search">
                                 </div>
                             </td>
                         </tr>
                     </table>
-                </div>
-                 <div class="col-sm-6">
-                    <div class="pull-right">
-                        <button type="button" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
-                        <button type="submit" class="btn btn-primary sharp" (click)="onClose()">Close</button>
-                    </div>
                 </div>
             </div>
             <div class="row">
@@ -101,11 +109,11 @@
                     <div id="page-button">
                         <table>
                             <tr>
-                                <td><button id="btnFirst" class="" (click)="back()">first</button></td>
-                                <td><button id="btnBack" class="" (click)="back()">previous</button></td>
+                                <td><button id="btnFirst" class="" (click)="first()">first</button></td>
+                                <td><button id="btnBack" class="" (click)="previous()">previous</button></td>
                                 <td><button class="text-center" id="pageCount" disabled></button></td>
                                 <td><button id="btnNext" class="" (click)="next()">next</button></td>
-                                <td><button id="btnLast" class="" (click)="back()">last</button></td>
+                                <td><button id="btnLast" class="" (click)="last()">last</button></td>
                             <tr>
                         </table>
                     </div>

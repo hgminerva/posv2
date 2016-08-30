@@ -1,7 +1,18 @@
 <section id="collection-id" class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>Collections</h4>
+             <div class="row">
+                <div class="col-sm-6">
+                    <h4>Collection List</h4>
+                </div>
+                 <div class="col-sm-6">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary sharp" (click)="onAdd()">Tender</button>
+                        <button type="button" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
+                        <button type="submit" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -16,13 +27,6 @@
                             </td>
                         </tr>
                     </table>
-                </div>
-                 <div class="col-sm-6">
-                    <div class="pull-right">
-                        <button class="btn btn-primary sharp" type="button">Tender</button> 
-                        <button class="btn btn-primary sharp" type="button" (click)="onAdd()">Add</button> 
-                        <button class="btn btn-primary sharp" type="button" (click)="onClose()">Close</button> 
-                    </div>
                 </div>
             </div>
             <div class="row">

@@ -48,6 +48,7 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     this.itemsView = new wijmo.collections.CollectionView();
                     this.itemsView.pageSize = 15;
                     this.itemService.listItems(this);
+                    this.setFilters();
                 };
                 ItemComponent.prototype.onAdd = function () {
                     this._router.navigate(['AddItem']);
@@ -58,31 +59,45 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                 ItemComponent.prototype.onClose = function () {
                     this._router.navigate(['Dashboard']);
                 };
-                ItemComponent.prototype.next = function () {
-                    if (this.itemsView.pageIndex < this.itemsView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.itemsView.moveToNextPage();
-                    }
-                    if (this.itemsView.pageIndex == this.itemsView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
+                ItemComponent.prototype.first = function () {
+                    this.itemsView.moveToFirstPage();
+                    this.itemService.updatePageButtons(this);
                 };
-                ItemComponent.prototype.back = function () {
-                    if (this.itemsView.pageIndex > 0) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.itemsView.moveToPreviousPage();
-                    }
-                    if (this.itemsView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                ItemComponent.prototype.next = function () {
+                    this.itemsView.moveToNextPage();
+                    this.itemService.updatePageButtons(this);
+                };
+                ItemComponent.prototype.previous = function () {
+                    this.itemsView.moveToPreviousPage();
+                    this.itemService.updatePageButtons(this);
+                };
+                ItemComponent.prototype.last = function () {
+                    this.itemsView.moveToLastPage();
+                    this.itemService.updatePageButtons(this);
                 };
                 //getters
                 ItemComponent.prototype.getToastr = function () { return this._toastr; };
                 ItemComponent.prototype.getCollectionView = function () { return this.itemsView; };
+                ItemComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.itemsView;
+                    var service = this.itemService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    this.itemsView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                };
                 ItemComponent = __decorate([
                     core_1.Component({
                         selector: 'item',
