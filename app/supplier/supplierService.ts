@@ -11,7 +11,7 @@ export class SupplierService {
     constructor(private http : Http) {
     }
 
-    public listSuppliers(supplierComponent : SupplierComponent) : void {
+    public listSuppliers(component : SupplierComponent) : void {
         const url = localStorage.getItem('api_url') + SupplierService.API_SUPPLIER_URL + "list";
         const headers = new Headers({'Authorization' : 'Bearer ' + localStorage.getItem('access_token')});
         const option = new RequestOptions();
@@ -22,8 +22,8 @@ export class SupplierService {
             response => {
                  switch(response.status) {
                         case Response.SUCCESS :
-                                supplierComponent.getCollectionView().sourceCollection = response.json();
-                                this.checkPageCount(supplierComponent.getCollectionView());
+                                component.getCollectionView().sourceCollection = response.json();
+                                this.updatePageButtons(component);
                                 break;
                         case Response.BAD_REQUEST : break;
                         case Response.FORBIDDEN_ERROR : break;
@@ -33,7 +33,7 @@ export class SupplierService {
                     }          
             },
             error => {
-                supplierComponent.getToastr().error('Server error', '');
+                component.getToastr().error('Server error', '');
             }
         )
     }
@@ -69,10 +69,72 @@ export class SupplierService {
                 )
     }
 
-    private checkPageCount(customerView: wijmo.collections.CollectionView) : void {
-        if(customerView.pageCount == 1 || customerView.itemCount == 0){
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+   public updatePageButtons(component : SupplierComponent) : void {
+        var currentPage = component.getCollectionView().pageIndex;
+        var totalPage = component.getCollectionView().pageCount;
+        var btnFirst = document.getElementById('btnFirst');
+        var btnPrev = document.getElementById('btnBack');
+        var btnNext = document.getElementById('btnNext');
+        var btnLast = document.getElementById('btnLast');
+        var pageButton = document.getElementById('page-button');
+        var pageCount = (<HTMLInputElement>document.getElementById('pageCount'));
+        var filterText = (<HTMLInputElement>document.getElementById('InputFilter'));
+
+        pageButton.style.display = "none";
+
+        if(totalPage == 0) {
+            btnFirst.setAttribute('disabled', 'disabled');
+            btnPrev.setAttribute('disabled', 'disabled');
+            btnNext.setAttribute('disabled', 'disabled');
+            btnLast.setAttribute('disabled', 'disabled');
+            
+            return;
         }
+
+        pageButton.style.display = "block";
+
+        if(currentPage == 0) {
+            if(filterText.value != "") {
+                if(totalPage <= 1) {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.setAttribute('disabled', 'disabled');
+                    btnLast.setAttribute('disabled', 'disabled');
+                }
+                else {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.removeAttribute('disabled');
+                    btnLast.removeAttribute('disabled');
+                }
+            }
+            else {
+                btnFirst.setAttribute('disabled', 'disabled');
+                btnPrev.setAttribute('disabled', 'disabled');
+                btnNext.removeAttribute('disabled');
+                btnLast.removeAttribute('disabled');
+            }
+        }
+        else if(currentPage == totalPage - 1) {
+            btnNext.setAttribute('disabled', 'disabled');
+            btnLast.setAttribute('disabled', 'disabled');
+            btnFirst.removeAttribute('disabled');
+            btnPrev.removeAttribute('disabled');
+        }
+        else {
+            if(btnFirst.hasAttribute('disabled')) {
+                btnFirst.removeAttribute('disabled');
+            }
+            if(btnPrev.hasAttribute('disabled')) {
+                btnPrev.removeAttribute('disabled');
+            }
+            if(btnNext.hasAttribute('disabled')) {
+                btnNext.removeAttribute('disabled');
+            }
+            if(btnLast.hasAttribute('disabled')) {
+                btnLast.removeAttribute('disabled');
+            }
+        }
+        pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
     }
 }

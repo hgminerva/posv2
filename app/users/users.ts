@@ -60,6 +60,7 @@ export class UsersComponent implements OnInit{
     public getToastr() : ToastsManager { return this._toastr }
 
     public getCollectionView() : wijmo.collections.CollectionView { return this.usersView; }
+    
     public next() : void {
         if(this.usersView.pageIndex < this.usersView.pageCount){
             if(document.getElementById('btnBack').hasAttribute('disabled')){

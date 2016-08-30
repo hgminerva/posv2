@@ -91,6 +91,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 SystemTablesComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
                 };
+                SystemTablesComponent.prototype.getAccountsView = function () { return this.chartOfAccountsView; };
                 SystemTablesComponent.prototype.getPayTypeView = function () { return this.payTypeView; };
                 SystemTablesComponent.prototype.getPeriodView = function () { return this.periodView; };
                 SystemTablesComponent.prototype.getTaxView = function () { return this.taxView; };

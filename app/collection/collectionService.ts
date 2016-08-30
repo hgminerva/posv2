@@ -21,7 +21,7 @@ export class CollectionService {
                     switch(response.status) {
                         case Response.SUCCESS: 
                             component.getCollectionView().sourceCollection = response.json();
-                            this.checkPageCount(component.getCollectionView());
+                            this.updatePageButtons(component);
                             break;
                     }
                 },
@@ -71,10 +71,73 @@ export class CollectionService {
                   );
     }
 
-    private checkPageCount(collectionView: wijmo.collections.CollectionView) : void {
-        if(collectionView.pageCount == 1 || collectionView.itemCount == 0){
-                document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+    public updatePageButtons(component : ItemComponent) : void {
+        var currentPage = component.getCollectionView().pageIndex;
+        var totalPage = component.getCollectionView().pageCount;
+        var btnFirst = document.getElementById('btnFirst');
+        var btnPrev = document.getElementById('btnBack');
+        var btnNext = document.getElementById('btnNext');
+        var btnLast = document.getElementById('btnLast');
+        var pageButton = document.getElementById('page-button');
+        var pageCount = (<HTMLInputElement>document.getElementById('pageCount'));
+        var filterText = (<HTMLInputElement>document.getElementById('InputFilter'));
+
+        pageButton.style.display = "none";
+
+        if(totalPage == 0) {
+            btnFirst.setAttribute('disabled', 'disabled');
+            btnPrev.setAttribute('disabled', 'disabled');
+            btnNext.setAttribute('disabled', 'disabled');
+            btnLast.setAttribute('disabled', 'disabled');
+            
+            return;
         }
+
+        pageButton.style.display = "block";
+
+        if(currentPage == 0) {
+            if(filterText.value != "") {
+                if(totalPage <= 1) {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.setAttribute('disabled', 'disabled');
+                    btnLast.setAttribute('disabled', 'disabled');
+                }
+                else {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.removeAttribute('disabled');
+                    btnLast.removeAttribute('disabled');
+                }
+            }
+            else {
+                btnFirst.setAttribute('disabled', 'disabled');
+                btnPrev.setAttribute('disabled', 'disabled');
+                btnNext.removeAttribute('disabled');
+                btnLast.removeAttribute('disabled');
+            }
+        }
+        else if(currentPage == totalPage - 1) {
+            btnNext.setAttribute('disabled', 'disabled');
+            btnLast.setAttribute('disabled', 'disabled');
+            btnFirst.removeAttribute('disabled');
+            btnPrev.removeAttribute('disabled');
+        }
+        else {
+            if(btnFirst.hasAttribute('disabled')) {
+                btnFirst.removeAttribute('disabled');
+            }
+            if(btnPrev.hasAttribute('disabled')) {
+                btnPrev.removeAttribute('disabled');
+            }
+            if(btnNext.hasAttribute('disabled')) {
+                btnNext.removeAttribute('disabled');
+            }
+            if(btnLast.hasAttribute('disabled')) {
+                btnLast.removeAttribute('disabled');
+            }
+        }
+        pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
     }
+
 }

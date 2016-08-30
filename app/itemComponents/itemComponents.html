@@ -88,12 +88,12 @@
                     <div id="page-button">
                         <table>
                             <tr>
-                                <td><button id="btnFirst" class="" (click)="back()">first</button></td>
-                                <td><button id="btnBack" class="" (click)="back()">previous</button></td>
+                                <td><button id="btnFirst" class="" (click)="first()"><i class="fa fa-backward" aria-hidden="true"></i></button></td>
+                                <td><button id="btnBack" class="" (click)="previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></button></td>
                                 <td><button class="text-center" id="pageCount" disabled></button></td>
-                                <td><button id="btnNext" class="" (click)="next()">next</button></td>
-                                <td><button id="btnLast" class="" (click)="back()">last</button></td>
-                            </tr>
+                                <td><button id="btnNext" class="" (click)="next()"><i class="fa  fa-step-forward" aria-hidden="true"></i></button></td>
+                                <td><button id="btnLast" class="" (click)="last()"><i class="fa  fa-forward" aria-hidden="true"></i></button></td>
+                            <tr>
                         </table>
                     </div>
                 </div>

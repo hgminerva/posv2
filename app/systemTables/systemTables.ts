@@ -94,6 +94,8 @@ export class SystemTablesComponent implements OnInit{
         this.router.navigate(['Dashboard']);
     }
 
+    public getAccountsView() : wijmo.collections.CollectionView { return this.chartOfAccountsView; }
+
     public getPayTypeView() : wijmo.collections.CollectionView { return this.payTypeView; }
 
     public getPeriodView() : wijmo.collections.CollectionView { return this.periodView; }

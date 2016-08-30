@@ -36,11 +36,68 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     }, function (error) {
                     });
                 };
-                ChartOfAccountsService.prototype.checkPageCount = function (customerView) {
-                    if (customerView.pageCount == 1 || customerView.itemCount == 0) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+                ChartOfAccountsService.prototype.updatePageButtons = function (component) {
+                    var currentPage = component.getAccountsView().pageIndex;
+                    var totalPage = component.getAccountsView().pageCount;
+                    var btnFirst = document.getElementById('btnFirst');
+                    var btnPrev = document.getElementById('btnBack');
+                    var btnNext = document.getElementById('btnNext');
+                    var btnLast = document.getElementById('btnLast');
+                    var pageButton = document.getElementById('page-button');
+                    var pageCount = document.getElementById('pageCount');
+                    var filterText = document.getElementById('InputFilter');
+                    pageButton.style.display = "none";
+                    if (totalPage == 0) {
+                        btnFirst.setAttribute('disabled', 'disabled');
+                        btnPrev.setAttribute('disabled', 'disabled');
+                        btnNext.setAttribute('disabled', 'disabled');
+                        btnLast.setAttribute('disabled', 'disabled');
+                        return;
                     }
+                    pageButton.style.display = "block";
+                    if (currentPage == 0) {
+                        if (filterText.value != "") {
+                            if (totalPage <= 1) {
+                                btnFirst.setAttribute('disabled', 'disabled');
+                                btnPrev.setAttribute('disabled', 'disabled');
+                                btnNext.setAttribute('disabled', 'disabled');
+                                btnLast.setAttribute('disabled', 'disabled');
+                            }
+                            else {
+                                btnFirst.setAttribute('disabled', 'disabled');
+                                btnPrev.setAttribute('disabled', 'disabled');
+                                btnNext.removeAttribute('disabled');
+                                btnLast.removeAttribute('disabled');
+                            }
+                        }
+                        else {
+                            btnFirst.setAttribute('disabled', 'disabled');
+                            btnPrev.setAttribute('disabled', 'disabled');
+                            btnNext.removeAttribute('disabled');
+                            btnLast.removeAttribute('disabled');
+                        }
+                    }
+                    else if (currentPage == totalPage - 1) {
+                        btnNext.setAttribute('disabled', 'disabled');
+                        btnLast.setAttribute('disabled', 'disabled');
+                        btnFirst.removeAttribute('disabled');
+                        btnPrev.removeAttribute('disabled');
+                    }
+                    else {
+                        if (btnFirst.hasAttribute('disabled')) {
+                            btnFirst.removeAttribute('disabled');
+                        }
+                        if (btnPrev.hasAttribute('disabled')) {
+                            btnPrev.removeAttribute('disabled');
+                        }
+                        if (btnNext.hasAttribute('disabled')) {
+                            btnNext.removeAttribute('disabled');
+                        }
+                        if (btnLast.hasAttribute('disabled')) {
+                            btnLast.removeAttribute('disabled');
+                        }
+                    }
+                    pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
                 };
                 ChartOfAccountsService.API_URL_ACCOUNTS = "";
                 ChartOfAccountsService = __decorate([

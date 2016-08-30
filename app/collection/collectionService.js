@@ -38,7 +38,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         switch (response.status) {
                             case response_1.Response.SUCCESS:
                                 component.getCollectionView().sourceCollection = response.json();
-                                _this.checkPageCount(component.getCollectionView());
+                                _this.updatePageButtons(component);
                                 break;
                         }
                     }, function (error) {
@@ -72,11 +72,68 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         component.getToastr().error('Server error');
                     });
                 };
-                CollectionService.prototype.checkPageCount = function (collectionView) {
-                    if (collectionView.pageCount == 1 || collectionView.itemCount == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
+                CollectionService.prototype.updatePageButtons = function (component) {
+                    var currentPage = component.getCollectionView().pageIndex;
+                    var totalPage = component.getCollectionView().pageCount;
+                    var btnFirst = document.getElementById('btnFirst');
+                    var btnPrev = document.getElementById('btnBack');
+                    var btnNext = document.getElementById('btnNext');
+                    var btnLast = document.getElementById('btnLast');
+                    var pageButton = document.getElementById('page-button');
+                    var pageCount = document.getElementById('pageCount');
+                    var filterText = document.getElementById('InputFilter');
+                    pageButton.style.display = "none";
+                    if (totalPage == 0) {
+                        btnFirst.setAttribute('disabled', 'disabled');
+                        btnPrev.setAttribute('disabled', 'disabled');
+                        btnNext.setAttribute('disabled', 'disabled');
+                        btnLast.setAttribute('disabled', 'disabled');
+                        return;
                     }
+                    pageButton.style.display = "block";
+                    if (currentPage == 0) {
+                        if (filterText.value != "") {
+                            if (totalPage <= 1) {
+                                btnFirst.setAttribute('disabled', 'disabled');
+                                btnPrev.setAttribute('disabled', 'disabled');
+                                btnNext.setAttribute('disabled', 'disabled');
+                                btnLast.setAttribute('disabled', 'disabled');
+                            }
+                            else {
+                                btnFirst.setAttribute('disabled', 'disabled');
+                                btnPrev.setAttribute('disabled', 'disabled');
+                                btnNext.removeAttribute('disabled');
+                                btnLast.removeAttribute('disabled');
+                            }
+                        }
+                        else {
+                            btnFirst.setAttribute('disabled', 'disabled');
+                            btnPrev.setAttribute('disabled', 'disabled');
+                            btnNext.removeAttribute('disabled');
+                            btnLast.removeAttribute('disabled');
+                        }
+                    }
+                    else if (currentPage == totalPage - 1) {
+                        btnNext.setAttribute('disabled', 'disabled');
+                        btnLast.setAttribute('disabled', 'disabled');
+                        btnFirst.removeAttribute('disabled');
+                        btnPrev.removeAttribute('disabled');
+                    }
+                    else {
+                        if (btnFirst.hasAttribute('disabled')) {
+                            btnFirst.removeAttribute('disabled');
+                        }
+                        if (btnPrev.hasAttribute('disabled')) {
+                            btnPrev.removeAttribute('disabled');
+                        }
+                        if (btnNext.hasAttribute('disabled')) {
+                            btnNext.removeAttribute('disabled');
+                        }
+                        if (btnLast.hasAttribute('disabled')) {
+                            btnLast.removeAttribute('disabled');
+                        }
+                    }
+                    pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
                 };
                 CollectionService.API_COLLECTION_URL = "/api/transaction/collection/";
                 CollectionService = __decorate([

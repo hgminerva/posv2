@@ -91,7 +91,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 //getters
                 CustomerComponent.prototype.getToastr = function () { return this.toastr; };
-                CustomerComponent.prototype.getCustomerView = function () { return this.customerView; };
+                CustomerComponent.prototype.getCollectionView = function () { return this.customerView; };
                 CustomerComponent = __decorate([
                     core_1.Component({
                         selector: 'customer',

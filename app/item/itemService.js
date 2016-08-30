@@ -49,6 +49,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                             default: break;
                         }
                     }, function (error) {
+                        _this.updatePageButtons(component);
                         component.getToastr().error('Server Error', '');
                     });
                 };

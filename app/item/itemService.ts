@@ -37,6 +37,7 @@ export class ItemService {
                     }           
                 },
                 error => {
+                    this.updatePageButtons(component);   
                     component.getToastr().error('Server Error', '');
                 }
             );

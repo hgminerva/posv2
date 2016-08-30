@@ -93,6 +93,6 @@ export class CustomerComponent implements OnInit {
 
     public getToastr() : ToastsManager { return this.toastr; }
     
-    public getCustomerView() : wijmo.collections.CollectionView { return this.customerView; }
+    public getCollectionView() : wijmo.collections.CollectionView { return this.customerView; }
 
 }
