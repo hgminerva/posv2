@@ -64,30 +64,51 @@ export class CustomerComponent implements OnInit {
     }
     
 
+     public first() : void {
+        this.customerView.moveToFirstPage();
+        this.customerService.updatePageButtons(this);
+    }
+ 
     public next() : void {
-        if(this.customerView.pageIndex < this.customerView.pageCount){
-            if(document.getElementById('btnBack').hasAttribute('disabled')){
-                document.getElementById('btnBack').removeAttribute('disabled')
-            }
-            this.customerView.moveToNextPage();
-        }
-        if(this.customerView.pageIndex == this.customerView.pageCount - 1) {
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-        }
-        console.log(this.customerView.sourceCollection[0].Id);
+        this.customerView.moveToNextPage();
+        this.customerService.updatePageButtons(this);
+    } 
+
+    public previous() : void {
+        this.customerView.moveToPreviousPage();
+        this.customerService.updatePageButtons(this);
     }
 
-    public back() : void {
-        if(this.customerView.pageIndex < this.customerView.pageCount) {
-            if(document.getElementById('btnNext').hasAttribute('disabled')) {
-                document.getElementById('btnNext').removeAttribute('disabled'); 
-            }
-            this.customerView.moveToPreviousPage();
-        }
-        if(this.customerView.pageIndex == 0){
-            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-        }
+    public last() : void {
+        this.customerView.moveToLastPage();
+        this.customerService.updatePageButtons(this);
     }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.customerView;
+        var service = this.customerService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
+        }
+
+        this.customerView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
+        }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+    }
+
 
     //getters
 

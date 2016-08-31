@@ -58,27 +58,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 SupplierComponent.prototype.deleteSupplier = function () {
                     this.supplierService.deleteSupplier(this.supplierView.currentItem, this);
                 };
-                SupplierComponent.prototype.next = function () {
-                    if (this.supplierView.pageIndex < this.supplierView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.supplierView.moveToNextPage();
-                    }
-                    if (this.supplierView.pageIndex == this.supplierView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
+                SupplierComponent.prototype.first = function () {
+                    this.supplierView.moveToFirstPage();
+                    this.supplierService.updatePageButtons(this);
                 };
-                SupplierComponent.prototype.back = function () {
-                    if (this.supplierView.pageIndex > 0) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.supplierView.moveToPreviousPage();
-                    }
-                    if (this.supplierView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                SupplierComponent.prototype.next = function () {
+                    this.supplierView.moveToNextPage();
+                    this.supplierService.updatePageButtons(this);
+                };
+                SupplierComponent.prototype.previous = function () {
+                    this.supplierView.moveToPreviousPage();
+                    this.supplierService.updatePageButtons(this);
+                };
+                SupplierComponent.prototype.last = function () {
+                    this.supplierView.moveToLastPage();
+                    this.supplierService.updatePageButtons(this);
+                };
+                SupplierComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.supplierView;
+                    var service = this.supplierService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 //getters
                 SupplierComponent.prototype.getToastr = function () { return this.toastr; };

@@ -58,28 +58,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 DebitCreditMemoComponent.prototype.deleteDebitCreditMemo = function () {
                     this.debitCreditMemoService.deleteCollection(this.debitCreditMemoView.currentItem, this);
                 };
-                DebitCreditMemoComponent.prototype.next = function () {
-                    if (this.debitCreditMemoView.pageIndex < this.debitCreditMemoView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.debitCreditMemoView.moveToNextPage();
-                    }
-                    if (this.debitCreditMemoView.pageIndex == this.debitCreditMemoView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
-                    console.log(this.debitCreditMemoView.sourceCollection[0].Id);
+                DebitCreditMemoComponent.prototype.first = function () {
+                    this.debitCreditMemoView.moveToFirstPage();
+                    this.debitCreditMemoService.updatePageButtons(this);
                 };
-                DebitCreditMemoComponent.prototype.back = function () {
-                    if (this.debitCreditMemoView.pageIndex < this.debitCreditMemoView.pageCount) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.debitCreditMemoView.moveToPreviousPage();
-                    }
-                    if (this.debitCreditMemoView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                DebitCreditMemoComponent.prototype.next = function () {
+                    this.debitCreditMemoView.moveToNextPage();
+                    this.debitCreditMemoService.updatePageButtons(this);
+                };
+                DebitCreditMemoComponent.prototype.previous = function () {
+                    this.debitCreditMemoView.moveToPreviousPage();
+                    this.debitCreditMemoService.updatePageButtons(this);
+                };
+                DebitCreditMemoComponent.prototype.last = function () {
+                    this.debitCreditMemoView.moveToLastPage();
+                    this.debitCreditMemoService.updatePageButtons(this);
+                };
+                DebitCreditMemoComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.debitCreditMemoView;
+                    var service = this.debitCreditMemoService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 //getters
                 DebitCreditMemoComponent.prototype.getToastr = function () { return this.toastr; };

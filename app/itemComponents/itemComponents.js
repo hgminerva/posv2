@@ -54,28 +54,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 ItemComponentsComponent.prototype.deleteItemComponent = function () {
                 };
-                ItemComponentsComponent.prototype.next = function () {
-                    if (this.itemComponentView.pageIndex < this.itemComponentView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.itemComponentView.moveToNextPage();
-                    }
-                    if (this.itemComponentView.pageIndex == this.itemComponentView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
-                    console.log(this.itemComponentView.sourceCollection[0].Id);
+                ItemComponentsComponent.prototype.first = function () {
+                    this.itemComponentView.moveToFirstPage();
+                    this.itemComponentsService.updatePageButtons(this);
                 };
-                ItemComponentsComponent.prototype.back = function () {
-                    if (this.itemComponentView.pageIndex < this.itemComponentView.pageCount) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.itemComponentView.moveToPreviousPage();
-                    }
-                    if (this.itemComponentView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                ItemComponentsComponent.prototype.next = function () {
+                    this.itemComponentView.moveToNextPage();
+                    this.itemComponentsService.updatePageButtons(this);
+                };
+                ItemComponentsComponent.prototype.previous = function () {
+                    this.itemComponentView.moveToPreviousPage();
+                    this.itemComponentsService.updatePageButtons(this);
+                };
+                ItemComponentsComponent.prototype.last = function () {
+                    this.itemComponentView.moveToLastPage();
+                    this.itemComponentsService.updatePageButtons(this);
+                };
+                ItemComponentsComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.itemComponentView;
+                    var service = this.itemComponentsService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 //getters
                 //getters

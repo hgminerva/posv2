@@ -53,29 +53,49 @@ export class PurchasesComponent implements OnInit{
         this.purchaseService.deletePurchase(this.purchaseView.currentItem, this);
     }
 
+    public first() : void {
+        this.purchaseView.moveToFirstPage();
+        this.purchaseService.updatePageButtons(this);
+    }
+ 
     public next() : void {
-        if(this.purchaseView .pageIndex < this.purchaseView .pageCount){
-            if(document.getElementById('btnBack').hasAttribute('disabled')){
-                document.getElementById('btnBack').removeAttribute('disabled')
-            }
-            this.purchaseView .moveToNextPage();
-        }
-        if(this.purchaseView .pageIndex == this.purchaseView .pageCount - 1) {
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-        }
-        console.log(this.purchaseView .sourceCollection[0].Id);
+        this.purchaseView.moveToNextPage();
+        this.purchaseService.updatePageButtons(this);
+    } 
+
+    public previous() : void {
+        this.purchaseView.moveToPreviousPage();
+        this.purchaseService.updatePageButtons(this);
     }
 
-    public back() : void {
-        if(this.purchaseView .pageIndex < this.purchaseView .pageCount) {
-            if(document.getElementById('btnNext').hasAttribute('disabled')) {
-                document.getElementById('btnNext').removeAttribute('disabled'); 
-            }
-            this.purchaseView .moveToPreviousPage();
+    public last() : void {
+        this.purchaseView.moveToLastPage();
+        this.purchaseService.updatePageButtons(this);
+    }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.purchaseView;
+        var service = this.purchaseService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
         }
-        if(this.purchaseView.pageIndex == 0){
-            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+
+        collectionView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
         }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
     }
 
     //getters

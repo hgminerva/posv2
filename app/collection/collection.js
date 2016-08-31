@@ -58,28 +58,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 CollectionComponent.prototype.deleteCollection = function () {
                     this.collectionService.deleteCollection(this.collectionView.currentItem, this);
                 };
-                CollectionComponent.prototype.next = function () {
-                    if (this.collectionView.pageIndex < this.collectionView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.collectionView.moveToNextPage();
-                    }
-                    if (this.collectionView.pageIndex == this.collectionView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
-                    console.log(this.collectionView.sourceCollection[0].Id);
+                CollectionComponent.prototype.first = function () {
+                    this.collectionView.moveToFirstPage();
+                    this.collectionService.updatePageButtons(this);
                 };
-                CollectionComponent.prototype.back = function () {
-                    if (this.collectionView.pageIndex < this.collectionView.pageCount) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.collectionView.moveToPreviousPage();
-                    }
-                    if (this.collectionView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                CollectionComponent.prototype.next = function () {
+                    this.collectionView.moveToNextPage();
+                    this.collectionService.updatePageButtons(this);
+                };
+                CollectionComponent.prototype.previous = function () {
+                    this.collectionView.moveToPreviousPage();
+                    this.collectionService.updatePageButtons(this);
+                };
+                CollectionComponent.prototype.last = function () {
+                    this.collectionView.moveToLastPage();
+                    this.collectionService.updatePageButtons(this);
+                };
+                CollectionComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.collectionView;
+                    var service = this.collectionService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    this.collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 //getters
                 CollectionComponent.prototype.getToastr = function () { return this._toastr; };

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.input', './supplierService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2Input, supplierService_1;
     var SupplierAddComponent;
     return {
         setters:[
@@ -25,12 +25,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (supplierService_1_1) {
+                supplierService_1 = supplierService_1_1;
             }],
         execute: function() {
             SupplierAddComponent = (function () {
-                function SupplierAddComponent(toastr, router) {
+                function SupplierAddComponent(toastr, router, supplierService) {
                     this.toastr = toastr;
                     this.router = router;
+                    this.supplierService = supplierService;
                 }
                 SupplierAddComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
@@ -64,14 +68,11 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     document.getElementById('cmbAPAccount').removeAttribute('disabled');
                 };
                 SupplierAddComponent.prototype.onClose = function () {
-                    this.router.navigate(['Supplier']);
                     this.addSupplier();
                 };
                 //getters
                 SupplierAddComponent.prototype.getToastr = function () { return this.toastr; };
-                /**
-                *This function initializes the  term combobox of supplier add page
-                **/
+                SupplierAddComponent.prototype.getRouter = function () { return this.router; };
                 SupplierAddComponent.prototype.initTermCombobox = function () {
                     var i, day = 15;
                     for (i = 1; i < SupplierAddComponent.CMB_TERM_LEMGTH; i++) {
@@ -79,11 +80,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                         day *= 2;
                     }
                     this.cmbTermSource.push('COD');
-                    console.log(this.cmbTermSource.length);
                 };
-                /**
-                *This function initializes the  APAccount combobox of supplier add page
-                **/
                 SupplierAddComponent.prototype.initAPAccountCombobox = function () {
                     this.cmbAPAccountSource.push('Accounts Payable');
                     this.cmbAPAccountSource.push('Local Tax Payable');
@@ -93,12 +90,20 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 SupplierAddComponent.prototype.addSupplier = function () {
                     var supplier = this.createSupplier();
                     if (this.validate(supplier)) {
+                        this.supplierService.addSupplier(supplier, this);
                     }
                     else {
                     }
                 };
                 SupplierAddComponent.prototype.createSupplier = function () {
-                    var supplier = {};
+                    var supplier = {
+                        Supplier: this.supplier,
+                        Address: this.address,
+                        TelephoneNumber: this.telephoneNumber,
+                        CellphoneNumber: this.cellphoneNumber,
+                        FaxNumber: this.faxNumber,
+                        TIN: this.tin
+                    };
                     return supplier;
                 };
                 SupplierAddComponent.prototype.validate = function (supplier) {
@@ -131,10 +136,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjComboBox
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager, supplierService_1.SupplierService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, supplierService_1.SupplierService])
                 ], SupplierAddComponent);
                 return SupplierAddComponent;
             }());

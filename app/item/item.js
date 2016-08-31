@@ -75,9 +75,6 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     this.itemsView.moveToLastPage();
                     this.itemService.updatePageButtons(this);
                 };
-                //getters
-                ItemComponent.prototype.getToastr = function () { return this._toastr; };
-                ItemComponent.prototype.getCollectionView = function () { return this.itemsView; };
                 ItemComponent.prototype.setFilters = function () {
                     var inputFilter = document.getElementById('InputFilter');
                     var filterText = '';
@@ -98,6 +95,9 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                         service.updatePageButtons(component);
                     });
                 };
+                //getters
+                ItemComponent.prototype.getToastr = function () { return this._toastr; };
+                ItemComponent.prototype.getCollectionView = function () { return this.itemsView; };
                 ItemComponent = __decorate([
                     core_1.Component({
                         selector: 'item',

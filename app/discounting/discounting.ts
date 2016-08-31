@@ -60,35 +60,54 @@ export class DiscountingComponent implements OnInit{
         this.discountingService.deleteDiscount(this.discountsView.currentItem, this);
     }
 
+     public first() : void {
+        this.discountsView.moveToFirstPage();
+        this.discountingService.updatePageButtons(this);
+    }
+ 
     public next() : void {
-        if(this.discountsView.pageIndex < this.discountsView.pageCount){
-            if(document.getElementById('btnBack').hasAttribute('disabled')){
-                document.getElementById('btnBack').removeAttribute('disabled');
-            }
-            this.discountsView.moveToNextPage();
-        }
-        if(this.discountsView.pageIndex == this.discountsView.pageCount - 1) {
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-        }
+        this.discountsView.moveToNextPage();
+        this.discountingService.updatePageButtons(this);
     } 
 
-    public back() : void {
-       if(this.discountsView.pageIndex > 0) {
-            if(document.getElementById('btnNext').hasAttribute('disabled')){
-                document.getElementById('btnNext').removeAttribute('disabled');
-            }
-            this.discountsView.moveToPreviousPage();
-       }
-       if(this.discountsView.pageIndex == 0) {
-           document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-       }
+    public previous() : void {
+        this.discountsView.moveToPreviousPage();
+        this.discountingService.updatePageButtons(this);
+    }
+
+    public last() : void {
+        this.discountsView.moveToLastPage();
+        this.discountingService.updatePageButtons(this);
+    }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.discountsView;
+        var service = this.discountingService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
+        }
+
+        collectionView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
+        }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
     }
 
     //getters
     public getToastr() : ToastsManager { return this.toastr; };
 
     public getCollectionView() : wijmo.collections.CollectionView { return this.discountsView; }
-
-    public getSource() : wijmo.collections.ObservableArray { return this.discountSource; }
 
 }

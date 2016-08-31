@@ -55,30 +55,51 @@ export class StockOutComponent implements OnInit {
         this.stockOutService.deleteStockOut(this.stockOutView.currentItem, this);
     }
 
+    public first() : void {
+        this.stockOutView.moveToFirstPage();
+        this.stockOutService.updatePageButtons(this);
+    }
+ 
     public next() : void {
-        if(this.stockOutView.pageIndex < this.stockOutView.pageCount){
-            if(document.getElementById('btnBack').hasAttribute('disabled')){
-                document.getElementById('btnBack').removeAttribute('disabled')
-            }
-            this.stockOutView.moveToNextPage();
-        }
-        if(this.stockOutView.pageIndex == this.stockOutView.pageCount - 1) {
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-        }
-        console.log(this.stockOutView.sourceCollection[0].Id);
+        this.stockOutView.moveToNextPage();
+        this.stockOutService.updatePageButtons(this);
+    } 
+
+    public previous() : void {
+        this.stockOutView.moveToPreviousPage();
+        this.stockOutService.updatePageButtons(this);
     }
 
-    public back() : void {
-        if(this.stockOutView.pageIndex < this.stockOutView.pageCount) {
-            if(document.getElementById('btnNext').hasAttribute('disabled')) {
-                document.getElementById('btnNext').removeAttribute('disabled'); 
-            }
-            this.stockOutView.moveToPreviousPage();
-        }
-        if(this.stockOutView.pageIndex == 0){
-            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-        }
+    public last() : void {
+        this.stockOutView.moveToLastPage();
+        this.stockOutService.updatePageButtons(this);
     }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.stockOutView;
+        var service = this.stockOutService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
+        }
+
+        collectionView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
+        }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+    }
+
 
     //getters
     public getToastr() : ToastsManager { return this.toastr; }

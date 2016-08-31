@@ -55,7 +55,7 @@ export class ItemComponent implements OnInit{
 
     public first() : void {
         this.itemsView.moveToFirstPage();
-         this.itemService.updatePageButtons(this);
+        this.itemService.updatePageButtons(this);
     }
  
     public next() : void {
@@ -72,12 +72,6 @@ export class ItemComponent implements OnInit{
         this.itemsView.moveToLastPage();
         this.itemService.updatePageButtons(this);
     }
-
-
-    //getters
-    public getToastr() : ToastsManager { return this._toastr; }
-
-    public getCollectionView() : wijmo.collections.CollectionView { return this.itemsView; }
 
     public setFilters() : void {
         var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
@@ -103,6 +97,11 @@ export class ItemComponent implements OnInit{
             service.updatePageButtons(component);            
         })
     }
+
+     //getters
+    public getToastr() : ToastsManager { return this._toastr; }
+
+    public getCollectionView() : wijmo.collections.CollectionView { return this.itemsView; }
 
 
 }

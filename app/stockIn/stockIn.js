@@ -58,28 +58,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 StockInComponent.prototype.deleteStockIn = function () {
                     this.stockInService.deleteStockIn(this.stockInView.currentItem, this);
                 };
-                StockInComponent.prototype.next = function () {
-                    if (this.stockInView.pageIndex < this.stockInView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.stockInView.moveToNextPage();
-                    }
-                    if (this.stockInView.pageIndex == this.stockInView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
-                    console.log(this.stockInView.sourceCollection[0].Id);
+                StockInComponent.prototype.first = function () {
+                    this.stockInView.moveToFirstPage();
+                    this.stockInService.updatePageButtons(this);
                 };
-                StockInComponent.prototype.back = function () {
-                    if (this.stockInView.pageIndex < this.stockInView.pageCount) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.stockInView.moveToPreviousPage();
-                    }
-                    if (this.stockInView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                StockInComponent.prototype.next = function () {
+                    this.stockInView.moveToNextPage();
+                    this.stockInService.updatePageButtons(this);
+                };
+                StockInComponent.prototype.previous = function () {
+                    this.stockInView.moveToPreviousPage();
+                    this.stockInService.updatePageButtons(this);
+                };
+                StockInComponent.prototype.last = function () {
+                    this.stockInView.moveToLastPage();
+                    this.stockInService.updatePageButtons(this);
+                };
+                StockInComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.stockInView;
+                    var service = this.stockInService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 //getters
                 StockInComponent.prototype.getToastr = function () { return this.toastr; };

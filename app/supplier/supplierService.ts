@@ -1,6 +1,7 @@
 import {Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {SupplierComponent} from './supplier';
+import {SupplierAddComponent} from './supplierAdd';
 import {Response} from '../response/response';
 
 
@@ -38,12 +39,43 @@ export class SupplierService {
         )
     }
 
+    public addSupplier(data, component : SupplierAddComponent) : void {
+        const url = localStorage.getItem('api_url') + SupplierService.API_SUPPLIER_URL + "create";
+        const headers = new Headers(
+            {
+                'Authorization' : 'Bearer ' + localStorage.getItem('access_token'),
+                'Content-Type' : 'application/json'
+            }
+        )
+        const requestOptions = new RequestOptions({headers : headers});
+
+        this.http.post(url, JSON.stringify(data), requestOptions)
+            .subscribe(
+                response => {
+                     switch(response.status) {
+                        case Response.SUCCESS :
+                                component.getToastr().success('Add successful');
+                                component.getRouter().navigate(['Supplier']);
+                                break;
+                        case Response.BAD_REQUEST : break;
+                        case Response.FORBIDDEN_ERROR : break;
+                        case Response.NOT_FOUND : 
+                                break;
+                        default: break;
+                    }          
+                },
+                error => {
+
+                }
+            )
+    }
+
     public deleteSupplier(data, component : SupplierComponent) : void {
         const url = localStorage.getItem('api_url') + SupplierService.API_SUPPLIER_URL + "delete";
         const headers = new Headers(
             {
                 'Authorization' : 'Bearer ' + localStorage.getItem('access_token'),
-                'Content-Type' : 'application/json',
+                'Content-Type' : 'application/json'
             }
         )
         const requestOptions = new RequestOptions({headers : headers,  body : JSON.stringify(data)});
@@ -109,10 +141,18 @@ export class SupplierService {
                 }
             }
             else {
-                btnFirst.setAttribute('disabled', 'disabled');
-                btnPrev.setAttribute('disabled', 'disabled');
-                btnNext.removeAttribute('disabled');
-                btnLast.removeAttribute('disabled');
+                if(totalPage > 1) {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.removeAttribute('disabled');
+                    btnLast.removeAttribute('disabled');
+                }
+                else {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.setAttribute('disabled', 'disabled');
+                    btnLast.setAttribute('disabled', 'disabled');
+                }
             }
         }
         else if(currentPage == totalPage - 1) {

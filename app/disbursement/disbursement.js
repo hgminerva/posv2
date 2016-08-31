@@ -58,28 +58,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 DisbursementComponent.prototype.deleteDisbursement = function () {
                     this.disbursementService.deleteDisbursement(this.disbursementView.currentItem, this);
                 };
-                DisbursementComponent.prototype.next = function () {
-                    if (this.disbursementView.pageIndex < this.disbursementView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.disbursementView.moveToNextPage();
-                    }
-                    if (this.disbursementView.pageIndex == this.disbursementView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
-                    console.log(this.disbursementView.sourceCollection[0].Id);
+                DisbursementComponent.prototype.first = function () {
+                    this.disbursementView.moveToFirstPage();
+                    this.disbursementService.updatePageButtons(this);
                 };
-                DisbursementComponent.prototype.back = function () {
-                    if (this.disbursementView.pageIndex < this.disbursementView.pageCount) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.disbursementView.moveToPreviousPage();
-                    }
-                    if (this.disbursementView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                DisbursementComponent.prototype.next = function () {
+                    this.disbursementView.moveToNextPage();
+                    this.disbursementService.updatePageButtons(this);
+                };
+                DisbursementComponent.prototype.previous = function () {
+                    this.disbursementView.moveToPreviousPage();
+                    this.disbursementService.updatePageButtons(this);
+                };
+                DisbursementComponent.prototype.last = function () {
+                    this.disbursementView.moveToLastPage();
+                    this.disbursementService.updatePageButtons(this);
+                };
+                DisbursementComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.disbursementView;
+                    var service = this.disbursementService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 //getters
                 DisbursementComponent.prototype.getToastr = function () { return this.toastr; };

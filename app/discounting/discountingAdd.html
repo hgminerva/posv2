@@ -10,9 +10,9 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="pull-right">
-                            <button type="button" class="btn btn-primary sharp" (click)="onLock()">Lock</button>
-                            <button type="button" class="btn btn-primary sharp" (click)="onUnlock()">Unlock</button>
-                            <button type="button" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                            <button type="button" class="btn btn-primary btn-sm sharp" (click)="onLock()"><i class="fa fa-lock"> Lock</i></button>
+                            <button type="button" class="btn btn-primary btn-sm sharp" (click)="onUnlock()"><i class="fa fa-unlock"> Unlock</i></button>
+                            <button type="button" class="btn btn-primary btn-sm sharp" (click)="onClose()"><i class="fa fa-close"> Close</i></button>
                         </div>
                     </div>
                 </div>
@@ -89,37 +89,52 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
-                  <wj-flex-grid #flexDiscount id="flexDiscount" class="grid" [itemsSource]="discountsView">
-                    <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
-                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                            <button class="btn btn-danger sharp" >
-                                    Delete
-                            </button>
-                        </template>
-                    </wj-flex-grid-column> 
-                    <wj-flex-grid-column [header]="'Item'" 
-                                        [binding]="'Item'"
-                                        [isReadOnly]="true" 
-                                        [width]="'3*'"
-                                        [align]="'center'">
-                    </wj-flex-grid-column>
-                    <wj-flex-grid-column [header]="'A'" 
-                                        [binding]="'A'"
-                                        [data-type]="'Boolean'"
-                                        [isReadOnly]="true" 
-                                        [align]="'center'">
-                    </wj-flex-grid-column>
-                </wj-flex-grid>
-                <div id="grid-page-button">
-                    <table>
-                        <tr>
-                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
-                            <td><button id="btnBack" class="btn btn-primary sharp" (click)="back()">back</button></td>
-                            <td></td>
-                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
-                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
-                        </tr>
-                    </table>
+                <div class="row">
+                    <div class="col-sm-12 clearfix">
+                        <div class="pull-right">
+                            <button id="btnAdd" class="btn btn-primary btn-sm sharp"><i class="fa fa-plus"> Add</i></button>
+                        </div>
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">    
+                        <wj-flex-grid #flexDiscount id="flexDiscount" class="grid" [itemsSource]="discountsView">
+                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70">
+                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <button class="btn btn-danger sharp" >
+                                            Delete
+                                    </button>
+                                </template>
+                            </wj-flex-grid-column> 
+                            <wj-flex-grid-column [header]="'Item'" 
+                                                [binding]="'Item'"
+                                                [isReadOnly]="true" 
+                                                [width]="'3*'"
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                            <wj-flex-grid-column [header]="'A'" 
+                                                [binding]="'A'"
+                                                [data-type]="'Boolean'"
+                                                [isReadOnly]="true" 
+                                                [align]="'center'">
+                            </wj-flex-grid-column>
+                        </wj-flex-grid>
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="col-sm-12">  
+                        <div id="page-button">
+                            <table>
+                                <tr>
+                                    <td><button id="btnFirst" class="" (click)="first()"><i class="fa fa-backward" aria-hidden="true"></i></button></td>
+                                    <td><button id="btnBack" class="" (click)="previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></button></td>
+                                    <td><button class="text-center" id="pageCount" disabled></button></td>
+                                    <td><button id="btnNext" class="" (click)="next()"><i class="fa  fa-step-forward" aria-hidden="true"></i></button></td>
+                                    <td><button id="btnLast" class="" (click)="last()"><i class="fa  fa-forward" aria-hidden="true"></i></button></td>
+                                <tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

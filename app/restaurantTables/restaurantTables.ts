@@ -55,29 +55,49 @@ export class RestaurantTablesComponent implements OnInit{
         this.restaurantTableService.deleteCollection(this.restaurantTableView.currentItem, this);
     }
 
+    public first() : void {
+        this.restaurantTableView.moveToFirstPage();
+        this.restaurantTableService.updatePageButtons(this);
+    }
+ 
     public next() : void {
-        if(this.restaurantTableView.pageIndex < this.restaurantTableView.pageCount){
-            if(document.getElementById('btnBack').hasAttribute('disabled')){
-                document.getElementById('btnBack').removeAttribute('disabled')
-            }
-            this.restaurantTableView.moveToNextPage();
-        }
-        if(this.restaurantTableView.pageIndex == this.restaurantTableView.pageCount - 1) {
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-        }
-        console.log(this.restaurantTableView.sourceCollection[0].Id);
+        this.restaurantTableView.moveToNextPage();
+        this.restaurantTableService.updatePageButtons(this);
+    } 
+
+    public previous() : void {
+        this.restaurantTableView.moveToPreviousPage();
+        this.restaurantTableService.updatePageButtons(this);
     }
 
-    public back() : void {
-        if(this.restaurantTableView.pageIndex < this.restaurantTableView.pageCount) {
-            if(document.getElementById('btnNext').hasAttribute('disabled')) {
-                document.getElementById('btnNext').removeAttribute('disabled'); 
-            }
-            this.restaurantTableView.moveToPreviousPage();
+    public last() : void {
+        this.restaurantTableView.moveToLastPage();
+        this.restaurantTableService.updatePageButtons(this);
+    }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.restaurantTableView;
+        var service = this.restaurantTableService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
         }
-        if(this.restaurantTableView.pageIndex == 0){
-            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+
+        collectionView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
         }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
     }
 
     //getters

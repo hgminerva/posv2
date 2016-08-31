@@ -63,33 +63,46 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 DiscountingComponent.prototype.deleteItem = function () {
                     this.discountingService.deleteDiscount(this.discountsView.currentItem, this);
                 };
-                DiscountingComponent.prototype.next = function () {
-                    if (this.discountsView.pageIndex < this.discountsView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.discountsView.moveToNextPage();
-                    }
-                    if (this.discountsView.pageIndex == this.discountsView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
+                DiscountingComponent.prototype.first = function () {
+                    this.discountsView.moveToFirstPage();
+                    this.discountingService.updatePageButtons(this);
                 };
-                DiscountingComponent.prototype.back = function () {
-                    if (this.discountsView.pageIndex > 0) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.discountsView.moveToPreviousPage();
-                    }
-                    if (this.discountsView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                DiscountingComponent.prototype.next = function () {
+                    this.discountsView.moveToNextPage();
+                    this.discountingService.updatePageButtons(this);
+                };
+                DiscountingComponent.prototype.previous = function () {
+                    this.discountsView.moveToPreviousPage();
+                    this.discountingService.updatePageButtons(this);
+                };
+                DiscountingComponent.prototype.last = function () {
+                    this.discountsView.moveToLastPage();
+                    this.discountingService.updatePageButtons(this);
+                };
+                DiscountingComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.discountsView;
+                    var service = this.discountingService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 //getters
                 DiscountingComponent.prototype.getToastr = function () { return this.toastr; };
                 ;
                 DiscountingComponent.prototype.getCollectionView = function () { return this.discountsView; };
-                DiscountingComponent.prototype.getSource = function () { return this.discountSource; };
                 DiscountingComponent = __decorate([
                     core_1.Component({
                         selector: 'discounting',

@@ -55,29 +55,49 @@ export class CollectionComponent implements OnInit{
         this.collectionService.deleteCollection(this.collectionView.currentItem, this);
     }
 
+    public first() : void {
+        this.collectionView.moveToFirstPage();
+        this.collectionService.updatePageButtons(this);
+    }
+ 
     public next() : void {
-        if(this.collectionView.pageIndex < this.collectionView.pageCount){
-            if(document.getElementById('btnBack').hasAttribute('disabled')){
-                document.getElementById('btnBack').removeAttribute('disabled')
-            }
-            this.collectionView.moveToNextPage();
-        }
-        if(this.collectionView.pageIndex == this.collectionView.pageCount - 1) {
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-        }
-        console.log(this.collectionView.sourceCollection[0].Id);
+        this.collectionView.moveToNextPage();
+        this.collectionService.updatePageButtons(this);
+    } 
+
+    public previous() : void {
+        this.collectionView.moveToPreviousPage();
+        this.collectionService.updatePageButtons(this);
     }
 
-    public back() : void {
-        if(this.collectionView.pageIndex < this.collectionView.pageCount) {
-            if(document.getElementById('btnNext').hasAttribute('disabled')) {
-                document.getElementById('btnNext').removeAttribute('disabled'); 
-            }
-            this.collectionView.moveToPreviousPage();
+    public last() : void {
+        this.collectionView.moveToLastPage();
+        this.collectionService.updatePageButtons(this);
+    }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.collectionView;
+        var service = this.collectionService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
         }
-        if(this.collectionView.pageIndex == 0){
-            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+
+        this.collectionView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
         }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
     }
 
     //getters

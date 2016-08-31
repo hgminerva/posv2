@@ -89,9 +89,7 @@ export class ItemService {
         this._http.get(url, option)
             .subscribe(
                 response => { 
-                        cmbUnit = new wijmo.input.ComboBox('#cmbUnit',{
-                        itemsSource : this.getUnits(response.json())
-                    });
+                    cmbUnit.itemsSource = this.getUnits(response.json())
                 },
                 error => {
                     itemAddComponent.getToastr().error('Server Error', '');
@@ -150,10 +148,18 @@ export class ItemService {
                 }
             }
             else {
-                btnFirst.setAttribute('disabled', 'disabled');
-                btnPrev.setAttribute('disabled', 'disabled');
-                btnNext.removeAttribute('disabled');
-                btnLast.removeAttribute('disabled');
+                if(totalPage > 1) {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.removeAttribute('disabled');
+                    btnLast.removeAttribute('disabled');
+                }
+                else {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.setAttribute('disabled', 'disabled');
+                    btnLast.setAttribute('disabled', 'disabled');
+                }
             }
         }
         else if(currentPage == totalPage - 1) {

@@ -5,7 +5,7 @@ import {Response} from '../../response/response';
 
 @Injectable()
 export class ChartOfAccountsService {
-    private static API_URL_ACCOUNTS : string = "";
+    private static API_URL_ACCOUNTS : string = "/api/acount/";
 
     public constructor(private http : Http) {
 
@@ -21,13 +21,13 @@ export class ChartOfAccountsService {
         this.http.get(url, requestOptions)
                 .subscribe(
                     response=> {
-
+                        component.getAccountsView().sourceCollection = response.json();
+                        this.updatePageButtons(component);
                     },
                     error => {
-
+                        this.updatePageButtons(component);
                     }
                 )
-
     }
 
     public updatePageButtons(component : SystemTablesComponent) : void {
@@ -43,6 +43,7 @@ export class ChartOfAccountsService {
 
         pageButton.style.display = "none";
 
+        console.log(totalPage);
         if(totalPage == 0) {
             btnFirst.setAttribute('disabled', 'disabled');
             btnPrev.setAttribute('disabled', 'disabled');
@@ -70,10 +71,18 @@ export class ChartOfAccountsService {
                 }
             }
             else {
-                btnFirst.setAttribute('disabled', 'disabled');
-                btnPrev.setAttribute('disabled', 'disabled');
-                btnNext.removeAttribute('disabled');
-                btnLast.removeAttribute('disabled');
+                if(totalPage > 1) {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.removeAttribute('disabled');
+                    btnLast.removeAttribute('disabled');
+                }
+                else {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.setAttribute('disabled', 'disabled');
+                    btnLast.setAttribute('disabled', 'disabled');
+                }
             }
         }
         else if(currentPage == totalPage - 1) {

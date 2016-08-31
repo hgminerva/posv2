@@ -55,29 +55,49 @@ export class DisbursementComponent implements OnInit{
         this.disbursementService.deleteDisbursement(this.disbursementView.currentItem, this);
     }
 
+    public first() : void {
+        this.disbursementView.moveToFirstPage();
+        this.disbursementService.updatePageButtons(this);
+    }
+ 
     public next() : void {
-        if(this.disbursementView.pageIndex < this.disbursementView.pageCount){
-            if(document.getElementById('btnBack').hasAttribute('disabled')){
-                document.getElementById('btnBack').removeAttribute('disabled')
-            }
-            this.disbursementView .moveToNextPage();
-        }
-        if(this.disbursementView.pageIndex == this.disbursementView.pageCount - 1) {
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-        }
-        console.log(this.disbursementView.sourceCollection[0].Id);
+        this.disbursementView.moveToNextPage();
+        this.disbursementService.updatePageButtons(this);
+    } 
+
+    public previous() : void {
+        this.disbursementView.moveToPreviousPage();
+        this.disbursementService.updatePageButtons(this);
     }
 
-    public back() : void {
-        if(this.disbursementView .pageIndex < this.disbursementView.pageCount) {
-            if(document.getElementById('btnNext').hasAttribute('disabled')) {
-                document.getElementById('btnNext').removeAttribute('disabled'); 
-            }
-            this.disbursementView .moveToPreviousPage();
+    public last() : void {
+        this.disbursementView.moveToLastPage();
+        this.disbursementService.updatePageButtons(this);
+    }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.disbursementView;
+        var service = this.disbursementService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
         }
-        if(this.disbursementView.pageIndex == 0){
-            document.getElementById('btnBack').setAttribute('disabled', 'disabled');
+
+        collectionView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
         }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
     }
 
     //getters

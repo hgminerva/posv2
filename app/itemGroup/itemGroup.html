@@ -7,8 +7,8 @@
                 </div>
                  <div class="col-sm-6">
                     <div class="pull-right">
-                        <button type="button" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
-                        <button type="submit" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                        <button type="button" class="btn btn-primary btn-sm sharp" (click)="onAdd()"><i class="fa fa-plus"> Add</i></button>
+                        <button type="submit" class="btn btn-primary btn-sm sharp" (click)="onClose()"><i class="fa fa-close"> Close</i></button>
                     </div>
                 </div>
             </div>
@@ -37,9 +37,9 @@
                         [selectionMode]="'Row'">
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60" [align]="'center'">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                    <button class="btn btn-primary btn-xs btn-block sharp" >
-                                            Edit
-                                    </button>
+                                <button class="btn btn-primary btn-xs btn-block sharp" >
+                                    <i class="fa fa-edit">Edit</i>
+                                </button>
                             </template>
                         </wj-flex-grid-column>
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">

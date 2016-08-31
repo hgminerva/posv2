@@ -58,28 +58,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 StockOutComponent.prototype.deleteStockOut = function () {
                     this.stockOutService.deleteStockOut(this.stockOutView.currentItem, this);
                 };
-                StockOutComponent.prototype.next = function () {
-                    if (this.stockOutView.pageIndex < this.stockOutView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.stockOutView.moveToNextPage();
-                    }
-                    if (this.stockOutView.pageIndex == this.stockOutView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
-                    console.log(this.stockOutView.sourceCollection[0].Id);
+                StockOutComponent.prototype.first = function () {
+                    this.stockOutView.moveToFirstPage();
+                    this.stockOutService.updatePageButtons(this);
                 };
-                StockOutComponent.prototype.back = function () {
-                    if (this.stockOutView.pageIndex < this.stockOutView.pageCount) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.stockOutView.moveToPreviousPage();
-                    }
-                    if (this.stockOutView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                StockOutComponent.prototype.next = function () {
+                    this.stockOutView.moveToNextPage();
+                    this.stockOutService.updatePageButtons(this);
+                };
+                StockOutComponent.prototype.previous = function () {
+                    this.stockOutView.moveToPreviousPage();
+                    this.stockOutService.updatePageButtons(this);
+                };
+                StockOutComponent.prototype.last = function () {
+                    this.stockOutView.moveToLastPage();
+                    this.stockOutService.updatePageButtons(this);
+                };
+                StockOutComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.stockOutView;
+                    var service = this.stockOutService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 //getters
                 StockOutComponent.prototype.getToastr = function () { return this.toastr; };

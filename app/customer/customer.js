@@ -66,28 +66,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 CustomerComponent.prototype.deleteCustomer = function () {
                     this.customerService.deleteCustomer(this.customerView.currentItem, this);
                 };
-                CustomerComponent.prototype.next = function () {
-                    if (this.customerView.pageIndex < this.customerView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.customerView.moveToNextPage();
-                    }
-                    if (this.customerView.pageIndex == this.customerView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
-                    console.log(this.customerView.sourceCollection[0].Id);
+                CustomerComponent.prototype.first = function () {
+                    this.customerView.moveToFirstPage();
+                    this.customerService.updatePageButtons(this);
                 };
-                CustomerComponent.prototype.back = function () {
-                    if (this.customerView.pageIndex < this.customerView.pageCount) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.customerView.moveToPreviousPage();
-                    }
-                    if (this.customerView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                CustomerComponent.prototype.next = function () {
+                    this.customerView.moveToNextPage();
+                    this.customerService.updatePageButtons(this);
+                };
+                CustomerComponent.prototype.previous = function () {
+                    this.customerView.moveToPreviousPage();
+                    this.customerService.updatePageButtons(this);
+                };
+                CustomerComponent.prototype.last = function () {
+                    this.customerView.moveToLastPage();
+                    this.customerService.updatePageButtons(this);
+                };
+                CustomerComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.customerView;
+                    var service = this.customerService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    this.customerView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 //getters
                 CustomerComponent.prototype.getToastr = function () { return this.toastr; };

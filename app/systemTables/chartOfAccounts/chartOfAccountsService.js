@@ -26,6 +26,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     this.http = http;
                 }
                 ChartOfAccountsService.prototype.listChartOfAccounts = function (component) {
+                    var _this = this;
                     var url = localStorage.getItem('api_url') + ChartOfAccountsService.API_URL_ACCOUNTS + "list";
                     var headers = new http_1.Headers({
                         'Authentication': 'Bearer ' + localStorage.getItem('access_token')
@@ -33,7 +34,10 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     var requestOptions = new http_1.RequestOptions(headers);
                     this.http.get(url, requestOptions)
                         .subscribe(function (response) {
+                        component.getAccountsView().sourceCollection = response.json();
+                        _this.updatePageButtons(component);
                     }, function (error) {
+                        _this.updatePageButtons(component);
                     });
                 };
                 ChartOfAccountsService.prototype.updatePageButtons = function (component) {
@@ -47,6 +51,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     var pageCount = document.getElementById('pageCount');
                     var filterText = document.getElementById('InputFilter');
                     pageButton.style.display = "none";
+                    console.log(totalPage);
                     if (totalPage == 0) {
                         btnFirst.setAttribute('disabled', 'disabled');
                         btnPrev.setAttribute('disabled', 'disabled');
@@ -71,10 +76,18 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             }
                         }
                         else {
-                            btnFirst.setAttribute('disabled', 'disabled');
-                            btnPrev.setAttribute('disabled', 'disabled');
-                            btnNext.removeAttribute('disabled');
-                            btnLast.removeAttribute('disabled');
+                            if (totalPage > 1) {
+                                btnFirst.setAttribute('disabled', 'disabled');
+                                btnPrev.setAttribute('disabled', 'disabled');
+                                btnNext.removeAttribute('disabled');
+                                btnLast.removeAttribute('disabled');
+                            }
+                            else {
+                                btnFirst.setAttribute('disabled', 'disabled');
+                                btnPrev.setAttribute('disabled', 'disabled');
+                                btnNext.setAttribute('disabled', 'disabled');
+                                btnLast.setAttribute('disabled', 'disabled');
+                            }
                         }
                     }
                     else if (currentPage == totalPage - 1) {
@@ -99,7 +112,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     }
                     pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
                 };
-                ChartOfAccountsService.API_URL_ACCOUNTS = "";
+                ChartOfAccountsService.API_URL_ACCOUNTS = "/api/acount/";
                 ChartOfAccountsService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

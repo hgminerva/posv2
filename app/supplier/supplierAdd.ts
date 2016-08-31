@@ -4,6 +4,8 @@ import {Router} from 'angular2/router';
 
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {SupplierService} from './supplierService';
+
 @Component({
     selector: 'supplier',
     templateUrl: 'app/supplier/supplierAdd.html',
@@ -11,7 +13,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
         wjNg2Input.WjComboBox
     ],
     providers: [
-        ToastsManager
+        ToastsManager, SupplierService
     ]
 })
 
@@ -28,7 +30,9 @@ export class SupplierAddComponent implements OnInit{
 
     private static CMB_TERM_LEMGTH : Number = 5;
 
-    constructor(private toastr : ToastsManager, private router : Router) {
+    constructor(private toastr : ToastsManager,
+                private router : Router,
+                private supplierService  : SupplierService) {
 
     }
 
@@ -70,17 +74,14 @@ export class SupplierAddComponent implements OnInit{
     }
 
     public onClose() : void {
-        this.router.navigate(['Supplier']);
         this.addSupplier();
     }
 
     //getters
     public getToastr() : ToastsManager { return this.toastr; }
 
-    
-    /**
-    *This function initializes the  term combobox of supplier add page  
-    **/
+    public getRouter() : Router { return this.router; }
+
     private initTermCombobox() : void {
         var i, day = 15;
         for(i = 1; i < SupplierAddComponent.CMB_TERM_LEMGTH; i++) {
@@ -89,13 +90,8 @@ export class SupplierAddComponent implements OnInit{
         }
 
         this.cmbTermSource.push('COD');
-
-        console.log(this.cmbTermSource.length);
     }
 
-    /**
-    *This function initializes the  APAccount combobox of supplier add page  
-    **/
     private initAPAccountCombobox() : void {
        this.cmbAPAccountSource.push('Accounts Payable');
        this.cmbAPAccountSource.push('Local Tax Payable');
@@ -106,7 +102,7 @@ export class SupplierAddComponent implements OnInit{
     private addSupplier() : void {
         const supplier = this.createSupplier();
         if(this.validate(supplier)) {
-
+            this.supplierService.addSupplier(supplier, this);
         }
         else {
 
@@ -115,7 +111,12 @@ export class SupplierAddComponent implements OnInit{
 
     private createSupplier() {
         const supplier = {
-
+            Supplier : this.supplier,
+            Address : this.address,
+            TelephoneNumber : this.telephoneNumber,
+            CellphoneNumber : this.cellphoneNumber,
+            FaxNumber : this.faxNumber,
+            TIN : this.tin
         };
         return supplier;
     }

@@ -58,28 +58,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 RestaurantTablesComponent.prototype.deleteRestaurantTable = function () {
                     this.restaurantTableService.deleteCollection(this.restaurantTableView.currentItem, this);
                 };
-                RestaurantTablesComponent.prototype.next = function () {
-                    if (this.restaurantTableView.pageIndex < this.restaurantTableView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.restaurantTableView.moveToNextPage();
-                    }
-                    if (this.restaurantTableView.pageIndex == this.restaurantTableView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
-                    console.log(this.restaurantTableView.sourceCollection[0].Id);
+                RestaurantTablesComponent.prototype.first = function () {
+                    this.restaurantTableView.moveToFirstPage();
+                    this.restaurantTableService.updatePageButtons(this);
                 };
-                RestaurantTablesComponent.prototype.back = function () {
-                    if (this.restaurantTableView.pageIndex < this.restaurantTableView.pageCount) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.restaurantTableView.moveToPreviousPage();
-                    }
-                    if (this.restaurantTableView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                RestaurantTablesComponent.prototype.next = function () {
+                    this.restaurantTableView.moveToNextPage();
+                    this.restaurantTableService.updatePageButtons(this);
+                };
+                RestaurantTablesComponent.prototype.previous = function () {
+                    this.restaurantTableView.moveToPreviousPage();
+                    this.restaurantTableService.updatePageButtons(this);
+                };
+                RestaurantTablesComponent.prototype.last = function () {
+                    this.restaurantTableView.moveToLastPage();
+                    this.restaurantTableService.updatePageButtons(this);
+                };
+                RestaurantTablesComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.restaurantTableView;
+                    var service = this.restaurantTableService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 //getters
                 RestaurantTablesComponent.prototype.getToastr = function () { return this.toastr; };

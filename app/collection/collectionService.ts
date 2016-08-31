@@ -71,7 +71,7 @@ export class CollectionService {
                   );
     }
 
-    public updatePageButtons(component : ItemComponent) : void {
+    public updatePageButtons(component : CollectionComponent) : void {
         var currentPage = component.getCollectionView().pageIndex;
         var totalPage = component.getCollectionView().pageCount;
         var btnFirst = document.getElementById('btnFirst');
@@ -111,10 +111,18 @@ export class CollectionService {
                 }
             }
             else {
-                btnFirst.setAttribute('disabled', 'disabled');
-                btnPrev.setAttribute('disabled', 'disabled');
-                btnNext.removeAttribute('disabled');
-                btnLast.removeAttribute('disabled');
+                if(totalPage > 1) {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.removeAttribute('disabled');
+                    btnLast.removeAttribute('disabled');
+                }
+                else {
+                    btnFirst.setAttribute('disabled', 'disabled');
+                    btnPrev.setAttribute('disabled', 'disabled');
+                    btnNext.setAttribute('disabled', 'disabled');
+                    btnLast.setAttribute('disabled', 'disabled');
+                }
             }
         }
         else if(currentPage == totalPage - 1) {

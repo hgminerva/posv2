@@ -72,17 +72,13 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.taxView = new wijmo.collections.CollectionView();
                     this.terminalView = new wijmo.collections.CollectionView();
                     this.unitView = new wijmo.collections.CollectionView();
-                    this.chartOfAccountsView.pageSize = 10;
-                    this.payTypeView.pageSize = 10;
-                    this.unitView.pageSize = 10;
-                    this.taxView.pageSize = 10;
-                    this.periodView.pageSize = 10;
-                    this.terminalView.pageSize = 10;
-                    this.payTypeService.listPayType(this);
-                    this.periodService.listPeriod(this);
-                    this.taxService.listTax(this);
-                    this.unitService.listUnit(this);
-                    this.terminalService.listTerminal(this);
+                    this.chartOfAccountsView.pageSize = 15;
+                    this.payTypeView.pageSize = 15;
+                    this.unitView.pageSize = 15;
+                    this.taxView.pageSize = 15;
+                    this.periodView.pageSize = 15;
+                    this.terminalView.pageSize = 15;
+                    this.chartOfAccountsService.listChartOfAccounts(this);
                 };
                 SystemTablesComponent.prototype.onLock = function () {
                 };
@@ -90,6 +86,72 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 };
                 SystemTablesComponent.prototype.onClose = function () {
                     this.router.navigate(['Dashboard']);
+                };
+                SystemTablesComponent.prototype.first = function () {
+                    this.currentCollectionView.moveToFirstPage();
+                    this.currentService.updatePageButtons(this);
+                };
+                SystemTablesComponent.prototype.next = function () {
+                    this.currentCollectionView.moveToNextPage();
+                    this.currentService.updatePageButtons(this);
+                };
+                SystemTablesComponent.prototype.previous = function () {
+                    this.currentCollectionView.moveToPreviousPage();
+                    this.currentService.updatePageButtons(this);
+                };
+                SystemTablesComponent.prototype.last = function () {
+                    this.currentCollectionView.moveToLastPage();
+                    this.currentService.updatePageButtons(this);
+                };
+                SystemTablesComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.currentCollectionView;
+                    var service = this.currentService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                };
+                SystemTablesComponent.prototype.displayChartOfAccounts = function () {
+                    this.currentCollectionView = this.chartOfAccountsView;
+                    this.currentService = this.chartOfAccountsService;
+                    this.chartOfAccountsService.listChartOfAccounts(this);
+                };
+                SystemTablesComponent.prototype.displayPayType = function () {
+                    this.currentCollectionView = this.payTypeView;
+                    this.currentService = this.payTypeService;
+                    this.payTypeService.listPayType(this);
+                };
+                SystemTablesComponent.prototype.displayUnit = function () {
+                    this.currentCollectionView = this.unitView;
+                    this.currentService = this.unitService;
+                    this.unitService.listUnit(this);
+                };
+                SystemTablesComponent.prototype.displayTerminal = function () {
+                    this.currentCollectionView = this.terminalView;
+                    this.currentService = this.terminalService;
+                    this.terminalService.listTerminal(this);
+                };
+                SystemTablesComponent.prototype.displayPeriod = function () {
+                    this.currentCollectionView = this.periodView;
+                    this.currentService = this.periodService;
+                    this.periodService.listPeriod(this);
+                };
+                SystemTablesComponent.prototype.displayTax = function () {
+                    this.currentCollectionView = this.taxView;
+                    this.currentService = this.taxService;
+                    this.taxService.listTax(this);
                 };
                 SystemTablesComponent.prototype.getAccountsView = function () { return this.chartOfAccountsView; };
                 SystemTablesComponent.prototype.getPayTypeView = function () { return this.payTypeView; };

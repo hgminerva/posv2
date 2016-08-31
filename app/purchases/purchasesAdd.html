@@ -10,11 +10,11 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="pull-right">
-                            <button class="btn btn-primary sharp" type="button" (click)="onLock()">Lock</button>
-                            <button class="btn btn-primary sharp" type="button" (click)="onUnlock()">Unlock</button>
-                            <button class="btn btn-primary sharp" type="button" (click)="onPreview()">Preview</button>
-                            <button class="btn btn-primary sharp" type="button" (click)="onPrint()">Print</button>
-                            <button class="btn btn-primary sharp" type="button" (click)="onClose()">Close</button>
+                            <button class="btn btn-primary btn-sm sharp" type="button" (click)="onLock()"><i class="fa fa-lock"> Lock</i></button>
+                            <button class="btn btn-primary btn-sm sharp" type="button" (click)="onUnlock()"><i class="fa fa-unlock"> Unlock</i></button>
+                            <button class="btn btn-primary btn-sm sharp" type="button" (click)="onPreview()"><i class="fa fa-eye"> Preview</i></button>
+                            <button class="btn btn-primary btn-sm sharp" type="button" (click)="onPrint()"><i class="fa fa-print"> Print</i></button>
+                            <button class="btn btn-primary btn-sm sharp" type="button" (click)="onClose()"><i class="fa fa-close"> Close</i></button>
                         </div>
                     </div>
                 </div>
@@ -101,94 +101,111 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="form-group">
-                                <div class="col-sm-3">
-                                    <label class="control-label pull-right">Total Amount</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input [(ngModel)]="totalAmount"
-                                        id="totalAmount"
-                                        class="form-control input-70"
-                                        placeholder="0.00"
-                                        disabled>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label pull-right">Total Amount</label>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <input [(ngModel)]="download"
+                            <div class="col-sm-9">
+                                <input [(ngModel)]="totalAmount"
+                                    id="totalAmount"
+                                    class="form-control input-70"
+                                    placeholder="0.00"
+                                    disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="col-sm-12">
+                                <table class="pull-right">
+                                    <tr>
+                                        <td style="width:100%"> <input [(ngModel)]="download"
                                         id="download"
                                         class="form-control input-100 pull-right"
                                         placeholder="Download items from stock alert."
-                                        disabled>
-                                </div>
-                                <div class="col-sm-6">
-                                    <button id="btnDownload" class="btn btn-primary sharp ">Download</button>
-                                </div>
+                                        disabled></td>
+                                        <td> <button id="btnDownload" class="btn btn-primary btn-sm sharp "><i class="fa fa-download"></i></button></td>
+                                    </tr>
+                                </table>
                             </div>
-                    </div>
-                </form>
+                        </div>         
+                        </div>                   
+                    </form>
+                </div>
             </div>
-        </div>
          <div class="panel panel-default">
              <div class="panel-body">
-                   <wj-flex-grid id="flexPurchaseAdd" 
-                        #flexPurchaseAdd 
-                        class="grid" 
-                        [itemsSource]="purchaseAddView" [isReadOnly]="true">
-                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
-                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-danger sharp" >
-                                        Delete
-                                </button>
-                            </template>
-                        </wj-flex-grid-column> 
-                        <wj-flex-grid-column [header]="'Item'" 
-                                            [binding]="'Item'"
-                                            [align]="'center'"
-                                            [width]="'8*'">
-                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                            <wj-combo-box [itemsSource]="cmbItemSource" class="input-100">
-                            </wj-combo-box>
-                            </template>
-                        </wj-flex-grid-column> 
-                        <wj-flex-grid-column [header]="'Unit'"
-                                            [binding]="'Unit'"
-                                            [align]="'center'"
-                                            [width]="'3*'">
-                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                            <wj-combo-box [itemsSource]="cmbUnit" class="input-100" disabled>
-                            </wj-combo-box>
-                            </template>
-                        </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Quantity'"
-                                            [binding]="'Quantity'"
-                                            [align]="'center'"
-                                            [width]="'2*'"
-                                            [data-type]="'Number'">
-                        </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Unit Cost'"
-                                            [binding]="'UnitCost'"
-                                            [align]="'center'"
-                                            [width]="'2*'"
-                                            [data-type]="'Number'">
-                        </wj-flex-grid-column>
-                        <wj-flex-grid-column [header]="'Total Cost'"
-                                            [binding]="'TotalCost'"
-                                            [align]="'center'"
-                                            [width]="'2*'"
-                                            [data-type]="'Number'">
-                        </wj-flex-grid-column>
-                </wj-flex-grid>
-                 <div id="grid-page-button">
-                    <table>
-                        <tr>
-                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
-                            <td><button id="btnBack" class="btn btn-primary sharp" (click)="back()">back</button></td>
-                            <td></td>
-                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
-                            <td><button id="btnNext" class="btn btn-primary sharp" (click)="next()">next</button></td>
-                        </tr>
-                    </table>
+                 <div class="row">
+                    <div class="col-sm-12 clearfix">
+                        <div class="pull-right">
+                            <button id="btnAdd" class="btn btn-primary btn-sm sharp"><i class="fa fa-plus"> Add</i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">    
+                          <wj-flex-grid id="flexPurchaseAdd" 
+                                #flexPurchaseAdd 
+                                class="grid" 
+                                [itemsSource]="purchaseAddView" [isReadOnly]="true">
+                                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="75" [align]="'center'">
+                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                        <button class="btn btn-danger btn-xs btn-block sharp" >
+                                                <i class="fa fa-trash">Delete</i>
+                                        </button>
+                                    </template>
+                                </wj-flex-grid-column> 
+                                <wj-flex-grid-column [header]="'Item'" 
+                                                    [binding]="'Item'"
+                                                    [align]="'center'"
+                                                    [width]="'8*'">
+                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <wj-combo-box [itemsSource]="cmbItemSource" class="input-100">
+                                    </wj-combo-box>
+                                    </template>
+                                </wj-flex-grid-column> 
+                                <wj-flex-grid-column [header]="'Unit'"
+                                                    [binding]="'Unit'"
+                                                    [align]="'center'"
+                                                    [width]="'3*'">
+                                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                    <wj-combo-box [itemsSource]="cmbUnit" class="input-100" disabled>
+                                    </wj-combo-box>
+                                    </template>
+                                </wj-flex-grid-column>
+                                <wj-flex-grid-column [header]="'Quantity'"
+                                                    [binding]="'Quantity'"
+                                                    [align]="'center'"
+                                                    [width]="'2*'"
+                                                    [data-type]="'Number'">
+                                </wj-flex-grid-column>
+                                <wj-flex-grid-column [header]="'Unit Cost'"
+                                                    [binding]="'UnitCost'"
+                                                    [align]="'center'"
+                                                    [width]="'2*'"
+                                                    [data-type]="'Number'">
+                                </wj-flex-grid-column>
+                                <wj-flex-grid-column [header]="'Total Cost'"
+                                                    [binding]="'TotalCost'"
+                                                    [align]="'center'"
+                                                    [width]="'2*'"
+                                                    [data-type]="'Number'">
+                                </wj-flex-grid-column>
+                        </wj-flex-grid>
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="col-sm-12">  
+                        <div id="page-button">
+                            <table>
+                                <tr>
+                                    <td><button id="btnFirst" class="" (click)="first()"><i class="fa fa-backward" aria-hidden="true"></i></button></td>
+                                    <td><button id="btnBack" class="" (click)="previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></button></td>
+                                    <td><button class="text-center" id="pageCount" disabled></button></td>
+                                    <td><button id="btnNext" class="" (click)="next()"><i class="fa  fa-step-forward" aria-hidden="true"></i></button></td>
+                                    <td><button id="btnLast" class="" (click)="last()"><i class="fa  fa-forward" aria-hidden="true"></i></button></td>
+                                <tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
          </div>

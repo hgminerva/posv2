@@ -51,11 +51,34 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         component.getToastr().error('Server error', '');
                     });
                 };
+                SupplierService.prototype.addSupplier = function (data, component) {
+                    var url = localStorage.getItem('api_url') + SupplierService.API_SUPPLIER_URL + "create";
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                        'Content-Type': 'application/json'
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this.http.post(url, JSON.stringify(data), requestOptions)
+                        .subscribe(function (response) {
+                        switch (response.status) {
+                            case response_1.Response.SUCCESS:
+                                component.getToastr().success('Add successful');
+                                component.getRouter().navigate(['Supplier']);
+                                break;
+                            case response_1.Response.BAD_REQUEST: break;
+                            case response_1.Response.FORBIDDEN_ERROR: break;
+                            case response_1.Response.NOT_FOUND:
+                                break;
+                            default: break;
+                        }
+                    }, function (error) {
+                    });
+                };
                 SupplierService.prototype.deleteSupplier = function (data, component) {
                     var url = localStorage.getItem('api_url') + SupplierService.API_SUPPLIER_URL + "delete";
                     var headers = new http_1.Headers({
                         'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     });
                     var requestOptions = new http_1.RequestOptions({ headers: headers, body: JSON.stringify(data) });
                     this.http.delete(url, requestOptions)
@@ -110,10 +133,18 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                             }
                         }
                         else {
-                            btnFirst.setAttribute('disabled', 'disabled');
-                            btnPrev.setAttribute('disabled', 'disabled');
-                            btnNext.removeAttribute('disabled');
-                            btnLast.removeAttribute('disabled');
+                            if (totalPage > 1) {
+                                btnFirst.setAttribute('disabled', 'disabled');
+                                btnPrev.setAttribute('disabled', 'disabled');
+                                btnNext.removeAttribute('disabled');
+                                btnLast.removeAttribute('disabled');
+                            }
+                            else {
+                                btnFirst.setAttribute('disabled', 'disabled');
+                                btnPrev.setAttribute('disabled', 'disabled');
+                                btnNext.setAttribute('disabled', 'disabled');
+                                btnLast.setAttribute('disabled', 'disabled');
+                            }
                         }
                     }
                     else if (currentPage == totalPage - 1) {

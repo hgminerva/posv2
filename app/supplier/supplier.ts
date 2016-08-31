@@ -54,28 +54,49 @@ export class SupplierComponent implements OnInit{
         this.supplierService.deleteSupplier(this.supplierView.currentItem, this);
     }
 
+    public first() : void {
+        this.supplierView.moveToFirstPage();
+        this.supplierService.updatePageButtons(this);
+    }
+ 
     public next() : void {
-        if(this.supplierView.pageIndex < this.supplierView.pageCount){
-            if(document.getElementById('btnBack').hasAttribute('disabled')){
-                document.getElementById('btnBack').removeAttribute('disabled');
-            }
-            this.supplierView.moveToNextPage();
-        }
-        if(this.supplierView.pageIndex == this.supplierView.pageCount - 1) {
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-        }
+        this.supplierView.moveToNextPage();
+        this.supplierService.updatePageButtons(this);
     } 
 
-    public back() : void {
-       if(this.supplierView.pageIndex > 0) {
-            if(document.getElementById('btnNext').hasAttribute('disabled')){
-                document.getElementById('btnNext').removeAttribute('disabled');
-            }
-            this.supplierView.moveToPreviousPage();
-       }
-       if(this.supplierView.pageIndex == 0) {
-           document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-       }
+    public previous() : void {
+        this.supplierView.moveToPreviousPage();
+        this.supplierService.updatePageButtons(this);
+    }
+
+    public last() : void {
+        this.supplierView.moveToLastPage();
+        this.supplierService.updatePageButtons(this);
+    }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.supplierView;
+        var service = this.supplierService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
+        }
+
+        collectionView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
+        }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
     }
 
     //getters

@@ -40,6 +40,8 @@ export class SystemTablesComponent implements OnInit{
     private taxView : wijmo.collections.CollectionView;
     private unitView : wijmo.collections.CollectionView;
     private terminalView : wijmo.collections.CollectionView;
+    private currentCollectionView : wijmo.collections.CollectionView;
+    private currentService;
 
     constructor(private router : Router,
                 private toastr : ToastsManager, 
@@ -68,18 +70,14 @@ export class SystemTablesComponent implements OnInit{
         this.terminalView = new wijmo.collections.CollectionView();
         this.unitView = new wijmo.collections.CollectionView();
 
-        this.chartOfAccountsView.pageSize = 10;
-        this.payTypeView.pageSize = 10;
-        this.unitView.pageSize = 10;
-        this.taxView.pageSize = 10;
-        this.periodView.pageSize = 10;
-        this.terminalView.pageSize = 10;
+        this.chartOfAccountsView.pageSize = 15;
+        this.payTypeView.pageSize = 15;
+        this.unitView.pageSize = 15;
+        this.taxView.pageSize = 15;
+        this.periodView.pageSize = 15;
+        this.terminalView.pageSize = 15;
 
-        this.payTypeService.listPayType(this);
-        this.periodService.listPeriod(this);
-        this.taxService.listTax(this);
-        this.unitService.listUnit(this);
-        this.terminalService.listTerminal(this);
+        this.chartOfAccountsService.listChartOfAccounts(this);
     }
 
     public onLock() : void {
@@ -92,6 +90,87 @@ export class SystemTablesComponent implements OnInit{
 
     public onClose() : void {   
         this.router.navigate(['Dashboard']);
+    }
+
+    public first() : void {
+        this.currentCollectionView.moveToFirstPage();
+        this.currentService.updatePageButtons(this);
+    }
+ 
+    public next() : void {
+        this.currentCollectionView.moveToNextPage();
+        this.currentService.updatePageButtons(this);
+    } 
+
+    public previous() : void {
+        this.currentCollectionView.moveToPreviousPage();
+        this.currentService.updatePageButtons(this);
+    }
+
+    public last() : void {
+        this.currentCollectionView.moveToLastPage();
+        this.currentService.updatePageButtons(this);
+    }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.currentCollectionView;
+        var service = this.currentService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
+        }
+
+        collectionView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
+        }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+    }
+
+    public displayChartOfAccounts() : void {
+        this.currentCollectionView = this.chartOfAccountsView;
+        this.currentService = this.chartOfAccountsService;
+        this.chartOfAccountsService.listChartOfAccounts(this);
+    }
+
+    public displayPayType() : void {
+        this.currentCollectionView = this.payTypeView;
+        this.currentService = this.payTypeService;
+        this.payTypeService.listPayType(this);
+    }
+
+    public displayUnit() : void {
+        this.currentCollectionView = this.unitView
+        this.currentService = this.unitService
+        this.unitService.listUnit(this);
+    }
+
+    public displayTerminal() : void {
+        this.currentCollectionView = this.terminalView
+        this.currentService = this.terminalService
+        this.terminalService.listTerminal(this);
+    }
+
+    public displayPeriod() : void {
+        this.currentCollectionView = this.periodView;
+        this.currentService = this.periodService;
+        this.periodService.listPeriod(this);
+    }
+
+    public displayTax() : void {
+        this.currentCollectionView = this.taxView;
+        this.currentService = this.taxService;
+        this.taxService.listTax(this);
     }
 
     public getAccountsView() : wijmo.collections.CollectionView { return this.chartOfAccountsView; }

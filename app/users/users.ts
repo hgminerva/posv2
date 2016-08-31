@@ -61,27 +61,49 @@ export class UsersComponent implements OnInit{
 
     public getCollectionView() : wijmo.collections.CollectionView { return this.usersView; }
     
+    public first() : void {
+        this.usersView.moveToFirstPage();
+        this._usersService.updatePageButtons(this);
+    }
+ 
     public next() : void {
-        if(this.usersView.pageIndex < this.usersView.pageCount){
-            if(document.getElementById('btnBack').hasAttribute('disabled')){
-                document.getElementById('btnBack').removeAttribute('disabled');
-            }
-            this.usersView.moveToNextPage();
-        }
-        if(this.usersView.pageIndex == this.usersView.pageCount - 1) {
-            document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-        }
+        this.usersView.moveToNextPage();
+        this._usersService.updatePageButtons(this);
     } 
 
-    public back() : void {
-       if(this.usersView.pageIndex > 0) {
-            if(document.getElementById('btnNext').hasAttribute('disabled')){
-                document.getElementById('btnNext').removeAttribute('disabled');
-            }
-            this.usersView.moveToPreviousPage();
-       }
-       if(this.usersView.pageIndex == 0) {
-           document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-       }
+    public previous() : void {
+        this.usersView.moveToPreviousPage();
+        this._usersService.updatePageButtons(this);
     }
+
+    public last() : void {
+        this.usersView.moveToLastPage();
+        this._usersService.updatePageButtons(this);
+    }
+
+    public setFilters() : void {
+        var inputFilter = (<HTMLInputElement>document.getElementById('InputFilter'));
+        var filterText = ''
+        var collectionView = this.usersView;
+        var service = this._usersService;
+        var component = this;
+
+        inputFilter.onkeyup = function (e) {
+            filterText = inputFilter.value;
+            collectionView.refresh();
+        }
+
+        collectionView.filter= function (item){
+            return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > - 1);
+        }
+
+        collectionView.currentChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+
+        collectionView.collectionChanged.addHandler(function() {
+            service.updatePageButtons(component);            
+        })
+    }
+
 }

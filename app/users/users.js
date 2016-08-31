@@ -61,27 +61,41 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', '.
                 //getters
                 UsersComponent.prototype.getToastr = function () { return this._toastr; };
                 UsersComponent.prototype.getCollectionView = function () { return this.usersView; };
-                UsersComponent.prototype.next = function () {
-                    if (this.usersView.pageIndex < this.usersView.pageCount) {
-                        if (document.getElementById('btnBack').hasAttribute('disabled')) {
-                            document.getElementById('btnBack').removeAttribute('disabled');
-                        }
-                        this.usersView.moveToNextPage();
-                    }
-                    if (this.usersView.pageIndex == this.usersView.pageCount - 1) {
-                        document.getElementById('btnNext').setAttribute('disabled', 'disabled');
-                    }
+                UsersComponent.prototype.first = function () {
+                    this.usersView.moveToFirstPage();
+                    this._usersService.updatePageButtons(this);
                 };
-                UsersComponent.prototype.back = function () {
-                    if (this.usersView.pageIndex > 0) {
-                        if (document.getElementById('btnNext').hasAttribute('disabled')) {
-                            document.getElementById('btnNext').removeAttribute('disabled');
-                        }
-                        this.usersView.moveToPreviousPage();
-                    }
-                    if (this.usersView.pageIndex == 0) {
-                        document.getElementById('btnBack').setAttribute('disabled', 'disabled');
-                    }
+                UsersComponent.prototype.next = function () {
+                    this.usersView.moveToNextPage();
+                    this._usersService.updatePageButtons(this);
+                };
+                UsersComponent.prototype.previous = function () {
+                    this.usersView.moveToPreviousPage();
+                    this._usersService.updatePageButtons(this);
+                };
+                UsersComponent.prototype.last = function () {
+                    this.usersView.moveToLastPage();
+                    this._usersService.updatePageButtons(this);
+                };
+                UsersComponent.prototype.setFilters = function () {
+                    var inputFilter = document.getElementById('InputFilter');
+                    var filterText = '';
+                    var collectionView = this.usersView;
+                    var service = this._usersService;
+                    var component = this;
+                    inputFilter.onkeyup = function (e) {
+                        filterText = inputFilter.value;
+                        collectionView.refresh();
+                    };
+                    collectionView.filter = function (item) {
+                        return !filterText || (item.ItemCode.toLowerCase().indexOf(filterText.toLowerCase()) > -1);
+                    };
+                    collectionView.currentChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
+                    collectionView.collectionChanged.addHandler(function () {
+                        service.updatePageButtons(component);
+                    });
                 };
                 UsersComponent = __decorate([
                     core_1.Component({

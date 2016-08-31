@@ -7,8 +7,7 @@
                 </div>
                  <div class="col-sm-6">
                     <div class="pull-right">
-                        <button type="button" class="btn btn-primary sharp" (click)="onAdd()">Add</button>
-                        <button type="submit" class="btn btn-primary sharp" (click)="onClose()">Close</button>
+                        <button type="submit" class="btn btn-primary btn-sm sharp" (click)="onClose()"><i class="fa fa-close"> Close</i></button>
                     </div>
                 </div>
             </div>
@@ -31,12 +30,12 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#chartOfAccounts">Chart of Accounts</a></li>
-                        <li><a a data-toggle="tab" href="#payType">Pay type</a></li>
-                        <li><a a data-toggle="tab" href="#tax">Tax</a></li>
-                        <li><a a data-toggle="tab" href="#unit">Unit</a></li>
-                        <li><a a data-toggle="tab" href="#period">Period</a></li>
-                        <li><a a data-toggle="tab" href="#terminal">Terminal</a></li>
+                        <li class="active"><a data-toggle="tab" href="#chartOfAccounts" (click)="displayChartOfAccounts()">Chart of Accounts</a></li>
+                        <li><a a data-toggle="tab" href="#payType" (click)="displayPayType()">Pay type</a></li>
+                        <li><a a data-toggle="tab" href="#tax" (click)="displayTax()">Tax</a></li>
+                        <li><a a data-toggle="tab" href="#unit" (click)="displayUnit()">Unit</a></li>
+                        <li><a a data-toggle="tab" href="#period" (click)="displayPeriod()">Period</a></li>
+                        <li><a a data-toggle="tab" href="#terminal" (click)="displayTerminal()">Terminal</a></li>
                     </ul>
                 </div>
             </div>
@@ -51,7 +50,7 @@
                                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                             <button class="btn btn-primary btn-xs btn-block  sharp" >
-                                                Edit
+                                                  <i class="fa fa-edit">Edit</i>
                                             </button>
                                         </template>
                                     </wj-flex-grid-column>
@@ -63,36 +62,21 @@
                                         </template>
                                     </wj-flex-grid-column>
                                     <wj-flex-grid-column [header]="'Account Code'"
-                                                        [binding]="'Account Code'"
+                                                        [binding]="'Code'"
                                                         [width]="'2*'"
-                                                        [align]="'center'">
+                                                        [align]="'left'">
                                     </wj-flex-grid-column>
                                     <wj-flex-grid-column [header]="'Account'"
                                                         [binding]="'Account'"
                                                         [width]="'5*'"
-                                                        [align]="'center'">
+                                                        [align]="'left'">
                                     </wj-flex-grid-column>
                                     <wj-flex-grid-column [header]="'Type'"
-                                                        [binding]="'ChartOfAccountType'"
+                                                        [binding]="'AccountType'"
                                                         [width]="'2*'"
-                                                        [align]="'center'">
+                                                        [align]="'left'">
                                     </wj-flex-grid-column>
                                 </wj-flex-grid>
-                            </div>
-                        </div>
-                        <div class="row"> 
-                            <div class="col-sm-12">  
-                                <div id="page-button">
-                                    <table>
-                                        <tr>
-                                            <td><button id="btnFirst" class="" (click)="first()"><i class="fa fa-backward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnBack" class="" (click)="previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></button></td>
-                                            <td><button class="text-center" id="pageCount" disabled></button></td>
-                                            <td><button id="btnNext" class="" (click)="next()"><i class="fa  fa-step-forward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnLast" class="" (click)="last()"><i class="fa  fa-forward" aria-hidden="true"></i></button></td>
-                                        </tr>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,7 +87,7 @@
                                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                                 <button class="btn btn-primary btn-xs btn-block sharp" >
-                                                        Edit
+                                                    <i class="fa fa-edit">Edit</i>
                                                 </button>
                                         </template>
                                     </wj-flex-grid-column>
@@ -127,21 +111,6 @@
                                 </wj-flex-grid>
                             </div>
                         </div>
-                        <div class="row"> 
-                            <div class="col-sm-12">  
-                                <div id="page-button">
-                                    <table>
-                                        <tr>
-                                            <td><button id="btnFirst" class="" (click)="first()"><i class="fa fa-backward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnBack" class="" (click)="previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></button></td>
-                                            <td><button class="text-center" id="pageCount" disabled></button></td>
-                                            <td><button id="btnNext" class="" (click)="next()"><i class="fa  fa-step-forward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnLast" class="" (click)="last()"><i class="fa  fa-forward" aria-hidden="true"></i></button></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div id="tax" class="tab-pane fade">
                         <div class="row">
@@ -150,7 +119,7 @@
                                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                                 <button class="btn btn-primary btn-xs btn-block sharp" >
-                                                        Edit
+                                                     <i class="fa fa-edit">Edit</i>
                                                 </button>
                                         </template>
                                     </wj-flex-grid-column>
@@ -184,21 +153,6 @@
                                 </wj-flex-grid>
                             </div>
                         </div>
-                        <div class="row"> 
-                            <div class="col-sm-12">  
-                                <div id="page-button">
-                                    <table>
-                                        <tr>
-                                            <td><button id="btnFirst" class="" (click)="first()"><i class="fa fa-backward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnBack" class="" (click)="previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></button></td>
-                                            <td><button class="text-center" id="pageCount" disabled></button></td>
-                                            <td><button id="btnNext" class="" (click)="next()"><i class="fa  fa-step-forward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnLast" class="" (click)="last()"><i class="fa  fa-forward" aria-hidden="true"></i></button></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div id="unit" class="tab-pane fade">
                         <div class="row">
@@ -207,7 +161,7 @@
                                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                                 <button class="btn btn-primary btn-xs btn-block sharp" >
-                                                        Edit
+                                                    <i class="fa fa-edit">Edit</i>
                                                 </button>
                                         </template>
                                     </wj-flex-grid-column>
@@ -226,21 +180,6 @@
                                 </wj-flex-grid>
                             </div>
                         </div>
-                        <div class="row"> 
-                            <div class="col-sm-12">  
-                                <div id="page-button">
-                                    <table>
-                                        <tr>
-                                            <td><button id="btnFirst" class="" (click)="first()"><i class="fa fa-backward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnBack" class="" (click)="previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></button></td>
-                                            <td><button class="text-center" id="pageCount" disabled></button></td>
-                                            <td><button id="btnNext" class="" (click)="next()"><i class="fa  fa-step-forward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnLast" class="" (click)="last()"><i class="fa  fa-forward" aria-hidden="true"></i></button></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div id="period" class="tab-pane fade">
                         <div class="row">
@@ -249,7 +188,7 @@
                                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                                 <button class="btn btn-primary btn-xs btn-block sharp" >
-                                                        Edit
+                                                    <i class="fa fa-edit">Edit</i>
                                                 </button>
                                         </template>
                                     </wj-flex-grid-column>
@@ -268,21 +207,6 @@
                                 </wj-flex-grid>
                             </div>
                         </div>
-                        <div class="row"> 
-                            <div class="col-sm-12">  
-                                <div id="page-button">
-                                    <table>
-                                        <tr>
-                                            <td><button id="btnFirst" class="" (click)="first()"><i class="fa fa-backward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnBack" class="" (click)="previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></button></td>
-                                            <td><button class="text-center" id="pageCount" disabled></button></td>
-                                            <td><button id="btnNext" class="" (click)="next()"><i class="fa  fa-step-forward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnLast" class="" (click)="last()"><i class="fa  fa-forward" aria-hidden="true"></i></button></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div id="terminal" class="tab-pane">
                         <div class="row">
@@ -291,7 +215,7 @@
                                     <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                                 <button class="btn btn-primary btn-xs btn-block sharp" >
-                                                        Edit
+                                                    <i class="fa fa-edit">Edit</i>
                                                 </button>
                                         </template>
                                     </wj-flex-grid-column>
@@ -310,20 +234,20 @@
                                 </wj-flex-grid>
                             </div>
                         </div>
-                        <div class="row"> 
-                            <div class="col-sm-12">  
-                                <div id="page-button">
-                                    <table>
-                                        <tr>
-                                           <td><button id="btnFirst" class="" (click)="first()"><i class="fa fa-backward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnBack" class="" (click)="previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></button></td>
-                                            <td><button class="text-center" id="pageCount" disabled></button></td>
-                                            <td><button id="btnNext" class="" (click)="next()"><i class="fa  fa-step-forward" aria-hidden="true"></i></button></td>
-                                            <td><button id="btnLast" class="" (click)="last()"><i class="fa  fa-forward" aria-hidden="true"></i></button></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <div class="row"> 
+                    <div class="col-sm-12">  
+                        <div id="page-button">
+                            <table>
+                                <tr>
+                                    <td><button id="btnFirst" class="" (click)="first()"><i class="fa fa-backward" aria-hidden="true"></i></button></td>
+                                    <td><button id="btnBack" class="" (click)="previous()"><i class="fa fa-step-backward" aria-hidden="true"></i></button></td>
+                                    <td><button class="text-center" id="pageCount" disabled></button></td>
+                                    <td><button id="btnNext" class="" (click)="next()"><i class="fa  fa-step-forward" aria-hidden="true"></i></button></td>
+                                    <td><button id="btnLast" class="" (click)="last()"><i class="fa  fa-forward" aria-hidden="true"></i></button></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
