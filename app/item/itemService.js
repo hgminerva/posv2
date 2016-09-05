@@ -53,7 +53,8 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         component.getToastr().error('Server Error', '');
                     });
                 };
-                ItemService.prototype.addItem = function (data, itemComponent) {
+                ItemService.prototype.addItem = function (data, component) {
+                    component.getRouter().navigate(['Item']);
                 };
                 ItemService.prototype.deleteItem = function (data, itemComponent) {
                     var url = localStorage.getItem('api_url') + ItemService.API_ITEM_URL + "delete";
@@ -78,29 +79,37 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         itemComponent.getToastr().error('Server Error');
                     });
                 };
-                ItemService.prototype.initUnit = function (itemAddComponent, cmbUnit) {
-                    var _this = this;
-                    var url = localStorage.getItem('api_url') + ItemService.API_UNIT_URL + "list";
+                ItemService.prototype.initCombobox = function (component, cmb, api_url, displayPropetry, valueProperty) {
+                    var url = localStorage.getItem('api_url') + api_url + "list";
                     var accessToken = localStorage.getItem('access_token');
                     var header = new http_1.Headers({ 'Authorization': 'Bearer ' + accessToken });
                     var option = new http_1.RequestOptions();
                     option.headers = header;
                     this._http.get(url, option)
                         .subscribe(function (response) {
-                        cmbUnit.itemsSource = _this.getUnits(response.json());
+                        cmb.itemsSource = response.json();
+                        cmb.displayMemberPath = displayPropetry;
+                        cmb.selectedValuePath = valueProperty;
                     }, function (error) {
-                        itemAddComponent.getToastr().error('Server Error', '');
+                        component.getToastr().error('Server Error', '');
                     });
                 };
-                ItemService.prototype.getUnits = function (units) {
-                    if (units != null) {
-                        var data = new wijmo.collections.ObservableArray();
-                        for (var i = 0; i < units.length; i++) {
-                            data.push(units[i].Unit);
-                        }
-                        return data;
-                    }
-                    return null;
+                ItemService.prototype.initAccounts = function (component, cmb, cmb2, cmb3) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + ItemService.API_ACCOUNT_URL + "list";
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this._http.get(url, requestOptions)
+                        .subscribe(function (response) {
+                        var src = response.json();
+                        _this.initAccountsCombobox(cmb, "SALES", "Account", "Id", src);
+                        _this.initAccountsCombobox(cmb2, "ASSET", "Account", "Id", src);
+                        _this.initAccountsCombobox(cmb3, "EXPENSES", "Account", "Id", src);
+                    }, function (error) {
+                        component.getToastr().error('Server Error', '');
+                    });
                 };
                 ItemService.prototype.updatePageButtons = function (component) {
                     var currentPage = component.getCollectionView().pageIndex;
@@ -173,8 +182,24 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     }
                     pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
                 };
-                ItemService.API_ITEM_URL = '/api/item/';
+                ItemService.prototype.initAccountsCombobox = function (cmb, filter, displayPropetry, valueProperty, source) {
+                    var src = new wijmo.collections.ObservableArray();
+                    for (var i = 0; i < source.length; i++) {
+                        if (source[i].AccountType == filter) {
+                            src.push(source[i]);
+                        }
+                    }
+                    console.log(src[0].Account);
+                    cmb.itemsSource = src;
+                    cmb.displayMemberPath = "Account";
+                    cmb.selectedValuePath = "Id";
+                    console.log(cmb.itemsSource);
+                };
                 ItemService.API_UNIT_URL = '/api/unit/';
+                ItemService.API_TAX_URL = '/api/tax/';
+                ItemService.API_URL_SUPPLIER = '/api/supplier/';
+                ItemService.API_ITEM_URL = '/api/item/';
+                ItemService.API_ACCOUNT_URL = '/api/acount/';
                 ItemService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

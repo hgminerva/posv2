@@ -23,13 +23,11 @@ export class TaxService {
                     response=> {
                         component.getTaxView().sourceCollection = response.json();
                         this.updatePageButtons(component);
-                        console.log(response.json() + "tx");
                     },
                     error => {
-
+                        
                     }
                 )
-
     }
 
     public updatePageButtons(component : SystemTablesComponent) : void {

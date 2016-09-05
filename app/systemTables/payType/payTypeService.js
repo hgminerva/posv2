@@ -37,6 +37,8 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         component.getPayTypeView().sourceCollection = response.json();
                         _this.updatePageButtons(component);
                     }, function (error) {
+                        component.getToastr().error('Server error');
+                        _this.updatePageButtons(component);
                     });
                 };
                 PayTypeService.prototype.updatePageButtons = function (component) {

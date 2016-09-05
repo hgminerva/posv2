@@ -25,7 +25,8 @@ export class PayTypeService {
                         this.updatePageButtons(component);
                     },
                     error => {
-
+                        component.getToastr().error('Server error');
+                        this.updatePageButtons(component);
                     }
                 )
 

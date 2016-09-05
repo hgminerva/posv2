@@ -23,10 +23,10 @@ export class PeriodService {
                     response=> {
                         component.getPeriodView().sourceCollection = response.json();
                         this.updatePageButtons(component);
-                        console.log(component.getPeriodView().sourceCollection);
                     },
                     error => {
-
+                        component.getToastr().error('Server error');
+                        this.updatePageButtons(component);
                     }
                 )
 

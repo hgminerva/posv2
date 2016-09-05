@@ -1,5 +1,5 @@
 'use strict';
-import { Component, Injectable } from 'angular2/core';
+import { Component, Injectable, OnInit } from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {ItemComponent} from './item';
 import {ItemAddComponent} from './itemAdd';
@@ -8,11 +8,16 @@ import {Response} from '../response/response';
 
 @Injectable()
 export class ItemService {
+    public static API_UNIT_URL = '/api/unit/';
+    public static API_TAX_URL = '/api/tax/';
+    public static API_URL_SUPPLIER = '/api/supplier/';
     private static API_ITEM_URL = '/api/item/';
-    private static API_UNIT_URL = '/api/unit/';
+    private static API_ACCOUNT_URL = '/api/acount/';
+
 
     public constructor(private _http : Http) {
     }
+
 
     public listItems(component : ItemComponent) {
         const url : string = localStorage.getItem('api_url') + ItemService.API_ITEM_URL + "list"; 
@@ -43,8 +48,8 @@ export class ItemService {
             );
     }
 
-    public addItem(data, itemComponent : ItemComponent) : void {
-
+    public addItem(data, component : ItemAddComponent) : void {
+        component.getRouter().navigate(['Item']);
     }
 
     public deleteItem(data, itemComponent : ItemComponent) : void {
@@ -79,8 +84,12 @@ export class ItemService {
                   );
     }
 
-    public initUnit(itemAddComponent : ItemAddComponent, cmbUnit : wijmo.input.ComboBox) : void {
-        const url : string = localStorage.getItem('api_url') + ItemService.API_UNIT_URL + "list"; 
+    public initCombobox(component : ItemAddComponent,
+                        cmb : wijmo.input.ComboBox, 
+                        api_url : String,
+                        displayPropetry : string,
+                        valueProperty : string ) : void {
+        const url : string = localStorage.getItem('api_url') + api_url + "list"; 
         const accessToken : string = localStorage.getItem('access_token');
         const header = new Headers({'Authorization' : 'Bearer ' + accessToken});
         const option = new RequestOptions();
@@ -89,24 +98,38 @@ export class ItemService {
         this._http.get(url, option)
             .subscribe(
                 response => { 
-                    cmbUnit.itemsSource = this.getUnits(response.json())
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = displayPropetry;
+                    cmb.selectedValuePath = valueProperty;
                 },
                 error => {
-                    itemAddComponent.getToastr().error('Server Error', '');
+                    component.getToastr().error('Server Error', '');
                 }
             );
     }
+     public initAccounts(component : ItemAddComponent, 
+                         cmb : wijmo.input.ComboBox, 
+                         cmb2 : wijmo.input.ComboBox, 
+                         cmb3 : wijmo.input.ComboBox) : void {
+        const url = localStorage.getItem('api_url') + ItemService.API_ACCOUNT_URL + "list";
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
 
-    private getUnits(units : wijmo.collections.ObservableArray) : wijmo.collections.ObservableArray {
-        if(units != null) {
-            const data = new wijmo.collections.ObservableArray();
-            for(var i = 0; i < units.length; i++) {
-                data.push(units[i].Unit);
-            }
-            return data;
-        }
-        return null;
-    }
+        this._http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                   var src = response.json();
+                   this.initAccountsCombobox(cmb, "SALES", "Account", "Id", src);
+                   this.initAccountsCombobox(cmb2, "ASSET", "Account", "Id", src);
+                   this.initAccountsCombobox(cmb3, "EXPENSES", "Account", "Id", src);
+                },
+                error => {
+                      component.getToastr().error('Server Error', '');
+                }
+            )
+    } 
 
    public updatePageButtons(component : ItemComponent) : void {
         var currentPage = component.getCollectionView().pageIndex;
@@ -183,6 +206,27 @@ export class ItemService {
             }
         }
         pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
+    }
+
+     private initAccountsCombobox(cmb : wijmo.input.ComboBox, 
+                                filter : string,  
+                                displayPropetry : string,
+                                valueProperty : string,
+                                source : wijmo.collections.ObservableArray ) {
+
+           var src = new wijmo.collections.ObservableArray();
+
+           for(var i = 0; i < source.length; i++) {
+               if(source[i].AccountType == filter) {
+                   src.push(source[i]);
+               }
+               //console.log(source[i].AccountType);
+           }
+           console.log(src[0].Account);
+           cmb.itemsSource = src;
+           cmb.displayMemberPath = "Account";
+           cmb.selectedValuePath = "Id";
+           console.log(cmb.itemsSource);
     }
 
 }

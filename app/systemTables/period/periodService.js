@@ -36,8 +36,9 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         .subscribe(function (response) {
                         component.getPeriodView().sourceCollection = response.json();
                         _this.updatePageButtons(component);
-                        console.log(component.getPeriodView().sourceCollection);
                     }, function (error) {
+                        component.getToastr().error('Server error');
+                        _this.updatePageButtons(component);
                     });
                 };
                 PeriodService.prototype.updatePageButtons = function (component) {

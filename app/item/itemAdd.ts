@@ -28,10 +28,17 @@ export class ItemAddComponent implements OnInit {
     private cmbCategory : wijmo.input.ComboBox;
     private cmbUnit : wijmo.input.ComboBox;
     private cmbDefaultSupplier : wijmo.input.ComboBox;
+    private cmbSalesAccount : wijmo.input.ComboBox;
+    private cmbAssetAccount : wijmo.input.ComboBox;
+    private cmbCostAccount : wijmo.input.ComboBox;
+    private cmbPurchase : wijmo.input.ComboBox;
+    private cmbSales : wijmo.input.ComboBox;
+    private cmbKitchen : wijmo.input.ComboBox;
     private cost : String;
     private markUp : String;
     private price : String;
     private stockLevelQuantity : String;
+    private genericName : String;
     private onHandQuantity : String;
     private inventoty : Boolean = false;
     private package : Boolean = false;
@@ -58,13 +65,24 @@ export class ItemAddComponent implements OnInit {
         this.cmbCategory = new wijmo.input.ComboBox('#cmbCategory');
         this.cmbUnit = new wijmo.input.ComboBox('#cmbUnit');
         this.cmbDefaultSupplier = new wijmo.input.ComboBox('#cmbDefaultSupplier');
+        this.cmbSalesAccount = new wijmo.input.ComboBox('#cmbSalesAccount');
+        this.cmbAssetAccount = new wijmo.input.ComboBox('#cmbAssetAccount');
+        this.cmbCostAccount = new wijmo.input.ComboBox('#cmbCostAccount');
+        this.cmbPurchase = new wijmo.input.ComboBox('#cmbPurchase');
+        this.cmbSales = new wijmo.input.ComboBox('#cmbSales');
+        this.cmbKitchen= new wijmo.input.ComboBox('#cmbKitchen');
+    
+        this.itemService.initCombobox(this,this.cmbUnit, ItemService.API_UNIT_URL, "Unit", "Id");
+        this.itemService.initCombobox(this, this.cmbPurchase, ItemService.API_TAX_URL, "Tax", "Id");
+        this.itemService.initCombobox(this, this.cmbSales, ItemService.API_TAX_URL, "Tax", "Id");
+        this.itemService.initCombobox(this, this.cmbDefaultSupplier, ItemService.API_URL_SUPPLIER, "Supplier", "Id");
 
-        this.itemService.initUnit(this,this.cmbUnit);
+        this.itemService.initAccounts(this.cmbSalesAccount, this.cmbAssetAccount, this.cmbCostAccount);
     }
 
     public onClose() : void {
         this.addItem();
-        this.router.navigate(['Item']);
+        console.log(this.cmbUnit.selectedValue);
     }
 
     public onLock() : void {
@@ -80,7 +98,7 @@ export class ItemAddComponent implements OnInit {
     public addItem() : void {
         var item = this.createItem();
         if(this.validate(item)) {
-
+            this.itemService.addItem(item, this);
         }
         else {
 
@@ -89,7 +107,7 @@ export class ItemAddComponent implements OnInit {
 
     public createItem() {
         var item = {
-
+            
         };
         return item;
     }
@@ -97,44 +115,67 @@ export class ItemAddComponent implements OnInit {
     //getters
     public getToastr() : ToastsManager { return this.toastr; } 
 
+    public getRouter() : Router { return this.router; }
+
     //validation
     private validate(item) : boolean {
+        if(!this.validateBarCode(this.barCode)) {
+            return false;
+        }
+        if(!this.validateItemDescription(this.itemDescription)) {
+            return false;
+        }
+        if(!this.validateAlias(this.alias)) {
+            return false;
+        }
+        if(!this.validateCost(this.cost)) {
+            return false;
+        }
+        if(!this.validateMarkUp(this.markUp)) {
+            return false;
+        }
+        if(!this.validatePrice(this.price)) {
+            return false;
+        }
+        if(!this.validateStockLevelQuantity(this.stockLevelQuantity)) {
+            return false;
+        }
+        if(!this.validateGenericName(this.genericName)) {
+            return false;
+        }
+
         return true;
     }
 
-    private validateBarCode(barCode : string) : boolean {
+    private validateBarCode(barCode : String) : boolean {
         return true;
     }
 
-    private validateItemDescription(itemDescription : string) : boolean {
+    private validateItemDescription(itemDescription : String) : boolean {
         return true;
     }
 
-    private validateAlias(alias : string) : boolean {
+    private validateAlias(alias : String) : boolean {
         return true;
     }
 
-    private validateCost(cost : string ) : boolean {
+    private validateCost(cost : String ) : boolean {
         return true;
     }
 
-    private validateMarkUp(markUp : string ) : boolean {
+    private validateMarkUp(markUp : String ) : boolean {
         return true;
     }
 
-    private validatePrice(price : string ) : boolean {
+    private validatePrice(price : String ) : boolean {
         return true;
     }
 
-    private validateStockLevelQuantity(stockLevelQty : string ) : boolean {
+    private validateStockLevelQuantity(stockLevelQty : String ) : boolean {
         return true;
     } 
 
-    private validateRemarks(remarks : string ) : boolean {
-        return true;
-    }
-
-    private validateGenericName(genericName : string ) : boolean {
+    private validateGenericName(genericName : String ) : boolean {
         return true;
     }
 

@@ -25,6 +25,7 @@ export class ChartOfAccountsService {
                         this.updatePageButtons(component);
                     },
                     error => {
+                        component.getToastr().error('Server error');
                         this.updatePageButtons(component);
                     }
                 )

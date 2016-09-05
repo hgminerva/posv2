@@ -153,12 +153,14 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.currentService = this.taxService;
                     this.taxService.listTax(this);
                 };
+                //getters
                 SystemTablesComponent.prototype.getAccountsView = function () { return this.chartOfAccountsView; };
                 SystemTablesComponent.prototype.getPayTypeView = function () { return this.payTypeView; };
                 SystemTablesComponent.prototype.getPeriodView = function () { return this.periodView; };
                 SystemTablesComponent.prototype.getTaxView = function () { return this.taxView; };
                 SystemTablesComponent.prototype.getUnitView = function () { return this.unitView; };
                 SystemTablesComponent.prototype.getTerminalView = function () { return this.terminalView; };
+                SystemTablesComponent.prototype.getToastr = function () { return this.toastr; };
                 SystemTablesComponent = __decorate([
                     core_1.Component({
                         selector: 'systemTables',

@@ -155,7 +155,7 @@
                                     <label class="control-label  pull-right">Lot Number</label> 
                                 </div>
                                 <div class="col-sm-10">
-                                    <input [(ngModel)]="lotNumber" class="form-control input-40" type="text" required >
+                                    <input [(ngModel)]="lotNumber" class="form-control input-40" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -175,7 +175,7 @@
                                     <label class="control-label pull-right">Generic Name</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input class="form-control input-50" type="text" placeholder="NA" required />
+                                    <input [(ngModel)]="genericName" class="form-control input-50" type="text" placeholder="NA" required />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -183,10 +183,7 @@
                                     <label class="control-label pull-right">Sales Account</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <wj-combo-box class="input-50"
-                                        [itemsSource] = "testArray"
-                                    >
-                                    </wj-combo-box>
+                                   <div id="cmbSalesAccount"></div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -194,10 +191,7 @@
                                     <label class="control-labe pull-right">Asset Account</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <wj-combo-box class="input-50"
-                                        [itemsSource] = "testArray"
-                                    >
-                                    </wj-combo-box>
+                                    <div id="cmbAssetAccount"></div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -205,10 +199,7 @@
                                     <label class="control-label pull-right">Cost Account</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <wj-combo-box class="input-50"
-                                        [itemsSource] = "testArray"
-                                    >
-                                    </wj-combo-box>
+                                    <div id="cmbCostAccount"></div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -216,21 +207,25 @@
                                     <label class="control-label pull-right">Purchase VAT</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <wj-combo-box class="input-40"
-                                        [itemsSource] = "testArray"
-                                    >
-                                    </wj-combo-box>
+                                    <div id="cmbPurchase"></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label class="control-label pull-right">Kitchen</label>
+                                    <label class="control-label pull-right">Sales VAT</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <wj-combo-box class="input-40"
-                                        [itemsSource] = "testArray"
-                                    >
-                                    </wj-combo-box>
+                                    <div id="cmbSales"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label pull-right">Kitchen Report</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="col-sm-10">
+                                        <div id="cmbKitchen"></div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -275,11 +270,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="panel-footer">
-                <div class="text-center">
-                    <button>Add Item</button>
                 </div>
             </div>
         </div>

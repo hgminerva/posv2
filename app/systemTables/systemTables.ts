@@ -43,6 +43,8 @@ export class SystemTablesComponent implements OnInit{
     private currentCollectionView : wijmo.collections.CollectionView;
     private currentService;
 
+    private grid : wijmo.grid.FlexGrid;
+
     constructor(private router : Router,
                 private toastr : ToastsManager, 
                 private chartOfAccountsService : ChartOfAccountsService,
@@ -140,7 +142,7 @@ export class SystemTablesComponent implements OnInit{
     public displayChartOfAccounts() : void {
         this.currentCollectionView = this.chartOfAccountsView;
         this.currentService = this.chartOfAccountsService;
-        this.chartOfAccountsService.listChartOfAccounts(this);
+        this.chartOfAccountsService.listChartOfAccounts(this); 
     }
 
     public displayPayType() : void {
@@ -173,6 +175,8 @@ export class SystemTablesComponent implements OnInit{
         this.taxService.listTax(this);
     }
 
+    //getters
+
     public getAccountsView() : wijmo.collections.CollectionView { return this.chartOfAccountsView; }
 
     public getPayTypeView() : wijmo.collections.CollectionView { return this.payTypeView; }
@@ -184,4 +188,6 @@ export class SystemTablesComponent implements OnInit{
     public getUnitView() : wijmo.collections.CollectionView { return this.unitView; }
 
     public getTerminalView() : wijmo.collections.CollectionView { return this.terminalView; }
+
+    public getToastr() : ToastsManager { return this.toastr; }
 }

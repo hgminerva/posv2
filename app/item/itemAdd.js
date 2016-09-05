@@ -54,11 +54,21 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     this.cmbCategory = new wijmo.input.ComboBox('#cmbCategory');
                     this.cmbUnit = new wijmo.input.ComboBox('#cmbUnit');
                     this.cmbDefaultSupplier = new wijmo.input.ComboBox('#cmbDefaultSupplier');
-                    this.itemService.initUnit(this, this.cmbUnit);
+                    this.cmbSalesAccount = new wijmo.input.ComboBox('#cmbSalesAccount');
+                    this.cmbAssetAccount = new wijmo.input.ComboBox('#cmbAssetAccount');
+                    this.cmbCostAccount = new wijmo.input.ComboBox('#cmbCostAccount');
+                    this.cmbPurchase = new wijmo.input.ComboBox('#cmbPurchase');
+                    this.cmbSales = new wijmo.input.ComboBox('#cmbSales');
+                    this.cmbKitchen = new wijmo.input.ComboBox('#cmbKitchen');
+                    this.itemService.initCombobox(this, this.cmbUnit, itemService_1.ItemService.API_UNIT_URL, "Unit", "Id");
+                    this.itemService.initCombobox(this, this.cmbPurchase, itemService_1.ItemService.API_TAX_URL, "Tax", "Id");
+                    this.itemService.initCombobox(this, this.cmbSales, itemService_1.ItemService.API_TAX_URL, "Tax", "Id");
+                    this.itemService.initCombobox(this, this.cmbDefaultSupplier, itemService_1.ItemService.API_URL_SUPPLIER, "Supplier", "Id");
+                    this.itemService.initAccounts(this.cmbSalesAccount, this.cmbAssetAccount, this.cmbCostAccount);
                 };
                 ItemAddComponent.prototype.onClose = function () {
                     this.addItem();
-                    this.router.navigate(['Item']);
+                    console.log(this.cmbUnit.selectedValue);
                 };
                 ItemAddComponent.prototype.onLock = function () {
                     document.getElementById('itemAddTabContent').setAttribute('class', 'disable');
@@ -71,6 +81,7 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                 ItemAddComponent.prototype.addItem = function () {
                     var item = this.createItem();
                     if (this.validate(item)) {
+                        this.itemService.addItem(item, this);
                     }
                     else {
                     }
@@ -81,8 +92,33 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                 };
                 //getters
                 ItemAddComponent.prototype.getToastr = function () { return this.toastr; };
+                ItemAddComponent.prototype.getRouter = function () { return this.router; };
                 //validation
                 ItemAddComponent.prototype.validate = function (item) {
+                    if (!this.validateBarCode(this.barCode)) {
+                        return false;
+                    }
+                    if (!this.validateItemDescription(this.itemDescription)) {
+                        return false;
+                    }
+                    if (!this.validateAlias(this.alias)) {
+                        return false;
+                    }
+                    if (!this.validateCost(this.cost)) {
+                        return false;
+                    }
+                    if (!this.validateMarkUp(this.markUp)) {
+                        return false;
+                    }
+                    if (!this.validatePrice(this.price)) {
+                        return false;
+                    }
+                    if (!this.validateStockLevelQuantity(this.stockLevelQuantity)) {
+                        return false;
+                    }
+                    if (!this.validateGenericName(this.genericName)) {
+                        return false;
+                    }
                     return true;
                 };
                 ItemAddComponent.prototype.validateBarCode = function (barCode) {
@@ -104,9 +140,6 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     return true;
                 };
                 ItemAddComponent.prototype.validateStockLevelQuantity = function (stockLevelQty) {
-                    return true;
-                };
-                ItemAddComponent.prototype.validateRemarks = function (remarks) {
                     return true;
                 };
                 ItemAddComponent.prototype.validateGenericName = function (genericName) {

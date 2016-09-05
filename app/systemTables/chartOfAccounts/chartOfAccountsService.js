@@ -37,6 +37,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         component.getAccountsView().sourceCollection = response.json();
                         _this.updatePageButtons(component);
                     }, function (error) {
+                        component.getToastr().error('Server error');
                         _this.updatePageButtons(component);
                     });
                 };

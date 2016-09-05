@@ -36,7 +36,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                         .subscribe(function (response) {
                         component.getTaxView().sourceCollection = response.json();
                         _this.updatePageButtons(component);
-                        console.log(response.json() + "tx");
                     }, function (error) {
                     });
                 };
