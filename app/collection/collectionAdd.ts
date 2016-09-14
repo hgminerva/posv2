@@ -6,6 +6,8 @@ import {App} from '../app/app';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {CollectionService} from './collectionService';
+
 @Component({
     selector: 'collection-add',
     templateUrl: 'app/collection/collectionAdd.html',
@@ -16,7 +18,8 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
                  wjNg2Input.WjComboBox
     ],
     providers: [
-        ToastsManager
+        ToastsManager,
+        CollectionService
     ]
 })
 
@@ -39,7 +42,7 @@ export class CollectionAddComponent implements OnInit {
 
     private collectionDate : wijmo.input.InputDate;
 
-    constructor(private router : Router, private toastr : ToastsManager) {
+    constructor(private router : Router, private toastr : ToastsManager, private service : CollectionService) {
 
     }
 
@@ -57,6 +60,10 @@ export class CollectionAddComponent implements OnInit {
             format : "MM/dd/yyyy",
             value : new Date()
         });
+
+        this.service.initCombobox(this, this.cmbApprovedBy);
+        this.service.initCombobox(this, this.cmbPreparedBy);
+        this.service.initCombobox(this, this.cmbCheckedBy);
 
         this.collectionDetailSource.push({Amount : '200'});
     }

@@ -7,6 +7,9 @@ import {Response} from '../response/response';
 @Injectable()
 export class CustomerService {
     private static CUSTOMER_API_URL = '/api/customer/';
+    public static TERM_API_URL = '/api/term/';
+    private static ACCOUNT_API_URL = '/api/acount/';
+    public static ITEM_PRICE_API_URL = '/api/itemPrice/';
 
     public constructor(private http : Http) {
     }
@@ -89,6 +92,50 @@ export class CustomerService {
             )
     }
 
+    public initARCombobox(component : CustomerAddComponent, cmb : wijmo.input.ComboBox) : void {
+        const url = localStorage.getItem('api_url') + CustomerService.ACCOUNT_API_URL + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+        
+        this.http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = "Account";
+                    cmb.selectedValuePath = "Id";
+                    this.filterArAccount(cmb);
+                },
+                error => {
+                    console.log('error');
+                }
+            )
+    }
+
+    public initCombobox(component : CustomerAddComponent, 
+                        cmb : wijmo.input.ComboBox, 
+                        api_url : string, 
+                        display : string, 
+                        selectedValue : string) {
+        const url = localStorage.getItem('api_url') + api_url + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+        
+        this.http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = display;
+                    cmb.selectedValuePath = selectedValue;
+                },
+                error => {
+                }
+            )
+    }
+
    public updatePageButtons(component : CustomerComponent) : void {
         var currentPage = component.getCollectionView().pageIndex;
         var totalPage = component.getCollectionView().pageCount;
@@ -164,6 +211,16 @@ export class CustomerService {
             }
         }
         pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
+    }
+
+    private filterArAccount(cmb : wijmo.input.ComboBox) : void {
+        var src = [];
+        for(var c of cmb.itemsSource) {
+            if(c.AccountType == 'ASSET') {
+                src.push(c);
+            }
+        }
+        cmb.itemsSource = src;
     }
 
 }

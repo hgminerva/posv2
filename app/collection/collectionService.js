@@ -72,6 +72,21 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         component.getToastr().error('Server error');
                     });
                 };
+                CollectionService.prototype.initCombobox = function (component, cmb) {
+                    var url = localStorage.getItem('api_url') + CollectionService.API_URL_USER + 'list';
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this._http.get(url, requestOptions)
+                        .subscribe(function (response) {
+                        cmb.itemsSource = response.json();
+                        cmb.displayMemberPath = 'FullName';
+                        cmb.selectedValuePath = 'Id';
+                    }, function (error) {
+                        console.log('error');
+                    });
+                };
                 CollectionService.prototype.updatePageButtons = function (component) {
                     var currentPage = component.getCollectionView().pageIndex;
                     var totalPage = component.getCollectionView().pageCount;
@@ -144,6 +159,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
                 };
                 CollectionService.API_COLLECTION_URL = "/api/transaction/collection/";
+                CollectionService.API_URL_USER = "/api/user/";
                 CollectionService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

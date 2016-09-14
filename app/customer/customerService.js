@@ -93,6 +93,37 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         }
                     });
                 };
+                CustomerService.prototype.initARCombobox = function (component, cmb) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + CustomerService.ACCOUNT_API_URL + 'list';
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this.http.get(url, requestOptions)
+                        .subscribe(function (response) {
+                        cmb.itemsSource = response.json();
+                        cmb.displayMemberPath = "Account";
+                        cmb.selectedValuePath = "Id";
+                        _this.filterArAccount(cmb);
+                    }, function (error) {
+                        console.log('error');
+                    });
+                };
+                CustomerService.prototype.initCombobox = function (component, cmb, api_url, display, selectedValue) {
+                    var url = localStorage.getItem('api_url') + api_url + 'list';
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this.http.get(url, requestOptions)
+                        .subscribe(function (response) {
+                        cmb.itemsSource = response.json();
+                        cmb.displayMemberPath = display;
+                        cmb.selectedValuePath = selectedValue;
+                    }, function (error) {
+                    });
+                };
                 CustomerService.prototype.updatePageButtons = function (component) {
                     var currentPage = component.getCollectionView().pageIndex;
                     var totalPage = component.getCollectionView().pageCount;
@@ -164,7 +195,20 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     }
                     pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
                 };
+                CustomerService.prototype.filterArAccount = function (cmb) {
+                    var src = [];
+                    for (var _i = 0, _a = cmb.itemsSource; _i < _a.length; _i++) {
+                        var c = _a[_i];
+                        if (c.AccountType == 'ASSET') {
+                            src.push(c);
+                        }
+                    }
+                    cmb.itemsSource = src;
+                };
                 CustomerService.CUSTOMER_API_URL = '/api/customer/';
+                CustomerService.TERM_API_URL = '/api/term/';
+                CustomerService.ACCOUNT_API_URL = '/api/acount/';
+                CustomerService.ITEM_PRICE_API_URL = '/api/itemPrice/';
                 CustomerService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

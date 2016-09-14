@@ -1,11 +1,14 @@
 import {Component, Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {StockOutComponent} from './stockOut';
+import {StockOutAddComponent} from './stockOutAdd';
 import {Response} from '../response/response';
 
 @Injectable()
 export class StockOutService {
     private static API_URL_STOCK_OUT : string = "/api/transaction/stockOut/";
+    private static ACCOUNT_API_URL = '/api/acount/';
+    private static API_URL_USER : string = "/api/user/";
 
     public constructor(private http : Http) {}
 
@@ -63,7 +66,49 @@ export class StockOutService {
                   );
     }
 
-  public updatePageButtons(component : StockOutComponent) : void {
+    public initCombobox(component : StockOutAddComponent, 
+                        cmb : wijmo.input.ComboBox) {
+        const url = localStorage.getItem('api_url') + StockOutService.API_URL_USER + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+        
+        this.http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = 'FullName';
+                    cmb.selectedValuePath = 'Id';
+                },
+                error => {
+                    console.log('error');
+                }
+            )
+    }
+
+    public initAccount(component : StockOutAddComponent, cmb : wijmo.input.ComboBox) : void {
+            const url = localStorage.getItem('api_url') + StockOutService.ACCOUNT_API_URL + 'list';
+            const headers = new Headers({
+                'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+            });
+            const requestOptions = new RequestOptions({headers : headers});
+            
+            this.http.get(url, requestOptions)
+                .subscribe(
+                    response => {
+                        cmb.itemsSource = response.json();
+                        cmb.displayMemberPath = "Account";
+                        cmb.selectedValuePath = "Id";
+                        this.filterAccount(cmb);
+                    },
+                    error => {
+                        console.log('error');
+                    }
+                )
+    }
+
+    public updatePageButtons(component : StockOutComponent) : void {
         var currentPage = component.getCollectionView().pageIndex;
         var totalPage = component.getCollectionView().pageCount;
         var btnFirst = document.getElementById('btnFirst');
@@ -138,5 +183,15 @@ export class StockOutService {
             }
         }
         pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
+    }
+
+     private filterAccount(cmb : wijmo.input.ComboBox) : void {
+        var src = [];
+        for(var c of cmb.itemsSource) {
+            if(c.AccountType == 'EXPENSES') {
+                src.push(c);
+            }
+        }
+        cmb.itemsSource = src;
     }
 }

@@ -42,10 +42,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     else {
                     }
                     /*Else*/
-                    this.cmbTermSource = new wijmo.collections.ObservableArray();
-                    this.cmbAPAccountSource = new wijmo.collections.ObservableArray();
-                    this.initTermCombobox();
-                    this.initAPAccountCombobox();
+                    this.cmbTerm = new wijmo.input.ComboBox('#cmbTerm');
+                    this.cmbAPAccount = new wijmo.input.ComboBox('#cmbAPAccount');
+                    this.supplierService.initTerm(this, this.cmbTerm);
+                    this.supplierService.initAPAccount(this, this.cmbAPAccount);
                 };
                 SupplierAddComponent.prototype.onLock = function () {
                     document.getElementById('supplier').setAttribute('disabled', 'disabled');
@@ -73,20 +73,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 //getters
                 SupplierAddComponent.prototype.getToastr = function () { return this.toastr; };
                 SupplierAddComponent.prototype.getRouter = function () { return this.router; };
-                SupplierAddComponent.prototype.initTermCombobox = function () {
-                    var i, day = 15;
-                    for (i = 1; i < SupplierAddComponent.CMB_TERM_LEMGTH; i++) {
-                        this.cmbTermSource.push(day + " days");
-                        day *= 2;
-                    }
-                    this.cmbTermSource.push('COD');
-                };
-                SupplierAddComponent.prototype.initAPAccountCombobox = function () {
-                    this.cmbAPAccountSource.push('Accounts Payable');
-                    this.cmbAPAccountSource.push('Local Tax Payable');
-                    this.cmbAPAccountSource.push('VAT Payable-Input');
-                    this.cmbAPAccountSource.push('VAT Payable-Output');
-                };
                 SupplierAddComponent.prototype.addSupplier = function () {
                     var supplier = this.createSupplier();
                     if (this.validate(supplier)) {

@@ -69,6 +69,38 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         component.getToastr().error('Server error');
                     });
                 };
+                StockOutService.prototype.initCombobox = function (component, cmb) {
+                    var url = localStorage.getItem('api_url') + StockOutService.API_URL_USER + 'list';
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this.http.get(url, requestOptions)
+                        .subscribe(function (response) {
+                        cmb.itemsSource = response.json();
+                        cmb.displayMemberPath = 'FullName';
+                        cmb.selectedValuePath = 'Id';
+                    }, function (error) {
+                        console.log('error');
+                    });
+                };
+                StockOutService.prototype.initAccount = function (component, cmb) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + StockOutService.ACCOUNT_API_URL + 'list';
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this.http.get(url, requestOptions)
+                        .subscribe(function (response) {
+                        cmb.itemsSource = response.json();
+                        cmb.displayMemberPath = "Account";
+                        cmb.selectedValuePath = "Id";
+                        _this.filterAccount(cmb);
+                    }, function (error) {
+                        console.log('error');
+                    });
+                };
                 StockOutService.prototype.updatePageButtons = function (component) {
                     var currentPage = component.getCollectionView().pageIndex;
                     var totalPage = component.getCollectionView().pageCount;
@@ -140,7 +172,19 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     }
                     pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
                 };
+                StockOutService.prototype.filterAccount = function (cmb) {
+                    var src = [];
+                    for (var _i = 0, _a = cmb.itemsSource; _i < _a.length; _i++) {
+                        var c = _a[_i];
+                        if (c.AccountType == 'EXPENSES') {
+                            src.push(c);
+                        }
+                    }
+                    cmb.itemsSource = src;
+                };
                 StockOutService.API_URL_STOCK_OUT = "/api/transaction/stockOut/";
+                StockOutService.ACCOUNT_API_URL = '/api/acount/';
+                StockOutService.API_URL_USER = "/api/user/";
                 StockOutService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

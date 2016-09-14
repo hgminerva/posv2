@@ -5,6 +5,8 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {DebitCreditMemoService} from './debitCreditMemoService';
+
 @Component({
     selector: 'purchase-add',
     templateUrl: 'app/debitCreditMemo/debitCreditMemoAdd.html',
@@ -16,13 +18,11 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
         wjNg2Input.WjInputDate
     ],
     providers: [
-        ToastsManager
+        ToastsManager,
+        DebitCreditMemoService
     ]
 })
 
-/**
-* 
-*/
 export class DebitCreditMemoAddComponent implements OnInit {
     private debitCreditMemoNumber : String;
     private period : String;
@@ -32,21 +32,14 @@ export class DebitCreditMemoAddComponent implements OnInit {
     private cmbCheckedBy : wijmo.input.ComboBox;
     private cmbApprovedBy : wijmo.input.ComboBox;
 
-
-    //grid
     private purchaseAddView : wijmo.collections.CollectionView;
     private purchaseAddSource : wijmo.collections.ObservableArray;
 
 
-    constructor(private toastr : ToastsManager, private router : Router) {
+    constructor(private toastr : ToastsManager, private router : Router, private service : DebitCreditMemoService) {
 
     }
 
-    /** 
-    *This function is just like a constructor will initialize all the component elements
-    *when there will be new purchase order. 
-    *Will go back to the login screen if you try to access this component without logging in.
-    **/
     public ngOnInit() : void {
         if(!localStorage.getItem('access_token')) {
             //this._router.navigate(['Login']);
@@ -69,6 +62,10 @@ export class DebitCreditMemoAddComponent implements OnInit {
         this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
 
         this.purchaseAddSource.push({Quantity : 1});
+
+        this.service.initCombobox(this, this.cmbApprovedBy);
+        this.service.initCombobox(this, this.cmbPreparedBy);
+        this.service.initCombobox(this, this.cmbCheckedBy);
     }  
 
     public onLock() : void {

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './purchaseService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, purchaseService_1;
     var PurchaseAddComponent;
     return {
         setters:[
@@ -28,18 +28,17 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (purchaseService_1_1) {
+                purchaseService_1 = purchaseService_1_1;
             }],
         execute: function() {
             PurchaseAddComponent = (function () {
-                function PurchaseAddComponent(toastr, router) {
+                function PurchaseAddComponent(toastr, router, service) {
                     this.toastr = toastr;
                     this.router = router;
+                    this.service = service;
                 }
-                /**
-                *This function is just like a constructor will initialize all the component elements
-                *when there will be new purchase order.
-                *Will go back to the login screen if you try to access this component without logging in.
-                **/
                 PurchaseAddComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                     }
@@ -48,7 +47,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     /*Else*/
                     this.purchaseAddSource = new wijmo.collections.ObservableArray();
                     this.purchaseAddView = new wijmo.collections.CollectionView(this.purchaseAddSource);
-                    this.cmbAuthority = new wijmo.collections.ObservableArray();
                     this.inputDate = new wijmo.input.InputDate('#inputDate', {
                         format: 'MM/dd/yyyy',
                         value: new Date()
@@ -58,6 +56,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
                     this.cmbSupplier = new wijmo.input.ComboBox('#cmbSupplier');
                     this.purchaseAddSource.push({ Quantity: 1 });
+                    this.service.initCombobox(this, this.cmbSupplier, purchaseService_1.PurchaseService.API_URL_SUPPLIER, 'Supplier', 'Id');
+                    this.service.initCombobox(this, this.cmbApprovedBy, purchaseService_1.PurchaseService.API_URL_USER, 'FullName', 'Id');
+                    this.service.initCombobox(this, this.cmbPreparedBy, purchaseService_1.PurchaseService.API_URL_USER, 'FullName', 'Id');
+                    this.service.initCombobox(this, this.cmbCheckedBy, purchaseService_1.PurchaseService.API_URL_USER, 'FullName', 'Id');
                 };
                 PurchaseAddComponent.prototype.onLock = function () {
                     document.getElementById('inputDate').setAttribute('disabled', 'disabled');
@@ -122,10 +124,11 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2Input.WjInputDate
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager,
+                            purchaseService_1.PurchaseService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router])
+                    __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager, router_1.Router, purchaseService_1.PurchaseService])
                 ], PurchaseAddComponent);
                 return PurchaseAddComponent;
             }());

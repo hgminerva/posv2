@@ -1,11 +1,13 @@
 import {Component, Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {CollectionComponent} from './collection';
+import {CollectionAddComponent} from './collectionAdd';
 import {Response} from '../response/response';
 
 @Injectable()
 export class CollectionService {
     private static API_COLLECTION_URL : string = "/api/transaction/collection/"; 
+    private static API_URL_USER : string = "/api/user/";
 
     constructor(private _http : Http) {
     }
@@ -69,6 +71,27 @@ export class CollectionService {
                           component.getToastr().error('Server error');
                       }
                   );
+    }
+
+     public initCombobox(component : CollectionAddComponent, 
+                        cmb : wijmo.input.ComboBox) {
+        const url = localStorage.getItem('api_url') + CollectionService.API_URL_USER + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+        
+        this._http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = 'FullName';
+                    cmb.selectedValuePath = 'Id';
+                },
+                error => {
+                    console.log('error');
+                }
+            )
     }
 
     public updatePageButtons(component : CollectionComponent) : void {

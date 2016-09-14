@@ -6,6 +6,7 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {StockOutService} from './stockOutService';
 
 @Component({
     selector: 'stock-out-add',
@@ -17,52 +18,52 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
                  wjNg2Input.WjComboBox
                ],
     providers:[
-        ToastsManager
+        ToastsManager,
+        StockOutService
     ]
 })
 
 export class StockOutAddComponent implements OnInit{
 
-    private cmbAuthority : wijmo.collections.ObservableArray;
-    private cmbAccount : wijmo.collections.ObservableArray;
     private stockOutDate : wijmo.input.InputDate;
+    private cmbAccount : wijmo.input.ComboBox;
+    private cmbPreparedBy : wijmo.input.ComboBox;
+    private cmbApprovedBy : wijmo.input.ComboBox;
+    private cmbCheckedBy : wijmo.input.ComboBox;
 
-    public constructor(private router : Router, private toastr : ToastsManager) {
+    public constructor(private router : Router, private toastr : ToastsManager, private service : StockOutService) {
 
     }
 
     public ngOnInit() : void {
-        if(true) {
+        if(!localStorage.getItem('acceess_token')) {
 
         }
         else {
 
         }
 
-        this.cmbAuthority = new wijmo.collections.ObservableArray();
-        this.cmbAccount = new wijmo.collections.ObservableArray();
         this.stockOutDate = new wijmo.input.InputDate('#inputDate', {
             format: 'MM-dd-yyyy',
             value : new Date()
         });
 
-        this.initCmbAuthority();
-        this.initCmbAccount();
+        this.cmbAccount = new wijmo.input.ComboBox('#cmbAccount');
+        this.cmbApprovedBy = new wijmo.input.ComboBox('#cmbApprovedBy');
+        this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
+        this.cmbPreparedBy = new wijmo.input.ComboBox('#cmbPreparedBy');
+
+                
+        this.service.initAccount(this, this.cmbAccount);
+        this.service.initCombobox(this, this.cmbApprovedBy);
+        this.service.initCombobox(this, this.cmbPreparedBy);
+        this.service.initCombobox(this, this.cmbCheckedBy);
+
     }
 
     public onClose() : void {
         this.router.navigate(['StockOut']);
         this.addStockOut();
-    }
-
-    private initCmbAuthority() : void {
-        this.cmbAuthority.push('Administrator');
-        this.cmbAuthority.push('Cashier');
-        this.cmbAuthority.push('Teller');
-    }
-
-    private initCmbAccount() : void {
-        this.cmbAccount.push('Test');
     }
 
     private addStockOut() : void {

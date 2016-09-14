@@ -5,6 +5,8 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {StockInService} from './stockInService';
+
 @Component({
     selector: 'stock-in-add',
     templateUrl: 'app/stockIn/stockInAdd.html',
@@ -16,7 +18,8 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
         wjNg2FlexGrid.WjFlexGridCellTemplate
     ],    
     providers: [
-        ToastsManager
+        ToastsManager,
+        StockInService
     ]
 })
 
@@ -38,7 +41,7 @@ export class StockInAddComponent implements OnInit{
 
     private cmbAuthoritySource : wijmo.collections.ObservableArray;
 
-    public constructor(private router : Router, private toastr : ToastsManager) {
+    public constructor(private router : Router, private toastr : ToastsManager, private service : StockInService) {
 
     }
 
@@ -63,6 +66,12 @@ export class StockInAddComponent implements OnInit{
         this.cmbSupplier = new wijmo.input.ComboBox('#cmbSupplier');
         this.cmbPoNumber = new wijmo.input.ComboBox('#cmbPoNumber');
         this.cmbDownloadCatergory = new wijmo.input.ComboBox('#cmbDownload');
+
+        
+        this.service.initCombobox(this, this.cmbSupplier, StockInService.API_URL_SUPPLIER, 'Supplier', 'Id');
+        this.service.initCombobox(this, this.cmbApprovedBy, StockInService.API_URL_USER, 'FullName', 'Id');
+        this.service.initCombobox(this, this.cmbPreparedBy, StockInService.API_URL_USER, 'FullName', 'Id');
+        this.service.initCombobox(this, this.cmbCheckedBy, StockInService.API_URL_USER, 'FullName', 'Id');
     }
 
     public onClose() : void {

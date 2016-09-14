@@ -98,6 +98,36 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         component.getToastr().error('Server error', '');
                     });
                 };
+                SupplierService.prototype.initTerm = function (component, cmb) {
+                    var url = localStorage.getItem('api_url') + SupplierService.API_TERM_URL + 'list';
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this.http.get(url, requestOptions)
+                        .subscribe(function (response) {
+                        cmb.itemsSource = response.json();
+                        cmb.displayMemberPath = 'Term';
+                        cmb.selectedValuePath = 'Id';
+                    }, function (error) {
+                    });
+                };
+                SupplierService.prototype.initAPAccount = function (component, cmb) {
+                    var _this = this;
+                    var url = localStorage.getItem('api_url') + SupplierService.API_ACCOUNT_URL + 'list';
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this.http.get(url, requestOptions)
+                        .subscribe(function (response) {
+                        cmb.itemsSource = response.json();
+                        cmb.displayMemberPath = 'Account';
+                        cmb.selectedValuePath = 'Id';
+                        _this.filterAPAccount(cmb);
+                    }, function (error) {
+                    });
+                };
                 SupplierService.prototype.updatePageButtons = function (component) {
                     var currentPage = component.getCollectionView().pageIndex;
                     var totalPage = component.getCollectionView().pageCount;
@@ -169,7 +199,19 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     }
                     pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
                 };
+                SupplierService.prototype.filterAPAccount = function (cmb) {
+                    var src = [];
+                    for (var _i = 0, _a = cmb.itemsSource; _i < _a.length; _i++) {
+                        var c = _a[_i];
+                        if (c.AccountType == 'LIABILITY') {
+                            src.push(c);
+                        }
+                    }
+                    cmb.itemsSource = src;
+                };
                 SupplierService.API_SUPPLIER_URL = '/api/supplier/';
+                SupplierService.API_TERM_URL = '/api/term/';
+                SupplierService.API_ACCOUNT_URL = '/api/acount/';
                 SupplierService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

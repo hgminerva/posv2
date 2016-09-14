@@ -77,7 +77,7 @@ export class ItemAddComponent implements OnInit {
         this.itemService.initCombobox(this, this.cmbSales, ItemService.API_TAX_URL, "Tax", "Id");
         this.itemService.initCombobox(this, this.cmbDefaultSupplier, ItemService.API_URL_SUPPLIER, "Supplier", "Id");
 
-        this.itemService.initAccounts(this.cmbSalesAccount, this.cmbAssetAccount, this.cmbCostAccount);
+        this.itemService.initAccounts(this, this.cmbSalesAccount, this.cmbAssetAccount, this.cmbCostAccount);
     }
 
     public onClose() : void {

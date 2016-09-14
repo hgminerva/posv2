@@ -1,11 +1,13 @@
 import {Component, Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {StockCountComponent} from './stockCount';
+import {StockCountAddComponent} from './stockCountAdd';
 import {Response} from '../response/response';
 
 @Injectable()
 export class StockCountService {
     private static API_URL_STOCK_COUNT : string = "/api/transaction/stockCount/";
+    private static API_URL_USER : string = "/api/user/";
 
     public constructor(private http : Http) {}
 
@@ -61,6 +63,27 @@ export class StockCountService {
                           component.getToastr().error('Server error');
                       }
                   );
+    }
+
+    public initCombobox(component : StockCountAddComponent, 
+                        cmb : wijmo.input.ComboBox) {
+        const url = localStorage.getItem('api_url') + StockCountService.API_URL_USER + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+        
+        this.http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = 'FullName';
+                    cmb.selectedValuePath = 'Id';
+                },
+                error => {
+                    console.log('error');
+                }
+            )
     }
 
    public updatePageButtons(component : StockCountComponent) : void {

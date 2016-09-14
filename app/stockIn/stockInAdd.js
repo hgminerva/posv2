@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './stockInService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, stockInService_1;
     var StockInAddComponent;
     return {
         setters:[
@@ -28,12 +28,16 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (stockInService_1_1) {
+                stockInService_1 = stockInService_1_1;
             }],
         execute: function() {
             StockInAddComponent = (function () {
-                function StockInAddComponent(router, toastr) {
+                function StockInAddComponent(router, toastr, service) {
                     this.router = router;
                     this.toastr = toastr;
+                    this.service = service;
                     this.return = false;
                 }
                 StockInAddComponent.prototype.ngOnInit = function () {
@@ -52,6 +56,10 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     this.cmbSupplier = new wijmo.input.ComboBox('#cmbSupplier');
                     this.cmbPoNumber = new wijmo.input.ComboBox('#cmbPoNumber');
                     this.cmbDownloadCatergory = new wijmo.input.ComboBox('#cmbDownload');
+                    this.service.initCombobox(this, this.cmbSupplier, stockInService_1.StockInService.API_URL_SUPPLIER, 'Supplier', 'Id');
+                    this.service.initCombobox(this, this.cmbApprovedBy, stockInService_1.StockInService.API_URL_USER, 'FullName', 'Id');
+                    this.service.initCombobox(this, this.cmbPreparedBy, stockInService_1.StockInService.API_URL_USER, 'FullName', 'Id');
+                    this.service.initCombobox(this, this.cmbCheckedBy, stockInService_1.StockInService.API_URL_USER, 'FullName', 'Id');
                 };
                 StockInAddComponent.prototype.onClose = function () {
                     this.router.navigate(['StockIn']);
@@ -116,10 +124,11 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                             wjNg2FlexGrid.WjFlexGridCellTemplate
                         ],
                         providers: [
-                            ng2_toastr_1.ToastsManager
+                            ng2_toastr_1.ToastsManager,
+                            stockInService_1.StockInService
                         ]
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager])
+                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager, stockInService_1.StockInService])
                 ], StockInAddComponent);
                 return StockInAddComponent;
             }());

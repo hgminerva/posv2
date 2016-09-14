@@ -1,11 +1,14 @@
 import {Component, Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {StockInComponent} from './stockIn';
+import {StockInAddComponent} from './stockInAdd';
 import {Response} from '../response/response';
 
 @Injectable()
 export class StockInService {
     private static API_URL_STOCK_IN : string = "/api/transaction/stockIn/";
+    public static API_URL_SUPPLIER : string = "/api/supplier/"
+    public static API_URL_USER : string = "/api/user/";
 
     public constructor(private http : Http) {}
 
@@ -61,6 +64,30 @@ export class StockInService {
                           component.getToastr().error('Server error');
                       }
                   );
+    }
+
+    public initCombobox(component : StockInAddComponent, 
+                        cmb : wijmo.input.ComboBox, 
+                        api_url : string, 
+                        display : string, 
+                        selectedValue : string) {
+        const url = localStorage.getItem('api_url') + api_url + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+        
+        this.http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = display;
+                    cmb.selectedValuePath = selectedValue;
+                },
+                error => {
+                    console.log('error');
+                }
+            )
     }
 
    public updatePageButtons(component : StockInComponent) : void {

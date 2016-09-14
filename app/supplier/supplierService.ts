@@ -8,6 +8,8 @@ import {Response} from '../response/response';
 @Injectable()
 export class SupplierService {
     private static API_SUPPLIER_URL : string = '/api/supplier/';
+    private static API_TERM_URL : string = '/api/term/';
+    private static API_ACCOUNT_URL : string = '/api/acount/';
 
     constructor(private http : Http) {
     }
@@ -101,6 +103,46 @@ export class SupplierService {
                 )
     }
 
+    public initTerm(component : SupplierAddComponent, 
+                        cmb : wijmo.input.ComboBox) {
+        const url = localStorage.getItem('api_url') + SupplierService.API_TERM_URL + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+        
+        this.http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = 'Term';
+                    cmb.selectedValuePath = 'Id';
+                },
+                error => {
+                }
+            )
+    }
+
+    public initAPAccount(component : SupplierAddComponent, cmb : wijmo.input.ComboBox) {
+        const url = localStorage.getItem('api_url') + SupplierService.API_ACCOUNT_URL + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+        
+        this.http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = 'Account';
+                    cmb.selectedValuePath = 'Id';
+                    this.filterAPAccount(cmb);
+                },
+                error => {
+                }
+            )
+    }
+
    public updatePageButtons(component : SupplierComponent) : void {
         var currentPage = component.getCollectionView().pageIndex;
         var totalPage = component.getCollectionView().pageCount;
@@ -176,5 +218,15 @@ export class SupplierService {
             }
         }
         pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
+    }
+
+     private filterAPAccount(cmb : wijmo.input.ComboBox) : void {
+        var src = [];
+        for(var c of cmb.itemsSource) {
+            if(c.AccountType == 'LIABILITY') {
+                src.push(c);
+            }
+        }
+        cmb.itemsSource = src;
     }
 }

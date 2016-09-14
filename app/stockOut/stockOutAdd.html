@@ -49,8 +49,8 @@
                                 <label class="control-label pull-right">Account</label>
                             </div>
                             <div class="col-sm-8">
-                                <wj-combo-box id="cmbAccount" class="input-80" [itemsSource]="cmbAccount">
-                                </wj-combo-box>
+                                <div id="cmbAccount" class="input-80">
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -68,11 +68,8 @@
                                     <label class="control-label pull-right">Prepared By</label>
                                 </div>
                                 <div class="col-sm-8">
-                                    <wj-combo-box id="cmbPreparedBy" 
-                                                class="input-70"
-                                                [itemsSource]="cmbAuthority"
-                                                [isReadOnly]="true" disabled>
-                                    </wj-combo-box>
+                                    <div id="cmbPreparedBy" disabled>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -80,11 +77,8 @@
                                     <label class="control-label pull-right">Checked By</label>
                                 </div>
                                 <div class="col-sm-8">
-                                    <wj-combo-box id="cmbPreparedBy" 
-                                                class="input-70"
-                                                [itemsSource]="cmbAuthority"
-                                                [isReadOnly]="true">
-                                    </wj-combo-box>
+                                    <div id="cmbCheckedBy" >
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -92,11 +86,8 @@
                                 <label class="control-label pull-right">Approved By</label>
                             </div>
                             <div class="col-sm-8">
-                                <wj-combo-box id="cmbApprovedBy"
-                                            class="input-70"
-                                            [itemsSource]="cmbAuthority"
-                                            [isReadOnly]="true">
-                                </wj-combo-box>
+                                <div id="cmbApprovedBy">
+                                </div>
                             </div>
                         </div>
                     </div>

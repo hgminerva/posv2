@@ -2,10 +2,13 @@ import {Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http'
 import {Response} from '../response/response';
 import {PurchasesComponent} from './purchases';
+import {PurchaseAddComponent} from './purchasesAdd';
 
 @Injectable()
 export class PurchaseService {
     private static API_URL_IPURCHASE : string = "/api/transaction/purchaseOrder/";
+    public static API_URL_SUPPLIER : string = "/api/supplier/"
+    public static API_URL_USER : string = "/api/user/";
 
     public constructor(private http : Http) {}
 
@@ -61,6 +64,50 @@ export class PurchaseService {
                           component.getToastr().error('Server error');
                       }
                   );
+    }
+
+    public initSupplier(component : PurchaseAddComponent, cmb : wijmo.input.ComboBox) {
+        const url = localStorage.getItem('api_url') + PurchaseService.API_URL_SUPPLIER + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+
+        this.http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = "Supplier";
+                    cmb.selectedValuePath = "Id";
+                },
+                error => {
+
+                }
+            )
+    }
+
+     public initCombobox(component : PurchaseAddComponent, 
+                        cmb : wijmo.input.ComboBox, 
+                        api_url : string, 
+                        display : string, 
+                        selectedValue : string) {
+        const url = localStorage.getItem('api_url') + api_url + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+        
+        this.http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = display;
+                    cmb.selectedValuePath = selectedValue;
+                },
+                error => {
+                    console.log('error');
+                }
+            )
     }
 
     public updatePageButtons(component : PurchasesComponent) : void {

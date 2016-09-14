@@ -64,7 +64,7 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     this.itemService.initCombobox(this, this.cmbPurchase, itemService_1.ItemService.API_TAX_URL, "Tax", "Id");
                     this.itemService.initCombobox(this, this.cmbSales, itemService_1.ItemService.API_TAX_URL, "Tax", "Id");
                     this.itemService.initCombobox(this, this.cmbDefaultSupplier, itemService_1.ItemService.API_URL_SUPPLIER, "Supplier", "Id");
-                    this.itemService.initAccounts(this.cmbSalesAccount, this.cmbAssetAccount, this.cmbCostAccount);
+                    this.itemService.initAccounts(this, this.cmbSalesAccount, this.cmbAssetAccount, this.cmbCostAccount);
                 };
                 ItemAddComponent.prototype.onClose = function () {
                     this.addItem();

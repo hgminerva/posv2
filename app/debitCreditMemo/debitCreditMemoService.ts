@@ -1,11 +1,13 @@
 import {Component, Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {DebitCreditMemoComponent} from './debitCreditMemo';
+import {DebitCreditMemoAddComponent} from './debitCreditMemoAdd';
 import {Response} from '../response/response';
 
 @Injectable()
 export class  DebitCreditMemoService{
     private static API_URL_RESTAURANT_TABLE : string = "/api/transaction/debitCreditMemo/";
+    private static API_URL_USER : string = "/api/user/";
 
     public constructor(private http : Http) {}
 
@@ -61,6 +63,27 @@ export class  DebitCreditMemoService{
                           component.getToastr().error('Server error');
                       }
                   );
+    }
+
+    public initCombobox(component : DebitCreditMemoAddComponent, 
+                        cmb : wijmo.input.ComboBox) {
+        const url = localStorage.getItem('api_url') + DebitCreditMemoService.API_URL_USER + 'list';
+        const headers = new Headers({
+            'Authorization' : 'Bearer ' + localStorage.getItem('access_token')
+        });
+        const requestOptions = new RequestOptions({headers : headers});
+        
+        this.http.get(url, requestOptions)
+            .subscribe(
+                response => {
+                    cmb.itemsSource = response.json();
+                    cmb.displayMemberPath = 'FullName';
+                    cmb.selectedValuePath = 'Id';
+                },
+                error => {
+                    console.log('error');
+                }
+            )
     }
 
 

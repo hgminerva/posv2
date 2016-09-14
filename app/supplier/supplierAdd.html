@@ -88,11 +88,8 @@
                             <label class="control-label pull-right">Term</label>
                         </div>
                         <div class="col-sm-10">
-                            <wj-combo-box id="cmbTerm"
-                                            class="input-20"
-                                            [itemsSource]="cmbTermSource"
-                                            [isReadOnly]="true">
-                            </wj-combo-box>
+                            <div id="cmbTerm">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -113,140 +110,13 @@
                             <label class="control-label pull-right">AP Account</label>
                         </div>
                         <div class="col-sm-10">
-                            <wj-combo-box id="cmbAPAccount"
-                                            class="input-40"
-                                            [itemsSource]="cmbAPAccountSource"
-                                            [isReadOnly]="true">
-                            </wj-combo-box>
+                            <div id="cmbAPAccount">
+                            </div>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-<!--
-    <div class="content-header clearfix">
-        <div class="col-sm-6">
-            <div class="pull-left">
-                <h4>Supplier Detail</h4>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="pull-right">
-                <button class="btn btn-primary sharp" type="button" (click)="onLock()">Lock</button>
-                <button class="btn btn-primary sharp" type="button" (click)="onUnlock()">Unlock</button>
-                <button class="btn btn-primary sharp" type="button" (click)="onClose()">Close</button>
-            </div>
-        </div>
-    </div>
-<div class="content-body clearfix">
-    <div class="col-sm-12">
-            <form id="formAddPurchaseOrder" class="form-horizontal" role="form">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label">Supplier</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input [(ngModel)]="supplier"
-                            id = "supplier"
-                            class="form-control input-50"
-                            type="text"
-                            placeholder="NA" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label">Address</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input [(ngModel)]="address"
-                            id="address" 
-                            class="form-control input-60"
-                            type="text"
-                            placeholder="NA"
-                            required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label">Telephone No.</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input [(ngModel)]="telephoneNumber"
-                            id="telephoneNumber" 
-                            class="form-control input-30"
-                            type="text"
-                            placeholder="NA"
-                            required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label">Cellphone No.</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input [(ngModel)]="cellphoneNumber"
-                            id="cellphoneNumber" 
-                            class="form-control input-30"
-                            type="text"
-                            placeholder="NA"
-                            required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label">Fax No.</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input [(ngModel)]="faxNumber"
-                            id="faxNumber" 
-                            class="form-control input-30"
-                            type="text"
-                            placeholder="NA"
-                            required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label">Term</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <wj-combo-box id="cmbTerm"
-                                        class="input-20"
-                                        [itemsSource]="cmbTermSource"
-                                        [isReadOnly]="true">
-                        </wj-combo-box>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label">TIN</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input [(ngModel)]="tin"
-                            id="tin" 
-                            class="form-control input-30"
-                            type="text"
-                            placeholder="NA"
-                            required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label class="control-label">AP Account</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <wj-combo-box id="cmbAPAccount"
-                                        class="input-40"
-                                        [itemsSource]="cmbAPAccountSource"
-                                        [isReadOnly]="true">
-                        </wj-combo-box>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 <!--End of body-->
 </section>

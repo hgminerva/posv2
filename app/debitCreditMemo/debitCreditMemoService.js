@@ -69,6 +69,21 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                         component.getToastr().error('Server error');
                     });
                 };
+                DebitCreditMemoService.prototype.initCombobox = function (component, cmb) {
+                    var url = localStorage.getItem('api_url') + DebitCreditMemoService.API_URL_USER + 'list';
+                    var headers = new http_1.Headers({
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                    });
+                    var requestOptions = new http_1.RequestOptions({ headers: headers });
+                    this.http.get(url, requestOptions)
+                        .subscribe(function (response) {
+                        cmb.itemsSource = response.json();
+                        cmb.displayMemberPath = 'FullName';
+                        cmb.selectedValuePath = 'Id';
+                    }, function (error) {
+                        console.log('error');
+                    });
+                };
                 DebitCreditMemoService.prototype.updatePageButtons = function (component) {
                     var currentPage = component.getCollectionView().pageIndex;
                     var totalPage = component.getCollectionView().pageCount;
@@ -141,6 +156,7 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                     pageCount.innerHTML = currentPage + 1 + "/" + totalPage;
                 };
                 DebitCreditMemoService.API_URL_RESTAURANT_TABLE = "/api/transaction/debitCreditMemo/";
+                DebitCreditMemoService.API_URL_USER = "/api/user/";
                 DebitCreditMemoService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

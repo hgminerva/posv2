@@ -5,6 +5,8 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {PurchaseService} from './purchaseService';
+
 @Component({
     selector: 'purchase-add',
     templateUrl: 'app/purchases/purchasesAdd.html',
@@ -16,22 +18,16 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
         wjNg2Input.WjInputDate
     ],
     providers: [
-        ToastsManager
+        ToastsManager,
+        PurchaseService
     ]
 })
 
-/**
-* 
-*/
 export class PurchaseAddComponent implements OnInit{
-    //grid
     private purchaseAddView : wijmo.collections.CollectionView;
     private purchaseAddSource : wijmo.collections.ObservableArray;
     private cmbItemSource : wijmo.collections.ObservableArray;
     private cmbUnit : wijmo.collections.ObservableArray;
-    //html elements sources
-    private cmbAuthority : wijmo.collections.ObservableArray;
-    //html elements input
     private poNumber : String;
     private period : Number;
     private cmbSupplier : wijmo.input.ComboBox;
@@ -43,15 +39,10 @@ export class PurchaseAddComponent implements OnInit{
     private download : String;
     private inputDate : wijmo.input.InputDate;
 
-    constructor(private toastr : ToastsManager, private router : Router) {
+    constructor(private toastr : ToastsManager, private router : Router, private service : PurchaseService) {
 
     }
 
-    /** 
-    *This function is just like a constructor will initialize all the component elements
-    *when there will be new purchase order. 
-    *Will go back to the login screen if you try to access this component without logging in.
-    **/
     public ngOnInit() : void {
         if(!localStorage.getItem('access_token')) {
             //this._router.navigate(['Login']);
@@ -62,7 +53,6 @@ export class PurchaseAddComponent implements OnInit{
         /*Else*/
         this.purchaseAddSource = new wijmo.collections.ObservableArray();
         this.purchaseAddView = new wijmo.collections.CollectionView(this.purchaseAddSource);
-        this.cmbAuthority = new wijmo.collections.ObservableArray();
 
         this.inputDate = new  wijmo.input.InputDate('#inputDate', {
             format : 'MM/dd/yyyy',
@@ -74,7 +64,12 @@ export class PurchaseAddComponent implements OnInit{
         this.cmbCheckedBy = new wijmo.input.ComboBox('#cmbCheckedBy');
         this.cmbSupplier = new wijmo.input.ComboBox('#cmbSupplier');
 
-        this.purchaseAddSource.push({Quantity : 1});
+    this.purchaseAddSource.push({Quantity : 1});
+
+    this.service.initCombobox(this, this.cmbSupplier, PurchaseService.API_URL_SUPPLIER, 'Supplier', 'Id');
+    this.service.initCombobox(this, this.cmbApprovedBy, PurchaseService.API_URL_USER, 'FullName', 'Id');
+    this.service.initCombobox(this, this.cmbPreparedBy, PurchaseService.API_URL_USER, 'FullName', 'Id');
+    this.service.initCombobox(this, this.cmbCheckedBy, PurchaseService.API_URL_USER, 'FullName', 'Id');
     }  
 
     public onLock() : void {

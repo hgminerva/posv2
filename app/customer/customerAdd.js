@@ -46,11 +46,12 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                     else {
                     }
                     /*Else*/
-                    this.cmbTermSource = new wijmo.collections.ObservableArray();
-                    this.cmbAR_AccountSource = new wijmo.collections.ObservableArray();
+                    this.cmbTerm = new wijmo.input.ComboBox('#cmbTerm');
+                    this.cmbARAccount = new wijmo.input.ComboBox('#cmbArAccount');
                     this.cmbDefaultPrice = new wijmo.input.ComboBox('#cmbDefaultPrice');
-                    this.initTermCombobox();
-                    this.initARCombobox();
+                    this.customerService.initCombobox(this, this.cmbTerm, customerService_1.CustomerService.TERM_API_URL, 'Term', 'Id');
+                    this.customerService.initARCombobox(this, this.cmbARAccount);
+                    this.customerService.initCombobox(this, this.cmbDefaultPrice, customerService_1.CustomerService.ITEM_PRICE_API_URL, 'PriceDescription', 'Id');
                 };
                 CustomerAddComponent.prototype.onClose = function () {
                     this.addCustomer();
@@ -94,20 +95,6 @@ System.register(['angular2/core', 'ng2-toastr/ng2-toastr', 'angular2/router', 'w
                 //getters
                 CustomerAddComponent.prototype.getToastr = function () { return this.toastr; };
                 CustomerAddComponent.prototype.getRouter = function () { return this.router; };
-                CustomerAddComponent.prototype.initTermCombobox = function () {
-                    var i, day = 15;
-                    for (i = 1; i < CustomerAddComponent.CMB_TERM_SOURCE_LENGTH; i++) {
-                        this.cmbTermSource.push(day + " days");
-                        day *= 2;
-                    }
-                    this.cmbTermSource.push('COD');
-                };
-                CustomerAddComponent.prototype.initARCombobox = function () {
-                    this.cmbAR_AccountSource.push('Account Receviable - Others');
-                    this.cmbAR_AccountSource.push('Account Receviable - Sales');
-                    this.cmbAR_AccountSource.push('Cash on Hand');
-                    this.cmbAR_AccountSource.push('Inventory');
-                };
                 CustomerAddComponent.prototype.createCustomer = function () {
                     var data = {
                         Customer: this.customer

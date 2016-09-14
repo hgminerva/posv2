@@ -25,8 +25,8 @@ export class SupplierAddComponent implements OnInit{
     private faxNumber : String;
     private tin : String;
 
-    private cmbTermSource : wijmo.collections.ObservableArray;
-    private cmbAPAccountSource : wijmo.collections.ObservableArray;
+    private cmbTerm : wijmo.input.ComboBox;
+    private cmbAPAccount : wijmo.input.ComboBox;
 
     private static CMB_TERM_LEMGTH : Number = 5;
 
@@ -44,11 +44,12 @@ export class SupplierAddComponent implements OnInit{
          
         }
         /*Else*/
-        this.cmbTermSource = new wijmo.collections.ObservableArray();
-        this.cmbAPAccountSource = new wijmo.collections.ObservableArray();
+        this.cmbTerm = new wijmo.input.ComboBox('#cmbTerm');
+        this.cmbAPAccount = new wijmo.input.ComboBox('#cmbAPAccount');
 
-        this.initTermCombobox();
-        this.initAPAccountCombobox();
+        this.supplierService.initTerm(this, this.cmbTerm);
+        this.supplierService.initAPAccount(this, this.cmbAPAccount);
+        
     }
 
      public onLock() : void {
@@ -81,23 +82,6 @@ export class SupplierAddComponent implements OnInit{
     public getToastr() : ToastsManager { return this.toastr; }
 
     public getRouter() : Router { return this.router; }
-
-    private initTermCombobox() : void {
-        var i, day = 15;
-        for(i = 1; i < SupplierAddComponent.CMB_TERM_LEMGTH; i++) {
-            this.cmbTermSource.push(day + " days");
-            day *= 2;
-        }
-
-        this.cmbTermSource.push('COD');
-    }
-
-    private initAPAccountCombobox() : void {
-       this.cmbAPAccountSource.push('Accounts Payable');
-       this.cmbAPAccountSource.push('Local Tax Payable');
-       this.cmbAPAccountSource.push('VAT Payable-Input');
-       this.cmbAPAccountSource.push('VAT Payable-Output');
-    }
 
     private addSupplier() : void {
         const supplier = this.createSupplier();

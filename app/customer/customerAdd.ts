@@ -33,8 +33,8 @@ export class CustomerAddComponent implements OnInit{
     private rewardConversion : String;
     private cmbDefaultPrice : wijmo.input.ComboBox;
 
-    private cmbTermSource : wijmo.collections.ObservableArray;
-    private cmbAR_AccountSource : wijmo.collections.ObservableArray;
+    private cmbTerm: wijmo.input.ComboBox;
+    private cmbARAccount : wijmo.input.ComboBox;
     
 
     private static  CMB_TERM_SOURCE_LENGTH : Number = 5;
@@ -51,13 +51,14 @@ export class CustomerAddComponent implements OnInit{
 
         }
         /*Else*/
-        this.cmbTermSource = new wijmo.collections.ObservableArray();
-        this.cmbAR_AccountSource = new wijmo.collections.ObservableArray();
+        this.cmbTerm = new wijmo.input.ComboBox('#cmbTerm');
+        this.cmbARAccount = new wijmo.input.ComboBox('#cmbArAccount');
 
         this.cmbDefaultPrice = new wijmo.input.ComboBox('#cmbDefaultPrice');
 
-        this.initTermCombobox();
-        this.initARCombobox();
+        this.customerService.initCombobox(this, this.cmbTerm, CustomerService.TERM_API_URL, 'Term', 'Id');
+        this.customerService.initARCombobox(this, this.cmbARAccount);
+        this.customerService.initCombobox(this, this.cmbDefaultPrice, CustomerService.ITEM_PRICE_API_URL, 'PriceDescription', 'Id');
     }
 
     public onClose() : void {
@@ -108,23 +109,6 @@ export class CustomerAddComponent implements OnInit{
     public getToastr() : ToastsManager { return this.toastr; } 
 
     public getRouter() : Router { return this.router; }
-
-    private initTermCombobox() : void {
-        var i, day = 15;
-        for(i = 1; i < CustomerAddComponent.CMB_TERM_SOURCE_LENGTH; i++) {
-            this.cmbTermSource.push(day + " days");
-            day *= 2;
-        }
-
-        this.cmbTermSource.push('COD');
-    }
-
-    private initARCombobox() : void {
-        this.cmbAR_AccountSource.push('Account Receviable - Others');
-        this.cmbAR_AccountSource.push('Account Receviable - Sales');
-        this.cmbAR_AccountSource.push('Cash on Hand');
-        this.cmbAR_AccountSource.push('Inventory');
-    }
 
     private createCustomer() : Object {
         var data = {
