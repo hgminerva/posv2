@@ -189,11 +189,9 @@ System.register(['angular2/core', 'angular2/http', '../response/response'], func
                             src.push(source[i]);
                         }
                     }
-                    console.log(src[0].Account);
                     cmb.itemsSource = src;
                     cmb.displayMemberPath = "Account";
                     cmb.selectedValuePath = "Id";
-                    console.log(cmb.itemsSource);
                 };
                 ItemService.API_UNIT_URL = '/api/unit/';
                 ItemService.API_TAX_URL = '/api/tax/';

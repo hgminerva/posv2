@@ -222,11 +222,9 @@ export class ItemService {
                }
                //console.log(source[i].AccountType);
            }
-           console.log(src[0].Account);
            cmb.itemsSource = src;
            cmb.displayMemberPath = "Account";
            cmb.selectedValuePath = "Id";
-           console.log(cmb.itemsSource);
     }
 
 }

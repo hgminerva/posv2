@@ -60,6 +60,8 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     this.cmbPurchase = new wijmo.input.ComboBox('#cmbPurchase');
                     this.cmbSales = new wijmo.input.ComboBox('#cmbSales');
                     this.cmbKitchen = new wijmo.input.ComboBox('#cmbKitchen');
+                    this.collectionSrc = new wijmo.collections.ObservableArray();
+                    this.collectionItem = new wijmo.collections.CollectionView(this.collectionSrc);
                     this.itemService.initCombobox(this, this.cmbUnit, itemService_1.ItemService.API_UNIT_URL, "Unit", "Id");
                     this.itemService.initCombobox(this, this.cmbPurchase, itemService_1.ItemService.API_TAX_URL, "Tax", "Id");
                     this.itemService.initCombobox(this, this.cmbSales, itemService_1.ItemService.API_TAX_URL, "Tax", "Id");
@@ -68,15 +70,13 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                 };
                 ItemAddComponent.prototype.onClose = function () {
                     this.addItem();
-                    console.log(this.cmbUnit.selectedValue);
+                    console.log(this.collectionSrc);
                 };
                 ItemAddComponent.prototype.onLock = function () {
                     document.getElementById('itemAddTabContent').setAttribute('class', 'disable');
-                    console.log('disabled');
                 };
                 ItemAddComponent.prototype.onUnLock = function () {
                     document.getElementById('itemAddTabContent').setAttribute('class', 'enable');
-                    console.log('disabled');
                 };
                 ItemAddComponent.prototype.addItem = function () {
                     var item = this.createItem();
@@ -90,9 +90,63 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     var item = {};
                     return item;
                 };
+                ItemAddComponent.prototype.addRow = function () {
+                    this.collectionItem.items.push({});
+                    console.log(this.collectionItem.items);
+                };
+                ItemAddComponent.prototype.delete = function () {
+                    this.collectionItem.remove(this.collectionItem.currentItem);
+                };
                 //getters
                 ItemAddComponent.prototype.getToastr = function () { return this.toastr; };
                 ItemAddComponent.prototype.getRouter = function () { return this.router; };
+                ItemAddComponent.prototype.formatCell = function () {
+                    var grid = this.grid;
+                    var panel = this.grid.cells;
+                    this.grid.formatItem.addHandler = function (s, e) {
+                        if (panel.cellType == wijmo.grid.CellType.Cell) {
+                        }
+                    };
+                };
+                ItemAddComponent.prototype.initGrid = function () {
+                    this.grid = new wijmo.grid.FlexGrid('#grid', {
+                        autoGenerateColumns: false,
+                        columns: [
+                            {
+                                header: " ",
+                                binding: "deleteId",
+                                width: 70,
+                                isContentHtml: true,
+                                isReadOnly: true,
+                                align: "center"
+                            },
+                            {
+                                header: "Price Description",
+                                binding: "priceDescription",
+                                width: "5*",
+                                isContentHtml: true
+                            },
+                            {
+                                header: "Price",
+                                binding: "price",
+                                width: 100,
+                                isContentHtml: true,
+                                isReadOnly: true,
+                                align: "center"
+                            },
+                            {
+                                header: "Trigger Quantity",
+                                binding: "quantity",
+                                width: 200,
+                                isContentHtml: true,
+                                isReadOnly: true,
+                                align: "center"
+                            }
+                        ],
+                        itemsSource: this.collectionItem,
+                        selectionMode: "Row"
+                    });
+                };
                 //validation
                 ItemAddComponent.prototype.validate = function (item) {
                     if (!this.validateBarCode(this.barCode)) {

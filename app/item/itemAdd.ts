@@ -44,7 +44,13 @@ export class ItemAddComponent implements OnInit {
     private package : Boolean = false;
     private expiryDate : wijmo.input.InputDate;
     private lotNumber : String;
+    //grid source
+    private grid : wijmo.grid.FlexGrid;
+    private collectionItem : wijmo.collections.CollectionView;
+    private collectionSrc : wijmo.collections.ObservableArray;
 
+    private priceDescription : string;
+    
     constructor(private router : Router, private toastr : ToastsManager,private itemService : ItemService){
 
     }
@@ -71,28 +77,31 @@ export class ItemAddComponent implements OnInit {
         this.cmbPurchase = new wijmo.input.ComboBox('#cmbPurchase');
         this.cmbSales = new wijmo.input.ComboBox('#cmbSales');
         this.cmbKitchen= new wijmo.input.ComboBox('#cmbKitchen');
+
+        this.collectionSrc = new wijmo.collections.ObservableArray();
+        this.collectionItem = new wijmo.collections.CollectionView(this.collectionSrc);
     
+
         this.itemService.initCombobox(this,this.cmbUnit, ItemService.API_UNIT_URL, "Unit", "Id");
         this.itemService.initCombobox(this, this.cmbPurchase, ItemService.API_TAX_URL, "Tax", "Id");
         this.itemService.initCombobox(this, this.cmbSales, ItemService.API_TAX_URL, "Tax", "Id");
         this.itemService.initCombobox(this, this.cmbDefaultSupplier, ItemService.API_URL_SUPPLIER, "Supplier", "Id");
 
-        this.itemService.initAccounts(this, this.cmbSalesAccount, this.cmbAssetAccount, this.cmbCostAccount);
+        this.itemService.initAccounts(this, this.cmbSalesAccount, this.cmbAssetAccount, this.cmbCostAccount); 
+
     }
 
     public onClose() : void {
         this.addItem();
-        console.log(this.cmbUnit.selectedValue);
+        console.log(this.collectionSrc);
     }
 
     public onLock() : void {
         document.getElementById('itemAddTabContent').setAttribute('class','disable');
-        console.log('disabled');
     }
 
     public onUnLock() : void {
         document.getElementById('itemAddTabContent').setAttribute('class','enable');
-        console.log('disabled');
     }
 
     public addItem() : void {
@@ -112,10 +121,70 @@ export class ItemAddComponent implements OnInit {
         return item;
     }
 
+    public addRow() : void {
+        this.collectionItem.items.push({});
+        console.log(this.collectionItem.items);
+    }
+
+    public delete() : void {
+        this.collectionItem.remove(this.collectionItem.currentItem);
+    }
+
     //getters
     public getToastr() : ToastsManager { return this.toastr; } 
 
     public getRouter() : Router { return this.router; }
+
+    private formatCell() : void {
+        var grid = this.grid;
+        var panel = this.grid.cells;
+    
+        this.grid.formatItem.addHandler = function(s, e) {
+            if(panel.cellType == wijmo.grid.CellType.Cell) {
+
+            }
+        }
+    }
+
+    private initGrid() : void {
+        this.grid = new wijmo.grid.FlexGrid('#grid', {
+            autoGenerateColumns: false,
+            columns: [
+                {
+                    header: " ",
+                    binding: "deleteId",
+                    width: 70,
+                    isContentHtml: true,
+                    isReadOnly: true,
+                    align: "center"
+                },
+                {
+                    header: "Price Description",
+                    binding: "priceDescription",
+                    width: "5*",
+                    isContentHtml: true
+                },
+                {
+                    header: "Price",
+                    binding: "price",
+                    width: 100,
+                    isContentHtml: true,
+                    isReadOnly: true,
+                    align: "center"
+                },
+                {
+                    header: "Trigger Quantity",
+                    binding: "quantity",
+                    width: 200,
+                    isContentHtml: true,
+                    isReadOnly: true,
+                    align: "center"
+                }
+            ],
+            itemsSource: this.collectionItem,
+            selectionMode: "Row"
+        });
+    }
 
     //validation
     private validate(item) : boolean {

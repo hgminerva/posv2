@@ -48,7 +48,7 @@
                                     <label class="control-label pull-right">Bar Code (SKU)</label> 
                                 </div>
                                 <div class="col-sm-10">
-                                    <input [(ngModel)]="barCode" class="form-control input-20" type="text" required >
+                                    <input [(ngModel)]="barCode" class="form-control input-20" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -56,7 +56,7 @@
                                     <label class="control-label pull-right">Item Description</label> 
                                 </div>
                                 <div class="col-sm-10">
-                                    <input [(ngModel)]="itemDescription" class="form-control input-50" type="text" required >
+                                    <input [(ngModel)]="itemDescription" class="form-control input-50" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -64,7 +64,7 @@
                                     <label class="control-label pull-right">Alias</label> 
                                 </div>
                                 <div class="col-sm-10">
-                                    <input [(ngModel)]="alias" class="form-control input-30" type="text" required >
+                                    <input [(ngModel)]="alias" class="form-control input-30" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -99,7 +99,7 @@
                                     <label class="control-label pull-right">Cost</label> 
                                 </div>
                                 <div class="col-sm-10">
-                                    <input [(ngModel)]="cost" class="form-control input-20" type="text" required >
+                                    <input [(ngModel)]="cost" class="form-control input-20" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -107,7 +107,7 @@
                                     <label class="control-label pull-right">Mark up</label> 
                                 </div>
                                 <div class="col-sm-10">
-                                    <input [(ngModel)]="markUp" class="form-control input-20" type="text" required >
+                                    <input [(ngModel)]="markUp" class="form-control input-20" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -115,7 +115,7 @@
                                     <label class="control-label pull-right">Price</label> 
                                 </div>
                                 <div class="col-sm-10">
-                                    <input [(ngModel)]="price" class="form-control input-20" type="text" required >
+                                    <input [(ngModel)]="price" class="form-control input-20" type="text" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -123,7 +123,7 @@
                                     <label class="control-label pull-right">Stock Level Quantity</label> 
                                 </div>
                                 <div class="col-sm-10">
-                                    <input [(ngModel)]="stockLevelQuantity" class="form-control  input-20" type="text" required >
+                                    <input [(ngModel)]="stockLevelQuantity" class="form-control  input-20" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -175,7 +175,7 @@
                                     <label class="control-label pull-right">Generic Name</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input [(ngModel)]="genericName" class="form-control input-50" type="text" placeholder="NA" required />
+                                    <input [(ngModel)]="genericName" class="form-control input-50" type="text" placeholder="NA"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -228,34 +228,51 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12 clearfix">
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-primary btn-sm sharp" (click)="addRow()"><i class="fa fa-plus">&nbsp;</i>Add Price Description</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <wj-flex-grid #flexItem class="grid" [itemsSource]="collectionItem" [selectionMode]="'Row'"> 
+                                    <wj-flex-grid-column [header]=""  [width]="70" [align]="'center'" [isReadOnly]="true">
+                                        <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                                <button class="btn btn-danger btn-xs btn-block sharp" (click)="delete()">
+                                                    <i class="fa fa-trash">Delete</i>
+                                                </button>
+                                        </template>
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Price Description'" 
+                                                        [binding]="'priceDescription'" 
+                                                        [width]="'2*'"
+                                                        [align]="'center'" 
+                                                        [dataMap]="['sds', 'sddsd', 'ssd','ssd']">  
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Price'" 
+                                                        [binding]="'price'" 
+                                                        [width]="100"
+                                                        [align]="'center'"
+                                                        [dataType]="'Number'"
+                                                        >
+                                    </wj-flex-grid-column>
+                                    <wj-flex-grid-column [header]="'Trigger Quantity'" 
+                                                        [binding]="'triggerQuantity'" 
+                                                        [width]="150"
+                                                        [align]="'center'"
+                                                        [dataType]="'Number'"
+                                                        
+                                                    >
+                                    </wj-flex-grid-column>
+                                </wj-flex-grid>    
+                            </div> 
+                        </div>
+                        <!--
+                            <div id="grid">
+                            </div>-->
                         </form>
-                        <wj-flex-grid #flexItem class="grid" [itemsSource]="collectionItems" > 
-                            <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="70" [align]="'center'">
-                                <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                        <button class="btn btn-danger sharp">
-                                            <i class="fa fa-trash">Delete</i>
-                                        </button>
-                                </template>
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Price Description'" 
-                                                [binding]="'Price Description'" 
-                                                [isReadOnly]="true" 
-                                                [width]="'2*'"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Price'" 
-                                                [binding]="'Price'" 
-                                                [isReadOnly]="true" 
-                                                [width]="100"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                            <wj-flex-grid-column [header]="'Trigger Quantity'" 
-                                                [binding]="'TriggerQuantity'" 
-                                                [isReadOnly]="true" 
-                                                [width]="150"
-                                                [align]="'center'">
-                            </wj-flex-grid-column>
-                        </wj-flex-grid>     
                     </div>
                      <div id="tabImage" class="tab-pane fade">
                         <div class="form-horizontal">
