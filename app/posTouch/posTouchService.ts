@@ -19,7 +19,7 @@ export class POSTouchService {
     getTableGroups(component : POSTouchComponent) : wijmo.collections.ObservableArray {
         let data = new wijmo.collections.ObservableArray();
         let api_url = localStorage.getItem('api_url');
-        let url = api_url + "/api/MstTableGroup"; 
+        let url = api_url + "/api/tableGroup/list"; 
         let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
         let options = new RequestOptions({ headers: headers }); 
         

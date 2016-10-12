@@ -237,7 +237,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <wj-flex-grid #flexItem class="grid" [itemsSource]="collectionItem" [selectionMode]="'Row'"> 
+                                    <wj-flex-grid #flexItem class="grid" [itemsSource]="collectionItem" [selectionMode]="'Row'" [allowAddNew]="true" [rowAdded]="addRow()"> 
                                     <wj-flex-grid-column [header]=""  [width]="70" [align]="'center'" [isReadOnly]="true">
                                         <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
                                                 <button class="btn btn-danger btn-xs btn-block sharp" (click)="delete()">
@@ -269,9 +269,11 @@
                                 </wj-flex-grid>    
                             </div> 
                         </div>
-                        <!--
-                            <div id="grid">
-                            </div>-->
+                           <!--
+                                    <div id="grid">
+                                    </div>
+                                    -->
+                        
                         </form>
                     </div>
                      <div id="tabImage" class="tab-pane fade">

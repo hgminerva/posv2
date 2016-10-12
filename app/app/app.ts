@@ -50,6 +50,7 @@ import {AccountingReportsComponent} from '../accountingReports/accountingReports
 import {SettingsComponent} from '../settings/settings';
 import {PosReportsComponent} from '../posReports/posReports';
 import {EightMmPosReportsComponent} from '../8mmPosReports/8mmPosReports';
+import {PosTouchDetailComponent} from '../posTouch/posTouchDetail';
 
 @Component({
   selector: 'app',
@@ -108,7 +109,8 @@ import {EightMmPosReportsComponent} from '../8mmPosReports/8mmPosReports';
                { path: '/accountingReports', name: 'AccountingReports', component: AccountingReportsComponent},
                { path: '/settings', name: 'Settings', component: SettingsComponent},
                { path: '/posReports', name: 'PosReports', component: PosReportsComponent},
-               { path: '/8mmPosReports', name: 'EightMmPosReports', component: EightMmPosReportsComponent}
+               { path: '/8mmPosReports', name: 'EightMmPosReports', component: EightMmPosReportsComponent},
+               { path: '/posTouchDetail', name:"PosTouchDetail", component: PosTouchDetailComponent}
 ])
 
 export class App {

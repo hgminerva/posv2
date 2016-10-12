@@ -1,4 +1,4 @@
-<section id="title" class="navbar navbar-default dark-silver">
+<section id="title" class="navbar navbar-default dark-silver" style="margin:0; border:none; border-radius: 0">
 <div class="container-fluid">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -8,7 +8,7 @@
         </button>
         <a class="navbar-brand"  href="/"><img src="images/logo4.png" alt="logo"></a>
     </div>
-    <ul class="nav navbar-nav navbar-right" id="myNavbar">
+    <ul class="nav navbar-nav navbar-right navbar-collapse" id="myNavbar">
         <li><a [routerLink]="['Dashboard']"><span style="color:#fff">Dashboard</span></a></li>      
         <li *ngIf="!login"><a [routerLink]="['Login']"><span style="color:#fff">Login</span></a></li>
         <li *ngIf="login"><a [routerLink]="['Logout']"><span style="color:#fff">Logout</span></a></li>

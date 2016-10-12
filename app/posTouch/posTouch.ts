@@ -9,7 +9,12 @@ import {POSTouchService} from '../posTouch/POSTouchService';
 @Component({
     selector: 'posTouch',
     templateUrl: 'app/posTouch/posTouch.html',
-    providers: [POSTouchService, ToastsManager]
+    providers: [POSTouchService, ToastsManager],
+     directives: [ 
+                 wjNg2FlexGrid.WjFlexGrid, 
+                 wjNg2FlexGrid.WjFlexGridColumn, 
+                 wjNg2FlexGrid.WjFlexGridCellTemplate
+               ]
 })
 export class POSTouchComponent implements OnInit {
     public page_tableGroup : number;
@@ -41,31 +46,20 @@ export class POSTouchComponent implements OnInit {
         if (!localStorage.getItem('access_token')) {
             //this.router.navigate(['Login']);
         } else {
-            this.page_tableGroup = 1;
-            this.pages_tableGroup = 1;
-            
-            this.getTableGroup();
-            this.fillTableGroup();
-            
-            this.page_table = 1;
-            this.pages_table = 1;
-            
-            for(var p=0; p<this.tableGroup.length; p++) {
-                this.tableGroupPicked[p] = "";
-            }
+        
         }
+        /*Else*/
          this.page_tableGroup = 1;
-            this.pages_tableGroup = 1;
             
-            this.getTableGroup();
-            this.fillTableGroup();
+        this.getTableGroup();
+        this.fillTableGroup();
             
-            this.page_table = 1;
-            this.pages_table = 1;
+        this.page_table = 1;
+        this.pages_table = 1;
             
-            for(var p=0; p<this.tableGroup.length; p++) {
-                this.tableGroupPicked[p] = "";
-            }
+        for(var p=0; p<this.tableGroup.length; p++) {
+            this.tableGroupPicked[p] = "";
+        }
     }
    
    // ============
@@ -210,7 +204,7 @@ export class POSTouchComponent implements OnInit {
     }
     
     clickTableOverTheCounter() {
-        
+        this.router.navigate(['PosTouchDetail']);
     }
     
     clickTableDelivery() {

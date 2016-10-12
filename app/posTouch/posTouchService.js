@@ -31,7 +31,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                 POSTouchService.prototype.getTableGroups = function (component) {
                     var data = new wijmo.collections.ObservableArray();
                     var api_url = localStorage.getItem('api_url');
-                    var url = api_url + "/api/MstTableGroup";
+                    var url = api_url + "/api/tableGroup/list";
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
                     var options = new http_1.RequestOptions({ headers: headers });
                     this.http.get(url, options)

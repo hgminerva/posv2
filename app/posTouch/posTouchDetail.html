@@ -1,0 +1,104 @@
+<section id="posTouchDetail" class="container-fluid">
+   <div class="subNavbar clearfix">
+       <div class="left">
+           <h4><span style="color:#AAC8DD">Pos Touch Detail</span></h4>
+       </div>
+       <div class="right">
+            <div class="fa fa-caret-down dropDown">
+                <ul class="dropDownContent">
+                    <li><span class="menu">Search</span></li>
+                    <li><span class="menu">Lock</span></li>
+                    <li><span class="menu">Unlock</span></li>
+                    <li><span class="menu">Print</span></li>
+                    <li><span class="menu">Tender</span></li>
+                    <li><span class="menu">Discount</span></li>
+                    <li><span class="menu">Override</span></li>
+                    <li><span class="menu">Close</span></li>
+                </ul>
+            </div>       
+       </div> 
+   </div>
+   <div class="content-wrapper">
+       <div class="content">
+           <div class="row">
+                <div class="col-sm-7">
+                    <table cell-padding=0 cellspacing=0>
+                        <thead>
+                            <tr>
+                                <th class="menu-cell"><i class="fa fa-backward"></i></th>
+                                <th class="menu-cell">BEVERAGE</th>
+                                <th class="menu-cell">BIB</th>
+                                <th class="menu-cell">BREAD & CAKES</th>
+                                <th class="menu-cell">BREAKFAST</th>
+                                <th class="menu-cell">BURGER</th>
+                                <th class="menu-cell">KIDDIE MEAL</th>
+                                <th class="menu-cell"><i class="fa fa-forward"></i></th>
+                            </tr>
+                        </thead>    
+                        <tbody>
+                                <tr>
+                                    <td rowspan="5" class="menu-cell"><i class="fa fa-backward"></i></td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td rowspan="5" class="menu-cell"><i class="fa fa-forward"></i></td>
+                                </tr>
+                                 <tr>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                </tr>
+                                 <tr>
+                                     <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                </tr>
+                                 <tr>
+                                     <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                </tr>
+                                 <tr>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                    <td class="menu-cell">test</td>
+                                </tr>
+                        </tbody>
+                        <tfoot>
+                                <tr>
+                                    <td colspan="8" class="menu-cell">
+                                        <button class="btn btn-success input-100" style="height:70px">CHANGE TABLE</button>
+                                    </td>
+                                </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="col-sm-5">
+                    <wj-flex-grid class="grid" [itemsSource]="items">
+                        <wj-flex-grid-column [header]="'Item'">
+
+                        </wj-flex-grid-column>
+                        <wj-flex-grid-column [header]="'Amount'">
+
+                        </wj-flex-grid-column>
+                    </wj-flex-grid>
+                </div>
+           </div>
+       </div>
+   </div>
+</section>

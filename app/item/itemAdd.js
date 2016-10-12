@@ -1,4 +1,4 @@
-System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input'], function(exports_1, context_1) {
+System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', './item.directive'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, itemService_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input;
+    var core_1, itemService_1, ng2_toastr_1, router_1, wjNg2FlexGrid, wjNg2Input, item_directive_1;
     var ItemAddComponent;
     return {
         setters:[
@@ -31,6 +31,9 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
             },
             function (wjNg2Input_1) {
                 wjNg2Input = wjNg2Input_1;
+            },
+            function (item_directive_1_1) {
+                item_directive_1 = item_directive_1_1;
             }],
         execute: function() {
             ItemAddComponent = (function () {
@@ -67,6 +70,7 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     this.itemService.initCombobox(this, this.cmbSales, itemService_1.ItemService.API_TAX_URL, "Tax", "Id");
                     this.itemService.initCombobox(this, this.cmbDefaultSupplier, itemService_1.ItemService.API_URL_SUPPLIER, "Supplier", "Id");
                     this.itemService.initAccounts(this, this.cmbSalesAccount, this.cmbAssetAccount, this.cmbCostAccount);
+                    //this.initGrid();
                 };
                 ItemAddComponent.prototype.onClose = function () {
                     this.addItem();
@@ -91,8 +95,6 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                     return item;
                 };
                 ItemAddComponent.prototype.addRow = function () {
-                    this.collectionItem.items.push({});
-                    console.log(this.collectionItem.items);
                 };
                 ItemAddComponent.prototype.delete = function () {
                     this.collectionItem.remove(this.collectionItem.currentItem);
@@ -100,15 +102,8 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                 //getters
                 ItemAddComponent.prototype.getToastr = function () { return this.toastr; };
                 ItemAddComponent.prototype.getRouter = function () { return this.router; };
-                ItemAddComponent.prototype.formatCell = function () {
-                    var grid = this.grid;
-                    var panel = this.grid.cells;
-                    this.grid.formatItem.addHandler = function (s, e) {
-                        if (panel.cellType == wijmo.grid.CellType.Cell) {
-                        }
-                    };
-                };
                 ItemAddComponent.prototype.initGrid = function () {
+                    var cv = this.collectionItem;
                     this.grid = new wijmo.grid.FlexGrid('#grid', {
                         autoGenerateColumns: false,
                         columns: [
@@ -124,28 +119,36 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                                 header: "Price Description",
                                 binding: "priceDescription",
                                 width: "5*",
-                                isContentHtml: true
+                                dataMap: ['1', '2', '3', '4']
                             },
                             {
                                 header: "Price",
                                 binding: "price",
                                 width: 100,
-                                isContentHtml: true,
-                                isReadOnly: true,
                                 align: "center"
                             },
                             {
                                 header: "Trigger Quantity",
                                 binding: "quantity",
                                 width: 200,
-                                isContentHtml: true,
-                                isReadOnly: true,
                                 align: "center"
                             }
                         ],
-                        itemsSource: this.collectionItem,
-                        selectionMode: "Row"
+                        itemsSource: cv,
+                        selectionMode: "Row",
+                        allowAddNew: true,
+                        allowDelete: true,
+                        rowAdded: function (s, e) {
+                            var flex = s;
+                            if (flex.rows.length > 2) {
+                                if (flex.itemsSource.items[flex.rows.length - 3].price == undefined || flex.itemsSource.items[flex.rows.length - 3].quantity == undefined) {
+                                    cv.cancelNew();
+                                }
+                            }
+                            // console.log(flex.itemsSource.items);
+                        }
                     });
+                    //  console.log(this.grid.rows.length);
                 };
                 //validation
                 ItemAddComponent.prototype.validate = function (item) {
@@ -208,6 +211,7 @@ System.register(['angular2/core', './itemService', 'ng2-toastr/ng2-toastr', 'ang
                             wjNg2FlexGrid.WjFlexGridColumn,
                             wjNg2FlexGrid.WjFlexGridCellTemplate,
                             wjNg2Input.WjComboBox,
+                            item_directive_1.myGridDirective
                         ],
                         providers: [
                             ng2_toastr_1.ToastsManager, itemService_1.ItemService

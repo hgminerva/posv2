@@ -6,6 +6,8 @@ import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
+import {myGridDirective} from './item.directive';
+
 @Component({
     selector: 'itemAdd',
     templateUrl: 'app/item/itemAdd.html',
@@ -14,6 +16,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
                  wjNg2FlexGrid.WjFlexGridColumn, 
                  wjNg2FlexGrid.WjFlexGridCellTemplate,
                  wjNg2Input.WjComboBox,
+                 myGridDirective
     ],
     providers: [
         ToastsManager, ItemService
@@ -88,7 +91,9 @@ export class ItemAddComponent implements OnInit {
         this.itemService.initCombobox(this, this.cmbDefaultSupplier, ItemService.API_URL_SUPPLIER, "Supplier", "Id");
 
         this.itemService.initAccounts(this, this.cmbSalesAccount, this.cmbAssetAccount, this.cmbCostAccount); 
+    
 
+       //this.initGrid();
     }
 
     public onClose() : void {
@@ -121,9 +126,8 @@ export class ItemAddComponent implements OnInit {
         return item;
     }
 
-    public addRow() : void {
-        this.collectionItem.items.push({});
-        console.log(this.collectionItem.items);
+    public addRow()  {
+      
     }
 
     public delete() : void {
@@ -135,18 +139,8 @@ export class ItemAddComponent implements OnInit {
 
     public getRouter() : Router { return this.router; }
 
-    private formatCell() : void {
-        var grid = this.grid;
-        var panel = this.grid.cells;
-    
-        this.grid.formatItem.addHandler = function(s, e) {
-            if(panel.cellType == wijmo.grid.CellType.Cell) {
-
-            }
-        }
-    }
-
     private initGrid() : void {
+        var cv = this.collectionItem;
         this.grid = new wijmo.grid.FlexGrid('#grid', {
             autoGenerateColumns: false,
             columns: [
@@ -162,28 +156,38 @@ export class ItemAddComponent implements OnInit {
                     header: "Price Description",
                     binding: "priceDescription",
                     width: "5*",
-                    isContentHtml: true
+                    dataMap: ['1', '2', '3', '4']
                 },
                 {
                     header: "Price",
                     binding: "price",
                     width: 100,
-                    isContentHtml: true,
-                    isReadOnly: true,
                     align: "center"
                 },
                 {
                     header: "Trigger Quantity",
                     binding: "quantity",
                     width: 200,
-                    isContentHtml: true,
-                    isReadOnly: true,
                     align: "center"
                 }
             ],
-            itemsSource: this.collectionItem,
-            selectionMode: "Row"
+            itemsSource: cv,
+            selectionMode: "Row",
+            allowAddNew: true,
+            allowDelete: true,
+            rowAdded: function(s, e) {
+                var flex = s;
+                if(flex.rows.length > 2) {
+                    if(flex.itemsSource.items[flex.rows.length - 3].price == undefined || flex.itemsSource.items[flex.rows.length - 3].quantity == undefined) {
+                       cv.cancelNew();
+                    }
+                }
+                
+                 // console.log(flex.itemsSource.items);
+            }
+            
         });
+      //  console.log(this.grid.rows.length);
     }
 
     //validation

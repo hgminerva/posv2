@@ -1,11 +1,18 @@
-<h4></h4>
 
-<br/> 
-
-<section id="posTouch-page" class="container">
-    <div class="row">
-        <div class="container col-sm-8">
-            <div class="btn-toolbar" role="toolbar">
+<section id="posTouch-page" class="container-fluid">
+    <div class="subNavbar clearfix">
+       <div class="left">
+           <h4><span style="color:#AAC8DD">Pos Touch</span></h4>
+       </div>
+       <div class="right">
+           
+       </div> 
+   </div>
+   <div class="content-wrapper">
+       <div class="content">
+           <div class="row">
+               <div class="col-sm-7">
+                               <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
                     <a (click)="previousTableGroups()" class="btn sharp btn-default" role="button">
                         <strong>&lt;</strong><br>
@@ -269,9 +276,9 @@
                     </a>
                 </div>
             </div>
-        </div>
-        <div class="container col-sm-4">
-            <div class="btn-toolbar" role="toolbar">
+               </div>
+               <div class="col-sm-5">
+                    <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group btn-group-lg btn-group-justified btn-group-fill-height">
                     <a class="btn sharp btn-default" role="button">
                         <strong>Open</strong><br>
@@ -284,17 +291,27 @@
                     <a class="btn sharp btn-default" role="button">
                         <strong>Collected</strong><br>
                         <span style="font-size : small;">&nbsp;</span>
-                    </a>
+                    </a>    
                 </div>
             </div>
-            <div>
-                <wj-flex-grid #flexSales
-                              class="grid" 
-                              [itemsSource]="sales"> 
+                <wj-flex-grid #flexSale class="grid" [itemsSource]="sales"> 
+                    <wj-flex-grid-column [header]="'Sales'" [isReadOnly]="true" [width]="'2*'">
+
+                    </wj-flex-grid-column>
+                    <wj-flex-grid-column [header]="'Amount'" [isReadOnly]="true" [width]="'2*'">
+                        
+                    </wj-flex-grid-column >
+                    <wj-flex-grid-column [header]="'Amount'" [isReadOnly]="true" [width]="'2*'">
+                        
+                    </wj-flex-grid-column >
+                    <wj-flex-grid-column [header]="'User'" [isReadOnly]="true" [width]="'2*'">
+                        
+                    </wj-flex-grid-column>
                 </wj-flex-grid> 
-            </div>
-        </div>
-    </div>
+               </div>
+           </div>
+       </div>
+   </div>
 </section>
 
     

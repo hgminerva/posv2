@@ -21,6 +21,7 @@ import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 })
 export class ItemComponent implements OnInit{
     private itemsView: wijmo.collections.CollectionView;
+    private filter: string;
 
     constructor(private itemService : ItemService, private _toastr : ToastsManager, private _router : Router){
     

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'ng2-toastr/ng2-toastr', '../posTouch/POSTouchService'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'ng2-toastr/ng2-toastr', '../posTouch/POSTouchService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/router', 'ng2-toastr/ng2-toastr', '.
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, router_1, ng2_toastr_1, POSTouchService_1;
+    var core_1, router_1, wjNg2FlexGrid, ng2_toastr_1, POSTouchService_1;
     var POSTouchComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', 'angular2/router', 'ng2-toastr/ng2-toastr', '.
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (wjNg2FlexGrid_1) {
+                wjNg2FlexGrid = wjNg2FlexGrid_1;
             },
             function (ng2_toastr_1_1) {
                 ng2_toastr_1 = ng2_toastr_1_1;
@@ -43,18 +46,9 @@ System.register(['angular2/core', 'angular2/router', 'ng2-toastr/ng2-toastr', '.
                     if (!localStorage.getItem('access_token')) {
                     }
                     else {
-                        this.page_tableGroup = 1;
-                        this.pages_tableGroup = 1;
-                        this.getTableGroup();
-                        this.fillTableGroup();
-                        this.page_table = 1;
-                        this.pages_table = 1;
-                        for (var p = 0; p < this.tableGroup.length; p++) {
-                            this.tableGroupPicked[p] = "";
-                        }
                     }
+                    /*Else*/
                     this.page_tableGroup = 1;
-                    this.pages_tableGroup = 1;
                     this.getTableGroup();
                     this.fillTableGroup();
                     this.page_table = 1;
@@ -192,6 +186,7 @@ System.register(['angular2/core', 'angular2/router', 'ng2-toastr/ng2-toastr', '.
                 POSTouchComponent.prototype.clickTable = function (index) {
                 };
                 POSTouchComponent.prototype.clickTableOverTheCounter = function () {
+                    this.router.navigate(['PosTouchDetail']);
                 };
                 POSTouchComponent.prototype.clickTableDelivery = function () {
                 };
@@ -199,7 +194,12 @@ System.register(['angular2/core', 'angular2/router', 'ng2-toastr/ng2-toastr', '.
                     core_1.Component({
                         selector: 'posTouch',
                         templateUrl: 'app/posTouch/posTouch.html',
-                        providers: [POSTouchService_1.POSTouchService, ng2_toastr_1.ToastsManager]
+                        providers: [POSTouchService_1.POSTouchService, ng2_toastr_1.ToastsManager],
+                        directives: [
+                            wjNg2FlexGrid.WjFlexGrid,
+                            wjNg2FlexGrid.WjFlexGridColumn,
+                            wjNg2FlexGrid.WjFlexGridCellTemplate
+                        ]
                     }),
                     __param(2, core_1.Inject(POSTouchService_1.POSTouchService)), 
                     __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager, POSTouchService_1.POSTouchService])
